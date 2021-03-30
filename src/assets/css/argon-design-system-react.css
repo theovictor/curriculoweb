@@ -2903,7 +2903,7 @@ input[type="button"].btn-block {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e"); }
 
 .custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::before {
-  border-color: #5e72e4;
+  border-color: #e47d5e;
   background-color: #5e72e4;
   box-shadow: none; }
 
@@ -12160,10 +12160,10 @@ a.btn-icon-only {
     left: -1.75rem; }
 
 .custom-control-input:active ~ .custom-control-label::before {
-  border-color: #5e72e4; }
+  border-color: #5ee4ce; }
 
 .custom-control-alternative .custom-control-label::before {
-  border: 0;
+  border: 1;
   box-shadow: 0 1px 3px rgba(50, 50, 93, 0.15), 0 1px 0 rgba(0, 0, 0, 0.02); }
 
 .custom-control-alternative .custom-control-input:checked ~ .custom-control-label::before {

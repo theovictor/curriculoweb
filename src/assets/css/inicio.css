@@ -1,0 +1,8 @@
+.ldLogin{
+    position: absolute;
+    background: linear-gradient(180deg, #59BEF7 11.46%, #FFFFFF 96.87%);
+    border-radius: 70px 0px 0px 0px;
+}
+.ldConta{
+    border-radius: 0px 0px 70px 0px;
+}

@@ -1,5 +1,5 @@
 import React from "react";
-//import "assets/css/Inicio.css";
+import "assets/css/inicio.css";
 // reactstrap components
 import {
   Button,
@@ -40,46 +40,35 @@ class Index extends React.Component {
             </div>
             <Container className="pt-lg-7">
               <Row className="justify-content-center">
-                <Col lg="5">
-                  <Card className="bg-secondary shadow border-0">
-                    <CardHeader className="bg-white pb-5">
+                {/* Login */}
+                <Col lg="5" className="ldLogin">
+                  <Card className="bg-transparent border-0">
+                    <CardHeader className="bg-transparent pb-5 border-0">
+                      <div className="text-muted text-center mb-3">
+                        <h4>Bem Vindo a CONNEC COMP</h4>
+                        <h5>Aqui você economiza papel e ajuda o meio ambiente !</h5>
+                      </div>
+                    </CardHeader>
+                    <CardBody className="px-lg-5 py-lg-5">
+                      <div className="text-center">
+                        <Button className="mt-4" color="primary" type="button">
+                          Entrar
+                        </Button>
+                      </div>
+                    </CardBody>
+                  </Card>
+                </Col>
+                {/* criar conta */}
+                <Col lg="5" className="ldConta bg-white">
+                  <Card className="bg-transparent border-0">
+                    <CardHeader className="bg-transparent pb-5 border-0">
                       <div className="text-muted text-center mb-3">
                         <small>Sign up with</small>
-                      </div>
-                      <div className="text-center">
-                        <Button
-                          className="btn-neutral btn-icon mr-4"
-                          color="default"
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                        >
-                          <span className="btn-inner--icon mr-1">
-                            <img
-                              alt="..."
-                              src={require("assets/img/icons/common/github.svg")}
-                            />
-                          </span>
-                          <span className="btn-inner--text">Github</span>
-                        </Button>
-                        <Button
-                          className="btn-neutral btn-icon ml-1"
-                          color="default"
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                        >
-                          <span className="btn-inner--icon mr-1">
-                            <img
-                              alt="..."
-                              src={require("assets/img/icons/common/google.svg")}
-                            />
-                          </span>
-                          <span className="btn-inner--text">Google</span>
-                        </Button>
                       </div>
                     </CardHeader>
                     <CardBody className="px-lg-5 py-lg-5">
                       <div className="text-center text-muted mb-4">
-                        <small>Or sign up with credentials</small>
+                        <small>Crie sua conta de GRAÇA</small>
                       </div>
                       <Form role="form">
                         <FormGroup>
@@ -89,7 +78,7 @@ class Index extends React.Component {
                                 <i className="ni ni-hat-3" />
                               </InputGroupText>
                             </InputGroupAddon>
-                            <Input placeholder="Name" type="text" />
+                            <Input placeholder="Nome" type="text" />
                           </InputGroup>
                         </FormGroup>
                         <FormGroup>
@@ -110,7 +99,7 @@ class Index extends React.Component {
                               </InputGroupText>
                             </InputGroupAddon>
                             <Input
-                              placeholder="Password"
+                              placeholder="Senha"
                               type="password"
                               autoComplete="off"
                             />
@@ -120,7 +109,6 @@ class Index extends React.Component {
                           <small>
                             password strength:{" "}
                             <span className="text-success font-weight-700">
-                              strong
                             </span>
                           </small>
                         </div>
@@ -137,12 +125,12 @@ class Index extends React.Component {
                                 htmlFor="customCheckRegister"
                               >
                                 <span>
-                                  I agree with the{" "}
+                                  Eu concordo com a{" "}
                                   <a
-                                    href="#pablo"
+                                    href="#"
                                     onClick={e => e.preventDefault()}
                                   >
-                                    Privacy Policy
+                                    Política de Privacidade.
                                   </a>
                                 </span>
                               </label>
@@ -155,7 +143,7 @@ class Index extends React.Component {
                           color="primary"
                           type="button"
                           >
-                            Entrar
+                            Criar Conta
                           </Button>
                         </div>
                       </Form>
