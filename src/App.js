@@ -1,10 +1,11 @@
 import React from "react";
 import './App.css';
-import Index from "views/Index";
+//import Index from "views/Index";
+import HomePg from "views/HomePg";
 
 function App() {
   return (
-      <Index />
+      <HomePg />
   );
 }
 export default App;

@@ -20,21 +20,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { BrowserRouter, Route, Switch, Redirect} from "react-router-dom";
+import { HashRouter, Route, Switch, Redirect} from "react-router-dom";
 
 import "assets/vendor/nucleo/css/nucleo.css";
 import "assets/vendor/font-awesome/css/font-awesome.min.css";
 import "assets/css/argon-design-system-react.css";
 
 import Profile from "views/Profile.js";
+import HomePg from "views/HomePg.js";
 
 ReactDOM.render(
-    <BrowserRouter>
+    <HashRouter>
         <Switch>
             <Route path="/" exact render={props => <App {...props} />} />
             <Route path="/profile-page" exact render = {props => <Profile {...props}/>}/>
+            <Route path="/register-page" exact render = {props => <HomePg {...props}/>}/>
             <Redirect to="/"/>
         </Switch>
-    </BrowserRouter>,
+    </HashRouter>,
     document.getElementById('root')
 );
