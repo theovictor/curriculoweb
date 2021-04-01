@@ -1,6 +1,7 @@
 import React from "react";
 import "assets/css/IndexPage.css";
 import { Link } from "react-router-dom";
+import Logo from "components/Logo";
 //reactstrap components
 import {
     Button,
@@ -44,6 +45,7 @@ function Index(){
                     <Container className={activeContainer}>
                         <div className="form-container sign-up-container">
                             <Form>
+                            <Logo/>
                                 <h2>Crie sua Conta</h2>
                                 <span className="text-default mb-4">
                                     Use seu email para registrar
@@ -98,6 +100,7 @@ function Index(){
                         </div>
                         <div className="form-container sign-in-container">
                             <Form action="#" role="form">
+                            <Logo/>
                                 <h2>Entrar</h2>
                                 <span className="text-default mb-4">Use sua conta</span>
                                 <FormGroup className={"mb-3" + signinEmailFocus}>
