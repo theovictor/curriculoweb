@@ -1,5 +1,6 @@
 import React from "react";
 import "assets/css/HomePg.css";
+import { Link } from "react-router-dom";
 //reactstrap components
 import {
     Button,
@@ -129,9 +130,9 @@ function HomePg(){
                                         </Input>
                                     </InputGroup>
                                 </FormGroup>
-                                <a href="#" onClick={(e) => e.preventDefault()}>
+                                <Link to="/profile-page">
                                     Esqueci minha senha!
-                                </a>
+                                </Link>
                                 <Button className="mt-3" color="primary">
                                     Entrar
                                 </Button>
