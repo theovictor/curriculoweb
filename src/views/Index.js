@@ -1,161 +1,177 @@
 import React from "react";
-import "assets/css/inicio.css";
-// reactstrap components
+import "assets/css/IndexPage.css";
+import { Link } from "react-router-dom";
+//reactstrap components
 import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  FormGroup,
-  Form,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
-  Container,
-  Row,
-  Col
+    Button,
+    FormGroup,
+    Form,
+    Input,
+    InputGroupAddon,
+    InputGroupText,
+    InputGroup,
+    Container,
 } from "reactstrap";
-
-class Index extends React.Component {
-  componentDidMount() {
-    document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
-    this.refs.main.scrollTop = 0;
-  }
-  render() {
-    return (
-      <>
-        <main ref="main">
-          <section className="section section-shaped section-lg">
-            <div className="shape shape-style-1 bg-gradient-warning">
-                <span />
-                <span />
-                <span />
-                <span />
-                <span />
-                <span />
-                <span />
-                <span />
-            </div>
-            <Container className="pt-lg-7">
-              <Row className="justify-content-center">
-                {/* Login */}
-                <Col lg="5" className="ldLogin">
-                  <Card className="bg-transparent border-0">
-                    <CardHeader className="bg-transparent pb-5 border-0">
-                      <div className="text-muted text-center mb-3">
-                        <h4>Bem Vindo a CONNEC COMP</h4>
-                        <h5>Aqui você economiza papel e ajuda o meio ambiente !</h5>
-                      </div>
-                    </CardHeader>
-                    <CardBody className="px-lg-5 py-lg-5">
-                      <div className="text-center">
-                        <Button className="mt-4" color="primary" type="button">
-                          Entrar
-                        </Button>
-                      </div>
-                    </CardBody>
-                  </Card>
-                </Col>
-                {/* criar conta */}
-                <Col lg="5" className="ldConta bg-white">
-                  <Card className="bg-transparent border-0">
-                    <CardHeader className="bg-transparent pb-5 border-0">
-                      <div className="text-muted text-center mb-3">
-                        <small>Sign up with</small>
-                      </div>
-                    </CardHeader>
-                    <CardBody className="px-lg-5 py-lg-5">
-                      <div className="text-center text-muted mb-4">
-                        <small>Crie sua conta de GRAÇA</small>
-                      </div>
-                      <Form role="form">
-                        <FormGroup>
-                          <InputGroup className="input-group-alternative mb-3">
-                            <InputGroupAddon addonType="prepend">
-                              <InputGroupText>
-                                <i className="ni ni-hat-3" />
-                              </InputGroupText>
-                            </InputGroupAddon>
-                            <Input placeholder="Nome" type="text" />
-                          </InputGroup>
-                        </FormGroup>
-                        <FormGroup>
-                          <InputGroup className="input-group-alternative mb-3">
-                            <InputGroupAddon addonType="prepend">
-                              <InputGroupText>
-                                <i className="ni ni-email-83" />
-                              </InputGroupText>
-                            </InputGroupAddon>
-                            <Input placeholder="Email" type="email" />
-                          </InputGroup>
-                        </FormGroup>
-                        <FormGroup>
-                          <InputGroup className="input-group-alternative">
-                            <InputGroupAddon addonType="prepend">
-                              <InputGroupText>
-                                <i className="ni ni-lock-circle-open" />
-                              </InputGroupText>
-                            </InputGroupAddon>
-                            <Input
-                              placeholder="Senha"
-                              type="password"
-                              autoComplete="off"
-                            />
-                          </InputGroup>
-                        </FormGroup>
-                        <div className="text-muted font-italic">
-                          <small>
-                            password strength:{" "}
-                            <span className="text-success font-weight-700">
-                            </span>
-                          </small>
-                        </div>
-                        <Row className="my-4">
-                          <Col xs="12">
-                            <div className="custom-control custom-control-alternative custom-checkbox">
-                              <input
-                                className="custom-control-input"
-                                id="customCheckRegister"
-                                type="checkbox"
-                              />
-                              <label
-                                className="custom-control-label"
-                                htmlFor="customCheckRegister"
-                              >
-                                <span>
-                                  Eu concordo com a{" "}
-                                  <a
-                                    href="#"
-                                    onClick={e => e.preventDefault()}
-                                  >
-                                    Política de Privacidade.
-                                  </a>
+function Index(){
+    const [activeContainer, setActiveContainer] = React.useState("");
+    const [signupNameFocus, setSignupNameFocus] = React.useState("");
+    const [signupEmailFocus, setSignupEmailFocus] = React.useState("");
+    const [signupPasswordFocus, setSignupPasswordFocus] = React.useState("");
+    const [signinEmailFocus, setSigninEmailFocus] = React.useState("");
+    const [signinPasswordFocus, setSigninPasswordFocus] = React.useState("");
+    React.useEffect(() => {
+        document.body.classList.add("index-page");
+        window.scrollTo(0, 0);
+        document.body.scrollTop = 0;
+        return function cleanup(){
+            document.body.classList.remove("index-page");
+        };
+    }, []);
+    return(
+        <>
+            <div className="wrapper">
+                <section className="section section-shaped section-lg">
+                    <div className="shape shape-style-1 bg-gradient-teal">
+                        <span/>
+                        <span/>
+                        <span/>
+                        <span/>
+                        <span/>
+                        <span/>
+                        <span/>
+                        <span/>
+                    </div>
+                    <Container className={activeContainer}>
+                        <div className="form-container sign-up-container">
+                            <Form>
+                                <h2>Crie sua Conta</h2>
+                                <span className="text-default mb-4">
+                                    Use seu email para registrar
                                 </span>
-                              </label>
-                            </div>
-                          </Col>
-                        </Row>
-                        <div className="text-center">
-                          <Button
-                          className="mt-4"
-                          color="primary"
-                          type="button"
-                          >
-                            Criar Conta
-                          </Button>
+                                <FormGroup className={"mb-3" + signupNameFocus}>
+                                    <InputGroup className="input-group-alternative">
+                                        <InputGroupAddon addonType="prepend">
+                                            <InputGroupText>
+                                                <i className="ni ni-circle-08"></i>
+                                            </InputGroupText>
+                                        </InputGroupAddon>
+                                        <Input
+                                            placeholder="Nome"
+                                            type="text"
+                                            onFocus={() => setSignupNameFocus("focused")}
+                                            onBlur={() => setSignupNameFocus("")}>
+                                        </Input>
+                                    </InputGroup>
+                                </FormGroup>
+                                <FormGroup className={"mb-3" + signupEmailFocus}>
+                                    <InputGroup className="input-group-alternative">
+                                        <InputGroupAddon addonType="prepend">
+                                            <InputGroupText>
+                                                <i className="ni ni-email-83"></i>
+                                            </InputGroupText>
+                                        </InputGroupAddon>
+                                        <Input 
+                                            placeholder="Email"
+                                            type="email"
+                                            onFocus={() => setSignupEmailFocus("focused")}
+                                            onBlur={() => setSignupEmailFocus("")}>
+                                        </Input>
+                                    </InputGroup>
+                                </FormGroup>
+                                <FormGroup className={signupPasswordFocus}>
+                                    <InputGroup className="input-group-alternative">
+                                        <InputGroupAddon addonType="prepend">
+                                            <InputGroupText>
+                                                <i className="ni ni-lock-circle-open"></i>
+                                            </InputGroupText>
+                                        </InputGroupAddon>
+                                        <Input 
+                                            placeholder="Senha"
+                                            type="password"
+                                            onFocus={() => setSignupPasswordFocus("focused")}
+                                            onBlur={() => setSignupPasswordFocus("")}>
+                                        </Input>
+                                    </InputGroup>
+                                </FormGroup>
+                                <Button color="primary">Criar Conta</Button>
+                            </Form>
                         </div>
-                      </Form>
-                    </CardBody>
-                  </Card>
-                </Col>
-              </Row>
-            </Container>
-          </section>
-        </main>
-      </>
+                        <div className="form-container sign-in-container">
+                            <Form action="#" role="form">
+                                <h2>Entrar</h2>
+                                <span className="text-default mb-4">Use sua conta</span>
+                                <FormGroup className={"mb-3" + signinEmailFocus}>
+                                    <InputGroup className="input-group-alternative">
+                                        <InputGroupAddon addonType="prepend">
+                                            <InputGroupText>
+                                                <i className="ni ni-email-83"></i>
+                                            </InputGroupText>
+                                        </InputGroupAddon>
+                                        <Input 
+                                            placeholder="Email"
+                                            type="email"
+                                            onFocus={() => setSigninEmailFocus("focused")}
+                                            onBlur={() => setSigninEmailFocus("")}>
+                                        </Input>
+                                    </InputGroup>
+                                </FormGroup>
+                                <FormGroup className={signinPasswordFocus}>
+                                    <InputGroup className="input-group-alternative">
+                                        <InputGroupAddon addonType="prepend">
+                                            <InputGroupText>
+                                                <i className="ni ni-lock-circle-open"></i>
+                                            </InputGroupText>
+                                        </InputGroupAddon>
+                                        <Input
+                                            placeholder="Senha"
+                                            type="password"
+                                            onFocus={() => setSigninPasswordFocus("focused")}
+                                            onBlur={() => setSigninPasswordFocus("")}>
+                                        </Input>
+                                    </InputGroup>
+                                </FormGroup>
+                                <Link to="/reset-page">
+                                    Esqueci minha senha!
+                                </Link>
+                                <Button className="mt-3" color="primary">
+                                    Entrar
+                                </Button>
+                            </Form>
+                        </div>
+                        <div className="overlay-container">
+                            <div className="overlay">
+                                <div className="overlay-panel overlay-left">
+                                    <h1 className="text-white">Bem Vindo a CONNEC COMP</h1>
+                                    <p>Aqui você economiza papel e ajuda o meio ambiente!</p>
+                                    <Button
+                                        className="btn-neutral"
+                                        color="default"
+                                        id="signIN"
+                                        size="sm"
+                                        onClick={() => setActiveContainer("")}
+                                    >
+                                        Entrar
+                                    </Button>
+                                </div>
+                                <div className="overlay-panel overlay-right">
+                                    <h1 className="text-white">Olá amigo!</h1>
+                                    <p>Entre com seus dados pessoais e comece a usar o nosso sistema totalmente gratuito.</p>
+                                    <Button
+                                        className="btn-neutral"
+                                        color="default"
+                                        id="signUP"
+                                        size="sm"
+                                        onClick={() => setActiveContainer("right-panel-active")}
+                                    >
+                                        Criar Conta
+                                    </Button>
+                                </div>
+                            </div>
+                        </div>
+                    </Container>
+                </section>
+            </div>
+        </>
     );
-  }
 }
 export default Index;
