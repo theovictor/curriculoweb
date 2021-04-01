@@ -130,7 +130,7 @@ function HomePg(){
                                         </Input>
                                     </InputGroup>
                                 </FormGroup>
-                                <Link to="/profile-page">
+                                <Link to="/password-page">
                                     Esqueci minha senha!
                                 </Link>
                                 <Button className="mt-3" color="primary">

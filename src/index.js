@@ -10,12 +10,14 @@ import "assets/css/argon-design-system-react.css";
 
 import Profile from "views/Profile.js";
 import HomePg from "views/HomePg.js";
+import PasswordPage from "views/PasswordPage.js";
 
 ReactDOM.render(
     <HashRouter>
         <Switch>
             <Route path="/" exact render={props => <App {...props} />} />
             <Route path="/register-page" exact render = {props => <HomePg {...props}/>}/>
+            <Route path="/password-page" exact render = {props => <PasswordPage {...props}/>}/>
             <Route path="/profile-page" exact render = {props => <Profile {...props}/>}/>
             <Redirect to="/"/>
         </Switch>
