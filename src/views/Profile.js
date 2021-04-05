@@ -1,9 +1,6 @@
 import React from "react";
-// reactstrap components
 import { Button, Card, Container, Row, Col } from "reactstrap";
-// core components
 import ProfileNavbar from "components/Navbars/ProfileNavbar.js";
-//import SimpleFooter from "components/Footers/SimpleFooter.js";
 
 class Profile extends React.Component {
   componentDidMount() {
