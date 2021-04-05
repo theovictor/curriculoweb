@@ -1,7 +1,6 @@
 import React from "react";
 import { Container, Col } from "reactstrap";
 import ResetCard from "components/ResetSenha/ResetCard.js";
-
 function ResetPage() {
     React.useEffect(() => {
         document.body.classList.add("reset-page");

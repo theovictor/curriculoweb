@@ -15,7 +15,6 @@ import {
   InputGroupAddon,
   InputGroupText,
 } from "reactstrap";
-// Components
 function ResetCard() {
     const [emailFocus, setEmailFocus] = React.useState("");
     return(
