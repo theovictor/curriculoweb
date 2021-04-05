@@ -8,6 +8,7 @@
     width: 768px;
     max-width: 100%;
     min-height: 480px;
+    transition: all 0.70s ease;
 }
 .index-page .section-shaped .container{
     height: 100%;

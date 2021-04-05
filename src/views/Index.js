@@ -1,7 +1,7 @@
 import React from "react";
 import "assets/css/IndexPage.css";
 import { Link } from "react-router-dom";
-import Logo from "components/Logo";
+import Logo from "components/Logo/Logo.js";
 //reactstrap components
 import {
     Button,
