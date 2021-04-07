@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, Card, Container, Row, Col } from "reactstrap";
-import ProfileNavbar from "components/Navbars/ProfileNavbar.js";
 
 class Profile extends React.Component {
   componentDidMount() {
@@ -11,7 +10,6 @@ class Profile extends React.Component {
   render() {
     return (
       <>
-        <ProfileNavbar />
         <main className="profile-page" ref="main">
           <section className="section-profile-cover section-shaped my-0">
             {/* Circles background */}
