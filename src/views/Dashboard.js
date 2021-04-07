@@ -1,6 +1,6 @@
 import React from "react";
-//import {Container} from "reactstrap";
 import DashNavbar from "components/Navbars/DashNavbar.js";
+//import DashFooter from "components/Footers/DashFooter.js";
 
 function Dashboard(){
     React.useEffect(() => {
@@ -27,6 +27,7 @@ function Dashboard(){
                         <span />
                     </div>
                 </section>
+                {/* <DashFooter /> */}
             </div>
         </>
     );
