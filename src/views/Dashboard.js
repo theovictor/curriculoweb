@@ -1,4 +1,5 @@
 import React from "react";
+import "assets/css/DashNavbar.css";
 import DashNavbar from "components/Navbars/DashNavbar.js";
 //import DashFooter from "components/Footers/DashFooter.js";
 

@@ -9,13 +9,13 @@ import {
     UncontrolledDropdown,
     Media,
     NavbarBrand,
-    Navbar,
     NavItem,
+    Navbar,
     Nav,
     Container,
     Row,
     Col,
-    Button
+    Card
 } from "reactstrap";
 class DashNavbar extends React.Component {
     componentDidMount(){
@@ -41,12 +41,14 @@ class DashNavbar extends React.Component {
             <>
                 <header className="header-global">
                     <Navbar className="navbar-main navbar-transparent navbar-light headroom" expand="lg" id="navbar-main">
-                        <Container>
-                            <NavbarBrand className="mr-lg-5" to="/" tag={Link}>
+                        <Container className="bg-gradient-warning">
+                            <NavbarBrand className="mr-lg-5" to="#" tag={Link}>
                                 <img alt="..." src={require("assets/img/brand/argon-react-white.png")}/>
                             </NavbarBrand>
                             <button className="navbar-toggler" id="navbar_global">
-                                <span className="navbar-toggler-icon"/>
+                                <span className="avatar avatar-sm rounded-circle">
+                                    <img alt="..." src={require("assets/img/theme/team-4-800x800.jpg")}/>
+                                </span>
                             </button>
                             <UncontrolledCollapse toggler="#navbar_global" navbar
                                 className={this.state.collapseClasses}
@@ -55,12 +57,19 @@ class DashNavbar extends React.Component {
                             >
                                 <div className="navbar-collapse-header">
                                     <Row>
-                                        <Col className="collapse-brand" xs="6">
-                                            <Link to="/">
-                                                <img alt="..." src={require("assets/img/brand/argon-react.png")}/>
-                                            </Link>
-                                        </Col>
-                                        <Col className="collapse-close" xs="6">
+                                        <Card className="collapse-brand bg-gradient-gray-dark">
+                                            <Media className="align-items-center">                                         
+                                                <span className="avatar avatar-sm rounded-circle">
+                                                    <img alt="..." src={require("assets/img/theme/team-4-800x800.jpg")}/>
+                                                </span>
+                                                <Media className="ml-1 mr-1 d-lg-block">
+                                                    <span className="mb-0 text-sm font-weight-bold" id="nome">
+                                                        Mariazinha
+                                                    </span>
+                                                </Media>
+                                            </Media>
+                                        </Card>
+                                        <Col className="collapse-close">
                                             <button className="navbar-toggler" id="navbar_global">
                                                 <span />
                                                 <span />
@@ -71,53 +80,59 @@ class DashNavbar extends React.Component {
                                 <Nav className="navbar-nav-hover align-items-lg-center" navbar>
                                     <UncontrolledDropdown nav>
                                         <DropdownToggle nav>
-                                            <i className="ni ni-ui-04 d-lg-none mr-1"/>
-                                            <span className="nav-link-inner--text">Components</span>
+                                            <i className="fa fa-home d-lg-none mr-2"/>
+                                            <span>Início</span>
                                         </DropdownToggle>
-                                        <DropdownMenu className="dropdown-menu-xl">
-                                            <div className="dropdown-menu-inner">
-                                                <Media className="d-flex align-items-center" to="#" tag={Link}>
-                                                    <div className="icon icon-shape bg-gradient-primary rounded-circle text-white">
-                                                        <i className="ni ni-spaceship"/>
-                                                    </div>
-                                                    <Media body className="ml-3">
-                                                        <h6 className="heading text-primary mb-md-1">Getting Started</h6>
-                                                        <p className="description d-none d-md-inline-block mb-0">
-                                                            Learn how to use Argon compiling scss, change brand colors and more.
-                                                        </p>
-                                                    </Media>
-                                                </Media>
-                                            </div>
-                                        </DropdownMenu>
                                     </UncontrolledDropdown>
                                     <UncontrolledDropdown nav>
-                                        <DropdownToggle nav>
-                                            <i className="ni ni-collection d-lg-none mr-1"/>
-                                            <span className="nav-link-inner--text">Examples</span>
+                                        <DropdownToggle nav to="#" tag={Link}>
+                                            <i className="ni ni-single-02 d-lg-none mr-2"/>
+                                            <span>Meu Perfil</span>
                                         </DropdownToggle>
-                                        <DropdownMenu>
-                                            <DropdownItem to="#" tag={Link}>
-                                                Landing
-                                            </DropdownItem>
-                                            <DropdownItem to="#" tag={Link}>
-                                                Profile
-                                            </DropdownItem>
-                                        </DropdownMenu>
+                                    </UncontrolledDropdown>
+                                    <UncontrolledDropdown nav>
+                                        <DropdownToggle nav to="#" tag={Link}>
+                                            <i className="ni ni-settings-gear-65 d-lg-none mr-2"/>
+                                            <span>Configurações</span>
+                                        </DropdownToggle>
+                                    </UncontrolledDropdown>
+                                    <UncontrolledDropdown nav>
+                                        <DropdownToggle nav to="#" tag={Link}>
+                                            <i className="ni ni-support-16 d-lg-none mr-2"/>
+                                            <span>Suporte</span>
+                                        </DropdownToggle>
+                                    </UncontrolledDropdown>
+                                    <UncontrolledDropdown className="d-lg-none"nav>
+                                        <DropdownToggle nav to="#" tag={Link}>
+                                            <i className="ni ni-user-run d-lg-none mr-2"/>
+                                            <span>Sair</span>
+                                        </DropdownToggle>
                                     </UncontrolledDropdown>
                                 </Nav>
                                 <Nav className="align-items-lg-center ml-lg-auto" navbar>
                                     <NavItem className="d-none d-lg-block ml-lg-4">
-                                        <Button className="btn-neutral btn-icon"
-                                            color="default" href="#"
-                                            target="_blank"
-                                        >
-                                            <span className="btn-inner--icon">
-                                                <i className="fa fa-cloud-download mr-2"/>
-                                            </span>
-                                            <span className="nav-link-inner--text ml-1">
-                                                Download
-                                            </span>
-                                        </Button>
+                                        <UncontrolledDropdown nav>
+                                            <DropdownToggle nav>
+                                                <Card className="collapse-brand bg-gradient-gray-dark">
+                                                    <Media className="align-items-center">                                         
+                                                        <span className="avatar avatar-sm rounded-circle">
+                                                            <img alt="..." src={require("assets/img/theme/team-4-800x800.jpg")}/>
+                                                        </span>
+                                                        <Media className="ml-1 mr-1 d-lg-block">
+                                                            <span className="mb-0 text-sm font-weight-bold" id="nome">
+                                                                Mariazinha
+                                                            </span>
+                                                        </Media>
+                                                    </Media>
+                                                </Card>
+                                            </DropdownToggle>
+                                            <DropdownMenu className="dropdown-menu">
+                                                <DropdownItem to="#" tag={Link} onClick={(e) => e.preventDefault()}>
+                                                    <i className="ni ni-user-run mr-2"/>
+                                                    <span className="nav-link-inner--text">Sair</span>
+                                                </DropdownItem>
+                                            </DropdownMenu>
+                                        </UncontrolledDropdown>
                                     </NavItem>
                                 </Nav>
                             </UncontrolledCollapse>
