@@ -42,7 +42,7 @@ class DashNavbar extends React.Component {
             <>
                 <header className="header-global">
                     <Navbar className="navbar-main navbar-transparent navbar-light headroom" expand="lg" id="navbar-main">
-                        <Container className="bg-gradient-purple">
+                        <Container className="nav-container bg-gradient-purple">
                             <NavbarBrand className="mr-lg-5 ml-4" to="#" tag={Link}>
                                 <Logo />
                             </NavbarBrand>
