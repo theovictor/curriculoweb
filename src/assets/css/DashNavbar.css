@@ -4,3 +4,12 @@
 .dashboard-page span#nome{
     color:  white;
 }
+.dashboard-page .dropdown-menu.show{
+    top: auto!important;
+    margin-left: 0.8rem!important;
+    min-width: 8.2rem!important;
+}
+.dashboard-page .container{
+    box-shadow: 0 15px 35px rgb(50 50 93 / 50%), 0 5px 15px rgb(0 0 0 / 30%);
+    border-radius: 5rem!important;
+}

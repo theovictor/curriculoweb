@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import Headroom from "headroom.js";
+import Logo from "components/Logo/Logo.js";
 import {
     UncontrolledCollapse,
     DropdownMenu,
@@ -41,9 +42,9 @@ class DashNavbar extends React.Component {
             <>
                 <header className="header-global">
                     <Navbar className="navbar-main navbar-transparent navbar-light headroom" expand="lg" id="navbar-main">
-                        <Container className="bg-gradient-warning">
-                            <NavbarBrand className="mr-lg-5" to="#" tag={Link}>
-                                <img alt="..." src={require("assets/img/brand/argon-react-white.png")}/>
+                        <Container className="bg-gradient-purple">
+                            <NavbarBrand className="mr-lg-5 ml-4" to="#" tag={Link}>
+                                <Logo />
                             </NavbarBrand>
                             <button className="navbar-toggler" id="navbar_global">
                                 <span className="avatar avatar-sm rounded-circle">
@@ -81,31 +82,31 @@ class DashNavbar extends React.Component {
                                     <UncontrolledDropdown nav>
                                         <DropdownToggle nav>
                                             <i className="fa fa-home d-lg-none mr-2"/>
-                                            <span>Início</span>
+                                            <span className="nav-link-inner--text">Início</span>
                                         </DropdownToggle>
                                     </UncontrolledDropdown>
                                     <UncontrolledDropdown nav>
                                         <DropdownToggle nav to="#" tag={Link}>
                                             <i className="ni ni-single-02 d-lg-none mr-2"/>
-                                            <span>Meu Perfil</span>
+                                            <span className="nav-link-inner--text">Meu Perfil</span>
                                         </DropdownToggle>
                                     </UncontrolledDropdown>
                                     <UncontrolledDropdown nav>
                                         <DropdownToggle nav to="#" tag={Link}>
                                             <i className="ni ni-settings-gear-65 d-lg-none mr-2"/>
-                                            <span>Configurações</span>
+                                            <span className="nav-link-inner--text">Configurações</span>
                                         </DropdownToggle>
                                     </UncontrolledDropdown>
                                     <UncontrolledDropdown nav>
                                         <DropdownToggle nav to="#" tag={Link}>
                                             <i className="ni ni-support-16 d-lg-none mr-2"/>
-                                            <span>Suporte</span>
+                                            <span className="nav-link-inner--text">Suporte</span>
                                         </DropdownToggle>
                                     </UncontrolledDropdown>
                                     <UncontrolledDropdown className="d-lg-none"nav>
-                                        <DropdownToggle nav to="#" tag={Link}>
+                                        <DropdownToggle nav to="#" tag={Link} onClick={(e) => e.preventDefault()}>
                                             <i className="ni ni-user-run d-lg-none mr-2"/>
-                                            <span>Sair</span>
+                                            <span className="nav-link-inner--text">Sair</span>
                                         </DropdownToggle>
                                     </UncontrolledDropdown>
                                 </Nav>
@@ -129,7 +130,7 @@ class DashNavbar extends React.Component {
                                             <DropdownMenu className="dropdown-menu">
                                                 <DropdownItem to="#" tag={Link} onClick={(e) => e.preventDefault()}>
                                                     <i className="ni ni-user-run mr-2"/>
-                                                    <span className="nav-link-inner--text">Sair</span>
+                                                    <span className="nav-link-inner--text font-weight-bold">Sair</span>
                                                 </DropdownItem>
                                             </DropdownMenu>
                                         </UncontrolledDropdown>
