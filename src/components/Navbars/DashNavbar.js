@@ -41,7 +41,7 @@ class DashNavbar extends React.Component {
             <>
                 <header className="header-global">
                     <Navbar className="navbar-main navbar-transparent navbar-light headroom" expand="lg" id="navbar-main">
-                        <Container className="bg-gradient-warning">
+                        <Container className="bg-gradient-purple">
                             <NavbarBrand className="mr-lg-5" to="#" tag={Link}>
                                 <img alt="..." src={require("assets/img/brand/argon-react-white.png")}/>
                             </NavbarBrand>
@@ -112,7 +112,7 @@ class DashNavbar extends React.Component {
                                 <Nav className="align-items-lg-center ml-lg-auto" navbar>
                                     <NavItem className="d-none d-lg-block ml-lg-4">
                                         <UncontrolledDropdown nav>
-                                            <DropdownToggle nav>
+                                            <DropdownToggle nav >
                                                 <Card className="collapse-brand bg-gradient-gray-dark">
                                                     <Media className="align-items-center">                                         
                                                         <span className="avatar avatar-sm rounded-circle">
@@ -131,6 +131,7 @@ class DashNavbar extends React.Component {
                                                     <i className="ni ni-user-run mr-2"/>
                                                     <span className="nav-link-inner--text">Sair</span>
                                                 </DropdownItem>
+                                                
                                             </DropdownMenu>
                                         </UncontrolledDropdown>
                                     </NavItem>

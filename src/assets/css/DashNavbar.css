@@ -1,6 +1,30 @@
 .dashboard-page .card{
-    border-radius: 20rem!important;
+    border-radius: 20rem !important;
 }
 .dashboard-page span#nome{
     color:  white;
+}
+
+.dashboard-page .dropdown-menu.show  {
+    top: auto  !important;
+    margin-left: 0.9rem!important;
+    min-width: 8.2rem!important;
+}
+
+.dashboard-page .colDados {
+    background-color: #fff;
+    border-radius: 15px;
+}
+
+.dashboard-page .dados {
+    margin-left: 20px;
+    padding: 15px;
+}
+
+.dashboard-page .sidebarCol {
+    border-radius: 15px;
+    padding: 15px;
+    background-color: #fff;
+    max-height: 500px;
+    margin-bottom: 5px;
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import "assets/css/DashNavbar.css";
 import DashNavbar from "components/Navbars/DashNavbar.js";
+import DashInicio from "components/DashInicio/DashInicio.js"
 //import DashFooter from "components/Footers/DashFooter.js";
 
 function Dashboard(){
@@ -15,7 +16,7 @@ function Dashboard(){
     return(
         <>
             <div className="wrapper">
-                <DashNavbar />
+                
                 <section className="section section-shaped section-lg">
                     <div className="shape shape-style-1 bg-gradient-teal">
                         <span />
@@ -27,9 +28,12 @@ function Dashboard(){
                         <span />
                         <span />
                     </div>
+                    <DashNavbar />
+                    <DashInicio/>
                 </section>
                 {/* <DashFooter /> */}
             </div>
+            
         </>
     );
 }
