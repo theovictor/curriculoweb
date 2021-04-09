@@ -41,7 +41,7 @@ class DashNavbar extends React.Component {
             <>
                 <header className="header-global">
                     <Navbar className="navbar-main navbar-transparent navbar-light headroom" expand="lg" id="navbar-main">
-                        <Container className="bg-gradient-warning">
+                        <Container>
                             <NavbarBrand className="mr-lg-5" to="#" tag={Link}>
                                 <img alt="..." src={require("assets/img/brand/argon-react-white.png")}/>
                             </NavbarBrand>
@@ -57,18 +57,18 @@ class DashNavbar extends React.Component {
                             >
                                 <div className="navbar-collapse-header">
                                     <Row>
-                                        <Card className="collapse-brand bg-gradient-gray-dark">
+                                        <div className="collapse-brand">
                                             <Media className="align-items-center">                                         
                                                 <span className="avatar avatar-sm rounded-circle">
                                                     <img alt="..." src={require("assets/img/theme/team-4-800x800.jpg")}/>
                                                 </span>
-                                                <Media className="ml-1 mr-1 d-lg-block">
-                                                    <span className="mb-0 text-sm font-weight-bold" id="nome">
+                                                <Media className="ml-2 mr-1 d-lg-block">
+                                                    <span className="mb-0 text-sm font-weight-bold">
                                                         Mariazinha
                                                     </span>
                                                 </Media>
                                             </Media>
-                                        </Card>
+                                        </div>
                                         <Col className="collapse-close">
                                             <button className="navbar-toggler" id="navbar_global">
                                                 <span />
