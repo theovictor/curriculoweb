@@ -22,7 +22,7 @@ class DashNavbar extends React.Component {
     componentDidMount(){
         let headroom = new Headroom(document.getElementById("navbar-main"));
         headroom.init();
-    }
+    };
     state = {
         collapseClasses: "",
         collapseOpen: false
@@ -31,12 +31,12 @@ class DashNavbar extends React.Component {
         this.setState({
             collapseClasses: "collapsing-out"
         });
-    }
+    };
     onExited = () => {
         this.setState({
             collapseClasses: ""
         });
-    }
+    };
     render(){
         return(
             <>
