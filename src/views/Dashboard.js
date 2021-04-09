@@ -3,6 +3,7 @@ import "assets/css/DashNavbar.css";
 import DashNavbar from "components/Navbars/DashNavbar.js";
 import DashFooter from "components/Footers/DashFooter.js";
 import DashBody from "components/Dashboard/DashBody.js";
+import DashInicio from "components/DashInicio/DashInicio.js";
 
 function Dashboard(){
     React.useEffect(() => {
@@ -29,6 +30,7 @@ function Dashboard(){
                         <span />
                     </div>
                     <DashBody />
+                    <DashInicio/>
                 </section>
                 <DashFooter />
             </div>
