@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter, Route, Switch, Redirect} from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import "assets/vendor/nucleo/css/nucleo.css";
 import "assets/vendor/font-awesome/css/font-awesome.min.css";
@@ -12,14 +12,14 @@ import Profile from "views/Profile.js";
 import ResetPage from "views/ResetPage.js";
 
 ReactDOM.render(
-    <HashRouter>
+    <BrowserRouter>
         <Switch>
-            <Route path="/" exact render = {props => <Index {...props}/>}/>
-            <Route path="/dashboard-page" exact render = {props => <Dashboard {...props}/>}/>
-            <Route path="/profile-page" exact render = {props => <Profile {...props}/>}/>
-            <Route path="/reset-page" exact render = {props => <ResetPage {...props}/>}/>
-            <Redirect to="/"/>
+            <Route exact path="/" component={Index}/>
+            <Route exact path="/dashboard-page" component={Dashboard}/>
+            <Route exact path="/profile-page" component={Profile}/>
+            <Route exact path="/reset-page" component={ResetPage}/>
+            <Route exact path="/index-page" component={Index}/>
         </Switch>
-    </HashRouter>,
+    </BrowserRouter>,
     document.getElementById('root')
 );
