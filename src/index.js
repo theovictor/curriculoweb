@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-
+// import css
 import "assets/vendor/nucleo/css/nucleo.css";
 import "assets/vendor/font-awesome/css/font-awesome.min.css";
 import "assets/css/argon-design-system-react.css";
-
+// import pages
 import Index from "views/Index.js";
 import Dashboard from "views/Dashboard.js";
 import Profile from "views/Profile.js";
