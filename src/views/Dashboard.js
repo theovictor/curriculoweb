@@ -1,5 +1,5 @@
 import React from "react";
-import "assets/css/DashNavbar.css";
+import "assets/css/DashPage.css";
 import DashNavbar from "components/Navbars/DashNavbar.js";
 import DashFooter from "components/Footers/DashFooter.js";
 import DashBody from "components/Dashboard/DashBody.js";
@@ -18,7 +18,12 @@ function Dashboard(){
             <div className="wrapper">
                 <DashNavbar />
                 <section className="section section-shaped section-lg">
-                    <div className="shape shape-style-1 bg-gradient-teal">
+                    <div className="shape shape-style-1"
+                        style={{
+                        backgroundImage: 'url("'+require("assets/img/theme/curved.jpg")+'")',
+                        backgroundSize: "cover",
+                        backgroundPosition: "center top",}}
+                    >
                         <span />
                         <span />
                         <span />
