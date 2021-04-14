@@ -114,7 +114,7 @@ class DashNavbar extends React.Component {
                                     <NavItem className="d-none d-lg-block ml-lg-4">
                                         <UncontrolledDropdown nav>
                                             <DropdownToggle nav>
-                                                <Card className="collapse-brand bg-gradient-gray-dark">
+                                                <Card className="card-nav collapse-brand bg-gradient-gray-dark">
                                                     <Media className="align-items-center">                                         
                                                         <span className="avatar avatar-sm rounded-circle">
                                                             <img alt="..." src={require("assets/img/theme/team-4-800x800.jpg")}/>
