@@ -1,18 +1,3 @@
-.dashboard-page .card-nav{
-    border-radius: 20rem !important;
-}
-.dashboard-page span#nome{
-    color:  white;
-}
-.dashboard-page .dropdown-menu.show  {
-    top: auto  !important;
-    margin-left: 0.9rem!important;
-    min-width: 8.2rem!important;
-}
-.dashboard-page .nav-container {
-    border-radius: 5rem!important;
-    box-shadow: 0 15px 35px rgb(50 50 93 / 25%), 0 5px 15px rgb(0 0 0 / 10%);
-}
 .dashboard-page .card-profile-image img{
     max-width: 180px;
     border-radius: .375rem;
