@@ -3,21 +3,20 @@ import ProfileBody from "components/Profile/ProfileBody.js";
 import DashNavbar from "components/Navbars/DashNavbar.js";
 import "assets/css/ProfilePage.css";
 
-class Profile extends React.Component {
-  componentDidMount() {
-    document.body.classList.add("profile-page");
-    document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
-    this.refs.main.scrollTop = 0;
-  }
-
-  render() {
-    return (
-      <>
-        <main className="profile-page" ref="main">
+function Profile() {
+    React.useEffect(() => {
+        document.body.classList.add("profile-page");
+        window.scrollTo(0, 0);
+        document.body.scrollTop = 0;
+        return function cleanup(){
+            document.body.classList.remove("profile-page");
+        };
+    });
+    return(
+        <>
+        <main className="profile-page">
             <DashNavbar />
           <section className="section-profile-cover section-shaped my-0">
-            {/* Circles background */}
             <div className="shape shape-style-1 shape-default alpha-4">
               <span />
               <span />
@@ -32,9 +31,7 @@ class Profile extends React.Component {
             <ProfileBody />
           </section>
         </main>
-      </>
+        </>
     );
-  }
 }
-
 export default Profile;
