@@ -80,13 +80,13 @@ class DashNavbar extends React.Component {
                                 </div>
                                 <Nav className="navbar-nav-hover align-items-lg-center" navbar>
                                     <UncontrolledDropdown nav>
-                                        <DropdownToggle nav>
+                                        <DropdownToggle nav to="/dashboard-page" tag={Link}>
                                             <i className="fa fa-home d-lg-none mr-2"/>
                                             <span className="nav-link-inner--text">Início</span>
                                         </DropdownToggle>
                                     </UncontrolledDropdown>
                                     <UncontrolledDropdown nav>
-                                        <DropdownToggle nav to="#" tag={Link}>
+                                        <DropdownToggle nav to="/profile-page" tag={Link}>
                                             <i className="ni ni-single-02 d-lg-none mr-2"/>
                                             <span className="nav-link-inner--text">Meu Perfil</span>
                                         </DropdownToggle>
@@ -104,7 +104,7 @@ class DashNavbar extends React.Component {
                                         </DropdownToggle>
                                     </UncontrolledDropdown>
                                     <UncontrolledDropdown className="d-lg-none"nav>
-                                        <DropdownToggle nav to="#" tag={Link} onClick={(e) => e.preventDefault()}>
+                                        <DropdownToggle nav to="/index-page" tag={Link} onClick={(e) => e.preventDefault()}>
                                             <i className="ni ni-user-run d-lg-none mr-2"/>
                                             <span className="nav-link-inner--text">Sair</span>
                                         </DropdownToggle>
@@ -128,7 +128,7 @@ class DashNavbar extends React.Component {
                                                 </Card>
                                             </DropdownToggle>
                                             <DropdownMenu className="dropdown-menu">
-                                                <DropdownItem to="#" tag={Link} onClick={(e) => e.preventDefault()}>
+                                                <DropdownItem to="/index-page" tag={Link}>
                                                     <i className="ni ni-user-run mr-2"/>
                                                     <span className="nav-link-inner--text font-weight-bold">Sair</span>
                                                 </DropdownItem>
