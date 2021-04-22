@@ -1,10 +1,8 @@
 import React from "react";
 import DashMenu from "components/Dashboard/DashMenu.js";
-//import DashForm1 from "components/Dashboard/DashForm1.js";
-//import DashForm2 from "components/Dashboard/DashForm2.js";
-//import DashForm3 from "components/Dashboard/DashForm3.js";
+import Formulario from "pages/Formulario.js";
 import {
-    Button,
+    //Button,
     Card,
     CardHeader,
     CardBody,
@@ -30,7 +28,7 @@ function DashBody(){
                                 </Row>
                             </CardHeader>
                             <CardBody>
-                                
+                                <Formulario />
                             </CardBody>
                         </Card>
                     </Col>
