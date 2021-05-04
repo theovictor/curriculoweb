@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState}from "react";
 import {Link} from "react-router-dom";
 import Logo from "components/Logo/Logo.js";
 import {
@@ -14,11 +14,10 @@ import {
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-
 function SignIn(){
 
-    const [signinEmailFocus, setSigninEmailFocus] = React.useState("");
-    const [signinPasswordFocus, setSigninPasswordFocus] = React.useState("");
+    const [signinEmailFocus, setSigninEmailFocus] = useState("");
+    const [signinPasswordFocus, setSigninPasswordFocus] = useState("");
     
     const formik = useFormik({
         initialValues: {
