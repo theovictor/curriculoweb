@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect} from "react";
 import {Link} from "react-router-dom";
 import Headroom from "headroom.js";
 import Logo from "components/Logo/Logo.js";
@@ -19,7 +19,6 @@ import {
     Card
 } from "reactstrap";
 export default function DashNavbar(){
-  const [collapseOpen, toggleCollapse] = useState(false);
   useEffect(() => {
     let headroom = new Headroom(document.getElementById("navbar-main"));
     headroom.init();
