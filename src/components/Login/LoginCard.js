@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-//import Logo from 'components/Logo/Logo.js';
+import Logo from 'components/Logo/Logo.js';
 import {
   Button,
   Card,
@@ -27,7 +27,7 @@ export default function LoginCard(){
                 <div className="text-muted text-center mb-3">
                   <small>Login</small>
                 </div>
-                {/* <Logo/> */}
+                <Logo/>
               </CardHeader>
               <CardBody className="px-lg-5 py-lg-5">
                 <div className="text-center text-muted mb-4">
