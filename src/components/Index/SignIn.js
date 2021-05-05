@@ -1,6 +1,8 @@
 import React, {useState}from "react";
 import {Link} from "react-router-dom";
 import Logo from "components/Logo/Logo.js";
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 import {
     Button,
     FormGroup,
@@ -11,10 +13,7 @@ import {
     InputGroup,
     FormFeedback,
 } from "reactstrap";
-import { useFormik } from 'formik';
-import * as yup from 'yup';
-
-function SignIn(){
+export default function SignIn(){
 
     const [signinEmailFocus, setSigninEmailFocus] = useState("");
     const [signinPasswordFocus, setSigninPasswordFocus] = useState("");
@@ -101,4 +100,3 @@ function SignIn(){
         </>
     );
 }
-export default SignIn;
