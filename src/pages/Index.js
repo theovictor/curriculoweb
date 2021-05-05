@@ -1,9 +1,10 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Container, Row, Col, Button} from 'reactstrap';
 import "assets/css/IndexPage.css";
 import LoginCard from 'components/Login/LoginCard';
 import RegisterCard from 'components/Register/RegisterCard.js';
 export default function Index() {
+  const [mostrar, setMostrar] = useState('');
   useEffect(() => {
     document.body.classList.add("index-page");
     window.scrollTo(0, 0);
@@ -13,7 +14,14 @@ export default function Index() {
     };
   }, []);
   function btnEntrar(){
-    
+    if(mostrar == '' || mostrar == 'registrar'){
+      setMostrar('entrar');
+    }
+  }
+  function btnRegistrar(){
+    if(mostrar == '' || mostrar == 'entrar'){
+      setMostrar('registrar');
+    }
   }
   return (
     <>
@@ -28,19 +36,28 @@ export default function Index() {
                   <p className="text-lead text-white">
                     Entre com sua conta, ou cria uma gratuitamente!!
                   </p>
+                  <Button className="my-4" color="primary" type="button"
+                    onClick={btnEntrar}
+                  >
+                    Entrar
+                  </Button>
+                  <Button className="my-4" color="primary" type="button"
+                    onClick={btnRegistrar}
+                  >
+                    Registrar
+                  </Button>
                 </Col>
               </Row>
             </div>
           </Container>
         </div>
       </div>
-      <div className="container">
-        <Button className="my-4" color="primary" type="button"
-          onClick={btnEntrar}
-        >
-          Entrar
-        </Button>
-      </div>
+      {mostrar === 'entrar'?
+        <LoginCard/>
+      : mostrar === 'registrar'?
+        <RegisterCard/>
+      : <div/>
+      }
     </>
   );
 }
