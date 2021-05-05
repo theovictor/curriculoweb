@@ -15,9 +15,9 @@ import {
   Col
 } from 'reactstrap';
 export default function LoginCard(){
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [signUpName, setSignUpName] = useState('');
+  const [signUpEmail, setSignUpEmail] = useState('');
+  const [signUpPassword, setSignUpPassword] = useState('');
   return(
     <>
       <section className="upper">
@@ -35,7 +35,7 @@ export default function LoginCard(){
                   <small>Entre com suas credenciais</small>
                 </div>
                 <Form role="form">
-                  <FormGroup className={"mb-3" + name}>
+                  <FormGroup className={"mb-3" + signUpName}>
                     <InputGroup className="input-group-alternative">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
@@ -43,12 +43,12 @@ export default function LoginCard(){
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input placeholder="Nome" type="text"
-                        onFocus={() => setName("focused")}
-                        onBlur={() => setName("")}
+                        onFocus={() => setSignUpName('focused')}
+                        onBlur={() => setSignUpName('')}
                       />
                     </InputGroup>
                   </FormGroup>
-                  <FormGroup>
+                  <FormGroup className={"mb-3" + signUpEmail}>
                     <InputGroup className="input-group-alternative">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
@@ -56,12 +56,12 @@ export default function LoginCard(){
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input placeholder="Email" type="email"
-                        onFocus={() => setEmail("focused")}
-                        onBlur={() => setEmail("")}
+                        onFocus={() => setSignUpEmail('focused')}
+                        onBlur={() => setSignUpEmail('')}
                       />
                     </InputGroup>
                   </FormGroup>
-                  <FormGroup className={password}>
+                  <FormGroup className={signUpPassword}>
                     <InputGroup className="input-group-alternative">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
@@ -69,8 +69,8 @@ export default function LoginCard(){
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input placeholder="Password" type="password"
-                        onFocus={() => setPassword("focused")}
-                        onBlur={() => setPassword("")}
+                        onFocus={() => setSignUpPassword('focused')}
+                        onBlur={() => setSignUpPassword('')}
                       />
                     </InputGroup>
                   </FormGroup>
@@ -81,7 +81,9 @@ export default function LoginCard(){
                     </label>
                   </div>
                   <div className="text-center">
-                    <Button className="my-4" color="primary" type="button">
+                    <Button className="my-4" color="primary" type="button"
+                      onClick={() => {}}
+                    >
                       Cadastrar
                     </Button>
                   </div>
