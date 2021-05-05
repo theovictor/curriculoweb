@@ -14,12 +14,12 @@ export default function Index() {
     };
   }, []);
   function btnEntrar(){
-    if(mostrar == '' || mostrar == 'registrar'){
+    if(mostrar === '' || mostrar === 'registrar'){
       setMostrar('entrar');
     }
   }
   function btnRegistrar(){
-    if(mostrar == '' || mostrar == 'entrar'){
+    if(mostrar === '' || mostrar === 'entrar'){
       setMostrar('registrar');
     }
   }
@@ -27,7 +27,8 @@ export default function Index() {
     <>
       <div className="section-shaped my-0 skew-separator skew-mini">
         <div className="page-header page-header-small header-filter">
-          <div className="page-header-image" style={{backgroundImage:'url("'+require("assets/img/theme/curved2.jpg")+'")',}}/>
+          <div className="page-header-image"
+            style={{backgroundImage:'url("'+require("assets/img/theme/curved2.jpg")+'")',}}/>
           <Container>
             <div className="header-body text-center mb-7">
               <Row className="justify-content-center">
@@ -40,16 +41,16 @@ export default function Index() {
               </Row>
               <Row className="justify-content-center">
                 <div className="py-4 mt-lg-0">
-                    <Button className="mr-4 mb-4" color="primary" type="button"
-                      onClick={btnEntrar}
-                    >
-                      Entrar
-                    </Button>
-                    <Button className="ml-4 mb-4" color="primary" type="button"
-                      onClick={btnRegistrar}
-                    >
-                      Registrar
-                    </Button>
+                  <Button className="mr-4 mb-4" color="primary" type="button"
+                    onClick={btnEntrar}
+                  >
+                    Entrar
+                  </Button>
+                  <Button className="ml-4 mb-4" color="primary" type="button"
+                    onClick={btnRegistrar}
+                  >
+                    Registrar
+                  </Button>
                 </div>
               </Row>
             </div>
