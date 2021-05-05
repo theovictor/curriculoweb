@@ -36,17 +36,21 @@ export default function Index() {
                   <p className="text-lead text-white">
                     Entre com sua conta, ou cria uma gratuitamente!!
                   </p>
-                  <Button className="my-4" color="primary" type="button"
-                    onClick={btnEntrar}
-                  >
-                    Entrar
-                  </Button>
-                  <Button className="my-4" color="primary" type="button"
-                    onClick={btnRegistrar}
-                  >
-                    Registrar
-                  </Button>
                 </Col>
+              </Row>
+              <Row className="justify-content-center">
+                <div className="py-4 mt-lg-0">
+                    <Button className="mr-4 mb-4" color="primary" type="button"
+                      onClick={btnEntrar}
+                    >
+                      Entrar
+                    </Button>
+                    <Button className="ml-4 mb-4" color="primary" type="button"
+                      onClick={btnRegistrar}
+                    >
+                      Registrar
+                    </Button>
+                </div>
               </Row>
             </div>
           </Container>
