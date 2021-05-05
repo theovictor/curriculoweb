@@ -15,8 +15,8 @@ import {
   Col
 } from 'reactstrap';
 export default function LoginCard(){
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [signInEmail, setSignInEmail] = useState('');
+  const [signInPassword, setSignInPassword] = useState('');
   return(
     <>
       <section className="upper">
@@ -34,7 +34,7 @@ export default function LoginCard(){
                   <small>Entre com suas credenciais</small>
                 </div>
                 <Form role="form">
-                  <FormGroup className={"mb-3" + email}>
+                  <FormGroup className={"mb-3" + signInEmail}>
                     <InputGroup className="input-group-alternative">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
@@ -42,12 +42,12 @@ export default function LoginCard(){
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input placeholder="Email" type="email"
-                        onFocus={() => setEmail("focused")}
-                        onBlur={() => setEmail("")}
+                        onFocus={() => setSignInEmail('focused')}
+                        onBlur={() => setSignInEmail('')}
                       />
                     </InputGroup>
                   </FormGroup>
-                  <FormGroup className={password}>
+                  <FormGroup className={signInPassword}>
                     <InputGroup className="input-group-alternative">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
@@ -55,8 +55,8 @@ export default function LoginCard(){
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input placeholder="Password" type="password"
-                        onFocus={() => setPassword("focused")}
-                        onBlur={() => setPassword("")}
+                        onFocus={() => setSignInPassword('focused')}
+                        onBlur={() => setSignInPassword('')}
                       />
                     </InputGroup>
                   </FormGroup>
@@ -67,7 +67,9 @@ export default function LoginCard(){
                     </label>
                   </div>
                   <div className="text-center">
-                    <Button className="my-4" color="primary" type="button">
+                    <Button className="my-4" color="primary" type="button"
+                      onClick={() => {}}
+                    >
                       Entrar
                     </Button>
                   </div>
