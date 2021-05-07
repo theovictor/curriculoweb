@@ -74,7 +74,7 @@ export default function DashNavbar(){
                               </DropdownToggle>
                           </UncontrolledDropdown>
                           <UncontrolledDropdown nav>
-                              <DropdownToggle nav to="#" tag={Link}>
+                              <DropdownToggle nav to="/config-page" tag={Link}>
                                   <i className="ni ni-settings-gear-65 d-lg-none mr-2"/>
                                   <span className="nav-link-inner--text">Configurações</span>
                               </DropdownToggle>

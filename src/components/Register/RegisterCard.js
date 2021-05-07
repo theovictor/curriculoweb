@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import Logo from 'components/Logo/Logo.js';
+import {useFormik} from 'formik';
+//import * as Yup from 'yup';
 import {
   Button,
   Card,
@@ -14,10 +16,21 @@ import {
   Container,
   Col
 } from 'reactstrap';
+
 export default function LoginCard(){
-  const [signUpName, setSignUpName] = useState('');
-  const [signUpEmail, setSignUpEmail] = useState('');
-  const [signUpPassword, setSignUpPassword] = useState('');
+  // const [signUpName, setSignUpName] = useState('');
+  // const [signUpEmail, setSignUpEmail] = useState('');
+  // const [signUpPassword, setSignUpPassword] = useState('');
+  const formik = useFormik ({
+    initialValues: {
+      name: '',
+      email: '',
+      password: '',
+    },
+    onSubmit: values => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
   return(
     <>
       <section className="upper">
@@ -34,43 +47,43 @@ export default function LoginCard(){
                 <div className="text-center text-muted mb-4">
                   <small>Entre com suas credenciais</small>
                 </div>
-                <Form role="form">
-                  <FormGroup className={"mb-3" + signUpName}>
+                <Form role="form" onSubmit={formik.handleSubmit}>
+                  <FormGroup className="mb-3">
                     <InputGroup className="input-group-alternative">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <i className="ni ni-circle-08"/>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input placeholder="Nome" type="text"
-                        onFocus={() => setSignUpName('focused')}
-                        onBlur={() => setSignUpName('')}
+                      <Input placeholder="Nome" id="name" type="text" name="name"
+                        onChange={formik.handleChange}
+                        value={formik.values.name}
                       />
                     </InputGroup>
                   </FormGroup>
-                  <FormGroup className={"mb-3" + signUpEmail}>
+                  <FormGroup className="mb-3">
                     <InputGroup className="input-group-alternative">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <i className="ni ni-email-83"/>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input placeholder="Email" type="email"
-                        onFocus={() => setSignUpEmail('focused')}
-                        onBlur={() => setSignUpEmail('')}
+                      <Input placeholder="Email" type="email" id="email" name="email"
+                        onChange={formik.handleChange}
+                        value={formik.values.email}
                       />
                     </InputGroup>
                   </FormGroup>
-                  <FormGroup className={signUpPassword}>
+                  <FormGroup>
                     <InputGroup className="input-group-alternative">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <i className="ni ni-lock-circle-open"/>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input placeholder="Password" type="password"
-                        onFocus={() => setSignUpPassword('focused')}
-                        onBlur={() => setSignUpPassword('')}
+                      <Input placeholder="Password" type="password" id="password" name="password"
+                        onChange={formik.handleChange}
+                        value={formik.values.password}
                       />
                     </InputGroup>
                   </FormGroup>
@@ -81,7 +94,7 @@ export default function LoginCard(){
                     </label>
                   </div>
                   <div className="text-center">
-                    <Button className="my-4" color="primary" type="button"
+                    <Button className="my-4" color="primary" type="submit"
                       onClick={() => {}}
                     >
                       Cadastrar
