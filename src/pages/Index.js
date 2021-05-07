@@ -14,12 +14,12 @@ export default function Index() {
     };
   }, []);
   function btnEntrar(){
-    if(mostrar == '' || mostrar == 'registrar'){
+    if(mostrar === '' || mostrar === 'registrar'){
       setMostrar('entrar');
     }
   }
   function btnRegistrar(){
-    if(mostrar == '' || mostrar == 'entrar'){
+    if(mostrar === '' || mostrar === 'entrar'){
       setMostrar('registrar');
     }
   }
