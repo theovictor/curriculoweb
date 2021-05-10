@@ -10,6 +10,7 @@ import Index from "pages/Index.js";
 import Dashboard from "pages/Dashboard.js";
 import Profile from "pages/Profile.js";
 import ResetPage from "pages/ResetPage.js";
+import Configuracao from "pages/Configuracao.js";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -19,6 +20,7 @@ ReactDOM.render(
           <Route exact path="/profile-page" component={Profile}/>
           <Route exact path="/reset-page" component={ResetPage}/>
           <Route exact path="/index-page" component={Index}/>
+          <Route exact path="/config-page" component={Configuracao}/>
       </Switch>
   </BrowserRouter>,
   document.getElementById('root')

@@ -27,7 +27,7 @@ export default function DashNavbar(){
     <>
       <header className="header-global">
           <Navbar className="navbar-main navbar-transparent navbar-light headroom" expand="lg" id="navbar-main">
-              <Container className="nav-container bg-gradient-purple">
+              <Container className="nav-container bg-gradient-purple-transparent">
                   <NavbarBrand className="mr-lg-5 ml-4" to="#" tag={Link}>
                       <Logo />
                   </NavbarBrand>
@@ -74,7 +74,7 @@ export default function DashNavbar(){
                               </DropdownToggle>
                           </UncontrolledDropdown>
                           <UncontrolledDropdown nav>
-                              <DropdownToggle nav to="#" tag={Link}>
+                              <DropdownToggle nav to="/config-page" tag={Link}>
                                   <i className="ni ni-settings-gear-65 d-lg-none mr-2"/>
                                   <span className="nav-link-inner--text">Configurações</span>
                               </DropdownToggle>

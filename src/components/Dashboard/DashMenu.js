@@ -1,5 +1,5 @@
-import React from "react";
-import {Col, Row, Card, CardBody, Button} from "reactstrap";
+import React from 'react';
+import { Col, Row, Card, CardBody, Button } from 'reactstrap';
 export default function DashMenu() {
   return (
     <>
