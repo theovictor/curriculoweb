@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Logo from 'components/Logo/Logo.js';
 import {useFormik} from 'formik';
-//import * as Yup from 'yup';
 import {
   Button,
   Card,

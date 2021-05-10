@@ -1,65 +1,68 @@
 import React, { useState } from "react";
 import { useFormik } from 'formik';
 import { Input, Form, Row, Col, FormGroup, Button } from "reactstrap";
-import * as yup from 'yup';
+//import * as yup from 'yup';
 export default function Formulario() {
   const [value, setValue] = useState(1);
   const formik = useFormik({
     initialValues: {
-      firstName: '',
-      lastName: '',
+      nome: '',
+      nacionalidade: '',
       email: '',
+      idade:'',
+      celular:'',
+      dataNascimento:'',
+      sexo:'',
+      estadoCivil:'',
+      raca:'',
+      cep:'',
+      uf:'',
+      endereco:'',
+      bairro:'',
+      numeroCasa:'',
+      
     },
     onSubmit: values => {
-      firstName: yup.string().required();
+      alert(JSON.stringify(values, null, 2));
+      //firstName: yup.string().required();
     },
-  })
+  });
   function btnAvancar() {
     if (value < 3) {
       setValue(value + 1);
     }
-  }
+  };
   function btnVoltar() {
     if (value > 1) {
       setValue(value - 1);
     }
-  }
+  };
   return (
     <>
-      <Form>
+      <Form onSubmit={formik.handleSubmit} className="needs-validation" noValidate>
         <h6 className="heading-small text-muted mb-4">
-          Suas Informações
-            </h6>
+          Dados Principais
+        </h6>
+{/* Primeira parte do Formulario*/}
         {value === 1 ?
           <div className="pl-lg-4">
             <Row>
               <Col lg="6">
                 <FormGroup>
-                  <label className="form-control-label"
-                    htmlFor="input-username"
-                  >
-                    Nome
-                        </label>
-                  <Input className="form-control-alternative"
-                    defaultValue="Mariazinha dos Biricuticos"
-                    id="input-username"
-                    placeholder="Nome"
-                    type="text"
-                  />
+                  <label className="form-control-label" htmlFor="nome">
+                    Nome *
+                  </label>
+                  <Input className="form-control-alternative" id="nome" name="nome" placeholder="Nome" type="text"
+                    onChange={formik.handleChange} value={formik.values.nome}/>
                 </FormGroup>
               </Col>
               <Col lg="6">
                 <FormGroup>
-                  <label className="form-control-label"
-                    htmlFor="input-email"
-                  >
-                    Email
-                            </label>
-                  <Input className="form-control-alternative"
-                    id="input-email"
-                    placeholder="mariazinha@exemplo.com"
-                    type="email"
-                  />
+                  <label className="form-control-label" htmlFor="email">
+                    Email *
+                  </label>
+                  <Input className="form-control-alternative" id="email" placeholder="example@email.com" name="email" type="email"
+                    onChange={formik.handleChange} value={formik.values.email}/>
                 </FormGroup>
               </Col>
             </Row>
@@ -162,7 +165,7 @@ export default function Formulario() {
             </div>
         }
       </Form>
-      <Button className="btn-icon border-0" color="default" type="button"
+      <Button className="btn-icon border-0" color="default" type="submit"
         onClick={btnAvancar} size="sm"
       >
         Avançar
