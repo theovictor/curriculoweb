@@ -15,11 +15,7 @@ import {
   Container,
   Col
 } from 'reactstrap';
-
 export default function LoginCard(){
-  // const [signUpName, setSignUpName] = useState('');
-  // const [signUpEmail, setSignUpEmail] = useState('');
-  // const [signUpPassword, setSignUpPassword] = useState('');
   const formik = useFormik ({
     initialValues: {
       name: '',
