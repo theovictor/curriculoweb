@@ -56,7 +56,7 @@ export default function LoginCard(){
                 <div className="text-center text-muted mb-4">
                   <small>Entre com suas credenciais</small>
                 </div>
-                <Form onSubmit={formik.handleSubmit}>
+                <Form role="form" onSubmit={formik.handleSubmit}>
                   <FormGroup className="mb-3">
                     <InputGroup className="input-group-alternative">
                       <InputGroupAddon addonType="prepend">

@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import Logo from 'components/Logo/Logo.js';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 import {
   Button,
   Card,
@@ -12,11 +14,20 @@ import {
   InputGroupAddon,
   InputGroupText,
   Container,
-  Col
+  Col,
+  FormFeedback
 } from 'reactstrap';
 export default function LoginCard(){
-  const [signInEmail, setSignInEmail] = useState('');
-  const [signInPassword, setSignInPassword] = useState('');
+  const formik = useFormik ({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: yup.object({
+      email: yup.string().email('Email inválido').required('Insira seu Email!'),
+      password: yup.string().required('Insira sua Senha!'),
+    })
+  })
   return(
     <>
       <section className="upper">
@@ -33,31 +44,31 @@ export default function LoginCard(){
                 <div className="text-center text-muted mb-4">
                   <small>Entre com suas credenciais</small>
                 </div>
-                <Form role="form">
-                  <FormGroup className={"mb-3" + signInEmail}>
+                <Form role="form" onSubmit={formik.handleSubmit}>
+                  <FormGroup className="mb-3">
                     <InputGroup className="input-group-alternative">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <i className="ni ni-email-83"/>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input placeholder="Email" type="email"
-                        onFocus={() => setSignInEmail('focused')}
-                        onBlur={() => setSignInEmail('')}
-                      />
+                      <Input placeholder="Email" id="email" type="email"
+                        invalid={formik.touched.email && formik.errors.email ? true : false}
+                        {...formik.getFieldProps('email')}/>
+                      <FormFeedback>{formik.touched.email && formik.errors.email ? formik.errors.email : null}</FormFeedback>
                     </InputGroup>
                   </FormGroup>
-                  <FormGroup className={signInPassword}>
+                  <FormGroup>
                     <InputGroup className="input-group-alternative">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <i className="ni ni-lock-circle-open"/>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input placeholder="Password" type="password"
-                        onFocus={() => setSignInPassword('focused')}
-                        onBlur={() => setSignInPassword('')}
-                      />
+                      <Input placeholder="Senha" id="password" type="password"
+                        invalid={formik.touched.password && formik.errors.password ? true : false}
+                        {...formik.getFieldProps('password')}/>
+                      <FormFeedback>{formik.touched.password && formik.errors.password ? formik.errors.password : null}</FormFeedback>
                     </InputGroup>
                   </FormGroup>
                   <div className="custom-control custom-control-alternative custom-checkbox">
@@ -67,9 +78,7 @@ export default function LoginCard(){
                     </label>
                   </div>
                   <div className="text-center">
-                    <Button className="my-4" color="primary" type="button"
-                      onClick={() => {}}
-                    >
+                    <Button className="my-4" color="primary" type="submit">
                       Entrar
                     </Button>
                   </div>
