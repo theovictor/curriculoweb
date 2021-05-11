@@ -20,7 +20,6 @@ export default function Formulario() {
       endereco:'',
       bairro:'',
       numeroCasa:'',
-      
     },
     onSubmit: values => {
       alert(JSON.stringify(values, null, 2));
