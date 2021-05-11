@@ -1,14 +1,8 @@
-import React, { useState } from "react";
-import { useFormik} from 'formik';
+import React from "react";
+import { useFormik } from 'formik';
 import { Input, Form, Row, Col, FormGroup, Button, FormFeedback } from "reactstrap";
 import * as Yup from 'yup';
 export default function Formulario() {
-  const [value, setValue] = useState(1);
-  
-  const sendForm = Yup.object().shape({
-    nome: Yup.string().required('Nome Obrigatorio'),
-    email: Yup.string().email('Email Obrigatorio')
-  })
   const formik = useFormik({
     initialValues: {
       nome: '',
@@ -41,6 +35,7 @@ export default function Formulario() {
       bairro: Yup.string().required('Barrio obrigatório'),
       cep: Yup.number().required('CEP obrigatório'),
       cidade: Yup.string().required('Cidade obrigatório'),
+      pais: Yup.string().required('País obrigatório'),
       uf: Yup.string().required('Estado (UF) obrigatório'),
       nacionalidade: Yup.string().required('Nacionalidade obrigatório'),
       naturalidade: Yup.string().required('Naturalidade obrigatório'),
@@ -72,7 +67,7 @@ export default function Formulario() {
               </Col>
               <Col lg="4">
                 <FormGroup>
-                  <label className=" form-control-label" htmlFor="dataNascimento">Date de Nascimento</label>
+                  <label className=" form-control-label" htmlFor="dataNascimento">Date de Nascimento *</label>
                   <Input className="form-control-alternative" id="dataNascimento" type="date"
                     invalid={formik.touched.dataNascimento && formik.errors.dataNascimento ? true : false}
                     {...formik.getFieldProps('dataNascimento')}/>
@@ -141,8 +136,8 @@ export default function Formulario() {
               </Col>
               <Col lg="2">
                 <FormGroup>
-                  <label className=" form-control-label" htmlFor="pais">Pais *</label>
-                  <Input className="form-control-alternative" id="pais" placeholder="Pais" type="text"
+                  <label className=" form-control-label" htmlFor="pais">País *</label>
+                  <Input className="form-control-alternative" id="pais" placeholder="País" type="text"
                     invalid={formik.touched.pais && formik.errors.pais ? true : false}
                     {...formik.getFieldProps('uf')}/>
                   <FormFeedback>{formik.touched.pais && formik.errors.pais ? formik.errors.pais : null}</FormFeedback>
@@ -180,6 +175,7 @@ export default function Formulario() {
                 </FormGroup>
               </Col>
             </Row>
+            <hr className="line-primary"></hr>
             <Button className="btn-icon border-0" color="default" type="submit">Avançar</Button>
         </div>
       </Form>
