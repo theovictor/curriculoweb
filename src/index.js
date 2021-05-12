@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {render} from 'react-dom';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import "assets/vendor/nucleo/css/nucleo.css";
@@ -12,14 +12,14 @@ import Profile from "pages/Profile.js";
 import ResetPage from "pages/ResetPage.js";
 import Configuracao from "pages/Configuracao.js";
 
-ReactDOM.render(
+render(
   <BrowserRouter>
       <Switch>
           <Route exact path="/" component={Index}/>
+          <Route exact path="/index-page" component={Index}/>
           <Route exact path="/dashboard-page" component={Dashboard}/>
           <Route exact path="/profile-page" component={Profile}/>
           <Route exact path="/reset-page" component={ResetPage}/>
-          <Route exact path="/index-page" component={Index}/>
           <Route exact path="/config-page" component={Configuracao}/>
       </Switch>
   </BrowserRouter>,
