@@ -1,6 +1,6 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
-import Headroom from "headroom.js";
+// import Headroom from "headroom.js";
 import Logo from "components/Logo/Logo.js";
 import {
     UncontrolledCollapse,
@@ -19,15 +19,15 @@ import {
     Card
 } from "reactstrap";
 export default function DashNavbar(){
-  useEffect(() => {
-    let headroom = new Headroom(document.getElementById("navbar-main"));
-    headroom.init();
-  });
+  // useEffect(() => {
+  //   let headroom = new Headroom(document.getElementById("navbar-main"));
+  //   headroom.init();
+  // });
   return(
     <>
       <header className="header-global">
           <Navbar className="navbar-main navbar-transparent navbar-light headroom" expand="lg" id="navbar-main">
-              <Container className="nav-container bg-gradient-purple-transparent">
+              <Container className="nav-container bg-gradient-purple">
                   <NavbarBrand className="mr-lg-5 ml-4" to="#" tag={Link}>
                       <Logo />
                   </NavbarBrand>
