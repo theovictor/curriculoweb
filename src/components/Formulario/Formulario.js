@@ -1,25 +1,8 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useFormik } from 'formik';
 import { Input, Form, Row, Col, FormGroup, Button, FormFeedback, Label } from "reactstrap";
 import * as yup from 'yup';
 export default function Formulario() {
-
-  function buscaCep (ev, setFieldValue){
-    const { value } = ev.target;
-    const cep = value?.replace(/[^0-9]/g, '');
-    if(cep?.length !== 8){
-      return;
-    }
-    fetch(`https://viacep.com.br/ws/${cep}/json/`)
-      .then((res) => res.json())
-      // .then((data) => console.log(data))
-      .then((data) => {
-        setFieldValue('logradouro', data.logradouro);
-        setFieldValue('bairro', data.bairro);
-        setFieldValue('cidade', data.localidade);
-        setFieldValue('uf', data.uf);
-      });
-  }
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -40,20 +23,58 @@ export default function Formulario() {
     validationSchema: yup.object({
       name: yup.string().required('name obrigatório'),
       email: yup.string().required('Email obrigatório'),
-      idade: yup.number().required('Idade obrigatória'),
+      //idade: yup.string().required('Idade obrigatória'),
       contato: yup.string().required('Telefone de Contato obrigatório'),
       dataNascimento: yup.string().required('Data de Nascimento obrigatório'),
       sexo: yup.string().required('Sexo obrigatório'),
       estadoCivil: yup.string().required('Estado Civil obrigatório'),
       nacionalidade: yup.string().required('Nacionalidade obrigatório'),
       cep: yup.string().required('CEP obrigatório'),
-      logradouro: yup.string().required('Logradouro obrigatório'),
+      // logradouro: yup.string().required('Logradouro obrigatório'),
       numeroCasa: yup.string().required('Nº da Casa obrigatório'),
-      bairro: yup.string().required('Barrio obrigatório'),
-      cidade: yup.string().required('Cidade obrigatório'),
-      uf: yup.string().required('Estado (UF) obrigatório'),
+      // bairro: yup.string().required('Barrio obrigatório'),
+      // cidade: yup.string().required('Cidade obrigatório'),
+      // uf: yup.string().required('Estado (UF) obrigatório'),
     }),
   });
+  function buscaCep (ev, setFieldValue){
+    const { value } = ev.target;
+    const cep = value?.replace(/[^0-9]/g, '');
+    if(cep?.length !== 8){
+      return;
+    }
+    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+      .then((res) => res.json())
+      .then((data) => {
+        setFieldValue('logradouro', data.logradouro);
+        setFieldValue('bairro', data.bairro);
+        setFieldValue('cidade', data.localidade);
+        setFieldValue('uf', data.uf);
+      });
+  }
+  function calcIdade (setFieldValue){
+    const dataInfo = formik.values.dataNascimento;
+    const anoAtual = new Date().getFullYear();
+    const dataInfoParts = dataInfo.split('-');
+    const anoNasc = dataInfoParts[0];
+    const mesNasc = dataInfoParts[1];
+    const diaNasc = dataInfoParts[2];
+    let age =  anoAtual - anoNasc;
+    const mesAtual = new Date().getMonth() + 1;
+    if(mesAtual < mesNasc){
+      setFieldValue('idade', age--);
+    }else{
+      if(mesAtual === mesNasc){
+        if(new Date().getDate() < diaNasc){
+          setFieldValue('idade', age--);
+        }
+      }
+    }
+    return setFieldValue('idade', age);
+  }
+  useEffect(() => {
+    console.log(formik.values)
+  }, [formik.values]);
   return (
     <>
       <Form onSubmit={formik.handleSubmit}>
@@ -98,11 +119,11 @@ export default function Formulario() {
                 <FormGroup>
                   <Label className=" form-control-label" htmlFor="dataNascimento">Date de Nascimento *</Label>
                   <Input className="form-control-alternative" id="dataNascimento" type="date"
-                    //onBlur = {(ev) => calcIdade(ev, formik.setFieldValue)}
-                    // invalid={formik.touched.dataNascimento && formik.errors.dataNascimento ? true : false}
-                    // {...formik.getFieldProps('dataNascimento')}
+                    invalid={formik.touched.dataNascimento && formik.errors.dataNascimento ? true : false}
+                    {...formik.getFieldProps('dataNascimento')}
+                    onBlur = {(ev) => calcIdade(formik.setFieldValue)}
                   />
-                  {/* <FormFeedback>{formik.touched.dataNascimento && formik.errors.dataNascimento ? formik.errors.dataNascimento : null}</FormFeedback> */}
+                  <FormFeedback>{formik.touched.dataNascimento && formik.errors.dataNascimento ? formik.errors.dataNascimento : null}</FormFeedback>
                 </FormGroup>
               </Col>
               <Col sm="2">
@@ -124,11 +145,10 @@ export default function Formulario() {
                 <FormGroup>
                   <Label className="form-control-label" htmlFor="cep">CEP *</Label>
                   <Input className="form-control-alternative" id="cep" placeholder="CEP" type="text"
-                    onBlur = {(ev) => buscaCep(ev, formik.setFieldValue)}
-                    // invalid = {formik.touched.cep && formik.errors.cep ? true : false}
-                    // {...formik.getFieldProps('cep')}
-                    />
-                  {/* <FormFeedback>{formik.touched.cep && formik.errors.cep ? formik.errors.cep : null}</FormFeedback> */}
+                    {...formik.getFieldProps('cep')}
+                    invalid = {formik.touched.cep && formik.errors.cep ? true : false}
+                    onBlur = {(ev) => buscaCep(ev, formik.setFieldValue)}/>
+                  <FormFeedback>{formik.touched.cep && formik.errors.cep ? formik.errors.cep : null}</FormFeedback>
                 </FormGroup>
               </Col>
               <Col lg="3">
