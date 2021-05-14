@@ -16,7 +16,6 @@ render(
   <BrowserRouter>
       <Switch>
           <Route exact path="/" component={Index}/>
-          <Route exact path="/index-page" component={Index}/>
           <Route exact path="/dashboard-page" component={Dashboard}/>
           <Route exact path="/profile-page" component={Profile}/>
           <Route exact path="/reset-page" component={ResetPage}/>
