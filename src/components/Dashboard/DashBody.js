@@ -6,7 +6,7 @@ export default function DashBody() {
     <>
       <Container className="mt-8" fluid>
         <Row>
-          <Col className="order-xl-1 mb-0 mb-xl-0" xl="3">
+          <Col className="order-xl-1 mb-0 mb-xl-0" xl="3"> {/* Card do Menu */}
             <Card className="card-profile shadow">
               <Row className="justify-content-center">
                 <Col className="order-lg-2" lg="3">
@@ -77,7 +77,7 @@ export default function DashBody() {
               </CardBody>
             </Card>
           </Col>
-          <Col className="order-xl-2 mt-6" xl="9">
+          <Col className="order-xl-2 mt-6" xl="9"> {/* Card da esquerda*/}
             <Card className="telaRND bg-secondary shadow">
               <CardHeader className="bg-white border-0">
                 <Row className="align-items-center">
