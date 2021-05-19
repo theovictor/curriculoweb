@@ -3,7 +3,7 @@ import { Card, CardHeader, CardBody, Container, Row, Col, Button, Nav, NavItem }
 import DadosPrincipais from 'components/Formularios/DadosPrincipais.js';
 import Escolares from 'components/Formularios/Escolares.js';
 export default function DashBody() {
-  const [mostrar, setMostrar] = useState('');
+  const [mostrar, setMostrar] = useState('escolares');
   function btnDadosPrin(){
     if(mostrar !== 'dadosPrincipal'){
       setMostrar('dadosPrincipal');
@@ -26,9 +26,9 @@ export default function DashBody() {
   }
   return (
     <>
-      <Container className="mt-7">
+      <Container className="mt-7" fluid>
         <Row>
-          <Col className="order-xl-1 mb-2 mb-xl-0" xl="4"> {/* Card do Menu */}
+          <Col className="order-xl-1 mb-2 mb-xl-0" xl="3"> {/* Card do Menu */}
             <Card className="card-profile shadow">
               <Row className="justify-content-center">
                 <Col className="order-lg-2" lg="3">
@@ -85,7 +85,7 @@ export default function DashBody() {
               </CardBody>
             </Card>
           </Col>
-          <Col className="order-xl-2" xl="8"> {/* Card da esquerda*/}
+          <Col className="order-xl-2" xl="9"> {/* Card da esquerda*/}
             <Card className="telaRND bg-secondary shadow">
               <CardHeader className="bg-white border-0">
                 <Row className="align-items-center">
