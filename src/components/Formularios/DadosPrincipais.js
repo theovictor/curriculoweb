@@ -1,8 +1,8 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { useFormik } from 'formik';
 import { Input, Form, Row, Col, FormGroup, Button, FormFeedback, Label } from "reactstrap";
 import * as yup from 'yup';
-export default function Formulario() {
+export default function DadosPrincipais() {
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -21,20 +21,20 @@ export default function Formulario() {
       uf:'',
     },
     validationSchema: yup.object({
-      name: yup.string().required('name obrigatório'),
+      name: yup.string().required('Nome obrigatório'),
       email: yup.string().required('Email obrigatório'),
-      //idade: yup.string().required('Idade obrigatória'),
+      idade: yup.string().required('Idade obrigatória'),
       contato: yup.string().required('Telefone de Contato obrigatório'),
       dataNascimento: yup.string().required('Data de Nascimento obrigatório'),
       sexo: yup.string().required('Sexo obrigatório'),
       estadoCivil: yup.string().required('Estado Civil obrigatório'),
       nacionalidade: yup.string().required('Nacionalidade obrigatório'),
       cep: yup.string().required('CEP obrigatório'),
-      // logradouro: yup.string().required('Logradouro obrigatório'),
+       logradouro: yup.string().required('Logradouro obrigatório'),
       numeroCasa: yup.string().required('Nº da Casa obrigatório'),
-      // bairro: yup.string().required('Barrio obrigatório'),
-      // cidade: yup.string().required('Cidade obrigatório'),
-      // uf: yup.string().required('Estado (UF) obrigatório'),
+       bairro: yup.string().required('Barrio obrigatório'),
+       cidade: yup.string().required('Cidade obrigatório'),
+       uf: yup.string().required('Estado (UF) obrigatório'),
     }),
   });
   function buscaCep (ev, setFieldValue){
@@ -72,17 +72,16 @@ export default function Formulario() {
     }
     return setFieldValue('idade', age);
   }
-  useEffect(() => {
-    console.log(formik.values)
-  }, [formik.values]);
+  // React.useEffect(() => {
+  //   console.log(formik.values)
+  // }, [formik.values]);
   return (
     <>
       <Form onSubmit={formik.handleSubmit}>
         <h6 className="heading-small text-muted mb-4">Dados Principais</h6>
-        <div className="pl-lg-4">
           <div> {/* Dados Principais */}
             <Row>
-              <Col lg="4">
+              <Col lg="5">
                 <FormGroup>
                   <Label className="form-control-label" htmlFor="name">Nome *</Label>
                   <Input className="form-control-alternative" id="name" placeholder="Nome" type="text"
@@ -100,13 +99,13 @@ export default function Formulario() {
                   <FormFeedback>{formik.touched.email && formik.errors.email ? formik.errors.email : null}</FormFeedback>
                 </FormGroup>
               </Col>
-              <Col lg="2">
+              <Col lg="3">
                 <FormGroup>
                   <Label className="form-control-label" htmlFor="sexo">Sexo *</Label>
                   <Input className="form-control-alternative" id="sexo" type="select" data-trigger=""
                     invalid={formik.touched.sexo && formik.errors.sexo ? true : false}
                     {...formik.getFieldProps('sexo')}>
-                    <option value={null}></option>
+                    <option value={null}>Gênero</option>
                     <option value="1">Masculino</option>
                     <option value="2">Feminino</option>
                   </Input>
@@ -115,7 +114,16 @@ export default function Formulario() {
               </Col>
             </Row>
             <Row>
-              <Col sm="3">
+              <Col lg="4">
+                <FormGroup>
+                  <Label className=" form-control-label" htmlFor="contato">Contato *</Label>
+                  <Input className="form-control-alternative" id="contato" type="text" placeholder="(69) 9 9999-9999"
+                    invalid={formik.touched.contato && formik.errors.contato ? true : false}
+                    {...formik.getFieldProps('contato')}/>
+                  <FormFeedback>{formik.touched.contato && formik.errors.contato ? formik.errors.contato : null}</FormFeedback>
+                </FormGroup>
+              </Col>
+              <Col lg="4">
                 <FormGroup>
                   <Label className=" form-control-label" htmlFor="dataNascimento">Date de Nascimento *</Label>
                   <Input className="form-control-alternative" id="dataNascimento" type="date"
@@ -126,13 +134,39 @@ export default function Formulario() {
                   <FormFeedback>{formik.touched.dataNascimento && formik.errors.dataNascimento ? formik.errors.dataNascimento : null}</FormFeedback>
                 </FormGroup>
               </Col>
-              <Col sm="2">
+              <Col lg="2">
                 <FormGroup>
                   <Label className=" form-control-label" htmlFor="idade">Idade</Label>
                   <Input className="form-control-alternative" id="idade" type="text" disabled
-                    // invalid={formik.touched.idade && formik.errors.idade ? true : false}
-                    {...formik.getFieldProps('idade')}/>
-                  {/* <FormFeedback>{formik.touched.idade && formik.errors.idade ? formik.errors.idade : null}</FormFeedback> */}
+                    {...formik.getFieldProps('idade')}
+                    invalid={formik.touched.idade && formik.errors.idade ? true : false}/>
+                  <FormFeedback>{formik.touched.idade && formik.errors.idade ? formik.errors.idade : null}</FormFeedback>
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row>
+              <Col lg="4">
+                <FormGroup>
+                  <Label className=" form-control-label" htmlFor="estadoCivil">Estado Civil *</Label>
+                  <Input className="form-control-alternative" id="estadoCivil" type="select" 
+                    invalid={formik.touched.estadoCivil && formik.errors.estadoCivil ? true : false}
+                    {...formik.getFieldProps('estadoCivil')}>
+                    <option value={null}>Est. Civil</option>
+                    <option value="Solteiro">Solteiro(a)</option>
+                    <option value="Casado">Casado(a)</option>
+                    <option value="Viúvo">Viúvo(a)</option>
+                    <option value="Divorciado">Divorciado(a)</option>
+                  </Input>
+                  <FormFeedback>{formik.touched.estadoCivil && formik.errors.estadoCivil ? formik.errors.estadoCivil : null}</FormFeedback>
+                </FormGroup>
+              </Col>
+              <Col lg="4">
+                <FormGroup>
+                  <Label className=" form-control-label" htmlFor="nacionalidade">Nacionalidade *</Label>
+                  <Input className="form-control-alternative" id="nacionalidade" type="text" placeholder="País"
+                    invalid={formik.touched.nacionalidade && formik.errors.nacionalidade ? true : false}
+                    {...formik.getFieldProps('nacionalidade')}/>
+                  <FormFeedback>{formik.touched.nacionalidade && formik.errors.nacionalidade ? formik.errors.nacionalidade : null}</FormFeedback>
                 </FormGroup>
               </Col>
             </Row>
@@ -155,7 +189,9 @@ export default function Formulario() {
                 <FormGroup>
                   <Label className="form-control-label" htmlFor="logradouro">Logradouro</Label>
                   <Input className="form-control-alternative" id="logradouro" placeholder="Logradouro" type="text" disabled
-                    {...formik.getFieldProps('logradouro')}/>
+                    {...formik.getFieldProps('logradouro')}
+                    invalid = {formik.touched.logradouro && formik.errors.logradouro ? true : false}/>
+                  <FormFeedback>{formik.touched.logradouro && formik.errors.logradouro ? formik.errors.logradouro : null}</FormFeedback>
                 </FormGroup>
               </Col>
               <Col lg="2">
@@ -171,7 +207,9 @@ export default function Formulario() {
                 <FormGroup>
                   <Label className=" form-control-label" htmlFor="bairro">Bairro</Label>
                   <Input className="form-control-alternative" id="bairro" placeholder="Bairro" type="text" disabled
-                    {...formik.getFieldProps('bairro')}/>
+                    {...formik.getFieldProps('bairro')}
+                    invalid = {formik.touched.bairro && formik.errors.bairro ? true : false}/>
+                  <FormFeedback>{formik.touched.bairro && formik.errors.bairro ? formik.errors.bairro : null}</FormFeedback>
                 </FormGroup>
               </Col>
             </Row>
@@ -181,15 +219,16 @@ export default function Formulario() {
                   <Label className=" form-control-label" htmlFor="cidade">Cidade</Label>
                   <Input className="form-control-alternative" id="cidade" placeholder="Cidade" type="text" disabled
                     {...formik.getFieldProps('cidade')}
-                    />
+                    invalid = {formik.touched.cidade && formik.errors.cidade ? true : false}/>
+                  <FormFeedback>{formik.touched.cidade && formik.errors.cidade ? formik.errors.cidade : null}</FormFeedback>
                 </FormGroup>
               </Col>
-              <Col lg="2">
+              <Col lg="3">
                 <FormGroup>
                   <Label className=" form-control-label" htmlFor="uf">UF *</Label>
                   <Input className="form-control-alternative" id="uf" placeholder="UF" type="select" disabled
-                    {...formik.getFieldProps('uf')}
-                  >
+                    invalid = {formik.touched.uf && formik.errors.uf ? true : false}
+                    {...formik.getFieldProps('uf')}>
                     <option value={null}>UF</option>
                     <option value="AC">Acre</option>
                     <option value="AL">Alagoas</option>
@@ -217,13 +256,18 @@ export default function Formulario() {
                     <option value="SP">São Paulo</option>
                     <option value="TO">Tocantins</option>
                   </Input>
+                  <FormFeedback>{formik.touched.uf && formik.errors.uf ? formik.errors.uf : null}</FormFeedback>
                 </FormGroup>
               </Col>
             </Row>
           </div>
           <hr className="line-primary"></hr>
-        </div>
-        <Button className="btn-icon border-0" color="success" type="submit">Salvar</Button>
+        <Button className="btn-icon border-0" color="success" type="submit">
+          <span className="btn-inner--icon">
+            <i className="fas fa-save"></i>
+          </span>
+          <span className="btn-inner--text">Salvar</span>
+        </Button>
       </Form>
     </>
   );
