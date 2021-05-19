@@ -4,11 +4,11 @@ import DashNavbar from 'components/Navbars/DashNavbar';
 import AccountSettings from 'components/Configuracao/AccountSettings';
 export default function Configuracao(){
   useEffect(() => {
-    document.body.classList.add('config-page');
+    document.body.classList.add('settings');
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     return function cleanup(){
-      document.body.classList.remove('config-page');
+      document.body.classList.remove('settings');
     };
   }, []);
   return(

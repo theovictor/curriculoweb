@@ -4,11 +4,11 @@ import "assets/css/ResetPage.css";
 import ResetCard from "components/ResetSenha/ResetCard.js";
 export default function ResetPage() {
   React.useEffect(() => {
-    document.body.classList.add("reset-page");
+    document.body.classList.add("reset");
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     return function cleanup() {
-      document.body.classList.remove("reset-page");
+      document.body.classList.remove("reset");
     };
   });
   return (

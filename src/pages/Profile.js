@@ -5,11 +5,11 @@ import "assets/css/ProfilePage.css";
 
 function Profile() {
     React.useEffect(() => {
-        document.body.classList.add("profile-page");
+        document.body.classList.add("profile");
         window.scrollTo(0, 0);
         document.body.scrollTop = 0;
         return function cleanup(){
-            document.body.classList.remove("profile-page");
+            document.body.classList.remove("profile");
         };
     });
     return(

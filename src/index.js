@@ -19,10 +19,10 @@ render(
   <BrowserRouter>
       <Switch>
           <Route exact path="/" component={Index}/>
-          <Route exact path="/dashboard-page" component={Dashboard}/>
-          <Route exact path="/profile-page" component={Profile}/>
-          <Route exact path="/reset-page" component={ResetPage}/>
-          <Route exact path="/config-page" component={Configuracao}/>
+          <Route exact path="/dashboard" component={Dashboard}/>
+          <Route exact path="/profile" component={Profile}/>
+          <Route exact path="/reset" component={ResetPage}/>
+          <Route exact path="/settings" component={Configuracao}/>
       </Switch>
   </BrowserRouter>,
   document.getElementById('root')

@@ -6,11 +6,11 @@ import RegisterCard from 'components/Register/RegisterCard.js';
 export default function Index() {
   const [mostrar, setMostrar] = useState('');
   useEffect(() => {
-    document.body.classList.add("index-page");
+    document.body.classList.add("index");
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     return function cleanup() {
-      document.body.classList.remove("index-page");
+      document.body.classList.remove("index");
     };
   }, []);
   function btnEntrar(){
