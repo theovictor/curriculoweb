@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Card, CardHeader, CardBody, Container, Row, Col, Button, Nav, NavItem } from 'reactstrap';
+import { Card, CardHeader, CardBody, Container, Row, Col, Button, Nav, NavItem, ListGroup, ListGroupItem } from 'reactstrap';
 import DadosPrincipais from 'components/Formularios/DadosPrincipais.js';
 import Escolares from 'components/Formularios/Escolares.js';
 export default function DashBody() {
@@ -44,42 +44,56 @@ export default function DashBody() {
                   <div className="h5 font-weight-300">dos Biricuticos</div>
                   <hr className="my-4" />
                   <Col className="text-left">
-                    <Nav vertical>
-                      <NavItem>
-                      <Button className="btn-icon btn-3 border-0" color="info" type="button" outline onClick={btnDadosPrin}>
-                        <span className="btn-inner--icon">
-                          <i className="ni ni-badge"></i>
-                        </span>
-                        <span className="btn-inner--text">Dados Principais</span>
-                      </Button>
-                      <Button className="btn-icon btn-3 border-0" color="info" type="button" outline onClick={btnEscolares}>
-                        <span className="btn-inner--icon">
-                          <i className="fas fa-graduation-cap"></i>
-                        </span>
-                        <span className="btn-inner--text">Escolares</span>
-                      </Button>
-                      <Button className="btn-icon btn-3 border-0" color="info" type="button" outline onClick={btnConheci}>
-                        <span className="btn-inner--icon">
-                        <i className="ni ni-books"></i>
-                        </span>
-                        <span className="btn-inner--text">Conhecimentos</span>
-                      </Button>
-                      <Button className="btn-icon btn-3 border-0" color="info" type="button" outline onClick={btnExperi}>
-                        <span className="btn-inner--icon">
-                          <i className="fas fa-chart-line"></i>
-                        </span>
-                        <span className="btn-inner--text">Experiências
-                        </span>
-                      </Button>
-                      <Button className="btn-icon btn-3 border-0" color="info" type="button" outline>
-                        <span className="btn-inner--icon">
-                          <i className="fas fa-file-pdf"></i>
-                        </span>
-                        <span className="btn-inner--text">Exportar PDF
-                        </span>
-                      </Button>
-                      </NavItem>
-                    </Nav>
+                    <ListGroup>
+                      <ListGroupItem className="list-group-item-action border-0"
+                        href="#"
+                        onClick={btnDadosPrin}
+                        tag="a"
+                      >
+                        <i className="ni ni-badge mr-3"/>
+                        Dados Principais
+                      </ListGroupItem>
+                    </ListGroup>
+                    <ListGroup>
+                      <ListGroupItem className="list-group-item-action border-0"
+                        href="#"
+                        onClick={btnEscolares}
+                        tag="a"
+                      >
+                        <i className="fas fa-graduation-cap mr-3"/>
+                        Escolares
+                      </ListGroupItem>
+                    </ListGroup>
+                    <ListGroup>
+                      <ListGroupItem className="list-group-item-action border-0"
+                        href="#"
+                        onClick={btnConheci}
+                        tag="a"
+                      >
+                        <i className="ni ni-books mr-3"/>
+                        Conhecimentos
+                      </ListGroupItem>
+                    </ListGroup>
+                    <ListGroup>
+                      <ListGroupItem className="list-group-item-action border-0"
+                        href="#"
+                        onClick={btnExperi}
+                        tag="a"
+                      >
+                        <i className="fas fa-chart-line mr-3"/>
+                        Experiências
+                      </ListGroupItem>
+                    </ListGroup>
+                    <ListGroup>
+                      <ListGroupItem className="list-group-item-action border-0"
+                        href="#"
+                        onClick={() => {}}
+                        tag="a"
+                      >
+                        <i className="fas fa-file-pdf mr-3"/>
+                        Exportar PDF
+                      </ListGroupItem>
+                    </ListGroup>
                   </Col>
                 </div>
               </CardBody>

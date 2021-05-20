@@ -5,6 +5,17 @@ import * as yup from 'yup';
 
 export default function ModalEscola() {
   const [modalOpen, setModalOpen] = useState(false);
+
+  function Limpar() {
+    formik.values.escola = '';
+    formik.values.curso = '';
+    formik.values.inicio = '';
+    formik.values.termino = '';
+    formik.values.periodo = '';
+    formik.values.turno = '';
+    formik.values.status = '';
+  }
+
   const formik = useFormik({
     initialValues: {
       escola: '',
@@ -26,9 +37,9 @@ export default function ModalEscola() {
     }),
   });
   
-  // React.useEffect(() => {
-  //   console.log(formik.values)
-  // }, [formik.values]);
+  React.useEffect(() => {
+    console.log(formik.values)
+  }, [formik.values]);
 
   return (
     <>
@@ -90,6 +101,27 @@ export default function ModalEscola() {
             <Row>
               <Col>
                 <FormGroup>
+                  <Label className="form-control-label" htmlFor="periodo">Período *</Label>
+                  <Input className="form-control-alternative" id="periodo" type="select"
+                    invalid={formik.touched.periodo && formik.errors.periodo ? true : false}
+                    {...formik.getFieldProps('periodo')}>
+                    <option value={null}>Selecione o Período</option>
+                    <option value="1">1º Período</option>
+                    <option value="2">2º Período</option>
+                    <option value="3">3º Período</option>
+                    <option value="4">4º Período</option>
+                    <option value="5">5º Período</option>
+                    <option value="6">6º Período</option>
+                    <option value="7">7º Período</option>
+                    <option value="8">8º Período</option>
+                    <option value="9">9º Período</option>
+                    <option value="10">10º Período</option>
+                    </Input>
+                  <FormFeedback>{formik.touched.periodo && formik.errors.periodo ? formik.errors.periodo : null}</FormFeedback>
+                </FormGroup>
+              </Col>
+              <Col>
+                <FormGroup>
                   <Label className="form-control-label" htmlFor="turno">Turno *</Label>
                   <Input className="form-control-alternative" id="turno" type="select"
                     invalid={formik.touched.turno && formik.errors.turno ? true : false}
@@ -118,7 +150,7 @@ export default function ModalEscola() {
                 </FormGroup>
               </Col>
             </Row>
-            <Button color="secondary" type="button" onClick={() => setModalOpen(!modalOpen)}>
+            <Button color="secondary" type="reset" onClick={() => Limpar (setModalOpen(!modalOpen))}>
               Cancelar
             </Button>
             <Button color="primary" type="submit">
