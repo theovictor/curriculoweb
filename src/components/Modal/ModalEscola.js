@@ -2,8 +2,6 @@ import React, {useState} from 'react';
 import { Button, Modal, Input, Form, Row, Col, FormGroup, FormFeedback, Label, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import ReactDatetime from 'react-datetime';
-import 'moment/locale/pt-br';
 
 export default function ModalEscola() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -20,13 +18,18 @@ export default function ModalEscola() {
     validationSchema: yup.object({
       escola: yup.string().required('O campo Escola/Universidade é obrigatório.'),
       curso: yup.string().required('O campo Curso é obrigatório.'),
-      inicio: yup.string().required('O campo Início é obrigatório.'),
+      inicio: yup.date().required('O campo Início é obrigatório.'),
       termino: yup.string().required('O campo Término é obrigatório.'),
       periodo: yup.string().required('O campo Período é obrigatório.'),
       turno: yup.string().required('O campo Turno é obrigatório.'),
       status: yup.string().required('O campo Status é obrigatório.'),
     }),
   });
+  
+  // React.useEffect(() => {
+  //   console.log(formik.values)
+  // }, [formik.values]);
+
   return (
     <>
       <Button className="mb-3" color="primary" type="button" onClick={() => setModalOpen(!modalOpen)}>
@@ -68,32 +71,16 @@ export default function ModalEscola() {
               <Col>
               <FormGroup>
                 <Label className="form-control-label" htmlFor="inicio">Ano Início *</Label>
-                <InputGroup className="input-group-alternative">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="ni ni-calendar-grid-58" />
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <ReactDatetime
-                    inputProps={{
-                      id: "inicio",
-                      placeholder: "Data Início",
-                      // invalid: {formik:formik.touched.inicio && formik.errors.inicio ? true : false},
-                    }}
-                    locale="pt-br"
-                    timeFormat={false}
-                    // {...formik.getFieldProps('inicio')}
-                    />
-                    {/* <FormFeedback>{formik.touched.inicio && formik.errors.inicio ? formik.errors.inicio : null}</FormFeedback> */}
-                </InputGroup>
-                {/* <Input className="form-control-alternative" id="inicio" placeholder="Ano de Início" type="date"
-                  {...formik.getFieldProps('inicio')}/>*/}
+                <Input className="form-control-alternative" id="inicio" type="date"
+                  invalid={formik.touched.inicio && formik.errors.inicio ? true : false}
+                  {...formik.getFieldProps('inicio')}/>
+                <FormFeedback>{formik.touched.inicio && formik.errors.inicio ? formik.errors.inicio : null}</FormFeedback>
               </FormGroup>
               </Col>
               <Col>
               <FormGroup>
                 <Label className="form-control-label" htmlFor="termino">Término *</Label>
-                <Input className="form-control-alternative" id="termino" placeholder="Ano Término" type="date"
+                <Input className="form-control-alternative" id="termino" type="date"
                   invalid={formik.touched.termino && formik.errors.termino ? true : false}
                   {...formik.getFieldProps('termino')}/>
                 <FormFeedback>{formik.touched.termino && formik.errors.termino ? formik.errors.termino : null}</FormFeedback>

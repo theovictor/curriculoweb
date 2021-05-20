@@ -3,7 +3,7 @@ import { Card, CardHeader, CardBody, Container, Row, Col, Button, Nav, NavItem }
 import DadosPrincipais from 'components/Formularios/DadosPrincipais.js';
 import Escolares from 'components/Formularios/Escolares.js';
 export default function DashBody() {
-  const [mostrar, setMostrar] = useState('escolares');
+  const [mostrar, setMostrar] = useState('');
   function btnDadosPrin(){
     if(mostrar !== 'dadosPrincipal'){
       setMostrar('dadosPrincipal');
