@@ -72,9 +72,6 @@ export default function DadosPrincipais() {
     }
     return setFieldValue('idade', age);
   }
-  // React.useEffect(() => {
-  //   console.log(formik.values)
-  // }, [formik.values]);
   return (
     <>
       <Form onSubmit={formik.handleSubmit}>
