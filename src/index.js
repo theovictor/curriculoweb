@@ -8,6 +8,7 @@ import "assets/css/argon-design-system-react.css";
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 import 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.css';
+import "react-datetime/css/react-datetime.css";
 
 import Index from "pages/Index.js";
 import Dashboard from "pages/Dashboard.js";
