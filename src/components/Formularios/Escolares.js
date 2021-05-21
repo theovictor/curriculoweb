@@ -1,12 +1,46 @@
 import React from "react";
-// react component for creating dynamic tables
+import { Card, Container, Row, Col, Button } from 'reactstrap';
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider from "react-bootstrap-table2-toolkit";
-import { Card, Container, Row, Col } from 'reactstrap';
-import { dataTable } from 'components/variables/general.js';
 import ModalEscola from 'components/Modal/ModalEscola.js';
 
 export default function Escolares(){
+  const dataTable = [
+    {
+      id: 1,
+      escola: 'Faro',
+      curso: 'engenharia',
+      inicio: '20/05/2021',
+      termino: '21/05/2021',
+      periodo: '8',
+      turno: 'Noturno',
+      status: 'cursando'      
+    },
+    {
+      id: 2,
+      escola: 'UNIR',
+      curso: 'engenharia',
+      inicio: '20/05/2021',
+      termino: '21/05/2021',
+      periodo: '8',
+      turno: 'Noturno',
+      status: 'cursando'      
+    },
+  ];
+  const Editar = () => {
+    return(
+      <Col>
+        <Button onClick={()=>{}}>Editar</Button>
+      </Col>
+    )
+  }
+  const Deletar = () => {
+    return(
+      <Col>
+        <Button onClick={()=>{}}>Deletar</Button>
+      </Col>
+    )
+  }
   return (
     <>
       <Container fluid>
@@ -14,7 +48,7 @@ export default function Escolares(){
             <Card>
               <ToolkitProvider
                   data={dataTable}
-                  keyField="name"
+                  keyField="id"
                   columns={[
                     {
                       dataField: "escola",
@@ -42,7 +76,7 @@ export default function Escolares(){
                       sort: true,
                     },
                     {
-                      dataField: "tunor",
+                      dataField: "turno",
                       text: "Turno",
                       sort: true,
                     },
@@ -52,10 +86,9 @@ export default function Escolares(){
                       sort: true,
                     },
                     {
-                      dataField: "acoes",
                       text: "Ações",
-                      sort: true,
-                    },
+                      formatter: Editar,
+                    }
                   ]}
                 >
                   {(props) => (

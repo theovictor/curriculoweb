@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Card, CardHeader, CardBody, Container, Row, Col, Button, Nav, NavItem, ListGroup, ListGroupItem } from 'reactstrap';
+import { Card, CardHeader, CardBody, Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap';
 import DadosPrincipais from 'components/Formularios/DadosPrincipais.js';
 import Escolares from 'components/Formularios/Escolares.js';
 export default function DashBody() {
