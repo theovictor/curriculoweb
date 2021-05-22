@@ -1058,8 +1058,8 @@ pre {
     margin-left: 91.66667%; } }
 
 .table {
-  /* width: 100%; */
-  margin-bottom: 1rem;
+  width: 100%;
+  margin-bottom: 0.5rem;
   color: #525f7f;
   background-color: transparent; }
   .table th,
@@ -3513,7 +3513,7 @@ input[type="button"].btn-block {
 
 .card-body {
   flex: 1 1 auto;
-  padding: 1.5rem; }
+  padding: 0.5rem; }
 
 .card-title {
   margin-bottom: 1.25rem; }
