@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import { Input, Form, Row, Col, FormGroup, Button, FormFeedback, Label } from "reactstrap";
 import * as yup from 'yup';
 export default function DadosPrincipais() {
+  // variaveis do formulario criadas usando formik.
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -20,6 +21,7 @@ export default function DadosPrincipais() {
       cidade: '',
       uf:'',
     },
+    // validação de campos obrigatorios.
     validationSchema: yup.object({
       name: yup.string().required('Nome obrigatório'),
       email: yup.string().required('Email obrigatório'),
@@ -37,6 +39,7 @@ export default function DadosPrincipais() {
        uf: yup.string().required('Estado (UF) obrigatório'),
     }),
   });
+  //função que consulta o cep
   function buscaCep (ev, setFieldValue){
     const { value } = ev.target;
     const cep = value?.replace(/[^0-9]/g, '');
@@ -52,6 +55,7 @@ export default function DadosPrincipais() {
         setFieldValue('uf', data.uf);
       });
   }
+  // função que calcula a idade, capturando a data fornecida no campo de dataNascimento.
   function calcIdade (setFieldValue){
     const dataInfo = formik.values.dataNascimento;
     const anoAtual = new Date().getFullYear();
@@ -259,11 +263,11 @@ export default function DadosPrincipais() {
             </Row>
           </div>
           <hr className="line-primary"></hr>
-        <Button className="btn-icon border-0" color="success" type="submit">
+        <Button className="btn-icon float-right mb-2" color="success" onClick={() => {}}>
           <span className="btn-inner--icon">
-            <i className="fas fa-save"></i>
+            <i className="ni ni-check-bold ml--2"/>
           </span>
-          <span className="btn-inner--text">Salvar</span>
+          <span className="btn-inner--text ml-2">Salvar</span>
         </Button>
       </Form>
     </>

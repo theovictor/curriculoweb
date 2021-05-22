@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import "assets/css/DashPage.css";
 import "assets/css/Dashnavbar.css";
 import DashNavbar from "components/Navbars/DashNavbar.js";
-// import DashFooter from "components/Footers/DashFooter.js";
 import DashBody from "components/Dashboard/DashBody.js";
+// import DashFooter from "components/Footers/DashFooter.js";
 
 export default function Dashboard() {
   useEffect(() => {

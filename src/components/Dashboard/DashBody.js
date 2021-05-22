@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import { Card, CardHeader, CardBody, Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap';
 import DadosPrincipais from 'components/Formularios/DadosPrincipais.js';
 import Escolares from 'components/Formularios/Escolares.js';
+import Conhecimentos from 'components/Formularios/Conhecimentos.js';
+
 export default function DashBody() {
   const [mostrar, setMostrar] = useState('');
   function btnDadosPrin(){
@@ -46,9 +48,8 @@ export default function DashBody() {
                   <Col className="text-left">
                     <ListGroup>
                       <ListGroupItem className="list-group-item-action border-0"
-                        href="#"
                         onClick={btnDadosPrin}
-                        tag="a"
+                        tag="button"
                       >
                         <i className="ni ni-badge mr-3"/>
                         Dados Principais
@@ -56,9 +57,8 @@ export default function DashBody() {
                     </ListGroup>
                     <ListGroup>
                       <ListGroupItem className="list-group-item-action border-0"
-                        href="#"
                         onClick={btnEscolares}
-                        tag="a"
+                        tag="button"
                       >
                         <i className="fas fa-graduation-cap mr-3"/>
                         Escolares
@@ -66,9 +66,8 @@ export default function DashBody() {
                     </ListGroup>
                     <ListGroup>
                       <ListGroupItem className="list-group-item-action border-0"
-                        href="#"
                         onClick={btnConheci}
-                        tag="a"
+                        tag="button"
                       >
                         <i className="ni ni-books mr-3"/>
                         Conhecimentos
@@ -76,9 +75,8 @@ export default function DashBody() {
                     </ListGroup>
                     <ListGroup>
                       <ListGroupItem className="list-group-item-action border-0"
-                        href="#"
                         onClick={btnExperi}
-                        tag="a"
+                        tag="button"
                       >
                         <i className="fas fa-chart-line mr-3"/>
                         Experiências
@@ -86,9 +84,8 @@ export default function DashBody() {
                     </ListGroup>
                     <ListGroup>
                       <ListGroupItem className="list-group-item-action border-0"
-                        href="#"
                         onClick={() => {}}
-                        tag="a"
+                        tag="button"
                       >
                         <i className="fas fa-file-pdf mr-3"/>
                         Exportar PDF
@@ -114,7 +111,7 @@ export default function DashBody() {
                 : mostrar === 'escolares'?
                   <Escolares/>
                 : mostrar === 'conhecimento'?
-                  <div/>
+                  <Conhecimentos/>
                 : mostrar === 'experiencia'?
                   <div/>
                 : <div/>
