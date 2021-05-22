@@ -14,3 +14,12 @@
 .dashboard .telaRND{
     min-height: 35rem!important;
 }
+.btnAcoes{
+  display: flex;
+}
+.react-bootstrap-table table {
+  table-layout: auto;
+}
+.tabelinha{
+  width: 100%;
+}
