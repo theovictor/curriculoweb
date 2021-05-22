@@ -1,11 +1,16 @@
 import React, {useState} from 'react';
-import { Button, Modal, Input, Form, Row, Col, FormGroup, FormFeedback, Label, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
+import { Button, Modal, Input, Form, Row, Col, FormGroup, FormFeedback, Label, 
+  // InputGroup, 
+  // InputGroupAddon, 
+  // InputGroupText 
+} from 'reactstrap';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
 export default function ModalEscola() {
+  //const que gerencia modal open e close.
   const [modalOpen, setModalOpen] = useState(false);
-
+  // função limpar campos formulario.
   function Limpar() {
     formik.values.escola = '';
     formik.values.curso = '';
@@ -15,7 +20,7 @@ export default function ModalEscola() {
     formik.values.turno = '';
     formik.values.status = '';
   }
-
+  // variaveis do formulario
   const formik = useFormik({
     initialValues: {
       escola: '',
@@ -26,6 +31,7 @@ export default function ModalEscola() {
       turno: '',
       status: '',
     },
+    // validação dos campos do formulario.
     validationSchema: yup.object({
       escola: yup.string().required('O campo Escola/Universidade é obrigatório.'),
       curso: yup.string().required('O campo Curso é obrigatório.'),
@@ -36,18 +42,13 @@ export default function ModalEscola() {
       status: yup.string().required('O campo Status é obrigatório.'),
     }),
   });
-  
-  React.useEffect(() => {
-    console.log(formik.values)
-  }, [formik.values]);
-
   return (
     <>
       <Button className="mb-3" color="primary" type="button" onClick={() => setModalOpen(!modalOpen)}>
         <span className="btn-inner--icon">
-          <i className="ni ni-fat-add"></i>
+          <i className="fa fa-plus-circle ml--2"></i>
         </span>
-        <span className="btn-inner--text">Novo</span>
+        <span className="btn-inner--text ml-2"> Novo Curso</span>
       </Button>
       <Modal className="modal-lg" isOpen={modalOpen} toggle={() => setModalOpen(!modalOpen)} modalClassName="bd-example-modal-lg">
         <div className="modal-header">
@@ -150,11 +151,17 @@ export default function ModalEscola() {
                 </FormGroup>
               </Col>
             </Row>
-            <Button color="secondary" type="reset" onClick={() => Limpar (setModalOpen(!modalOpen))}>
-              Cancelar
+            <Button className="btn-icon float-right mt-2" color="success" onClick={() => {}}>
+              <span className="btn-inner--icon">
+                <i className="ni ni-check-bold ml--2"/>
+              </span>
+              <span className="btn-inner--text ml-2">Salvar</span>
             </Button>
-            <Button color="primary" type="submit">
-              Salvar
+            <Button className="btn-icon float-right mr-3 mt-2" color="danger" onClick={() => Limpar (setModalOpen(!modalOpen))}>
+              <span className="btn-inner--icon">
+                <i className="fa fa-times ml--2"/>
+              </span>
+              <span className="btn-inner--text ml-2">Cancelar</span>
             </Button>
           </Form>
         </div>
