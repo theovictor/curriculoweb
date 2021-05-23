@@ -2,6 +2,7 @@ import React from "react";
 import { useFormik } from 'formik';
 import { Input, Form, Row, Col, FormGroup, Button, FormFeedback, Label } from "reactstrap";
 import * as yup from 'yup';
+
 export default function DadosPrincipais() {
   // variaveis do formulario criadas usando formik.
   const formik = useFormik({
@@ -84,7 +85,7 @@ export default function DadosPrincipais() {
             <Row>
               <Col lg="5">
                 <FormGroup>
-                  <Label className="form-control-label" htmlFor="name">Nome *</Label>
+                  <Label className="form-control-label required" htmlFor="name">Nome</Label>
                   <Input className="form-control-alternative" id="name" placeholder="Nome" type="text"
                     invalid={formik.touched.name && formik.errors.name ? true : false}
                     {...formik.getFieldProps('name')}/>
@@ -93,7 +94,7 @@ export default function DadosPrincipais() {
               </Col>
               <Col lg="4">
                 <FormGroup>
-                  <Label className="form-control-label" htmlFor="email">Email *</Label>
+                  <Label className="form-control-label required" htmlFor="email">Email</Label>
                   <Input className="form-control-alternative" id="email" placeholder="examplo@email.com" type="email"
                     invalid={formik.touched.email && formik.errors.email ? true : false}
                     {...formik.getFieldProps('email')}/>
@@ -102,7 +103,7 @@ export default function DadosPrincipais() {
               </Col>
               <Col lg="3">
                 <FormGroup>
-                  <Label className="form-control-label" htmlFor="sexo">Sexo *</Label>
+                  <Label className="form-control-label required" htmlFor="sexo">Sexo</Label>
                   <Input className="form-control-alternative" id="sexo" type="select" data-trigger=""
                     invalid={formik.touched.sexo && formik.errors.sexo ? true : false}
                     {...formik.getFieldProps('sexo')}>
@@ -117,7 +118,7 @@ export default function DadosPrincipais() {
             <Row>
               <Col lg="4">
                 <FormGroup>
-                  <Label className=" form-control-label" htmlFor="contato">Contato *</Label>
+                  <Label className=" form-control-label required" htmlFor="contato">Contato</Label>
                   <Input className="form-control-alternative" id="contato" type="text" placeholder="(69) 9 9999-9999"
                     invalid={formik.touched.contato && formik.errors.contato ? true : false}
                     {...formik.getFieldProps('contato')}/>
@@ -126,7 +127,7 @@ export default function DadosPrincipais() {
               </Col>
               <Col lg="4">
                 <FormGroup>
-                  <Label className=" form-control-label" htmlFor="dataNascimento">Date de Nascimento *</Label>
+                  <Label className=" form-control-label required" htmlFor="dataNascimento">Date de Nascimento</Label>
                   <Input className="form-control-alternative" id="dataNascimento" type="date"
                     invalid={formik.touched.dataNascimento && formik.errors.dataNascimento ? true : false}
                     {...formik.getFieldProps('dataNascimento')}
@@ -137,7 +138,7 @@ export default function DadosPrincipais() {
               </Col>
               <Col lg="2">
                 <FormGroup>
-                  <Label className=" form-control-label" htmlFor="idade">Idade</Label>
+                  <Label className=" form-control-label required" htmlFor="idade">Idade</Label>
                   <Input className="form-control-alternative" id="idade" type="text" disabled
                     {...formik.getFieldProps('idade')}
                     invalid={formik.touched.idade && formik.errors.idade ? true : false}/>
@@ -148,7 +149,7 @@ export default function DadosPrincipais() {
             <Row>
               <Col lg="4">
                 <FormGroup>
-                  <Label className=" form-control-label" htmlFor="estadoCivil">Estado Civil *</Label>
+                  <Label className=" form-control-label required" htmlFor="estadoCivil">Estado Civil</Label>
                   <Input className="form-control-alternative" id="estadoCivil" type="select" 
                     invalid={formik.touched.estadoCivil && formik.errors.estadoCivil ? true : false}
                     {...formik.getFieldProps('estadoCivil')}>
@@ -163,7 +164,7 @@ export default function DadosPrincipais() {
               </Col>
               <Col lg="4">
                 <FormGroup>
-                  <Label className=" form-control-label" htmlFor="nacionalidade">Nacionalidade *</Label>
+                  <Label className=" form-control-label required" htmlFor="nacionalidade">Nacionalidade</Label>
                   <Input className="form-control-alternative" id="nacionalidade" type="text" placeholder="País"
                     invalid={formik.touched.nacionalidade && formik.errors.nacionalidade ? true : false}
                     {...formik.getFieldProps('nacionalidade')}/>
@@ -178,7 +179,7 @@ export default function DadosPrincipais() {
             <Row>
               <Col lg="3">
                 <FormGroup>
-                  <Label className="form-control-label" htmlFor="cep">CEP *</Label>
+                  <Label className="form-control-label required" htmlFor="cep">CEP</Label>
                   <Input className="form-control-alternative" id="cep" placeholder="CEP" type="text"
                     {...formik.getFieldProps('cep')}
                     invalid = {formik.touched.cep && formik.errors.cep ? true : false}
@@ -188,7 +189,7 @@ export default function DadosPrincipais() {
               </Col>
               <Col lg="3">
                 <FormGroup>
-                  <Label className="form-control-label" htmlFor="logradouro">Logradouro</Label>
+                  <Label className="form-control-label required" htmlFor="logradouro">Logradouro</Label>
                   <Input className="form-control-alternative" id="logradouro" placeholder="Logradouro" type="text" disabled
                     {...formik.getFieldProps('logradouro')}
                     invalid = {formik.touched.logradouro && formik.errors.logradouro ? true : false}/>
@@ -197,7 +198,7 @@ export default function DadosPrincipais() {
               </Col>
               <Col lg="2">
                 <FormGroup>
-                  <Label className="form-control-label" htmlFor="numeroCasa">Nº Casa *</Label>
+                  <Label className="form-control-label required" htmlFor="numeroCasa">Nº Casa</Label>
                   <Input className="form-control-alternative" id="numeroCasa" placeholder="nº casa" type="text"
                     invalid={formik.touched.numeroCasa && formik.errors.numeroCasa ? true : false}
                     {...formik.getFieldProps('numeroCasa')}/>
@@ -206,7 +207,7 @@ export default function DadosPrincipais() {
               </Col>
               <Col lg="3">
                 <FormGroup>
-                  <Label className=" form-control-label" htmlFor="bairro">Bairro</Label>
+                  <Label className=" form-control-label required" htmlFor="bairro">Bairro</Label>
                   <Input className="form-control-alternative" id="bairro" placeholder="Bairro" type="text" disabled
                     {...formik.getFieldProps('bairro')}
                     invalid = {formik.touched.bairro && formik.errors.bairro ? true : false}/>
@@ -217,7 +218,7 @@ export default function DadosPrincipais() {
             <Row>
               <Col lg="3">
                 <FormGroup>
-                  <Label className=" form-control-label" htmlFor="cidade">Cidade</Label>
+                  <Label className=" form-control-label required" htmlFor="cidade">Cidade</Label>
                   <Input className="form-control-alternative" id="cidade" placeholder="Cidade" type="text" disabled
                     {...formik.getFieldProps('cidade')}
                     invalid = {formik.touched.cidade && formik.errors.cidade ? true : false}/>
@@ -226,7 +227,7 @@ export default function DadosPrincipais() {
               </Col>
               <Col lg="3">
                 <FormGroup>
-                  <Label className=" form-control-label" htmlFor="uf">UF *</Label>
+                  <Label className=" form-control-label required" htmlFor="uf">UF</Label>
                   <Input className="form-control-alternative" id="uf" placeholder="UF" type="select" disabled
                     invalid = {formik.touched.uf && formik.errors.uf ? true : false}
                     {...formik.getFieldProps('uf')}>
