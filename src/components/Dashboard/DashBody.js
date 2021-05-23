@@ -3,6 +3,7 @@ import { Card, CardHeader, CardBody, Container, Row, Col, ListGroup, ListGroupIt
 import DadosPrincipais from 'components/Formularios/DadosPrincipais.js';
 import Escolares from 'components/Formularios/Escolares.js';
 import Conhecimentos from 'components/Formularios/Conhecimentos.js';
+import Experiencias from 'components/Formularios/Experiencias.js';
 
 export default function DashBody() {
   const [mostrar, setMostrar] = useState('');
@@ -113,7 +114,7 @@ export default function DashBody() {
                 : mostrar === 'conhecimento'?
                   <Conhecimentos/>
                 : mostrar === 'experiencia'?
-                  <div/>
+                  <Experiencias/>
                 : <div/>
                 }
               </CardBody>
