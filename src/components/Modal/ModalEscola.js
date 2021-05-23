@@ -64,25 +64,27 @@ export default function ModalEscola() {
         <div className="modal-body bg-secondary">
           <Form onSubmit={formik.handleSubmit}>
             <Row>
-              <FormGroup>
-                <Label className="form-control-label" htmlFor="escola">Escola/Universidade *</Label>
-                <Input className="form-control-alternative" id="escola" placeholder="Nome da Escola/Universidade" type="text"
-                  invalid={formik.touched.escola && formik.errors.escola ? true : false}
-                  {...formik.getFieldProps('escola')}/>
-                <FormFeedback>{formik.touched.escola && formik.errors.escola ? formik.errors.escola : null}</FormFeedback>
-              </FormGroup>
-              <FormGroup>
-                <Label className="form-control-label" htmlFor="curso">Curso *</Label>
-                <Input className="form-control-alternative" id="curso" placeholder="Curso" type="text"
-                  invalid={formik.touched.curso && formik.errors.curso ? true : false}
-                  {...formik.getFieldProps('curso')}/>
-                <FormFeedback>{formik.touched.curso && formik.errors.curso ? formik.errors.curso : null}</FormFeedback>
-              </FormGroup>
+              <Col>
+                <FormGroup>
+                  <Label className="form-control-label required" htmlFor="escola">Escola/Universidade</Label>
+                  <Input className="form-control-alternative" id="escola" placeholder="Nome da Escola/Universidade" type="text"
+                    invalid={formik.touched.escola && formik.errors.escola ? true : false}
+                    {...formik.getFieldProps('escola')}/>
+                  <FormFeedback>{formik.touched.escola && formik.errors.escola ? formik.errors.escola : null}</FormFeedback>
+                </FormGroup>
+                <FormGroup>
+                  <Label className="form-control-label required" htmlFor="curso">Curso</Label>
+                  <Input className="form-control-alternative" id="curso" placeholder="Curso" type="text"
+                    invalid={formik.touched.curso && formik.errors.curso ? true : false}
+                    {...formik.getFieldProps('curso')}/>
+                  <FormFeedback>{formik.touched.curso && formik.errors.curso ? formik.errors.curso : null}</FormFeedback>
+                </FormGroup>
+              </Col>
             </Row>
             <Row>
               <Col>
               <FormGroup>
-                <Label className="form-control-label" htmlFor="inicio">Ano Início *</Label>
+                <Label className="form-control-label required" htmlFor="inicio">Ano Início</Label>
                 <Input className="form-control-alternative" id="inicio" type="date"
                   invalid={formik.touched.inicio && formik.errors.inicio ? true : false}
                   {...formik.getFieldProps('inicio')}/>
@@ -91,7 +93,7 @@ export default function ModalEscola() {
               </Col>
               <Col>
               <FormGroup>
-                <Label className="form-control-label" htmlFor="termino">Término *</Label>
+                <Label className="form-control-label required" htmlFor="termino">Ano Término</Label>
                 <Input className="form-control-alternative" id="termino" type="date"
                   invalid={formik.touched.termino && formik.errors.termino ? true : false}
                   {...formik.getFieldProps('termino')}/>
@@ -102,7 +104,7 @@ export default function ModalEscola() {
             <Row>
               <Col>
                 <FormGroup>
-                  <Label className="form-control-label" htmlFor="periodo">Período *</Label>
+                  <Label className="form-control-label required" htmlFor="periodo">Período</Label>
                   <Input className="form-control-alternative" id="periodo" type="select"
                     invalid={formik.touched.periodo && formik.errors.periodo ? true : false}
                     {...formik.getFieldProps('periodo')}>
@@ -123,7 +125,7 @@ export default function ModalEscola() {
               </Col>
               <Col>
                 <FormGroup>
-                  <Label className="form-control-label" htmlFor="turno">Turno *</Label>
+                  <Label className="form-control-label required" htmlFor="turno">Turno</Label>
                   <Input className="form-control-alternative" id="turno" type="select"
                     invalid={formik.touched.turno && formik.errors.turno ? true : false}
                     {...formik.getFieldProps('turno')}>
@@ -137,7 +139,7 @@ export default function ModalEscola() {
               </Col>
               <Col>
                 <FormGroup>
-                  <Label className="form-control-label" htmlFor="status">Status *</Label>
+                  <Label className="form-control-label required" htmlFor="status">Status</Label>
                   <Input className="form-control-alternative" id="status" type="select"
                     invalid={formik.touched.status && formik.errors.status ? true : false}
                     {...formik.getFieldProps('status')}>
