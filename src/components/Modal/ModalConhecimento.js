@@ -3,7 +3,7 @@ import { Button, Modal, Input, Form, Row, Col, FormGroup, FormFeedback, Label, I
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-export default function ModalEscola() {
+export default function ModalConhecimento() {
   //constante que gerencia a modal open e close.
   const [modalOpen, setModalOpen] = useState(false);
   // função para limpar os campos
@@ -47,7 +47,7 @@ export default function ModalEscola() {
             <Row>
               <Col>
                 <FormGroup className="mb-3">
-                  <Label className="form-control-label" htmlFor="conhecimento">Conhecimentos Gerais *</Label>
+                  <Label className="form-control-label required" htmlFor="conhecimento">Conhecimentos Gerais</Label>
                     <InputGroup className="input-group-alternative">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
@@ -63,7 +63,7 @@ export default function ModalEscola() {
               </Col>
               <Col lg="4">
                 <FormGroup className="mb-3">
-                  <Label className="form-control-label" htmlFor="nivel">Nível *</Label>
+                  <Label className="form-control-label required" htmlFor="nivel">Nível</Label>
                     <InputGroup className="input-group-alternative">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>

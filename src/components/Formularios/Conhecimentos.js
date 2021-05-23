@@ -5,7 +5,7 @@ import ToolkitProvider from "react-bootstrap-table2-toolkit";
 import ModalConhecimentos from 'components/Modal/ModalConhecimento.js';
 import {useFormik} from 'formik';
 
-export default function Escolares(){
+export default function Conhecimentos(){
   // variaveis do formulario
   const formik = useFormik ({
     initialValues: {
