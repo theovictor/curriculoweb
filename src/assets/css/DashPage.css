@@ -23,3 +23,7 @@
 .tabelinha{
   width: 100%;
 }
+.form-control-label.required::after{
+  content: " *";
+  color: red;
+}
