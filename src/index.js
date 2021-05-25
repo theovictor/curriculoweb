@@ -13,6 +13,7 @@ import Dashboard from "pages/Dashboard.js";
 import Profile from "pages/Profile.js";
 import ResetPage from "pages/ResetPage.js";
 import Configuracao from "pages/Configuracao.js";
+import Cursos from "pages/Cursos";
 
 render(
   <BrowserRouter>
@@ -22,6 +23,7 @@ render(
           <Route exact path="/profile" component={Profile}/>
           <Route exact path="/reset" component={ResetPage}/>
           <Route exact path="/settings" component={Configuracao}/>
+          <Route exact path="/cursos" component={Cursos}/>
       </Switch>
   </BrowserRouter>,
   document.getElementById('root')
