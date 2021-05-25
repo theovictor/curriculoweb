@@ -34,7 +34,7 @@ export default function Index() {
             <div className="header-body text-center mb-7">
               <Row className="justify-content-center">
                 <Col className="px-5" lg="6" md="8" xl="5">
-                  <h1 className="text-white">Bem Vindo!</h1>
+                  <h1 className="text-white">Bem-vindo(a) ao Connec Comp!</h1>
                   <p className="text-lead text-white">
                     Entre com sua conta, ou cria uma gratuitamente!!
                   </p>
