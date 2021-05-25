@@ -2,15 +2,28 @@ import React, {useEffect}from 'react';
 import {Container, Col, Row} from 'reactstrap';
 import DashNavbar from 'components/Navbars/DashNavbar';
 import AccountSettings from 'components/Configuracao/AccountSettings';
+import { useHistory } from "react-router-dom";
+import isLoged from "helper/IsLoged";
 export default function Configuracao(){
+  
+  const history = useHistory();
+ 
+  const routeChange = () =>{ 
+     
+    history.push('/');
+  }
+  
   useEffect(() => {
-    document.body.classList.add('config-page');
+    document.body.classList.add('settings');
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     return function cleanup(){
-      document.body.classList.remove('config-page');
+      document.body.classList.remove('settings');
     };
   }, []);
+
+  if(!isLoged()){routeChange()};
+
   return(
     <>
       <DashNavbar type="transparent"/>

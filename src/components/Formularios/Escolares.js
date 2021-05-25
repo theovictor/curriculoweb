@@ -1,109 +1,132 @@
 import React from "react";
-// react component for creating dynamic tables
+import { Card, Container, Row, Col, Button } from 'reactstrap';
 import BootstrapTable from "react-bootstrap-table-next";
-import paginationFactory from "react-bootstrap-table2-paginator";
-import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+import ToolkitProvider from "react-bootstrap-table2-toolkit";
+import ModalEscola from 'components/Modal/ModalEscola.js';
 
-import { dataTable } from 'components/variables/general.js';
-
-const pagination = paginationFactory({
-  page: 1,
-  alwaysShowAllBtns: true,
-  showTotal: true,
-  withFirstAndLast: false,
-  sizePerPageRenderer: ({ options, currSizePerPage, onSizePerPageChange }) => (
-    <div className="dataTables_length" id="datatable-basic_length">
-      <label>
-        Show{" "}
-        {
-          <select
-            name="datatable-basic_length"
-            aria-controls="datatable-basic"
-            className="form-control form-control-sm"
-            onChange={e => onSizePerPageChange(e.target.value)}
-          >
-            <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-          </select>
-        }{" "}
-        entries.
-      </label>
-    </div>
-  )
-});
-
-const { SearchBar } = Search;
-
-class ReactBSTables extends React.Component {
-  render() {
-    return (
-      <>
-        <ToolkitProvider
-          data={dataTable}
-          keyField="name"
-          columns={[
-            {
-              dataField: "name",
-              text: "Name",
-              sort: true
-            },
-            {
-              dataField: "position",
-              text: "Position",
-              sort: true
-            },
-            {
-              dataField: "office",
-              text: "Office",
-              sort: true
-            },
-            {
-              dataField: "Age",
-              text: "age",
-              sort: true
-            },
-            {
-              dataField: "start_date",
-              text: "Start date",
-              sort: true
-            },
-            {
-              dataField: "salary",
-              text: "Salary",
-              sort: true
-            }
-          ]}
-          search
-        >
-          {props => (
-            <div className="py-4">
-              <div
-                id="datatable-basic_filter"
-                className="dataTables_filter px-4 pb-1"
-              >
-                <label>
-                  Search:
-                  <SearchBar
-                    className="form-control-sm"
-                    placeholder=""
-                    {...props.searchProps}
-                  />
-                </label>
-              </div>
-              <BootstrapTable
-                {...props.baseProps}
-                bootstrap4={true}
-                pagination={pagination}
-                bordered={false}
-              />
-            </div>
-          )}
-        </ToolkitProvider>
-      </>
-    );
+export default function Escolares(){
+  // dados que vira do banco.
+  const dataTableEscolar = [
+    {
+      id: 1,
+      escola: 'Faro',
+      curso: 'engenharia',
+      inicio: '20/05/2021',
+      termino: '21/05/2021',
+      periodo: '8',
+      turno: 'Noturno',
+      status: 'cursando'      
+    },
+    {
+      id: 2,
+      escola: 'Faro',
+      curso: 'engenharia',
+      inicio: '20/05/2021',
+      termino: '21/05/2021',
+      periodo: '8',
+      turno: 'Noturno',
+      status: 'cursando'      
+    }
+  ];
+  // função para editar o campo.
+  function btnEditar() {
+    alert('editar campo')
   }
+  // função para deletar o campo.
+  function btnDeletar() {
+    alert('deletar campo')
+  }
+  // constante que adiciona os buttons de acoes na linha.
+  const addBotoesAcoes = () => {
+    return(
+      <div className="btnAcoes">
+        <Button className="btn-icon" color="success" onClick={btnEditar}>
+          <span className="btn-inner--icon">
+            <i className="fa fa-pencil"/>
+          </span>
+        </Button>
+        <Button className="btn-icon" color="danger" onClick={btnDeletar}>
+          <span className="btn-inner--icon">
+            <i className="fa fa-trash-o"/>
+          </span>
+        </Button>
+      </div>
+    )
+  }
+  return (
+    <>
+      <Container fluid>
+        <Row>
+            <Card className="tabelinha">
+              <ToolkitProvider
+                // data = nome da tabela que tera no banco.
+                data={dataTableEscolar}
+                keyField="id"
+                columns={[
+                  {
+                    dataField: "escola",
+                    text: "Escola/Universidade",
+                    sort: true,
+                  },
+                  {
+                    dataField: "curso",
+                    text: "Curso",
+                    sort: true,
+                  },
+                  {
+                    dataField: "inicio",
+                    text: "Início",
+                    sort: true,
+                  },
+                  {
+                    dataField: "termino",
+                    text: "Término",
+                    sort: true,
+                  },
+                  {
+                    dataField: "periodo",
+                    text: "Período",
+                    sort: true,
+                  },
+                  {
+                    dataField: "turno",
+                    text: "Turno",
+                    sort: true,
+                  },
+                  {
+                    dataField: "status",
+                    text: "Status",
+                    sort: true,
+                  },
+                  {
+                    dataField: "ações",
+                    text: "Ações",
+                    formatter: addBotoesAcoes,
+                  }
+                ]}
+              >
+                {(props) => (
+                  //Renderização da Tabela
+                  <div className="table-responsive pt-3">
+                    <Container fluid>
+                      <Row>
+                        <Col>
+                          {/* aqui sera chamado o component ModalEscola */}
+                          <ModalEscola/>
+                        </Col>
+                      </Row>
+                    </Container>
+                    <BootstrapTable
+                      {...props.baseProps}
+                      bootstrap4={true}
+                      bordered={false}
+                    />
+                  </div>
+                )}
+              </ToolkitProvider>
+            </Card>
+        </Row>
+      </Container>
+    </>
+  );
 }
-
-export default ReactBSTables;

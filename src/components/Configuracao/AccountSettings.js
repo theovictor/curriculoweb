@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import { useHistory } from "react-router-dom";
+import isLoged from "helper/IsLoged";
 import {
   Button,
   Card,
@@ -14,6 +16,16 @@ import {
 } from 'reactstrap';
 export default function AccountSettings() {
   const [activeTab, setActiveTab] = useState("tab1");
+
+  const history = useHistory();
+ 
+  const routeChange = () =>{ 
+     
+    history.push('/');
+  }
+
+  if(!isLoged()){routeChange()};
+
   return (
     <>
       <div className="bg-secondary">
