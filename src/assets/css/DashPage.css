@@ -1,4 +1,4 @@
-.dashboard-page .card-profile-image img{
+.dashboard .card-profile-image img{
     max-width: 180px;
     border-radius: .375rem;
     transform: translate(-50%, -50%);
@@ -7,10 +7,23 @@
     transition: all .15s ease;
     box-shadow: 0 0 2rem 0 rgb(167, 178, 189)!important;
 }
-.dashboard-page .icone{
+.dashboard .icone{
     display: flow-root;
     font-size: x-large;
 }
-.dashboard-page .telaRND{
+.dashboard .telaRND{
     min-height: 35rem!important;
+}
+.btnAcoes{
+  display: flex;
+}
+.react-bootstrap-table table {
+  table-layout: auto;
+}
+.tabelinha{
+  width: 100%;
+}
+.form-control-label.required::after{
+  content: " *";
+  color: red;
 }

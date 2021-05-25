@@ -1,14 +1,14 @@
-.index-page .skew-separator{
+.index .skew-separator{
   overflow: hidden;
 }
-.index-page .page-header.page-header-small{
+.index .page-header.page-header-small{
   min-height: 60vh;
   max-height: 440px;
 }
-.index-page .page-header.header-filter{
+.index .page-header.header-filter{
   position: relative;
 }
-.index-page .page-header{
+.index .page-header{
   min-height: 100vh;
   max-height: 999px;
   padding: 0;
@@ -16,13 +16,13 @@
   display: flex;
   align-items: center;
 }
-.index-page .page-header,header{
+.index .page-header,header{
   position: relative;
 }
-.index-page .page-header,.section-hero{
+.index .page-header,.section-hero{
   overflow: visible!important;
 }
-.index-page .page-header .page-header-image{
+.index .page-header .page-header-image{
   position: absolute;
   background-size: cover;
   background-position: 50%;
@@ -30,7 +30,7 @@
   height: 100%;
   z-index: -1;
 }
-.index-page .page-header.header-filter::before{
+.index .page-header.header-filter::before{
   position: absolute;
   z-index: 0;
   width: 100%;
@@ -41,10 +41,10 @@
   content: "";
   background-color: rgba(0,0,0,.5);
 }
-.index-page .skew-separator.skew-mini::after{
+.index .skew-separator.skew-mini::after{
   top: 79%!important;
 }
-.index-page .skew-separator::after{
+.index .skew-separator::after{
   content: "";
   position: absolute;
   width: 100%;
@@ -54,11 +54,11 @@
   top: 88%;
   z-index: 1;
 }
-.index-page .upper{
+.index .upper{
   margin-top: -200px;
   z-index: 2;
   position: relative;
 }
-.index-page img{
+.index img{
   width: 100%;
 }

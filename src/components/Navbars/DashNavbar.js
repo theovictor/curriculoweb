@@ -62,19 +62,19 @@ export default function DashNavbar(){
                       </div>
                       <Nav className="navbar-nav-hover align-items-lg-center" navbar>
                           <UncontrolledDropdown nav>
-                              <DropdownToggle nav to="/dashboard-page" tag={Link}>
+                              <DropdownToggle nav to="/dashboard" tag={Link}>
                                   <i className="fa fa-home d-lg-none mr-2"/>
                                   <span className="nav-link-inner--text">Início</span>
                               </DropdownToggle>
                           </UncontrolledDropdown>
                           <UncontrolledDropdown nav>
-                              <DropdownToggle nav to="/profile-page" tag={Link}>
+                              <DropdownToggle nav to="/profile" tag={Link}>
                                   <i className="ni ni-single-02 d-lg-none mr-2"/>
                                   <span className="nav-link-inner--text">Meu Perfil</span>
                               </DropdownToggle>
                           </UncontrolledDropdown>
                           <UncontrolledDropdown nav>
-                              <DropdownToggle nav to="/config-page" tag={Link}>
+                              <DropdownToggle nav to="/settings" tag={Link}>
                                   <i className="ni ni-settings-gear-65 d-lg-none mr-2"/>
                                   <span className="nav-link-inner--text">Configurações</span>
                               </DropdownToggle>
@@ -86,7 +86,7 @@ export default function DashNavbar(){
                               </DropdownToggle>
                           </UncontrolledDropdown>
                           <UncontrolledDropdown className="d-lg-none"nav>
-                              <DropdownToggle nav to="/index-page" tag={Link} onClick={(e) => e.preventDefault()}>
+                              <DropdownToggle nav to="/" tag={Link} onClick={() => {}}>
                                   <i className="ni ni-user-run d-lg-none mr-2"/>
                                   <span className="nav-link-inner--text">Sair</span>
                               </DropdownToggle>
@@ -110,7 +110,9 @@ export default function DashNavbar(){
                                       </Card>
                                   </DropdownToggle>
                                   <DropdownMenu className="dropdown-menu">
-                                      <DropdownItem to="/index-page" tag={Link}>
+                                      <DropdownItem to="/" tag={Link} onClick={() => {
+                                          localStorage.removeItem('token');
+                                      }}>
                                           <i className="ni ni-user-run mr-2"/>
                                           <span className="nav-link-inner--text font-weight-bold">Sair</span>
                                       </DropdownItem>

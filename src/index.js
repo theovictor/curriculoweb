@@ -6,7 +6,6 @@ import "assets/vendor/nucleo/css/nucleo.css";
 import "assets/vendor/font-awesome/css/font-awesome.min.css";
 import "assets/css/argon-design-system-react.css";
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
-import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 import 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.css';
 
 import Index from "pages/Index.js";
@@ -19,10 +18,10 @@ render(
   <BrowserRouter>
       <Switch>
           <Route exact path="/" component={Index}/>
-          <Route exact path="/dashboard-page" component={Dashboard}/>
-          <Route exact path="/profile-page" component={Profile}/>
-          <Route exact path="/reset-page" component={ResetPage}/>
-          <Route exact path="/config-page" component={Configuracao}/>
+          <Route exact path="/dashboard" component={Dashboard}/>
+          <Route exact path="/profile" component={Profile}/>
+          <Route exact path="/reset" component={ResetPage}/>
+          <Route exact path="/settings" component={Configuracao}/>
       </Switch>
   </BrowserRouter>,
   document.getElementById('root')
