@@ -1,6 +1,8 @@
 import React from 'react';
 import Logo from 'components/Logo/Logo.js';
 import { useFormik } from 'formik';
+import axios from 'axios';
+import { useHistory } from "react-router-dom";
 import * as yup from 'yup';
 import {
   Button,
@@ -17,6 +19,7 @@ import {
   Col,
   FormFeedback
 } from 'reactstrap';
+import BASE_URL from 'helper/Api';
 export default function LoginCard(){
   const formik = useFormik ({
     initialValues: {
@@ -28,6 +31,36 @@ export default function LoginCard(){
       password: yup.string().required('Insira sua Senha!'),
     })
   })
+  const history = useHistory();
+  const routeChange = () =>{ 
+     
+    history.push('/dashboard');
+  }
+
+   function btLogin(){
+    const {email,password}  = formik.values; 
+    
+    const user = {'email':email,'senha':password};
+     
+    if(email != ''&& password != ''){
+      axios.post(`${BASE_URL}login`,user).then(res =>{
+        
+        if(res.status == 200){
+          if(res.data.token != null){
+             localStorage.setItem('token',res.data.token);
+             routeChange();
+          }
+           
+        }
+      }).catch(error =>{
+        console.log('nao foi possivel fazer o login');
+        console.log(error);
+      })
+    }
+     
+    
+   }
+
   return(
     <>
       <section className="upper">
@@ -78,7 +111,7 @@ export default function LoginCard(){
                     </label>
                   </div>
                   <div className="text-center">
-                    <Button className="my-4" color="primary" type="submit">
+                    <Button className="my-4" color="primary" type="button"  onClick={btLogin} >
                       Entrar
                     </Button>
                   </div>

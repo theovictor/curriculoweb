@@ -110,7 +110,9 @@ export default function DashNavbar(){
                                       </Card>
                                   </DropdownToggle>
                                   <DropdownMenu className="dropdown-menu">
-                                      <DropdownItem to="/" tag={Link} onClick={() => {}}>
+                                      <DropdownItem to="/" tag={Link} onClick={() => {
+                                          localStorage.removeItem('token');
+                                      }}>
                                           <i className="ni ni-user-run mr-2"/>
                                           <span className="nav-link-inner--text font-weight-bold">Sair</span>
                                       </DropdownItem>

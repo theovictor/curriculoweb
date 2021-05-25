@@ -1,7 +1,10 @@
 import React from 'react';
 import Logo from 'components/Logo/Logo.js';
 import { useFormik } from 'formik';
+import axios from 'axios'
+import { useHistory } from "react-router-dom";
 import * as yup from 'yup';
+import BASE_URL from 'helper/Api';
 import {
   Button,
   Card,
@@ -18,6 +21,13 @@ import {
   FormFeedback
 } from 'reactstrap';
 export default function LoginCard(){
+ 
+  const history = useHistory();
+  const routeChange = () =>{ 
+     
+    history.push('/dashboard');
+  }
+ 
   const formik = useFormik ({
     initialValues: {
       userName: '',
@@ -40,6 +50,38 @@ export default function LoginCard(){
       acceptTerms: yup.bool().oneOf([true], 'Você deve concordar com os Termos antes de cadastrar.'),
     })
   });
+
+  function register(){
+  
+     const {userName,email,password,changePassword,acceptTerms}  = formik.values; 
+    
+    const user = {'nome':userName,'email':email,'senha':password};
+     
+    if(email != ''&& password != '' && acceptTerms === true){
+
+        if(password === changePassword){
+          axios.post(`${BASE_URL}cadastro`,user).then(res =>{
+        
+            if(res.status == 200){
+              if(res.data.token != null){
+                 localStorage.setItem('token',res.data.token);
+                 routeChange();
+              }
+               
+            }
+          }).catch(error =>{
+            console.log('nao foi possivel fazer cadastro');
+            console.log(error);
+          })
+        }else{
+          console.log('As senhas nao coincidem');
+        }
+
+    }
+     
+    
+    
+   }
   return(
     <>
       <section className="upper">
@@ -121,7 +163,7 @@ export default function LoginCard(){
                     </div>
                   </FormGroup>
                   <div className="text-center">
-                    <Button className="my-4" color="primary" type="submit">
+                    <Button className="my-4" color="primary" type="button"  onClick={register}>
                       Cadastrar
                     </Button>
                   </div>
