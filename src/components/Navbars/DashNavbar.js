@@ -85,6 +85,12 @@ export default function DashNavbar(){
                                   <span className="nav-link-inner--text">Suporte</span>
                               </DropdownToggle>
                           </UncontrolledDropdown>
+                          <UncontrolledDropdown nav>
+                              <DropdownToggle nav to="/cursos" tag={Link}>
+                                  <i className="ni ni-single-02 d-lg-none mr-2"/>
+                                  <span className="nav-link-inner--text">Cursos</span>
+                              </DropdownToggle>
+                          </UncontrolledDropdown>
                           <UncontrolledDropdown className="d-lg-none"nav>
                               <DropdownToggle nav to="/" tag={Link} onClick={() => {}}>
                                   <i className="ni ni-user-run d-lg-none mr-2"/>
