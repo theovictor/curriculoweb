@@ -1,25 +1,11 @@
 import React from 'react';
-import Logo from 'components/Logo/Logo.js';
+import { Button, Card, CardHeader, CardBody, FormGroup, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Container, Col, FormFeedback } from 'reactstrap';
 import { useFormik } from 'formik';
-import axios from 'axios'
-import { useHistory } from "react-router-dom";
 import * as yup from 'yup';
-import BASE_URL from 'helper/Api';
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  FormGroup,
-  Form,
-  Input,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  Container,
-  Col,
-  FormFeedback
-} from 'reactstrap';
+import axios from 'axios'
+import {api_cadastro} from 'services/api';
+import { useHistory } from "react-router-dom";
+import Logo from 'components/Logo/Logo.js';
 export default function LoginCard(){
  
   const history = useHistory();
@@ -60,7 +46,7 @@ export default function LoginCard(){
     if(email != ''&& password != '' && acceptTerms === true){
 
         if(password === changePassword){
-          axios.post(`${BASE_URL}cadastro`,user).then(res =>{
+          axios.post(`${api_cadastro}`,user).then(res =>{
         
             if(res.status == 200){
               if(res.data.token != null){

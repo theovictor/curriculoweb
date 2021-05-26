@@ -2,6 +2,7 @@ import React from "react";
 import { useFormik } from 'formik';
 import { Input, Form, Row, Col, FormGroup, Button, FormFeedback, Label } from "reactstrap";
 import * as yup from 'yup';
+import calcIdade from 'helpers/calcIdade';
 
 export default function DadosPrincipais() {
   // variaveis do formulario criadas usando formik.
@@ -56,27 +57,27 @@ export default function DadosPrincipais() {
         setFieldValue('uf', data.uf);
       });
   }
-  // função que calcula a idade, capturando a data fornecida no campo de dataNascimento.
-  function calcIdade (setFieldValue){
-    const dataInfo = formik.values.dataNascimento;
-    const anoAtual = new Date().getFullYear();
-    const dataInfoParts = dataInfo.split('-');
-    const anoNasc = dataInfoParts[0];
-    const mesNasc = dataInfoParts[1];
-    const diaNasc = dataInfoParts[2];
-    let age =  anoAtual - anoNasc;
-    const mesAtual = new Date().getMonth() + 1;
-    if(mesAtual < mesNasc){
-      setFieldValue('idade', age--);
-    }else{
-      if(mesAtual === mesNasc){
-        if(new Date().getDate() < diaNasc){
-          setFieldValue('idade', age--);
-        }
-      }
-    }
-    return setFieldValue('idade', age);
-  }
+  // // função que calcula a idade, capturando a data fornecida no campo de dataNascimento.
+  // function calcIdade (setFieldValue){
+  //   const dataInfo = formik.values.dataNascimento;
+  //   const anoAtual = new Date().getFullYear();
+  //   const dataInfoParts = dataInfo.split('-');
+  //   const anoNasc = dataInfoParts[0];
+  //   const mesNasc = dataInfoParts[1];
+  //   const diaNasc = dataInfoParts[2];
+  //   let age =  anoAtual - anoNasc;
+  //   const mesAtual = new Date().getMonth() + 1;
+  //   if(mesAtual < mesNasc){
+  //     setFieldValue('idade', age--);
+  //   }else{
+  //     if(mesAtual === mesNasc){
+  //       if(new Date().getDate() < diaNasc){
+  //         setFieldValue('idade', age--);
+  //       }
+  //     }
+  //   }
+  //   return setFieldValue('idade', age);
+  // }
   return (
     <>
       <Form onSubmit={formik.handleSubmit}>
@@ -131,7 +132,7 @@ export default function DadosPrincipais() {
                   <Input className="form-control-alternative" id="dataNascimento" type="date"
                     invalid={formik.touched.dataNascimento && formik.errors.dataNascimento ? true : false}
                     {...formik.getFieldProps('dataNascimento')}
-                    onBlur = {(ev) => calcIdade(formik.setFieldValue)}
+                    onBlur = {calcIdade(formik.values.dataNascimento, formik.setFieldValue)}
                   />
                   <FormFeedback>{formik.touched.dataNascimento && formik.errors.dataNascimento ? formik.errors.dataNascimento : null}</FormFeedback>
                 </FormGroup>

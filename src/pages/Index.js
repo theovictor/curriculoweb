@@ -16,7 +16,6 @@ export default function Index() {
   function btnEntrar(){
     if(mostrar === '' || mostrar === 'registrar'){
       setMostrar('entrar');
-      
     }
   }
   function btnRegistrar(){

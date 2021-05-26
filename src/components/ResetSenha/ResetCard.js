@@ -1,22 +1,8 @@
 import React from "react";
+import { Button, Card, CardHeader, CardBody, CardImg, CardTitle, Form, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText, FormFeedback } from "reactstrap";
 import { Link } from "react-router-dom";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardImg,
-  CardTitle,
-  Form,
-  FormGroup,
-  Input,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  FormFeedback
-} from "reactstrap";
 export default function ResetCard() {
   const formik = useFormik({
     initialValues: {

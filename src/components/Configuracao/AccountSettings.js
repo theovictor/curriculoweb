@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useHistory } from "react-router-dom";
-import isLoged from "helper/IsLoged";
+import isLoged from "helpers/isLoged";
 import {
   Button,
   Card,
