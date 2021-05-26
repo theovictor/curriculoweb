@@ -44,7 +44,7 @@ export default function LoginCard() {
       ),
       type: type,
       icon: "ni ni-bell-55",
-      autoDismiss: 3600
+      autoDismiss: 3
     };
     notifica.current.notificationAlert(options)
   };

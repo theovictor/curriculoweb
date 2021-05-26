@@ -67,7 +67,7 @@
   max-width: 600px;
   width: calc(100% - 30px);
   padding-right: 80px;
-  box-shadow: 0 3px 10px rgb(0 0 0 / 15%);
+  box-shadow: 3px 3px 10px rgb(255 255 255 / 60%);
   color: hsla(0,0%,100%,.85);
 }
 
@@ -80,6 +80,14 @@
   font-size: 1.25rem;
   margin-right: 1.25rem;
 }
-span.alert-title {
+.index span.alert-title {
   display: flex;
+  font-family: "Comic Sans MS";
+  font-size: 18px;
+  font-style: italic;
+}
+.index span.alert-msg {
+  font-family: "Comic Sans MS";
+  font-size: 15px;
+  font-style: italic;
 }

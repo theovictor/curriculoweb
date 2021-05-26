@@ -19,16 +19,15 @@ export default function Dashboard(){
       message: (
         <div className="alert-text">
           <span className="alert-title" data-notify="title">
-           {msg}
+           {''}
+           Aviso ! 
           </span>
-          {/* <span data-notify="message">
-            {msg}
-          </span> */}
+          <span className="alert-msg" data-notify="message">{msg}</span>
         </div>
       ),
       type: type,
       icon: "ni ni-bell-55",
-      autoDismiss: 2
+      autoDismiss: 3
     };
     notifica.current.notificationAlert(options)
   };
