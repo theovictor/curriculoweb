@@ -6,14 +6,15 @@ import { api_login } from '../../services/api.js';
 import * as yup from 'yup';
 import axios from 'axios';
 import NotificationAlert from "react-notification-alert";
+import { useSelector, useDispatch } from 'react-redux'
+import userActions from '../../store/actions/userActions'
+
 import Logo from 'components/Logo/Logo.js';
 
 export default function LoginCard() {
   const notifica = useRef();
-  
-  // useEffect(() => {
-  //   console.log(notifica.current.NotificationAlert)
-  // }, [])
+  const reducer = useSelector( state => state.userReducer )
+  const dispatch = useDispatch()
 
   const formik = useFormik({
     initialValues: {
@@ -51,21 +52,26 @@ export default function LoginCard() {
 
   function btLogin() {
     const { email, password } = formik.values;
-    const user = { 'email': email, 'senha': password };
+    const loginUser = { 'email': email, 'senha': password };
     if (email != '' && password != '') {
-      axios.post(`${api_login}`, user)
+      axios.post(`${api_login}`, loginUser)
       .then(res => {
-          if (res.data.token != null) {
-            localStorage.setItem('token', res.data.token);
-            routeChange();
-          }
+          // if (res.data.token != null) {
+          // }
+          sessionStorage.setItem('token', res.data.token);
+          sessionStorage.setItem('user_id', res.data.user._id);
+          // console.log(res.data.user._id);
+          dispatch(userActions.login(res.data.user._id))
+          routeChange();
       }).catch((err) => {
         notify('danger', 'Email ou Senha Inválidos!')
-        // console.log('nao foi possivel fazer o login');
-        //console.log(err);
       })
     }
   }
+
+  useEffect(() => {
+    console.log(reducer)
+  }, [reducer])
 
   return (
     <>

@@ -1,12 +1,21 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Card, CardHeader, CardBody, Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap';
 import DadosPrincipais from 'components/Formularios/DadosPrincipais.js';
 import Escolares from 'components/Formularios/Escolares.js';
 import Conhecimentos from 'components/Formularios/Conhecimentos.js';
 import Experiencias from 'components/Formularios/Experiencias.js';
+import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux'
+import userActions from '../../store/actions/userActions'
+import { api_curriculo } from '../../services/api.js';
 
 export default function DashBody() {
   const [mostrar, setMostrar] = useState('');
+
+  const reducer = useSelector( state => state);
+  // const dispatch = useDispatch();
+  // const [data, setData] = useState([]);
+
   function btnDadosPrin(){
     if(mostrar !== 'dadosPrincipal'){
       setMostrar('dadosPrincipal');
@@ -27,6 +36,19 @@ export default function DashBody() {
       setMostrar('experiencia');
     }
   }
+
+  const getCurriculo = async () =>{
+    axios.get(`${api_curriculo}?id=${reducer.userReducer.logged}`)
+    .then(res => {
+      console.log(res)
+    })
+  }
+
+  useEffect(() => {
+    console.log(reducer.userReducer)
+    getCurriculo()
+}, [reducer])
+
   return (
     <>
       <Container className="mt-7" fluid>
@@ -43,7 +65,7 @@ export default function DashBody() {
               </Row>
               <CardBody className="pt-0 pt-md-4">
                 <div className="text-center">
-                  <h3 className="mt-7">Mariazinha</h3>
+                  <h3 className="mt-7">{}</h3>
                   <div className="h5 font-weight-300">dos Biricuticos</div>
                   <hr className="my-4" />
                   <Col className="text-left">

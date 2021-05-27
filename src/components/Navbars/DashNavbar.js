@@ -1,8 +1,23 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { UncontrolledCollapse, DropdownMenu, DropdownItem, DropdownToggle, UncontrolledDropdown, Media, NavbarBrand, Navbar, Nav, Container, Row, Col, Card } from "reactstrap";
 import { Link } from "react-router-dom";
 import Logo from "components/Logo/Logo.js";
+import { useSelector, useDispatch } from 'react-redux'
+import userActions from '../../store/actions/userActions'
+
 export default function DashNavbar() {
+
+  const reducer = useSelector( state => state.userReducer);
+  const dispatch = useDispatch();
+  const userID = sessionStorage.getItem('user_id')
+  useEffect(() => {
+    if(!reducer.logged){
+      // console.log(userID)
+      dispatch(userActions.login(userID))
+      // console.log(reducer.logged)
+    }
+  }, [reducer.logged])
+
   return (
     <>
       <header className="header-global">
