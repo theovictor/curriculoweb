@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { api_curriculos } from '../../services/api'
-  
 
 const busca_dados_api = () => {
   return dispatch => {
@@ -10,8 +9,6 @@ const busca_dados_api = () => {
       })
   };
 };
-
-
   const index = (values) => {
       return { type: 'INDEX', values }
   };

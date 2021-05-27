@@ -10,7 +10,6 @@ export default function Profile() {
   const routeChange = () => {
     history.push('/');
   }
-  
   if (!isLoged()) { routeChange() };
 
   useEffect(() => {
@@ -20,7 +19,7 @@ export default function Profile() {
     return function cleanup() {
       document.body.classList.remove("profile");
     };
-  });
+  },[]);
   return (
     <>
       <main className="profile-page">
