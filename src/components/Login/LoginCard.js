@@ -60,7 +60,7 @@ export default function LoginCard() {
           // }
           sessionStorage.setItem('token', res.data.token);
           sessionStorage.setItem('user_id', res.data.user._id);
-          // console.log(res.data.user._id);
+          console.log(res.data.user._id);
           dispatch(userActions.login(res.data.user._id))
           routeChange();
       }).catch((err) => {
