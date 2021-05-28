@@ -1,18 +1,23 @@
 import axios from 'axios';
-import { api_curriculos } from '../../services/api'
+import { api_curriculo } from '../../services/api'
 
-const busca_dados_api = () => {
+const busca_curriculo = (user_id) => {
   return dispatch => {
-    axios.get(api_curriculos)
+    axios.get(`${api_curriculo}?id=${user_id}`)
       .then(res => {
-        dispatch(index(res.data))
+        dispatch(show_curriculo(res.data))
       })
   };
 };
-  const index = (values) => {
-      return { type: 'INDEX', values }
-  };
 
-  const edit = values => {return { type: 'EDIT', values };};
+const show_curriculo = (values) => {
+    return { type: 'SHOW_CURRICULO', values }
+};
 
-  export default { index, edit, busca_dados_api };
+const edit_mode = values => {return { type: 'EDIT_MODE', values };};
+
+export default {
+  busca_curriculo,
+  show_curriculo,
+  edit_mode
+};
