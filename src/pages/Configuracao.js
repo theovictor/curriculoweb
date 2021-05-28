@@ -1,18 +1,14 @@
 import React, {useEffect}from 'react';
 import {Container, Col, Row} from 'reactstrap';
+import { useHistory } from "react-router-dom";
 import DashNavbar from 'components/Navbars/DashNavbar';
 import AccountSettings from 'components/Configuracao/AccountSettings';
-import { useHistory } from "react-router-dom";
-import isLoged from "helper/IsLoged";
+import isLoged from "helpers/isLoged";
 export default function Configuracao(){
-  
   const history = useHistory();
- 
   const routeChange = () =>{ 
-     
     history.push('/');
   }
-  
   useEffect(() => {
     document.body.classList.add('settings');
     window.scrollTo(0, 0);
@@ -21,14 +17,12 @@ export default function Configuracao(){
       document.body.classList.remove('settings');
     };
   }, []);
-
   if(!isLoged()){routeChange()};
-
   return(
     <>
       <DashNavbar type="transparent"/>
       <div className="wrapper">
-        <div className="section-shaped my-0 skew-separator skew-mini">
+        {/* <div className="section-shaped my-0 skew-separator skew-mini">
           <div className="page-header page-header-small header-filter">
             <div className="page-header-image" style={{backgroundImage:'url("'+require("assets/img/theme/curved2.jpg")+'")',}}/>
             <Container>
@@ -44,8 +38,26 @@ export default function Configuracao(){
               </div>
             </Container>
           </div>
-        </div>
-        <AccountSettings/>
+        </div> */}
+        <section className="section section-shaped section-lg">
+          <div className="shape shape-style-1"
+            style={{
+              backgroundImage: 'url("' + require("assets/img/theme/curved.jpg") + '")',
+              backgroundSize: "cover",
+              backgroundPosition: "center top",
+            }}
+          >
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+          <AccountSettings/>
+        </section>
       </div>
     </>
   );

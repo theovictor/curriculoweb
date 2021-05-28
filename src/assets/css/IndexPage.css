@@ -62,3 +62,32 @@
 .index img{
   width: 100%;
 }
+.index .rna-wrapper .alert {
+  display: flex!important;
+  max-width: 600px;
+  width: calc(100% - 30px);
+  padding-right: 80px;
+  box-shadow: 3px 3px 10px rgb(255 255 255 / 60%);
+  color: hsla(0,0%,100%,.85);
+}
+
+.index .rna-wrapper .alert .ni[data-notify=icon] {
+  position: relative;
+  top: 4px;
+}
+
+.index .rna-wrapper .alert [data-notify=icon] {
+  font-size: 1.25rem;
+  margin-right: 1.25rem;
+}
+.index span.alert-title {
+  display: flex;
+  font-family: "Comic Sans MS";
+  font-size: 18px;
+  font-style: italic;
+}
+.index span.alert-msg {
+  font-family: "Comic Sans MS";
+  font-size: 15px;
+  font-style: italic;
+}

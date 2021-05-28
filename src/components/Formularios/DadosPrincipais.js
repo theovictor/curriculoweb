@@ -56,7 +56,7 @@ export default function DadosPrincipais() {
         setFieldValue('uf', data.uf);
       });
   }
-  // função que calcula a idade, capturando a data fornecida no campo de dataNascimento.
+  // // função que calcula a idade, capturando a data fornecida no campo de dataNascimento.
   function calcIdade (setFieldValue){
     const dataInfo = formik.values.dataNascimento;
     const anoAtual = new Date().getFullYear();
@@ -75,11 +75,11 @@ export default function DadosPrincipais() {
         }
       }
     }
-    return setFieldValue('idade', age);
+    return setFieldValue('idade', age.toString());
   }
   return (
     <>
-      <Form onSubmit={formik.handleSubmit}>
+      <Form>
         <h6 className="heading-small text-muted mb-4">Dados Principais</h6>
           <div> {/* Dados Principais */}
             <Row>
@@ -131,7 +131,7 @@ export default function DadosPrincipais() {
                   <Input className="form-control-alternative" id="dataNascimento" type="date"
                     invalid={formik.touched.dataNascimento && formik.errors.dataNascimento ? true : false}
                     {...formik.getFieldProps('dataNascimento')}
-                    onBlur = {(ev) => calcIdade(formik.setFieldValue)}
+                    onBlur = {() => calcIdade(formik.setFieldValue)}
                   />
                   <FormFeedback>{formik.touched.dataNascimento && formik.errors.dataNascimento ? formik.errors.dataNascimento : null}</FormFeedback>
                 </FormGroup>

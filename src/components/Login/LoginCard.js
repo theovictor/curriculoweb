@@ -1,27 +1,22 @@
-import React from 'react';
-import Logo from 'components/Logo/Logo.js';
+import React, {useState, useRef, useEffect} from 'react';
+import { Button, Card, CardHeader, CardBody, FormGroup, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Container, Col, FormFeedback } from 'reactstrap';
 import { useFormik } from 'formik';
-import axios from 'axios';
 import { useHistory } from "react-router-dom";
+import { api_login } from '../../services/api.js';
 import * as yup from 'yup';
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  FormGroup,
-  Form,
-  Input,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  Container,
-  Col,
-  FormFeedback
-} from 'reactstrap';
-import BASE_URL from 'helper/Api';
-export default function LoginCard(){
-  const formik = useFormik ({
+import axios from 'axios';
+import NotificationAlert from "react-notification-alert";
+import { useSelector, useDispatch } from 'react-redux'
+import userActions from '../../store/actions/userActions'
+
+import Logo from 'components/Logo/Logo.js';
+
+export default function LoginCard() {
+  const notifica = useRef();
+  const reducer = useSelector( state => state.userReducer )
+  const dispatch = useDispatch()
+
+  const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
@@ -32,37 +27,57 @@ export default function LoginCard(){
     })
   })
   const history = useHistory();
-  const routeChange = () =>{ 
-     
+  const routeChange = () => {
     history.push('/dashboard');
   }
 
-   function btLogin(){
-    const {email,password}  = formik.values; 
-    
-    const user = {'email':email,'senha':password};
-     
-    if(email != ''&& password != ''){
-      axios.post(`${BASE_URL}login`,user).then(res =>{
-        
-        if(res.status == 200){
-          if(res.data.token != null){
-             localStorage.setItem('token',res.data.token);
-             routeChange();
-          }
-           
-        }
-      }).catch(error =>{
-        console.log('nao foi possivel fazer o login');
-        console.log(error);
+  const notify = (type, msg) => {
+    const options = {
+      place: 'tc',
+      message: (
+        <div className="alert-text">
+          <span className="alert-title" data-notify="title">
+           {''}
+           Aviso 
+          </span>
+          <span data-notify="message">{msg}</span>
+        </div>
+      ),
+      type: type,
+      icon: "ni ni-bell-55",
+      autoDismiss: 3
+    };
+    notifica.current.notificationAlert(options)
+  };
+
+  function btLogin() {
+    const { email, password } = formik.values;
+    const loginUser = { 'email': email, 'senha': password };
+    if (email != '' && password != '') {
+      axios.post(`${api_login}`, loginUser)
+      .then(res => {
+          // if (res.data.token != null) {
+          // }
+          sessionStorage.setItem('token', res.data.token);
+          sessionStorage.setItem('user_id', res.data.user._id);
+          // console.log(res.data.user._id);
+          dispatch(userActions.login(res.data.user._id))
+          routeChange();
+      }).catch((err) => {
+        notify('danger', 'Email ou Senha Inválidos!')
       })
     }
-     
-    
-   }
+  }
 
-  return(
+  useEffect(() => {
+    console.log(reducer)
+  }, [reducer])
+
+  return (
     <>
+      <div className="rna-wrapper">
+        <NotificationAlert ref={notifica} />
+      </div>
       <section className="upper">
         <Container>
           <Col className="mx-auto" lg="5" md="8">
@@ -71,23 +86,23 @@ export default function LoginCard(){
                 <div className="text-muted text-center mb-3">
                   <small>Login</small>
                 </div>
-                <Logo/>
+                <Logo />
               </CardHeader>
               <CardBody className="px-lg-5 py-lg-5">
                 <div className="text-center text-muted mb-4">
                   <small>Entre com suas credenciais</small>
                 </div>
-                <Form role="form" onSubmit={formik.handleSubmit}>
+                <Form role="form">
                   <FormGroup className="mb-3">
                     <InputGroup className="input-group-alternative">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
-                          <i className="ni ni-email-83"/>
+                          <i className="ni ni-email-83" />
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input placeholder="Email" id="email" type="email"
                         invalid={formik.touched.email && formik.errors.email ? true : false}
-                        {...formik.getFieldProps('email')}/>
+                        {...formik.getFieldProps('email')} />
                       <FormFeedback>{formik.touched.email && formik.errors.email ? formik.errors.email : null}</FormFeedback>
                     </InputGroup>
                   </FormGroup>
@@ -95,23 +110,23 @@ export default function LoginCard(){
                     <InputGroup className="input-group-alternative">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
-                          <i className="ni ni-lock-circle-open"/>
+                          <i className="ni ni-lock-circle-open" />
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input placeholder="Senha" id="password" type="password"
                         invalid={formik.touched.password && formik.errors.password ? true : false}
-                        {...formik.getFieldProps('password')}/>
+                        {...formik.getFieldProps('password')} />
                       <FormFeedback>{formik.touched.password && formik.errors.password ? formik.errors.password : null}</FormFeedback>
                     </InputGroup>
                   </FormGroup>
                   <div className="custom-control custom-control-alternative custom-checkbox">
-                    <input className="custom-control-input" id="customCheckLogin2" type="checkbox"/>
+                    <input className="custom-control-input" id="customCheckLogin2" type="checkbox" />
                     <label className="custom-control-label" htmlFor="customCheckLogin2">
                       <span className="text-default opacity-5">Lembrar-me</span>
                     </label>
                   </div>
                   <div className="text-center">
-                    <Button className="my-4" color="primary" type="button"  onClick={btLogin} >
+                    <Button className="my-4" color="primary" onClick={btLogin} >
                       Entrar
                     </Button>
                   </div>

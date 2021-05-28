@@ -1,16 +1,16 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Container, Col } from "reactstrap";
 import "assets/css/ResetPage.css";
 import ResetCard from "components/ResetSenha/ResetCard.js";
 export default function ResetPage() {
-  React.useEffect(() => {
+  useEffect(() => {
     document.body.classList.add("reset");
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     return function cleanup() {
       document.body.classList.remove("reset");
     };
-  });
+  },[]);
   return (
     <>
       <div className="wrapper">
