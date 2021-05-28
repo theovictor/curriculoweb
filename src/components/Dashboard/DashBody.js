@@ -6,12 +6,13 @@ import DadosPrincipais from 'components/Formularios/DadosPrincipais.js';
 import Escolares from 'components/Formularios/Escolares.js';
 import Conhecimentos from 'components/Formularios/Conhecimentos.js';
 import Experiencias from 'components/Formularios/Experiencias.js';
+import Label from 'reactstrap/lib/Label';
 
 export default function DashBody() {
   const [mostrar, setMostrar] = useState('');
-  const reducer = useSelector( state => state);
   const dados_curriculo = useSelector( state => state.curriculoReducer);
-  const dispatch = useDispatch();
+
+  console.log(dados_curriculo)
 
   function btnDadosPrin(){
     if(mostrar !== 'dadosPrincipal'){
@@ -113,6 +114,17 @@ export default function DashBody() {
                 </Row>
               </CardHeader>
               <CardBody>
+                <Label>Formaçoes</Label>
+                {dados_curriculo.show_curriculo?.formacoes? dados_curriculo.show_curriculo.formacoes.map((item, idx)=>(
+                <div key={idx}>
+                  <p>Curso: {item.curso}</p>
+                  <p>Curso: {item.dataInicio}</p>
+                  <p>Curso: {item.dataTermino}</p>
+                  <p>Curso: {item.periodo}</p>
+                  <p>Curso: {item.status}</p>
+                  <p>Curso: {item.turno}</p>
+                </div>
+                )) : null}
                 {mostrar === 'dadosPrincipal'?
                   <DadosPrincipais />
                 : mostrar === 'escolares'?
