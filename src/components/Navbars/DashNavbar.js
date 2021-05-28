@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Logo from "components/Logo/Logo.js";
 import { useSelector, useDispatch } from 'react-redux'
 import userActions from '../../store/actions/userActions'
+import curriculoActions from 'store/actions/curriculoActions';
 
 export default function DashNavbar() {
 
@@ -12,11 +13,10 @@ export default function DashNavbar() {
   const userID = sessionStorage.getItem('user_id')
   useEffect(() => {
     if(!reducer.logged){
-      console.log(userID)
       dispatch(userActions.login(userID))
-      console.log(reducer.logged)
+      dispatch(curriculoActions.busca_curriculo(userID))
     }
-  }, [reducer.logged])
+  }, [])
 
   return (
     <>
@@ -75,7 +75,7 @@ export default function DashNavbar() {
                   </DropdownToggle>
                 </UncontrolledDropdown>
                 <UncontrolledDropdown nav>
-                  <DropdownToggle nav to="#" tag={Link}>
+                  <DropdownToggle onClick={() => console.log(userID)} nav to="#" tag={Link}>
                     <i className="ni ni-support-16 d-lg-none mr-2" />
                     <span className="nav-link-inner--text">Suporte</span>
                   </DropdownToggle>

@@ -1,13 +1,13 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useRef} from 'react';
 import { Button, Card, CardHeader, CardBody, FormGroup, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Container, Col, FormFeedback } from 'reactstrap';
 import { useFormik } from 'formik';
 import { useHistory } from "react-router-dom";
 import { api_login } from '../../services/api.js';
+import { useSelector, useDispatch } from 'react-redux'
 import * as yup from 'yup';
 import axios from 'axios';
-import NotificationAlert from "react-notification-alert";
-import { useSelector, useDispatch } from 'react-redux'
 import userActions from '../../store/actions/userActions'
+import NotificationAlert from "react-notification-alert";
 
 import Logo from 'components/Logo/Logo.js';
 
@@ -15,7 +15,6 @@ export default function LoginCard() {
   const notifica = useRef();
   const reducer = useSelector( state => state.userReducer )
   const dispatch = useDispatch()
-
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -30,7 +29,6 @@ export default function LoginCard() {
   const routeChange = () => {
     history.push('/dashboard');
   }
-
   const notify = (type, msg) => {
     const options = {
       place: 'tc',
@@ -49,7 +47,6 @@ export default function LoginCard() {
     };
     notifica.current.notificationAlert(options)
   };
-
   function btLogin() {
     const { email, password } = formik.values;
     const loginUser = { 'email': email, 'senha': password };
@@ -60,7 +57,7 @@ export default function LoginCard() {
           // }
           sessionStorage.setItem('token', res.data.token);
           sessionStorage.setItem('user_id', res.data.user._id);
-          // console.log(res.data.user._id);
+          console.log(res.data.user._id);
           dispatch(userActions.login(res.data.user._id))
           routeChange();
       }).catch((err) => {
@@ -68,11 +65,6 @@ export default function LoginCard() {
       })
     }
   }
-
-  useEffect(() => {
-    console.log(reducer)
-  }, [reducer])
-
   return (
     <>
       <div className="rna-wrapper">
