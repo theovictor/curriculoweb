@@ -16,21 +16,8 @@ import Dashboard from "pages/Dashboard.js";
 import Profile from "pages/Profile.js";
 import ResetPage from "pages/ResetPage.js";
 import Configuracao from "pages/Configuracao.js";
-import Cursos from "pages/Cursos";
 
 render(
-<<<<<<< HEAD
-  <BrowserRouter>
-      <Switch>
-          <Route exact path="/" component={Index}/>
-          <Route exact path="/dashboard" component={Dashboard}/>
-          <Route exact path="/profile" component={Profile}/>
-          <Route exact path="/reset" component={ResetPage}/>
-          <Route exact path="/settings" component={Configuracao}/>
-          <Route exact path="/cursos" component={Cursos}/>
-      </Switch>
-  </BrowserRouter>,
-=======
   <Provider store={store}>
     <BrowserRouter>
         <Switch>
@@ -42,6 +29,5 @@ render(
         </Switch>
     </BrowserRouter>
   </Provider>,
->>>>>>> theo
   document.getElementById('root')
 );
