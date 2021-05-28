@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { Card, CardHeader, CardBody, Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import DadosPrincipais from 'components/Formularios/DadosPrincipais.js';
 import Escolares from 'components/Formularios/Escolares.js';
@@ -9,10 +9,8 @@ import Experiencias from 'components/Formularios/Experiencias.js';
 
 export default function DashBody() {
   const [mostrar, setMostrar] = useState('');
-  const reducer = useSelector( state => state);
   const dados_curriculo = useSelector( state => state.curriculoReducer);
-  const dispatch = useDispatch();
-
+  console.log(dados_curriculo)
   function btnDadosPrin(){
     if(mostrar !== 'dadosPrincipal'){
       setMostrar('dadosPrincipal');
@@ -33,6 +31,7 @@ export default function DashBody() {
       setMostrar('experiencia');
     }
   }
+
   return (
     <>
       <Container className="mt-7" fluid>
@@ -53,6 +52,15 @@ export default function DashBody() {
                   <div className="h5 font-weight-300">dos Biricuticos</div>
                   <hr className="my-4" />
                   <Col className="text-left">
+                    <ListGroup>
+                      <ListGroupItem className="list-group-item-action border-0"
+                        // onClick={btnDadosPrin}
+                        tag="button"
+                      >
+                        <i className="ni ni-badge mr-3"/>
+                        Meu Curriculo
+                      </ListGroupItem>
+                    </ListGroup>
                     <ListGroup>
                       <ListGroupItem className="list-group-item-action border-0"
                         onClick={btnDadosPrin}
@@ -113,6 +121,7 @@ export default function DashBody() {
                 </Row>
               </CardHeader>
               <CardBody>
+                
                 {mostrar === 'dadosPrincipal'?
                   <DadosPrincipais />
                 : mostrar === 'escolares'?

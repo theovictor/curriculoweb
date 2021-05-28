@@ -53,11 +53,8 @@ export default function LoginCard() {
     if (email != '' && password != '') {
       axios.post(`${api_login}`, loginUser)
       .then(res => {
-          // if (res.data.token != null) {
-          // }
           sessionStorage.setItem('token', res.data.token);
           sessionStorage.setItem('user_id', res.data.user._id);
-          console.log(res.data.user._id);
           dispatch(userActions.login(res.data.user._id))
           routeChange();
       }).catch((err) => {
