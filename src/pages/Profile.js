@@ -22,8 +22,8 @@ export default function Profile() {
   },[]);
   return (
     <>
+      <DashNavbar />
       <main className="profile-page">
-        <DashNavbar />
         <section className="section-profile-cover section-shaped my-0">
           <div className="shape shape-style-1 shape-default alpha-4">
             <span />

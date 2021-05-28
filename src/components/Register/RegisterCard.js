@@ -60,16 +60,17 @@ export default function LoginCard(){
         axios.post(`${api_cadastro}`, user).then(res => {
           if (res.status == 200) {
             if (res.data.token != null) {
-              localStorage.setItem('token', res.data.token);
+              sessionStorage.setItem('token', res.data.token);
               routeChange();
             }
           }
         }).catch(error => {
-          console.log('nao foi possivel fazer cadastro');
+          notify('Não foi possivel fazer o cadastro')
+          // console.log('nao foi possivel fazer cadastro');
           console.log(error);
         })
       } else {
-        console.log('As senhas nao coincidem');
+        notify('As senhas nao coincidem');
       }
     }
   }

@@ -12,9 +12,9 @@ export default function DashNavbar() {
   const userID = sessionStorage.getItem('user_id')
   useEffect(() => {
     if(!reducer.logged){
-      // console.log(userID)
+      console.log(userID)
       dispatch(userActions.login(userID))
-      // console.log(reducer.logged)
+      console.log(reducer.logged)
     }
   }, [reducer.logged])
 
@@ -81,7 +81,10 @@ export default function DashNavbar() {
                   </DropdownToggle>
                 </UncontrolledDropdown>
                 <UncontrolledDropdown className="d-lg-none" nav>
-                  <DropdownToggle nav to="/" tag={Link} onClick={() => { }}>
+                  <DropdownToggle nav to="/" tag={Link} onClick={() => { 
+                    sessionStorage.removeItem('token');
+                    sessionStorage.removeItem('user_id');
+                  }}>
                     <i className="ni ni-user-run d-lg-none mr-2" />
                     <span className="nav-link-inner--text">Sair</span>
                   </DropdownToggle>
@@ -106,7 +109,8 @@ export default function DashNavbar() {
                     </DropdownToggle>
                     <DropdownMenu className="dropdown-menu">
                       <DropdownItem to="/" tag={Link} onClick={() => {
-                        localStorage.removeItem('token');
+                        sessionStorage.removeItem('token');
+                        sessionStorage.removeItem('user_id');
                       }}>
                         <i className="ni ni-user-run mr-2" />
                         <span className="nav-link-inner--text font-weight-bold">Sair</span>

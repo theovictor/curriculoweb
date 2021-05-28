@@ -46,10 +46,10 @@ export default function Dashboard(){
   
   return (
     <>
+      <DashNavbar />
       <div className="rna-wrapper">
         <NotificationAlert ref={notifica}/>
       </div>
-      <DashNavbar />
       <div className="wrapper">
         <section className="section section-shaped section-lg">
           <div className="shape shape-style-1"

@@ -6,15 +6,15 @@ import Conhecimentos from 'components/Formularios/Conhecimentos.js';
 import Experiencias from 'components/Formularios/Experiencias.js';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux'
-import userActions from '../../store/actions/userActions'
 import { api_curriculo } from '../../services/api.js';
+import curriculoActions from '../../store/actions/curriculoActions'
 
 export default function DashBody() {
   const [mostrar, setMostrar] = useState('');
 
   const reducer = useSelector( state => state);
-  // const dispatch = useDispatch();
-  // const [data, setData] = useState([]);
+  const teste = useSelector( state => state.curriculoReducer);
+  const dispatch = useDispatch();
 
   function btnDadosPrin(){
     if(mostrar !== 'dadosPrincipal'){
@@ -37,17 +37,28 @@ export default function DashBody() {
     }
   }
 
-  const getCurriculo = async () =>{
+  const getCurriculo = () =>{
     axios.get(`${api_curriculo}?id=${reducer.userReducer.logged}`)
     .then(res => {
-      console.log(res)
+      dispatch(curriculoActions.index(res.data))
     })
   }
 
   useEffect(() => {
-    console.log(reducer.userReducer)
     getCurriculo()
-}, [reducer])
+    // console.log(reducer.userReducer)
+}, [])
+
+//   useEffect(() => {
+//     console.log(teste)
+// }, [teste])
+
+//   useEffect(() => {
+//     console.log('component carregado')
+//     return () => {
+//       console.log('component desmontado')
+//     }
+//     }, [])
 
   return (
     <>
@@ -65,7 +76,7 @@ export default function DashBody() {
               </Row>
               <CardBody className="pt-0 pt-md-4">
                 <div className="text-center">
-                  <h3 className="mt-7">{}</h3>
+                  <h3 className="mt-7">{teste.dados_api?.curriculo?.nome? teste.dados_api.curriculo.nome : ''}</h3>
                   <div className="h5 font-weight-300">dos Biricuticos</div>
                   <hr className="my-4" />
                   <Col className="text-left">
