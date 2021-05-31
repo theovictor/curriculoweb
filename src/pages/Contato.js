@@ -1,33 +1,28 @@
-import React, {useEffect}from 'react';
-// import {Container, Col, Row} from 'reactstrap';
+import React, {useEffect} from 'react'
 import { useHistory } from "react-router-dom";
-import DashNavbar from 'components/Navbars/DashNavbar';
-import AccountSettings from 'components/Configuracao/AccountSettings';
+
 import isLoged from "helpers/isLoged";
+import DashNavbar from 'components/Navbars/DashNavbar'
+import ContatoCard from 'components/Contato/ContatoCard'
 
-import 'assets/css/navbar.css'
-import 'assets/css/upload-img.css'
-
-export default function Configuracao(){
+export default function Contato(){
   const history = useHistory();
   const routeChange = () =>{ 
     history.push('/');
   }
-
   useEffect(() => {
-    document.body.classList.add('settings');
+    document.body.classList.add('contact');
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     return function cleanup(){
-      document.body.classList.remove('settings');
+      document.body.classList.remove('contact');
     };
   }, []);
-
   if(!isLoged()){routeChange()};
-
+  
   return(
     <>
-      <DashNavbar/>
+      <DashNavbar />
       <div className="wrapper">
         <section className="section section-shaped section-lg">
           <div className="shape shape-style-1"
@@ -46,9 +41,9 @@ export default function Configuracao(){
             <span />
             <span />
           </div>
-          <AccountSettings/>
+          <ContatoCard />
         </section>
       </div>
     </>
-  );
+  )
 }

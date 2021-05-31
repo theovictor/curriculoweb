@@ -10,10 +10,7 @@ const busca_curriculo = (user_id) => {
   };
 };
 
-const show_curriculo = (values) => {
-    return { type: 'SHOW_CURRICULO', values }
-};
-
+const show_curriculo = (values) => {return { type: 'SHOW_CURRICULO', values }};
 const edit_mode = values => {return { type: 'EDIT_MODE', values };};
 
 export default {

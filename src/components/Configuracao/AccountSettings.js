@@ -3,7 +3,9 @@ import { Button, Card, CardHeader, Form, FormFeedback, Input, InputGroup, InputG
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useHistory } from "react-router-dom";
+
 import isLoged from "helpers/isLoged";
+import Upload from 'components/Upload/Upload'
 
 export default function AccountSettings() {
   const [enableNome, setEnableNome] = useState(true);
@@ -40,6 +42,7 @@ export default function AccountSettings() {
             <Card className="card-profile shadow">
               <section className="text-center">
                 {/* Component de Upload de Foto*/}
+                <Upload avatar/>
                 <h3 className="title mt-4">Charlie Bailey</h3>
               </section>
             </Card>

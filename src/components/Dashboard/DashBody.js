@@ -1,39 +1,37 @@
 import React, {useState} from 'react';
 import { Card, CardHeader, CardBody, Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import DadosPrincipais from 'components/Formularios/DadosPrincipais.js';
 import Escolares from 'components/Formularios/Escolares.js';
 import Conhecimentos from 'components/Formularios/Conhecimentos.js';
 import Experiencias from 'components/Formularios/Experiencias.js';
-import Label from 'reactstrap/lib/Label';
 
 export default function DashBody() {
-  const [mostrar, setMostrar] = useState('');
-  const dados_curriculo = useSelector( state => state.curriculoReducer);
+  const [mostrar, setMostrar] = useState('')
+  const dados_curriculo = useSelector( state => state.curriculoReducer)
 
-  console.log(dados_curriculo)
-
-  function btnDadosPrin(){
+  const btnDadosPrin = () => {
     if(mostrar !== 'dadosPrincipal'){
       setMostrar('dadosPrincipal');
     }
   }
-  function btnEscolares(){
+  const btnEscolares = () => {
     if(mostrar !== 'escolares'){
       setMostrar('escolares');
     }
   }
-  function btnConheci(){
+  const btnConheci = () => {
     if(mostrar !== 'conhecimento'){
       setMostrar('conhecimento');
     }
   }
-  function btnExperi(){
+  const btnExperi = () => {
     if(mostrar !== 'experiencia'){
       setMostrar('experiencia');
     }
   }
+
   return (
     <>
       <Container className="mt-7" fluid>
@@ -54,6 +52,15 @@ export default function DashBody() {
                   <div className="h5 font-weight-300">dos Biricuticos</div>
                   <hr className="my-4" />
                   <Col className="text-left">
+                    <ListGroup>
+                      <ListGroupItem className="list-group-item-action border-0"
+                        // onClick={btnDadosPrin}
+                        tag="button"
+                      >
+                        <i className="ni ni-badge mr-3"/>
+                        Meu Curriculo
+                      </ListGroupItem>
+                    </ListGroup>
                     <ListGroup>
                       <ListGroupItem className="list-group-item-action border-0"
                         onClick={btnDadosPrin}
@@ -114,17 +121,7 @@ export default function DashBody() {
                 </Row>
               </CardHeader>
               <CardBody>
-                <Label>Formaçoes</Label>
-                {dados_curriculo.show_curriculo?.formacoes? dados_curriculo.show_curriculo.formacoes.map((item, idx)=>(
-                <div key={idx}>
-                  <p>Curso: {item.curso}</p>
-                  <p>Curso: {item.dataInicio}</p>
-                  <p>Curso: {item.dataTermino}</p>
-                  <p>Curso: {item.periodo}</p>
-                  <p>Curso: {item.status}</p>
-                  <p>Curso: {item.turno}</p>
-                </div>
-                )) : null}
+                
                 {mostrar === 'dadosPrincipal'?
                   <DadosPrincipais />
                 : mostrar === 'escolares'?

@@ -1,8 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import {Container, Row, Col, Button} from 'reactstrap';
-import "assets/css/IndexPage.css";
+import React, { useEffect, useState } from 'react';
+import { Container, Row, Col, Button } from 'reactstrap';
+
+import 'assets/css/index-page.css'
+
 import LoginCard from 'components/Login/LoginCard';
-import RegisterCard from 'components/Register/RegisterCard.js';
+import RegisterCard from 'components/Register/RegisterCard';
+
 export default function Index() {
   const [mostrar, setMostrar] = useState('');
   useEffect(() => {
@@ -13,22 +16,14 @@ export default function Index() {
       document.body.classList.remove("index");
     };
   }, []);
-  function btnEntrar(){
-    if(mostrar === '' || mostrar === 'registrar'){
-      setMostrar('entrar');
-    }
-  }
-  function btnRegistrar(){
-    if(mostrar === '' || mostrar === 'entrar'){
-      setMostrar('registrar');
-    }
-  }
+  function btnEntrar() { if (mostrar === '' || mostrar === 'registrar') { setMostrar('entrar'); } }
+  function btnRegistrar() { if (mostrar === '' || mostrar === 'entrar') { setMostrar('registrar'); } }
   return (
     <>
       <div className="section-shaped my-0 skew-separator skew-mini">
         <div className="page-header page-header-small header-filter">
           <div className="page-header-image"
-            style={{backgroundImage:'url("'+require("assets/img/theme/curved2.jpg")+'")',}}/>
+            style={{ backgroundImage: 'url("' + require("assets/img/theme/curved2.jpg") + '")', }} />
           <Container>
             <div className="header-body text-center mb-7">
               <Row className="justify-content-center">
@@ -57,12 +52,14 @@ export default function Index() {
           </Container>
         </div>
       </div>
-      {mostrar === 'entrar'?
-        <LoginCard/>
-      : mostrar === 'registrar'?
-        <RegisterCard/>
-      : <div/>
-      }
+      <section className="upper">
+        {mostrar === 'entrar' ?
+          <LoginCard />
+          : mostrar === 'registrar' ?
+            <RegisterCard />
+          : <div />
+        }
+      </section>
     </>
   );
 }

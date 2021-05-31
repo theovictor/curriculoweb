@@ -1,0 +1,46 @@
+.settings .fileinput {
+  display: inline-block;
+  margin-bottom: 9px;
+}
+.settings .fileinput input[type=file] {
+  display: none;
+}
+.settings button, input, optgroup, select, textarea {
+  font-family: "Montserrat","Helvetica Neue",Arial,sans-serif;
+}
+.settings  .thumbnail {
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+}
+.settings .fileinput .thumbnail.img-circle {
+  border-radius: 50%;
+  max-width: 180px;
+  transform: translate(0%, -50%);
+}
+.settings .fileinput .thumbnail {
+  display: inline-block;
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: middle;
+  max-width: 360px;
+}
+.settings .img-raised {
+  box-shadow: 0 10px 25px 0 rgb(0 0 0 / 30%);
+}
+.settings img.fileImg {
+  max-width: 100%;
+  border-radius: 1px;
+}
+.settings .fileinput .thumbnail>img {
+  max-height: 100%;
+}
+.settings .fileinput .btn {
+  vertical-align: middle;
+}
+.settings .btn-round {
+  border-width: 1px;
+  border-radius: 30px!important;
+  padding: 11px 23px;
+}
