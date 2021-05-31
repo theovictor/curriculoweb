@@ -16,6 +16,7 @@ import Dashboard from "pages/Dashboard";
 import Profile from "pages/Profile";
 import ResetPage from "pages/ResetPage";
 import Configuracao from "pages/Configuracao";
+import Contato from "pages/Contato";
 
 render(
   <Provider store={store}>
@@ -26,6 +27,7 @@ render(
             <Route exact path="/profile" component={Profile}/>
             <Route exact path="/reset" component={ResetPage}/>
             <Route exact path="/settings" component={Configuracao}/>
+            <Route exact path="/contact" component={Contato}/>
         </Switch>
     </BrowserRouter>
   </Provider>,

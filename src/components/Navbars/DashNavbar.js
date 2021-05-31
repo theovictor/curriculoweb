@@ -83,9 +83,9 @@ export default function DashNavbar() {
                   </DropdownToggle>
                 </UncontrolledDropdown>
                 <UncontrolledDropdown nav>
-                  <DropdownToggle nav to="#" tag={Link}>
+                  <DropdownToggle nav to="/contact" tag={Link}>
                     <i className="ni ni-support-16 d-lg-none mr-2" />
-                    <span className="nav-link-inner--text">Suporte</span>
+                    <span className="nav-link-inner--text">Contato</span>
                   </DropdownToggle>
                 </UncontrolledDropdown>
                 <UncontrolledDropdown className="d-lg-none" nav>
