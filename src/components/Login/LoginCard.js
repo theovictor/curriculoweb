@@ -8,7 +8,6 @@ import * as yup from 'yup';
 import axios from 'axios';
 import userActions from '../../store/actions/userActions'
 import curriculoActions from '../../store/actions/curriculoActions'
-
 import NotificationAlert from "react-notification-alert";
 import Logo from 'components/Logo/Logo.js';
 

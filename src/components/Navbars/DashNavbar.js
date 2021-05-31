@@ -19,13 +19,13 @@ export default function DashNavbar() {
     }
   }, [])
 
-  useEffect(() => {
-    console.log(reducer)
-  }, [reducer])
+  // useEffect(() => {
+  //   console.log(reducer)
+  // }, [reducer])
 
-  useEffect(() => {
-    console.log(dados_curriculo)
-  }, [dados_curriculo])
+  // useEffect(() => {
+  //   console.log(dados_curriculo)
+  // }, [dados_curriculo])
 
   return (
     <>

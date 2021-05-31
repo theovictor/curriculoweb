@@ -1,43 +1,40 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Card, Container, Row, Col, Button } from 'reactstrap';
+import { useSelector, useDispatch } from 'react-redux'
+
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider from "react-bootstrap-table2-toolkit";
 import ModalEscola from 'components/Modal/ModalEscola.js';
+import curriculoActions from '../../store/actions/curriculoActions'
 
 export default function Escolares(){
-  // dados que vira do banco.
-  const dataTableEscolar = [
-    {
-      id: 1,
-      escola: 'Faro',
-      curso: 'engenharia',
-      inicio: '20/05/2021',
-      termino: '21/05/2021',
-      periodo: '8',
-      turno: 'Noturno',
-      status: 'cursando'      
-    },
-    {
-      id: 2,
-      escola: 'Faro',
-      curso: 'engenharia',
-      inicio: '20/05/2021',
-      termino: '21/05/2021',
-      periodo: '8',
-      turno: 'Noturno',
-      status: 'cursando'      
-    }
-  ];
+
+  const dispatch = useDispatch()
+  const dados_formacao = useSelector(state => state.curriculoReducer)
+  const [ dataRow , setDataRow] = useState()
+
+  function btnNovo() {
+    dispatch(curriculoActions.modal_escola(true))
+  }
+
   // função para editar o campo.
-  function btnEditar() {
-    alert('editar campo')
+  const btnEditar = () => {
+    dispatch(curriculoActions.modal_escola(true))
+    dispatch(curriculoActions.edit_mode(true))
   }
   // função para deletar o campo.
-  function btnDeletar() {
+  const btnDeletar = () => {
     alert('deletar campo')
   }
+
+
+  // useEffect(() => {
+  //   console.log(dados_formacao.show_curriculo.formacoes)
+  // }, [dados_formacao])
+  
+  
   // constante que adiciona os buttons de acoes na linha.
-  const addBotoesAcoes = () => {
+  const AddBotoesAcoes = () => {
     return(
       <div className="btnAcoes">
         <Button className="btn-icon" color="success" onClick={btnEditar}>
@@ -53,6 +50,13 @@ export default function Escolares(){
       </div>
     )
   }
+
+  useEffect(() => {
+    // console.log(dataRow)
+    dispatch(curriculoActions.show_formacao(dataRow))
+  }, [dataRow])
+
+
   return (
     <>
       <Container fluid>
@@ -60,8 +64,8 @@ export default function Escolares(){
             <Card className="tabelinha">
               <ToolkitProvider
                 // data = nome da tabela que tera no banco.
-                data={dataTableEscolar}
-                keyField="id"
+                data={dados_formacao.show_curriculo.formacoes && dados_formacao.show_curriculo.formacoes}
+                keyField="_id"
                 columns={[
                   {
                     dataField: "escola",
@@ -74,12 +78,12 @@ export default function Escolares(){
                     sort: true,
                   },
                   {
-                    dataField: "inicio",
+                    dataField: "dataInicio",
                     text: "Início",
                     sort: true,
                   },
                   {
-                    dataField: "termino",
+                    dataField: "dataTermino",
                     text: "Término",
                     sort: true,
                   },
@@ -101,27 +105,31 @@ export default function Escolares(){
                   {
                     dataField: "ações",
                     text: "Ações",
-                    formatter: addBotoesAcoes,
+                    formatter: AddBotoesAcoes,
                   }
                 ]}
               >
-                {(props) => (
-                  //Renderização da Tabela
+                {(props) => (<>
+                  {/* //Renderização da Tabela */}
                   <div className="table-responsive pt-3">
-                    <Container fluid>
-                      <Row>
-                        <Col>
-                          {/* aqui sera chamado o component ModalEscola */}
-                          <ModalEscola/>
-                        </Col>
-                      </Row>
-                    </Container>
+                  <Button className="mb-3" color="primary" type="button" onClick={btnNovo}>
+                    <span className="btn-inner--icon">
+                      <i className="fa fa-plus-circle ml--2"></i>
+                    </span>
+                    <span className="btn-inner--text ml-2"> Novo Curso</span>
+                  </Button>
+                  {/* {console.log(props.baseProps.data)} */}
                     <BootstrapTable
                       {...props.baseProps}
                       bootstrap4={true}
                       bordered={false}
+                      rowEvents={{onClick: (e, row, idx) => {
+                        setDataRow(row)
+                      }}}
                     />
                   </div>
+                  <ModalEscola/>
+                  </>
                 )}
               </ToolkitProvider>
             </Card>
