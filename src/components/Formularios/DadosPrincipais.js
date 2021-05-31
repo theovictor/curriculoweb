@@ -2,8 +2,12 @@ import React from "react";
 import { useFormik } from 'formik';
 import { Input, Form, Row, Col, FormGroup, Button, FormFeedback, Label } from "reactstrap";
 import * as yup from 'yup';
+// import { useSelector } from 'react-redux'
 
 export default function DadosPrincipais() {
+
+  // const dados_curriculo = useSelector( state => state.curriculoReducer);
+
   // variaveis do formulario criadas usando formik.
   const formik = useFormik({
     initialValues: {
@@ -77,6 +81,13 @@ export default function DadosPrincipais() {
     }
     return setFieldValue('idade', age.toString());
   }
+
+
+  // React.useEffect(() => {
+  //     formik.setFieldValue('name',  dados_curriculo.show_curriculo.curriculo.nome)
+  // }, [])
+
+
   return (
     <>
       <Form>

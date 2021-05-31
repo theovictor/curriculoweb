@@ -1,6 +1,8 @@
 import React, {useEffect} from "react";
 import { Container, Col } from "reactstrap";
-import "assets/css/ResetPage.css";
+
+import 'assets/css/reset-page.css'
+
 import ResetCard from "components/ResetSenha/ResetCard.js";
 export default function ResetPage() {
   useEffect(() => {

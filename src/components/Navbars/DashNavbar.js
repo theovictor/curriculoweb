@@ -9,14 +9,23 @@ import curriculoActions from 'store/actions/curriculoActions';
 export default function DashNavbar() {
 
   const reducer = useSelector( state => state.userReducer);
-  const dispatch = useDispatch();
+  const dados_curriculo = useSelector( state => state.curriculoReducer);
   const userID = sessionStorage.getItem('user_id')
+  const dispatch = useDispatch();
   useEffect(() => {
     if(!reducer.logged){
       dispatch(userActions.login(userID))
       dispatch(curriculoActions.busca_curriculo(userID))
     }
   }, [])
+
+  useEffect(() => {
+    console.log(reducer)
+  }, [reducer])
+
+  useEffect(() => {
+    console.log(dados_curriculo)
+  }, [dados_curriculo])
 
   return (
     <>
@@ -28,11 +37,10 @@ export default function DashNavbar() {
             </NavbarBrand>
             <button className="navbar-toggler" id="navbar_global">
               <span className="avatar avatar-sm rounded-circle">
-                <img alt="..." src={require("assets/img/theme/team-4-800x800.jpg")} />
+                <img alt="..." src={require("assets/img/theme/team-4-800x800.jpg")}/>
               </span>
             </button>
-            <UncontrolledCollapse toggler="#navbar_global" navbar
-            >
+            <UncontrolledCollapse toggler="#navbar_global" navbar>
               <div className="navbar-collapse-header">
                 <Row>
                   <div className="collapse-brand">
@@ -42,7 +50,7 @@ export default function DashNavbar() {
                       </span>
                       <Media className="ml-2 mr-1 d-lg-block">
                         <span className="mb-0 text-sm font-weight-bold">
-                          Mariazinha
+                          {reducer.logged?.user?.nome? reducer.logged.user.nome : ''}
                         </span>
                       </Media>
                     </Media>
@@ -75,7 +83,7 @@ export default function DashNavbar() {
                   </DropdownToggle>
                 </UncontrolledDropdown>
                 <UncontrolledDropdown nav>
-                  <DropdownToggle onClick={() => console.log(userID)} nav to="#" tag={Link}>
+                  <DropdownToggle nav to="#" tag={Link}>
                     <i className="ni ni-support-16 d-lg-none mr-2" />
                     <span className="nav-link-inner--text">Suporte</span>
                   </DropdownToggle>
@@ -101,7 +109,7 @@ export default function DashNavbar() {
                           </span>
                           <Media className="ml-1 mr-1 d-lg-block">
                             <span className="mb-0 text-sm font-weight-bold" id="nome">
-                              Mariazinha
+                              {reducer.logged?.user?.nome? reducer.logged.user.nome : ''}
                             </span>
                           </Media>
                         </Media>

@@ -11,11 +11,11 @@ import "react-notification-alert/dist/animate.css";
 import { Provider } from 'react-redux'
 import store from './store'
 
-import Index from "pages/Index.js";
-import Dashboard from "pages/Dashboard.js";
-import Profile from "pages/Profile.js";
-import ResetPage from "pages/ResetPage.js";
-import Configuracao from "pages/Configuracao.js";
+import Index from "pages/Index";
+import Dashboard from "pages/Dashboard";
+import Profile from "pages/Profile";
+import ResetPage from "pages/ResetPage";
+import Configuracao from "pages/Configuracao";
 
 render(
   <Provider store={store}>

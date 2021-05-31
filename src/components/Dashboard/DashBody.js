@@ -8,25 +8,25 @@ import Conhecimentos from 'components/Formularios/Conhecimentos.js';
 import Experiencias from 'components/Formularios/Experiencias.js';
 
 export default function DashBody() {
-  const [mostrar, setMostrar] = useState('');
-  const dados_curriculo = useSelector( state => state.curriculoReducer);
-  console.log(dados_curriculo)
-  function btnDadosPrin(){
+  const [mostrar, setMostrar] = useState('')
+  const dados_curriculo = useSelector( state => state.curriculoReducer)
+
+  const btnDadosPrin = () => {
     if(mostrar !== 'dadosPrincipal'){
       setMostrar('dadosPrincipal');
     }
   }
-  function btnEscolares(){
+  const btnEscolares = () => {
     if(mostrar !== 'escolares'){
       setMostrar('escolares');
     }
   }
-  function btnConheci(){
+  const btnConheci = () => {
     if(mostrar !== 'conhecimento'){
       setMostrar('conhecimento');
     }
   }
-  function btnExperi(){
+  const btnExperi = () => {
     if(mostrar !== 'experiencia'){
       setMostrar('experiencia');
     }

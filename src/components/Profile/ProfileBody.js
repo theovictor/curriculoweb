@@ -1,8 +1,9 @@
 import React from "react";
 import { Button, Card, Container, Row, Col } from "reactstrap";
+
 import ProfileData from './ProfileData';
 
-function ProfileBody() {
+export default function ProfileBody() {
   return (
     <Container>
       <Card className="card-profile left shadow mt--300">
@@ -10,20 +11,18 @@ function ProfileBody() {
           <Row className="justify-content-left">
             <Col className="order-lg-2" lg="3">
               <div className="card-profile-image">
-                <a href="#pablo" onClick={(e) => e.preventDefault()}>
                   <img
                     alt="..."
                     className="rounded-circle"
                     src={require("assets/img/theme/team-4-800x800.jpg")}
                   />
-                </a>
               </div>
             </Col>
 
             {/****** inicio menu redes sociais *******/}
             <Col className="order-lg-3 text-lg-right align-self-lg-center" lg="4">
               <div className="card-profile-actions py-4 mt-lg-0">
-                
+
                 {/****** FACEBOOK *******/}
                 <Button
                   className="mr-4"
@@ -32,10 +31,10 @@ function ProfileBody() {
                   onClick={(e) => e.preventDefault()}
                   size="sm"
                 >
-                   <i className="fab fa-facebook-square"/>
+                  <i className="fab fa-facebook-square" />
                 </Button>
 
-                 {/****** INSTAGRAM *******/}
+                {/****** INSTAGRAM *******/}
                 <Button
                   className="mr-4"
                   color="danger"
@@ -43,7 +42,7 @@ function ProfileBody() {
                   onClick={(e) => e.preventDefault()}
                   size="sm"
                 >
-                   <i className="fab fa-instagram"/>
+                  <i className="fab fa-instagram" />
                 </Button>
 
                 {/****** TWITTER *******/}
@@ -54,7 +53,7 @@ function ProfileBody() {
                   onClick={(e) => e.preventDefault()}
                   size="sm"
                 >
-                   <i className="fab fa-twitter"/>
+                  <i className="fab fa-twitter" />
                 </Button>
 
                 {/****** LINKEDIN *******/}
@@ -65,7 +64,7 @@ function ProfileBody() {
                   onClick={(e) => e.preventDefault()}
                   size="sm"
                 >
-                   <i className="fab fa-linkedin-in"/>
+                  <i className="fab fa-linkedin-in" />
                 </Button>
               </div>
             </Col>
@@ -77,7 +76,7 @@ function ProfileBody() {
             <h3>
               Jessica Jones <span className="font-weight-light">, 27</span>
             </h3>
-            
+
             {/****** CIDADE, ESTADO E PAÍS  *******/}
             <div className="h6 font-weight-300">
               <i className="ni location_pin mr-2" />
@@ -91,13 +90,13 @@ function ProfileBody() {
             </div>
           </div>
 
-            {/****** DESCRIÇÃO  *******/}
+          {/****** DESCRIÇÃO  *******/}
           <div className="mt-1 py-5 border-top text-center">
             <Row className="justify-content-center">
               <Col lg="9">
                 <p>
                   Objetivo: Contribuir para que meus conhecimentos possam trazer benefícios
-                  e crescimento para a instituição, aprimorando também minhas habilidades 
+                  e crescimento para a instituição, aprimorando também minhas habilidades
                   profissionais estando disposto a aprender coisas novas todos os dias.
                 </p>
               </Col>
@@ -108,5 +107,3 @@ function ProfileBody() {
     </Container>
   );
 }
-
-export default ProfileBody;
