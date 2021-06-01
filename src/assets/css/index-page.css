@@ -9,6 +9,10 @@
   position: relative;
 }
 .index .page-header{
+  background-image: url(../img/theme/curved2.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   min-height: 100vh;
   max-height: 999px;
   padding: 0;
@@ -106,6 +110,13 @@
 .index .skew-separator .container {
     z-index: 2!important;
     position: relative!important;
+}
+.index .logo{
+  background-image: url(../img/logo.png);
+  background-repeat: no-repeat;
+  min-height: 22vh;
+  background-size: contain;
+  background-position: center;
 }
 @media (min-width: 992px){
   .index .page-header .container {

@@ -1,11 +1,16 @@
-.dashboard .card-profile-image img{
-    max-width: 180px;
-    border-radius: .375rem;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    left: 50%;
-    transition: all .15s ease;
-    box-shadow: 0 0 2rem 0 rgb(167, 178, 189)!important;
+.dashboard .card-profile-image>.rounded-circle{
+  background-image: url(../img/theme/team-4-800x800.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 180px!important;
+  width: 180px!important;
+  border-radius: .375rem;
+  transform: translate(-50%, -50%);
+  position: relative;
+  left: 50%;
+  transition: all .15s ease;
+  box-shadow: 0 0 2rem 0 rgb(167, 178, 189)!important;
 }
 .dashboard .icone{
     display: flow-root;
@@ -35,12 +40,10 @@
   box-shadow: 3px 3px 10px rgb(255 255 255 / 60%);
   color: hsla(0,0%,100%,.85);
 }
-
 .dashboard .rna-wrapper .alert .ni[data-notify=icon] {
   position: relative;
   top: 4px;
 }
-
 .dashboard .rna-wrapper .alert [data-notify=icon] {
   font-size: 1.25rem;
   margin-right: 1.25rem;

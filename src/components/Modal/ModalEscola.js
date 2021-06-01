@@ -22,7 +22,7 @@ export default function ModalEscola() {
   // variaveis do formulario
   const formik = useFormik({
     initialValues: {
-      escola: '',
+      instituicao: '',
       curso: '',
       inicio: '',
       termino: '',
@@ -32,7 +32,7 @@ export default function ModalEscola() {
     },
     // validação dos campos do formulario.
     validationSchema: yup.object({
-      escola: yup.string().required('O campo Escola/Universidade é obrigatório.'),
+      instituicao: yup.string().required('O campo Escola/Universidade é obrigatório.'),
       curso: yup.string().required('O campo Curso é obrigatório.'),
       inicio: yup.date().required('O campo Início é obrigatório.'),
       termino: yup.string().required('O campo Término é obrigatório.'),
@@ -44,7 +44,7 @@ export default function ModalEscola() {
 
   // função limpar campos formulario.
   const limpar = () => {
-    formik.values.escola = '';
+    formik.values.instituicao = '';
     formik.values.curso = '';
     formik.values.inicio = '';
     formik.values.termino = '';
@@ -62,7 +62,7 @@ export default function ModalEscola() {
  useEffect(() => {
    console.log(curriculoReducer.show_formacao)
    if (curriculoReducer.show_formacao) {
-    //  formik.setFieldValue('escola', curriculoReducer.show_formacao.curso)
+     formik.setFieldValue('instituicao', curriculoReducer.show_formacao.instituicao)
      formik.setFieldValue('curso', curriculoReducer.show_formacao.curso)
      formik.setFieldValue('inicio', curriculoReducer.show_formacao.dataInicio)
      formik.setFieldValue('termino', curriculoReducer.show_formacao.dataTermino)
@@ -93,11 +93,11 @@ export default function ModalEscola() {
                   <Row>
                     <Col>
                       <FormGroup>
-                        <Label className="form-control-label required" htmlFor="escola">Escola/Universidade</Label>
-                        <Input className="form-control-alternative" id="escola" placeholder="Nome da Escola/Universidade" type="text"
-                          invalid={formik.touched.escola && formik.errors.escola ? true : false}
-                          {...formik.getFieldProps('escola')}/>
-                        <FormFeedback>{formik.touched.escola && formik.errors.escola ? formik.errors.escola : null}</FormFeedback>
+                        <Label className="form-control-label required" htmlFor="instituicao">Escola/Universidade</Label>
+                        <Input className="form-control-alternative" id="instituicao" placeholder="Nome da Escola/Universidade" type="text"
+                          invalid={formik.touched.instituicao && formik.errors.instituicao ? true : false}
+                          {...formik.getFieldProps('instituicao')}/>
+                        <FormFeedback>{formik.touched.instituicao && formik.errors.instituicao ? formik.errors.instituicao : null}</FormFeedback>
                       </FormGroup>
                       <FormGroup>
                         <Label className="form-control-label required" htmlFor="curso">Curso</Label>

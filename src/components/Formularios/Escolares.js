@@ -52,7 +52,7 @@ export default function Escolares(){
   }
 
   useEffect(() => {
-    // console.log(dataRow)
+    console.log(dataRow)
     dispatch(curriculoActions.show_formacao(dataRow))
   }, [dataRow])
 
@@ -68,7 +68,7 @@ export default function Escolares(){
                 keyField="_id"
                 columns={[
                   {
-                    dataField: "escola",
+                    dataField: "instituicao",
                     text: "Escola/Universidade",
                     sort: true,
                   },

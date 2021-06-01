@@ -41,15 +41,13 @@ export default function DashBody() {
               <Row className="justify-content-center">
                 <Col className="order-lg-2" lg="3">
                   <div className="card-profile-image">
-                    <img className="rounded-circle" alt="..."
-                      src={require("assets/img/theme/team-4-800x800.jpg")}/>
+                    <div className="rounded-circle"/>
                   </div>
                 </Col>
               </Row>
-              <CardBody className="pt-0 pt-md-4">
+              <CardBody className="pt-0">
                 <div className="text-center">
-                  <h3 className="mt-7">{dados_curriculo.show_curriculo?.curriculo?.nome? dados_curriculo.show_curriculo.curriculo.nome : ''}</h3>
-                  <div className="h5 font-weight-300">dos Biricuticos</div>
+                  <h3 className="mt--6">{dados_curriculo.show_curriculo?.curriculo?.nome? dados_curriculo.show_curriculo.curriculo.nome : ''}</h3>
                   <hr className="my-4" />
                   <Col className="text-left">
                     <ListGroup>

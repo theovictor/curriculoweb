@@ -1,11 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux'
-import userActions from '../store/actions/userActions'
-import curriculoActions from 'store/actions/curriculoActions'
-
-import 'assets/css/dash-page.css'
-import 'assets/css/navbar.css'
 
 import isLoged from "helpers/isLoged";
 import NotificationAlert from "react-notification-alert";
@@ -15,10 +9,6 @@ import DashBody from "components/Dashboard/DashBody.js";
 export default function Dashboard(){
   const history = useHistory();
   const notifica = useRef();
-
-  const reducer = useSelector( state => state.userReducer);
-  const userID = sessionStorage.getItem('user_id')
-  const dispatch = useDispatch();
 
   const routeChange = () =>{ 
     history.push('/');
@@ -52,12 +42,6 @@ export default function Dashboard(){
     };
   }, []);
 
-  useEffect(() => {
-    if(!reducer.logged){
-      dispatch(userActions.login(userID))
-      dispatch(curriculoActions.busca_curriculo(userID))
-    }
-  }, [])
 
   if(!isLoged()){routeChange()};
   
@@ -67,13 +51,7 @@ export default function Dashboard(){
       <div className="rna-wrapper"><NotificationAlert ref={notifica}/></div>
       <div className="wrapper">
         <section className="section section-shaped section-lg">
-          <div className="shape shape-style-1"
-            style={{
-              backgroundImage: 'url("' + require("assets/img/theme/curved.jpg") + '")',
-              backgroundSize: "cover",
-              backgroundPosition: "center top",
-            }}
-          >
+          <div className="shape shape-style-1 bg-gradient-teal">
             <span />
             <span />
             <span />

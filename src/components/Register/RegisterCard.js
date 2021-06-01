@@ -11,7 +11,6 @@ import userActions from '../../store/actions/userActions'
 // import curriculoActions from '../../store/actions/curriculoActions'
 
 import NotificationAlert from "react-notification-alert";
-import Logo from 'components/Logo/Logo.js';
 
 export default function LoginCard() {
   const notifica = useRef()
@@ -97,7 +96,7 @@ export default function LoginCard() {
               <div className="text-muted text-center mb-3">
                 <small>Cadastro</small>
               </div>
-              <Logo />
+              <div className="logo"/>
             </CardHeader>
             <CardBody className="px-lg-5 py-lg-5">
               <div className="text-center text-muted mb-4">

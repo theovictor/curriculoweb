@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-import 'assets/css/profile-page.css'
-import 'assets/css/navbar.css'
-
 import DashNavbar from "components/Navbars/DashNavbar.js";
 import ProfileBody from "components/Profile/ProfileBody.js";
 import isLoged from 'helpers/isLoged';

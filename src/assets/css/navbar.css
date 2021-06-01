@@ -13,3 +13,12 @@ span#nome {
   border-radius: 5rem !important;
   box-shadow: 0 15px 35px rgb(50 50 93 / 25%), 0 5px 15px rgb(0 0 0 / 10%);
 }
+img.logo-user-navbar{
+  background-image: url(../img/theme/team-4-800x800.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  min-height: 35px!important;
+  width: 35px!important;
+}
