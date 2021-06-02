@@ -11,13 +11,9 @@ import curriculoActions from '../../store/actions/curriculoActions'
 
 export default function ModalEscola() {
 
-  const dispatch = useDispatch()
-  //const que gerencia modal open e close.
   const [modalOpen, setModalOpen] = useState(false)
   const curriculoReducer = useSelector(state => state.curriculoReducer) 
-
-  
-
+  const dispatch = useDispatch()
   
   // variaveis do formulario
   const formik = useFormik({
@@ -30,7 +26,6 @@ export default function ModalEscola() {
       turno: '',
       status: '',
     },
-    // validação dos campos do formulario.
     validationSchema: yup.object({
       instituicao: yup.string().required('O campo Escola/Universidade é obrigatório.'),
       curso: yup.string().required('O campo Curso é obrigatório.'),
@@ -42,7 +37,6 @@ export default function ModalEscola() {
     }),
   });
 
-  // função limpar campos formulario.
   const limpar = () => {
     formik.values.instituicao = '';
     formik.values.curso = '';
@@ -52,25 +46,10 @@ export default function ModalEscola() {
     formik.values.turno = '';
     formik.values.status = '';
   }
-
   const btn_fechar = () => {
     limpar()
     dispatch(curriculoActions.modal_escola(false))
   }
-
-  // setar as variáveis do formik para edição
- useEffect(() => {
-   console.log(curriculoReducer.show_formacao)
-   if (curriculoReducer.show_formacao) {
-     formik.setFieldValue('instituicao', curriculoReducer.show_formacao.instituicao)
-     formik.setFieldValue('curso', curriculoReducer.show_formacao.curso)
-     formik.setFieldValue('inicio', curriculoReducer.show_formacao.dataInicio)
-     formik.setFieldValue('termino', curriculoReducer.show_formacao.dataTermino)
-     formik.setFieldValue('periodo', curriculoReducer.show_formacao.periodo)
-     formik.setFieldValue('turno', curriculoReducer.show_formacao.turno)
-     formik.setFieldValue('status', curriculoReducer.show_formacao.status)
-   }
- }, [curriculoReducer.show_formacao])
 
   return (
     <>

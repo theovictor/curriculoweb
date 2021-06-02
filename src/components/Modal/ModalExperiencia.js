@@ -2,18 +2,13 @@ import React, {useState} from 'react';
 import { Button, Modal, Input, Form, Row, Col, FormGroup, FormFeedback, Label, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { useSelector, useDispatch } from 'react-redux'
+import curriculoActions from '../../store/actions/curriculoActions'
 
 export default function ModalExperiencia() {
-  //constante que gerencia a modal open e close.
-  const [modalOpen, setModalOpen] = useState(false);
-  // função para limpar os campos
-  function Limpar() {
-    formik.values.nome = '';
-    formik.values.local = '';
-    formik.values.atividade = '';
-    formik.values.dataInicio = '';
-    formik.values.dataTermino = '';
-  }
+  const curriculoReducer = useSelector(state => state.curriculoReducer)
+  const dispatch = useDispatch()
+  
   // variaveis do formulario.
   const formik = useFormik({
     initialValues: {
@@ -31,23 +26,33 @@ export default function ModalExperiencia() {
       dataTermino: yup.string().required('O campo Data de Término é obrigatório.'),
     }),
   });
+
+  const limpar = () => {
+    formik.values.nome = '';
+    formik.values.local = '';
+    formik.values.atividade = '';
+    formik.values.dataInicio = '';
+    formik.values.dataTermino = '';
+  }
+
+  const btn_fechar = () => {
+    limpar()
+    dispatch(curriculoActions.modal_experiencia(false))
+  }
+
   // React.useEffect(() => {
   //   console.log(formik.values)
   // }, [formik.values])
+
+
   return (
     <>
-      <Button className="mb-3" color="primary" type="button" onClick={() => setModalOpen(!modalOpen)}>
-        <span className="btn-inner--icon">
-          <i className="fa fa-plus-circle ml--2"/>
-        </span>
-        <span className="btn-inner--text ml-2">Nova Expe.</span>
-      </Button>
-      <Modal className="modal-lg" isOpen={modalOpen} toggle={() => setModalOpen(!modalOpen)} modalClassName="bd-example-modal-lg">
+      <Modal className="modal-lg" isOpen={curriculoReducer.modal_experiencia} toggle={btn_fechar} modalClassName="bd-example-modal-lg">
         <div className="modal-header">
           <h5 className="modal-title" id="exampleModalScrollableTitle">
             Adicionar Experiências
           </h5>
-          <button aria-label="Close" className="close" type="button" onClick={() => setModalOpen(!modalOpen)}>
+          <button aria-label="Close" className="close" type="button" onClick={btn_fechar}>
             <span aria-hidden={true}>
               <i className="ni ni-fat-remove"/>
             </span>
@@ -120,7 +125,7 @@ export default function ModalExperiencia() {
               </span>
               <span className="btn-inner--text ml-2">Salvar</span>
             </Button>
-            <Button className="btn-icon float-right mr-3 mt-2" color="danger" onClick={() => Limpar (setModalOpen(!modalOpen))}>
+            <Button className="btn-icon float-right mr-3 mt-2" color="danger" onClick={btn_fechar}>
               <span className="btn-inner--icon">
                 <i className="fa fa-times ml--2"/>
               </span>

@@ -1,16 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Button, Modal, Input, Form, Row, Col, FormGroup, FormFeedback, Label, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { useSelector, useDispatch } from 'react-redux'
+import curriculoActions from '../../store/actions/curriculoActions'
 
 export default function ModalConhecimento() {
-  //constante que gerencia a modal open e close.
   const [modalOpen, setModalOpen] = useState(false);
-  // função para limpar os campos
-  function Limpar() {
-    formik.values.conhecimento = '';
-    formik.values.nivel = '';
-  }
+  const curriculoReducer = useSelector(state => state.curriculoReducer)
+  const dispatch = useDispatch()
+
   // variaveis do formulario.
   const formik = useFormik({
     initialValues: {
@@ -23,20 +22,24 @@ export default function ModalConhecimento() {
       nivel: yup.string().required('O campo Nível é obrigatório.'),
     }),
   });
+  
+  const limpar = () => {
+    formik.values.conhecimento = '';
+    formik.values.nivel = '';
+  }
+  const btn_fechar = () => {
+    limpar()
+    dispatch(curriculoActions.modal_conhecimento(false))
+  }
+
   return (
     <>
-      <Button className="mb-3" color="primary" type="button" onClick={() => setModalOpen(!modalOpen)}>
-        <span className="btn-inner--icon">
-          <i className="fa fa-plus-circle ml--2"/>
-        </span>
-        <span className="btn-inner--text ml-2">Adicionar Conhecimento</span>
-      </Button>
-      <Modal className="modal-lg" isOpen={modalOpen} toggle={() => setModalOpen(!modalOpen)} modalClassName="bd-example-modal-lg">
+      <Modal className="modal-lg" isOpen={curriculoReducer.modal_conhecimento} toggle={btn_fechar} modalClassName="bd-example-modal-lg">
         <div className="modal-header">
           <h5 className="modal-title" id="exampleModalScrollableTitle">
             Seus Conhecimentos
           </h5>
-          <button aria-label="Close" className="close" type="button" onClick={() => setModalOpen(!modalOpen)}>
+          <button aria-label="Close" className="close" type="button" onClick={btn_fechar}>
             <span aria-hidden={true}>
               <i className="ni ni-fat-remove"/>
             </span>
@@ -89,7 +92,7 @@ export default function ModalConhecimento() {
               </span>
               <span className="btn-inner--text ml-2">Salvar</span>
             </Button>
-            <Button className="btn-icon float-right mr-3 mt-2" color="danger" onClick={() => Limpar (setModalOpen(!modalOpen))}>
+            <Button className="btn-icon float-right mr-3 mt-2" color="danger" onClick={() => limpar (setModalOpen(!modalOpen))}>
               <span className="btn-inner--icon">
                 <i className="fa fa-times ml--2"/>
               </span>

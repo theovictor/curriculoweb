@@ -1,17 +1,18 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { useFormik } from 'formik';
 import { Input, Form, Row, Col, FormGroup, Button, FormFeedback, Label } from "reactstrap";
 import * as yup from 'yup';
-// import { useSelector } from 'react-redux'
+import { useDispatch ,useSelector } from 'react-redux'
+import curriculoActions from '../../store/actions/curriculoActions'
 
 export default function DadosPrincipais() {
+  const curriculoReducer = useSelector( state => state.curriculoReducer)
+  console.log(curriculoReducer)
+  const dispatch = useDispatch()
 
-  // const dados_curriculo = useSelector( state => state.curriculoReducer);
-
-  // variaveis do formulario criadas usando formik.
   const formik = useFormik({
     initialValues: {
-      name: '',
+      nome: '',
       email: '',
       idade: '',
       contato: '',
@@ -26,7 +27,6 @@ export default function DadosPrincipais() {
       cidade: '',
       uf:'',
     },
-    // validação de campos obrigatorios.
     validationSchema: yup.object({
       name: yup.string().required('Nome obrigatório'),
       email: yup.string().required('Email obrigatório'),
@@ -45,7 +45,7 @@ export default function DadosPrincipais() {
     }),
   });
   //função que consulta o cep
-  function buscaCep (ev, setFieldValue){
+  const bucas_cep = (ev, setFieldValue) => {
     const { value } = ev.target;
     const cep = value?.replace(/[^0-9]/g, '');
     if(cep?.length !== 8){
@@ -60,8 +60,8 @@ export default function DadosPrincipais() {
         setFieldValue('uf', data.uf);
       });
   }
-  // // função que calcula a idade, capturando a data fornecida no campo de dataNascimento.
-  function calcIdade (setFieldValue){
+  // função que calcula a idade, capturando a data fornecida no campo de dataNascimento.
+  const calc_idade = (setFieldValue) =>{
     const dataInfo = formik.values.dataNascimento;
     const anoAtual = new Date().getFullYear();
     const dataInfoParts = dataInfo.split('-');
@@ -82,11 +82,25 @@ export default function DadosPrincipais() {
     return setFieldValue('idade', age.toString());
   }
 
-
-  // React.useEffect(() => {
-  //     formik.setFieldValue('name',  dados_curriculo.show_curriculo.curriculo.nome)
-  // }, [])
-
+  useEffect(() => {
+    // console.log(curriculoReducer.show_curriculo)
+    if (curriculoReducer.show_curriculo) {
+      formik.setFieldValue('nome', curriculoReducer.show_curriculo.curriculo.nome)
+      formik.setFieldValue('email', curriculoReducer.show_curriculo.curriculo.email)
+      formik.setFieldValue('contato', curriculoReducer.show_curriculo.curriculo.telefone)
+      // formik.setFieldValue('idade', curriculoReducer.show_curriculo.dataInicio)
+      formik.setFieldValue('dataNascimento', curriculoReducer.show_curriculo.curriculo.dataNascimento)
+      formik.setFieldValue('sexo', curriculoReducer.show_curriculo.curriculo.sexo)
+      formik.setFieldValue('estadoCivil', curriculoReducer.show_curriculo.curriculo.civil)
+      formik.setFieldValue('nacionalidade', curriculoReducer.show_curriculo.curriculo.nacionalidade)
+      formik.setFieldValue('cep', curriculoReducer.show_curriculo.curriculo.cep)
+      formik.setFieldValue('logradouro', curriculoReducer.show_curriculo.curriculo.logradouro)
+      formik.setFieldValue('numeroCasa', curriculoReducer.show_curriculo.curriculo.casa)
+      formik.setFieldValue('bairro', curriculoReducer.show_curriculo.curriculo.bairro)
+      formik.setFieldValue('cidade', curriculoReducer.show_curriculo.curriculo.cidade)
+      formik.setFieldValue('uf', curriculoReducer.show_curriculo.curriculo.estado)
+    }
+  }, [])
 
   return (
     <>
@@ -97,10 +111,10 @@ export default function DadosPrincipais() {
               <Col lg="5">
                 <FormGroup>
                   <Label className="form-control-label required" htmlFor="name">Nome</Label>
-                  <Input className="form-control-alternative" id="name" placeholder="Nome" type="text"
-                    invalid={formik.touched.name && formik.errors.name ? true : false}
-                    {...formik.getFieldProps('name')}/>
-                  <FormFeedback>{formik.touched.name && formik.errors.name ? formik.errors.name : null}</FormFeedback>
+                  <Input className="form-control-alternative" id="nome" placeholder="Nome" type="text"
+                    invalid={formik.touched.nome && formik.errors.nome ? true : false}
+                    {...formik.getFieldProps('nome')}/>
+                  <FormFeedback>{formik.touched.nome && formik.errors.nome ? formik.errors.nome : null}</FormFeedback>
                 </FormGroup>
               </Col>
               <Col lg="4">
@@ -142,7 +156,7 @@ export default function DadosPrincipais() {
                   <Input className="form-control-alternative" id="dataNascimento" type="date"
                     invalid={formik.touched.dataNascimento && formik.errors.dataNascimento ? true : false}
                     {...formik.getFieldProps('dataNascimento')}
-                    onBlur = {() => calcIdade(formik.setFieldValue)}
+                    onBlur = {() => calc_idade(formik.setFieldValue)}
                   />
                   <FormFeedback>{formik.touched.dataNascimento && formik.errors.dataNascimento ? formik.errors.dataNascimento : null}</FormFeedback>
                 </FormGroup>
@@ -194,7 +208,7 @@ export default function DadosPrincipais() {
                   <Input className="form-control-alternative" id="cep" placeholder="CEP" type="text"
                     {...formik.getFieldProps('cep')}
                     invalid = {formik.touched.cep && formik.errors.cep ? true : false}
-                    onBlur = {(ev) => buscaCep(ev, formik.setFieldValue)}/>
+                    onBlur = {(ev) => bucas_cep(ev, formik.setFieldValue)}/>
                   <FormFeedback>{formik.touched.cep && formik.errors.cep ? formik.errors.cep : null}</FormFeedback>
                 </FormGroup>
               </Col>

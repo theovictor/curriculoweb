@@ -17,31 +17,23 @@ export default function Escolares(){
     dispatch(curriculoActions.modal_escola(true))
   }
 
-  // função para editar o campo.
-  const btnEditar = () => {
-    dispatch(curriculoActions.modal_escola(true))
-    dispatch(curriculoActions.edit_mode(true))
-  }
-  // função para deletar o campo.
+  // const btnEditar = () => {
+  //   dispatch(curriculoActions.modal_escola(true))
+  //   dispatch(curriculoActions.edit_mode(true))
+  // }
   const btnDeletar = () => {
     alert('deletar campo')
   }
-
-
-  // useEffect(() => {
-  //   console.log(dados_formacao.show_curriculo.formacoes)
-  // }, [dados_formacao])
   
   
-  // constante que adiciona os buttons de acoes na linha.
   const AddBotoesAcoes = () => {
     return(
       <div className="btnAcoes">
-        <Button className="btn-icon" color="success" onClick={btnEditar}>
+        {/* <Button className="btn-icon" color="success" onClick={btnEditar}>
           <span className="btn-inner--icon">
             <i className="fa fa-pencil"/>
           </span>
-        </Button>
+        </Button> */}
         <Button className="btn-icon" color="danger" onClick={btnDeletar}>
           <span className="btn-inner--icon">
             <i className="fa fa-trash-o"/>
@@ -116,7 +108,7 @@ export default function Escolares(){
                     <span className="btn-inner--icon">
                       <i className="fa fa-plus-circle ml--2"></i>
                     </span>
-                    <span className="btn-inner--text ml-2"> Novo Curso</span>
+                    <span className="btn-inner--text ml-2">Novo Formação</span>
                   </Button>
                   {/* {console.log(props.baseProps.data)} */}
                     <BootstrapTable

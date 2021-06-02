@@ -1,48 +1,35 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Card, Container, Row, Col, Button, Form, Input, Label } from 'reactstrap';
+import {useFormik} from 'formik';
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider from "react-bootstrap-table2-toolkit";
+import { useSelector, useDispatch } from 'react-redux'
+import curriculoActions from '../../store/actions/curriculoActions'
+
 import ModalConhecimentos from 'components/Modal/ModalConhecimento.js';
-import {useFormik} from 'formik';
 
 export default function Conhecimentos(){
+
+  const dispatch = useDispatch()
+  const dados_formacao = useSelector(state => state.curriculoReducer)
+  const [ dataRow , setDataRow] = useState()
+
   // variaveis do formulario
   const formik = useFormik ({
     initialValues: {
       cursoComplementar: '',
       docsAdicionais: '',
     }
-  });
-  // Dados que vira do banco
-  const dataTableConhecimento = [
-    {
-      id: 1,
-      conhecimento: 'Linux Terminal',
-      nivel: 'Intermediário',      
-    },
-    {
-      id: 2,
-      conhecimento: 'Excel',
-      nivel: 'Avançado',     
-    }
-  ];
-  // função para editar o campo.
-  function btnEditar() {
-    alert('editar campo')
-  };
-  // função para deletar o campo.
-  function btnDeletar() {
-    alert('deletar campo')
-  };
+  })
+
+  const btnNovo = () => {
+    dispatch(curriculoActions.modal_conhecimento(true))
+  }
+
   // constante que adiciona os buttons de acoes na linha.
   const addBotoesAcoes = () => {
     return(
       <div className="btnAcoes">
-        <Button className="btn-icon" color="success" onClick={btnEditar}>
-          <span className="btn-inner--icon">
-            <i className="fa fa-pencil"/>
-          </span>
-        </Button>
         <Button className="btn-icon" color="danger" onClick={btnDeletar}>
           <span className="btn-inner--icon">
             <i className="fa fa-trash-o"/>
@@ -50,22 +37,29 @@ export default function Conhecimentos(){
         </Button>
       </div>
     )
-  };
-  // React.useEffect(() => {
-  //   console.log(formik.values)
-  // }, [formik.values])
+  }
+
+  // função para deletar o campo.
+  const btnDeletar = () => {
+    alert('deletar campo')
+  }
+
+  useEffect(() => {
+    // console.log(dataRow)
+    dispatch(curriculoActions.show_conhecimento(dataRow))
+  }, [dataRow])
+
   return (
     <>
       <Container fluid>
         <Row> {/* Render da Tabela Conhecimentos*/}
           <Card className="tabelinha">
             <ToolkitProvider
-              // data = nome da tabela que tera no banco. 
-              data={dataTableConhecimento}
-              keyField="id"
+              data={dados_formacao.show_curriculo.conhecimento && dados_formacao.show_curriculo.conhecimento}
+              keyField="_id"
               columns={[
                 {
-                  dataField: 'conhecimento',
+                  dataField: 'nome',
                   text: 'Conhecimentos',
                   sort: true,
                 },
@@ -81,22 +75,25 @@ export default function Conhecimentos(){
                 }
               ]}
             >
-              {(props) => (
+              {(props) => (<>
                 <div className="table-responsive pt-3">
-                  <Container fluid>
-                    <Row>
-                      <Col>
-                        {/* aqui sera chamado o component ModalConhecimentos */}
-                        <ModalConhecimentos/>
-                      </Col>
-                    </Row>
-                  </Container>
+                  <Button className="mb-3" color="primary" onClick={btnNovo}>
+                    <span className="btn-inner--icon">
+                      <i className="fa fa-plus-circle ml--2"/>
+                    </span>
+                    <span className="btn-inner--text ml-2">Adicionar Conhecimento</span>
+                  </Button>
                   <BootstrapTable
                     {...props.baseProps}
                     bootstrap4={true}
                     bordered={false}
+                    rowEvents={{onClick: (e, row, idx) => {
+                      setDataRow(row)
+                    }}}
                   />
                 </div>
+                <ModalConhecimentos/>
+                </>
               )}
             </ToolkitProvider>
           </Card>
