@@ -3,7 +3,7 @@ import { Button, Card, CardHeader, CardBody, FormGroup, Form, Input, InputGroup,
 import { useFormik } from 'formik';
 import { useHistory } from "react-router-dom";
 import { api_login } from '../../services/api.js';
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import * as yup from 'yup';
 import axios from 'axios';
 import userActions from '../../store/actions/userActions'

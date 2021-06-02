@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from "react";
 import { Card, Container, Row, Col, Button } from 'reactstrap';
 import { useSelector, useDispatch } from 'react-redux'
+import axios from 'axios';
+import { api_formacao } from '../../services/api.js';
+import curriculoActions from '../../store/actions/curriculoActions'
 
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider from "react-bootstrap-table2-toolkit";
 import ModalEscola from 'components/Modal/ModalEscola.js';
-import curriculoActions from '../../store/actions/curriculoActions'
+import curriculoReducer from "store/reducers/curriculoReducer.js";
 
 export default function Escolares(){
 
@@ -13,19 +16,49 @@ export default function Escolares(){
   const dados_formacao = useSelector(state => state.curriculoReducer)
   const [ dataRow , setDataRow] = useState()
 
+  const headers = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+  }
+
   function btnNovo() {
     dispatch(curriculoActions.modal_escola(true))
   }
-
   // const btnEditar = () => {
   //   dispatch(curriculoActions.modal_escola(true))
   //   dispatch(curriculoActions.edit_mode(true))
   // }
+
+  // captura o evento do click na linha
+  // useEffect(() => {
+  //   dispatch(curriculoActions.show_formacao(dataRow))
+  //   console.log(dataRow)
+  // }, [dataRow])
+
+  useEffect(() => {
+    if(dataRow?._id){
+      dispatch(curriculoActions.show_formacao(dataRow))
+      console.log(dataRow._id)
+    }
+  }, [dataRow])
+
   const btnDeletar = () => {
-    alert('deletar campo')
+    if(dataRow?._id){
+      dispatch(curriculoActions.show_formacao(dataRow))
+      console.log(dataRow._id)
+    }
+
+    // axios.delete(`${api_formacao}/delete/${dataRow._id}`, {headers})
+    // .then(res => {
+    //   console.log('formação apagada com sucesso')
+    //   const userID = sessionStorage.getItem('user_id')
+    //   dispatch(curriculoActions.busca_curriculo(userID))
+    // }).catch(err => {
+    //   console.log(err + 'falha ao apagar formação')
+    // })
   }
-  
-  
+
   const AddBotoesAcoes = () => {
     return(
       <div className="btnAcoes">
@@ -42,12 +75,6 @@ export default function Escolares(){
       </div>
     )
   }
-
-  useEffect(() => {
-    console.log(dataRow)
-    dispatch(curriculoActions.show_formacao(dataRow))
-  }, [dataRow])
-
 
   return (
     <>
@@ -120,7 +147,7 @@ export default function Escolares(){
                       }}}
                     />
                   </div>
-                  <ModalEscola/>
+                  <ModalEscola />
                   </>
                 )}
               </ToolkitProvider>

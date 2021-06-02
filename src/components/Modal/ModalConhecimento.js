@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import curriculoActions from '../../store/actions/curriculoActions'
 
 export default function ModalConhecimento() {
-  const [modalOpen, setModalOpen] = useState(false);
   const curriculoReducer = useSelector(state => state.curriculoReducer)
   const dispatch = useDispatch()
 
@@ -92,7 +91,7 @@ export default function ModalConhecimento() {
               </span>
               <span className="btn-inner--text ml-2">Salvar</span>
             </Button>
-            <Button className="btn-icon float-right mr-3 mt-2" color="danger" onClick={() => limpar (setModalOpen(!modalOpen))}>
+            <Button className="btn-icon float-right mr-3 mt-2" color="danger" onClick={btn_fechar}>
               <span className="btn-inner--icon">
                 <i className="fa fa-times ml--2"/>
               </span>

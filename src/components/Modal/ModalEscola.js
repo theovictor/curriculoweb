@@ -7,21 +7,26 @@ import { Button, Modal, Input, Form, Row, Col, FormGroup, FormFeedback, Label, C
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux'
+import axios from 'axios';
+import { api_formacao } from '../../services/api.js';
 import curriculoActions from '../../store/actions/curriculoActions'
 
-export default function ModalEscola() {
 
-  const [modalOpen, setModalOpen] = useState(false)
+export default function ModalEscola() {
   const curriculoReducer = useSelector(state => state.curriculoReducer) 
   const dispatch = useDispatch()
-  
-  // variaveis do formulario
+
+  const headers = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+  }
   const formik = useFormik({
     initialValues: {
       instituicao: '',
       curso: '',
-      inicio: '',
-      termino: '',
+      dataInicio: '',
+      dataTermino: '',
       periodo: '',
       turno: '',
       status: '',
@@ -29,19 +34,18 @@ export default function ModalEscola() {
     validationSchema: yup.object({
       instituicao: yup.string().required('O campo Escola/Universidade é obrigatório.'),
       curso: yup.string().required('O campo Curso é obrigatório.'),
-      inicio: yup.date().required('O campo Início é obrigatório.'),
-      termino: yup.string().required('O campo Término é obrigatório.'),
+      dataInicio: yup.date().required('O campo Início é obrigatório.'),
+      dataTermino: yup.string().required('O campo Término é obrigatório.'),
       periodo: yup.string().required('O campo Período é obrigatório.'),
       turno: yup.string().required('O campo Turno é obrigatório.'),
       status: yup.string().required('O campo Status é obrigatório.'),
     }),
   });
-
   const limpar = () => {
     formik.values.instituicao = '';
     formik.values.curso = '';
-    formik.values.inicio = '';
-    formik.values.termino = '';
+    formik.values.dataInicio = '';
+    formik.values.dataTermino = '';
     formik.values.periodo = '';
     formik.values.turno = '';
     formik.values.status = '';
@@ -50,6 +54,29 @@ export default function ModalEscola() {
     limpar()
     dispatch(curriculoActions.modal_escola(false))
   }
+
+  const att_tabela = () => {
+    const userID = sessionStorage.getItem('user_id')
+    dispatch(curriculoActions.busca_curriculo(userID))
+  }
+
+  const envia_formacao = () => {
+    axios.post(`${api_formacao}/create`, {
+      instituicao: formik.values.instituicao,
+      curso: formik.values.curso,
+      dataInicio: formik.values.dataInicio,
+      dataTermino: formik.values.dataTermino,
+      periodo: formik.values.periodo,
+      turno: formik.values.turno,
+      status: formik.values.status,
+    }, { headers })
+      .then(res => {
+        att_tabela()
+        console.log('enviado com sucesso')
+      }).catch(err => {
+        console.log(err)
+      })
+  };
 
   return (
     <>
@@ -68,7 +95,7 @@ export default function ModalEscola() {
                 </button>
               </div>
               <div className="modal-body bg-secondary">
-                <Form onSubmit={formik.handleSubmit}>
+                <Form>
                   <Row>
                     <Col>
                       <FormGroup>
@@ -90,20 +117,20 @@ export default function ModalEscola() {
                   <Row>
                     <Col>
                     <FormGroup>
-                      <Label className="form-control-label required" htmlFor="inicio">Ano Início</Label>
-                      <Input className="form-control-alternative" id="inicio" type="date"
-                        invalid={formik.touched.inicio && formik.errors.inicio ? true : false}
-                        {...formik.getFieldProps('inicio')}/>
-                      <FormFeedback>{formik.touched.inicio && formik.errors.inicio ? formik.errors.inicio : null}</FormFeedback>
+                      <Label className="form-control-label required" htmlFor="dataInicio">Ano Início</Label>
+                      <Input className="form-control-alternative" id="dataInicio" type="date"
+                        invalid={formik.touched.dataInicio && formik.errors.dataInicio ? true : false}
+                        {...formik.getFieldProps('dataInicio')}/>
+                      <FormFeedback>{formik.touched.dataInicio && formik.errors.dataInicio ? formik.errors.dataInicio : null}</FormFeedback>
                     </FormGroup>
                     </Col>
                     <Col>
                     <FormGroup>
-                      <Label className="form-control-label required" htmlFor="termino">Ano Término</Label>
-                      <Input className="form-control-alternative" id="termino" type="date"
-                        invalid={formik.touched.termino && formik.errors.termino ? true : false}
-                        {...formik.getFieldProps('termino')}/>
-                      <FormFeedback>{formik.touched.termino && formik.errors.termino ? formik.errors.termino : null}</FormFeedback>
+                      <Label className="form-control-label required" htmlFor="dataTermino">Ano Término</Label>
+                      <Input className="form-control-alternative" id="dataTermino" type="date"
+                        invalid={formik.touched.dataTermino && formik.errors.dataTermino ? true : false}
+                        {...formik.getFieldProps('dataTermino')}/>
+                      <FormFeedback>{formik.touched.dataTermino && formik.errors.dataTermino ? formik.errors.dataTermino : null}</FormFeedback>
                     </FormGroup>
                     </Col>
                   </Row>
@@ -159,13 +186,13 @@ export default function ModalEscola() {
                       </FormGroup>
                     </Col>
                   </Row>
-                  <Button className="btn-icon float-right mt-2" color="success" onClick={() => {}}>
+                  <Button className="btn-icon float-right mt-2" color="success" onClick={() => {envia_formacao(); btn_fechar()}}>
                     <span className="btn-inner--icon">
                       <i className="ni ni-check-bold ml--2"/>
                     </span>
                     <span className="btn-inner--text ml-2">Salvar</span>
                   </Button>
-                  <Button className="btn-icon float-right mr-3 mt-2" color="danger" onClick={() => limpar (setModalOpen(!modalOpen))}>
+                  <Button className="btn-icon float-right mr-3 mt-2" color="danger" onClick={btn_fechar}>
                     <span className="btn-inner--icon">
                       <i className="fa fa-times ml--2"/>
                     </span>
