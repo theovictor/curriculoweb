@@ -3,16 +3,24 @@ import { Button, Modal, Input, Form, Row, Col, FormGroup, FormFeedback, Label, I
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux'
+import axios from 'axios';
+import { api_conhecimento } from '../../services/api.js';
 import curriculoActions from '../../store/actions/curriculoActions'
 
 export default function ModalConhecimento() {
   const curriculoReducer = useSelector(state => state.curriculoReducer)
   const dispatch = useDispatch()
 
+  const headers = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+  }
+
   // variaveis do formulario.
   const formik = useFormik({
     initialValues: {
-      conhecimento: '',
+      nome: '',
       nivel: '',
     },
     //validação dos campos do formulario.
@@ -26,6 +34,25 @@ export default function ModalConhecimento() {
     formik.values.conhecimento = '';
     formik.values.nivel = '';
   }
+
+  const att_tabela = () => {
+    const userID = sessionStorage.getItem('user_id')
+    dispatch(curriculoActions.busca_curriculo(userID))
+  }
+
+  const envia_conhecimento = () => {
+    axios.post(`${api_conhecimento}/create`, {
+      nome: formik.values.nome,
+      nivel: formik.values.nivel,
+    }, { headers })
+      .then(res => {
+        att_tabela()
+        console.log('enviado com sucesso')
+      }).catch(err => {
+        console.log(err)
+      })
+  };
+
   const btn_fechar = () => {
     limpar()
     dispatch(curriculoActions.modal_conhecimento(false))
@@ -56,10 +83,10 @@ export default function ModalConhecimento() {
                             <i className="ni ni-world"/>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input className="form-control-alternative" id="conhecimento" placeholder="Conhecimentos Gerais" type="text"
-                          invalid={formik.touched.conhecimento && formik.errors.conhecimento ? true : false}
-                          {...formik.getFieldProps('conhecimento')}/>
-                        <FormFeedback>{formik.touched.conhecimento && formik.errors.conhecimento ? formik.errors.conhecimento : null}</FormFeedback>
+                        <Input className="form-control-alternative" id="nome" placeholder="Conhecimentos Gerais" type="text"
+                          invalid={formik.touched.nome && formik.errors.nome ? true : false}
+                          {...formik.getFieldProps('nome')}/>
+                        <FormFeedback>{formik.touched.nome && formik.errors.nome ? formik.errors.nome : null}</FormFeedback>
                     </InputGroup>
                 </FormGroup>
               </Col>
@@ -85,7 +112,7 @@ export default function ModalConhecimento() {
                 </FormGroup>
               </Col>
             </Row>
-            <Button className="btn-icon float-right mt-2" color="success" onClick={() => {}}>
+            <Button className="btn-icon float-right mt-2" color="success" onClick={() => {envia_conhecimento(); btn_fechar()}}>
               <span className="btn-inner--icon">
                 <i className="ni ni-check-bold ml--2"/>
               </span>

@@ -1,40 +1,43 @@
 import React, {useState, useEffect} from "react";
 import { Card, Container, Row, Col, Button } from 'reactstrap';
-import { useSelector, useDispatch } from 'react-redux'
-import curriculoActions from '../../store/actions/curriculoActions'
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider from "react-bootstrap-table2-toolkit";
+
+import { useSelector, useDispatch } from 'react-redux'
+import axios from 'axios';
+import { api_experiencia } from '../../services/api.js';
+import curriculoActions from '../../store/actions/curriculoActions'
+
 import ModalExperiencia from 'components/Modal/ModalExperiencia.js';
 
 export default function Experiencias(){
   const dispatch = useDispatch()
   const dados_formacao = useSelector(state => state.curriculoReducer)
-  const [ dataRow , setDataRow] = useState()
+
+  const headers = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+  }
 
   const btnNovo = () => {
     dispatch(curriculoActions.modal_experiencia(true))
   }
 
-  const addBotoesAcoes = () => {
-    return(
-      <div className="btnAcoes">
-        <Button className="btn-icon" color="danger" onClick={btnDeletar}>
-          <span className="btn-inner--icon">
-            <i className="fa fa-trash-o"/>
-          </span>
-        </Button>
-      </div>
-    )
-  };
+  const att_tabela = () => {
+    const userID = sessionStorage.getItem('user_id')
+    dispatch(curriculoActions.busca_curriculo(userID))
+  }
 
-  const btnDeletar = () => {
-    alert('deletar campo')
-  };
-
-  useEffect(() => {
-    dispatch(curriculoActions.show_experiencia(dataRow))
-    console.log(dataRow)
-  }, [dataRow])
+  const btnDeletar = (rowId) => {
+    axios.delete(`${api_experiencia}/delete/${rowId}`, {headers})
+    .then(res => {
+    att_tabela() 
+      console.log('formação apagada com sucesso')
+    }).catch(err => {
+      console.log(err + 'falha ao apagar formação')
+    })
+  }
 
   return (
     <>
@@ -71,9 +74,19 @@ export default function Experiencias(){
                   sort: true,
                 },
                 {
-                  dataField: 'actions',
-                  text: 'Ações',
-                  formatter: addBotoesAcoes,
+                  dataField: "_id",
+                  text: "Excluir",
+                  formatter: (cellContent, row) => {
+                    return(
+                      <div className="btnAcoes">
+                        <Button className="btn-icon" color="danger" onClick={() => btnDeletar(row._id)}>
+                          <span className="btn-inner--icon">
+                            <i className="fa fa-trash-o"/>
+                          </span>
+                        </Button>
+                      </div>
+                    )
+                  }
                 }
               ]}
             >
@@ -89,9 +102,9 @@ export default function Experiencias(){
                     {...props.baseProps}
                     bootstrap4={true}
                     bordered={false}
-                    rowEvents={{onClick: (e, row, idx) => {
-                      setDataRow(row)
-                    }}}
+                    // rowEvents={{onClick: (e, row, idx) => {
+                    //   setDataRow(row)
+                    // }}}
                   />
                 </div>
                 <ModalExperiencia/>

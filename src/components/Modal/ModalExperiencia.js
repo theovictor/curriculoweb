@@ -3,18 +3,26 @@ import { Button, Modal, Input, Form, Row, Col, FormGroup, FormFeedback, Label, I
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux'
+import axios from 'axios';
+import { api_experiencia } from '../../services/api.js';
 import curriculoActions from '../../store/actions/curriculoActions'
 
 export default function ModalExperiencia() {
   const curriculoReducer = useSelector(state => state.curriculoReducer)
   const dispatch = useDispatch()
   
+  const headers = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+  }
+
   // variaveis do formulario.
   const formik = useFormik({
     initialValues: {
       nome: '',
       local: '',
-      atividade: '',
+      atividades: '',
       dataInicio: '',
       dataTermino: '',
     },
@@ -30,7 +38,7 @@ export default function ModalExperiencia() {
   const limpar = () => {
     formik.values.nome = '';
     formik.values.local = '';
-    formik.values.atividade = '';
+    formik.values.atividades = '';
     formik.values.dataInicio = '';
     formik.values.dataTermino = '';
   }
@@ -40,10 +48,26 @@ export default function ModalExperiencia() {
     dispatch(curriculoActions.modal_experiencia(false))
   }
 
-  // React.useEffect(() => {
-  //   console.log(formik.values)
-  // }, [formik.values])
+  const att_tabela = () => {
+    const userID = sessionStorage.getItem('user_id')
+    dispatch(curriculoActions.busca_curriculo(userID))
+  }
 
+  const envia_experiencia = () => {
+    axios.post(`${api_experiencia}/create`, {
+      nome: formik.values.nome,
+      local: formik.values.local,
+      atividades: formik.values.atividades,
+      dataInicio: formik.values.dataInicio,
+      dataTermino: formik.values.dataTermino,
+    }, { headers })
+      .then(res => {
+        att_tabela()
+        console.log('enviado com sucesso')
+      }).catch(err => {
+        console.log(err)
+      })
+  };
 
   return (
     <>
@@ -90,10 +114,10 @@ export default function ModalExperiencia() {
                 </FormGroup>
                 <FormGroup className="mb-3">
                   <Label className="form-control-label required" htmlFor="atividade">Atividade</Label>
-                  <Input className="form-control-alternative" id="atividade" placeholder="Digite aqui as atividades" type="textarea" rows="3"
-                    invalid={formik.touched.atividade && formik.errors.atividade ? true : false}
-                    {...formik.getFieldProps('atividade')}/>
-                  <FormFeedback>{formik.touched.atividade && formik.errors.atividade ? formik.errors.atividade : null}</FormFeedback>
+                  <Input className="form-control-alternative" id="atividades" placeholder="Digite aqui as atividades" type="textarea" rows="3"
+                    invalid={formik.touched.atividades && formik.errors.atividades ? true : false}
+                    {...formik.getFieldProps('atividades')}/>
+                  <FormFeedback>{formik.touched.atividades && formik.errors.atividades ? formik.errors.atividades : null}</FormFeedback>
                 </FormGroup>
               </Col>
             </Row>
@@ -119,7 +143,7 @@ export default function ModalExperiencia() {
                 </FormGroup>
               </Col>
             </Row>
-            <Button className="btn-icon float-right mt-2" color="success" type="submit" onClick={() => {}}>
+            <Button className="btn-icon float-right mt-2" color="success" type="submit" onClick={() => {envia_experiencia(); btn_fechar()}}>
               <span className="btn-inner--icon">
                 <i className="ni ni-check-bold ml--2"/>
               </span>

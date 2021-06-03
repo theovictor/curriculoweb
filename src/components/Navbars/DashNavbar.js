@@ -9,7 +9,7 @@ import curriculoActions from 'store/actions/curriculoActions';
 export default function DashNavbar() {
 
   const reducer = useSelector( state => state.userReducer);
-  // const dados_curriculo = useSelector( state => state.curriculoReducer);
+  const curriculoReducer = useSelector( state => state.curriculoReducer);
   const userID = sessionStorage.getItem('user_id')
   const dispatch = useDispatch();
   useEffect(() => {
@@ -19,9 +19,9 @@ export default function DashNavbar() {
     }
   }, [])
 
-  // useEffect(() => {
-  //   console.log(reducer)
-  // }, [reducer])
+  useEffect(() => {
+    console.log(curriculoReducer)
+  }, [curriculoReducer])
 
   return (
     <>

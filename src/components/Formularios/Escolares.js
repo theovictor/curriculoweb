@@ -8,13 +8,12 @@ import curriculoActions from '../../store/actions/curriculoActions'
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider from "react-bootstrap-table2-toolkit";
 import ModalEscola from 'components/Modal/ModalEscola.js';
-import curriculoReducer from "store/reducers/curriculoReducer.js";
+// import curriculoReducer from "store/reducers/curriculoReducer.js";
 
 export default function Escolares(){
-
-  const dispatch = useDispatch()
   const dados_formacao = useSelector(state => state.curriculoReducer)
-  const [ dataRow , setDataRow] = useState()
+  const dispatch = useDispatch()
+  // const [ dataRow , setDataRow] = useState()
 
   const headers = {
     'Accept': 'application/json',
@@ -25,6 +24,22 @@ export default function Escolares(){
   function btnNovo() {
     dispatch(curriculoActions.modal_escola(true))
   }
+
+  const att_tabela = () => {
+    const userID = sessionStorage.getItem('user_id')
+    dispatch(curriculoActions.busca_curriculo(userID))
+  }
+
+  const btnDeletar = (rowId) => {
+    axios.delete(`${api_formacao}/delete/${rowId}`, {headers})
+    .then(res => {
+    att_tabela() 
+      console.log('formação apagada com sucesso')
+    }).catch(err => {
+      console.log(err + 'falha ao apagar formação')
+    })
+  }
+
   // const btnEditar = () => {
   //   dispatch(curriculoActions.modal_escola(true))
   //   dispatch(curriculoActions.edit_mode(true))
@@ -36,53 +51,12 @@ export default function Escolares(){
   //   console.log(dataRow)
   // }, [dataRow])
 
-  useEffect(() => {
-    if(dataRow?._id){
-      dispatch(curriculoActions.show_formacao(dataRow))
-      console.log(dataRow._id)
-    }
-  }, [dataRow])
-
-  const btnDeletar = () => {
-    if(dataRow?._id){
-      dispatch(curriculoActions.show_formacao(dataRow))
-      console.log(dataRow._id)
-    }
-
-    // axios.delete(`${api_formacao}/delete/${dataRow._id}`, {headers})
-    // .then(res => {
-    //   console.log('formação apagada com sucesso')
-    //   const userID = sessionStorage.getItem('user_id')
-    //   dispatch(curriculoActions.busca_curriculo(userID))
-    // }).catch(err => {
-    //   console.log(err + 'falha ao apagar formação')
-    // })
-  }
-
-  const AddBotoesAcoes = () => {
-    return(
-      <div className="btnAcoes">
-        {/* <Button className="btn-icon" color="success" onClick={btnEditar}>
-          <span className="btn-inner--icon">
-            <i className="fa fa-pencil"/>
-          </span>
-        </Button> */}
-        <Button className="btn-icon" color="danger" onClick={btnDeletar}>
-          <span className="btn-inner--icon">
-            <i className="fa fa-trash-o"/>
-          </span>
-        </Button>
-      </div>
-    )
-  }
-
   return (
     <>
       <Container fluid>
         <Row>
             <Card className="tabelinha">
               <ToolkitProvider
-                // data = nome da tabela que tera no banco.
                 data={dados_formacao.show_curriculo.formacoes && dados_formacao.show_curriculo.formacoes}
                 keyField="_id"
                 columns={[
@@ -122,9 +96,19 @@ export default function Escolares(){
                     sort: true,
                   },
                   {
-                    dataField: "ações",
-                    text: "Ações",
-                    formatter: AddBotoesAcoes,
+                    dataField: "_id",
+                    text: "Excluir",
+                    formatter: (cellContent, row) => {
+                      return(
+                        <div className="btnAcoes">
+                          <Button className="btn-icon" color="danger" onClick={() => btnDeletar(row._id)}>
+                            <span className="btn-inner--icon">
+                              <i className="fa fa-trash-o"/>
+                            </span>
+                          </Button>
+                        </div>
+                      )
+                    }
                   }
                 ]}
               >
@@ -142,9 +126,9 @@ export default function Escolares(){
                       {...props.baseProps}
                       bootstrap4={true}
                       bordered={false}
-                      rowEvents={{onClick: (e, row, idx) => {
-                        setDataRow(row)
-                      }}}
+                      // rowEvents={{onClick: (e, row, idx) => {
+                      //   setDataRow(row._id)
+                      // }}}
                     />
                   </div>
                   <ModalEscola />

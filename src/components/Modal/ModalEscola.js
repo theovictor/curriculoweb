@@ -11,7 +11,6 @@ import axios from 'axios';
 import { api_formacao } from '../../services/api.js';
 import curriculoActions from '../../store/actions/curriculoActions'
 
-
 export default function ModalEscola() {
   const curriculoReducer = useSelector(state => state.curriculoReducer) 
   const dispatch = useDispatch()
