@@ -62,13 +62,6 @@ export default function Conhecimentos(){
       })
   };
 
-  useEffect(() => {
-    if (curriculoReducer.show_conhecimento) {
-      formik.setFieldValue('cursoAdicional', curriculoReducer.show_conhecimento.cursoAdicional)
-      formik.setFieldValue('docAdicional', curriculoReducer.show_conhecimento.docAdicional)
-    }
-  }, [curriculoReducer.show_conhecimento])
-
   return (
     <>
       <Container fluid>
@@ -129,17 +122,24 @@ export default function Conhecimentos(){
           </Card>
         </Row>
         <hr className="line-primary"></hr>
-        <Form onSubmit={formik.handleSubmit}>{/* Render Cursos Complementares e Documentos Adicionais*/}
+      {curriculoReducer.show_curriculo?.conhecimento? curriculoReducer.show_curriculo.conhecimento.map((item, idx)=>(
+        <Form key={idx}>{/* Render Cursos Complementares e Documentos Adicionais*/}
+          {/* key={idx}, */}
+          {/* formik.setFieldValue('cursoAdicional', item.cursoAdicional),
+          formik.setFieldValue('docAdicional', item.docAdicional) */}
           <Row>
             <Label className="form-control-label" htmlFor="cursoAdicional">CURSOS COMPLEMENTARES.</Label>
-            <Input className="form-control-alternative" id="cursoAdicional" placeholder="Insira aqui os cursos que você possui." rows="3" type="textarea"
-              {...formik.getFieldProps('cursoAdicional')}/>
+            <Input className="form-control-alternative" id="cursoAdicional" placeholder="Insira aqui os cursos que você possui." rows="3" type="textarea" disabled
+              // {...formik.setFieldValue('cursoAdicional', item.cursoAdicional)}
+              value={item.cursoAdicional}
+              ></Input>
           </Row>
           <hr className="line-primary"></hr>
           <Row className="mb-3">
             <Label className="form-control-label" htmlFor="docAdicional">DOCUMENTOS ADICIONAIS.</Label>
-            <Input className="form-control-alternative" id="docAdicional" placeholder="Insira aqui os documentos que você possui." rows="3" type="textarea"
-              {...formik.getFieldProps('docAdicional')}/>
+            <Input className="form-control-alternative" id="docAdicional" placeholder="Insira aqui os documentos que você possui." rows="3" type="textarea" disabled
+              value={item.docAdicional}
+              />
           </Row>
             <Button className="btn-icon float-right mb-2" color="success" onClick={envia_cursos_E_docs}>
               <span className="btn-inner--icon">
@@ -148,6 +148,7 @@ export default function Conhecimentos(){
               <span className="btn-inner--text ml-2">Salvar</span>
             </Button>
         </Form>
+      )): null}
       </Container>
     </>
   );
