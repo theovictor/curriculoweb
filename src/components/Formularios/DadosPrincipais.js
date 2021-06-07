@@ -83,12 +83,11 @@ export default function DadosPrincipais() {
   }
 
   useEffect(() => {
-    // console.log(curriculoReducer.show_curriculo)
-    if (curriculoReducer.show_curriculo) {
+    if (curriculoReducer.show_curriculo.curriculo) {
       formik.setFieldValue('nome', curriculoReducer.show_curriculo.curriculo.nome)
       formik.setFieldValue('email', curriculoReducer.show_curriculo.curriculo.email)
       formik.setFieldValue('contato', curriculoReducer.show_curriculo.curriculo.telefone)
-      // formik.setFieldValue('idade', curriculoReducer.show_curriculo.dataInicio)
+      formik.setFieldValue('idade', curriculoReducer.show_curriculo.dataInicio)
       formik.setFieldValue('dataNascimento', curriculoReducer.show_curriculo.curriculo.dataNascimento)
       formik.setFieldValue('sexo', curriculoReducer.show_curriculo.curriculo.sexo)
       formik.setFieldValue('estadoCivil', curriculoReducer.show_curriculo.curriculo.civil)
@@ -100,7 +99,7 @@ export default function DadosPrincipais() {
       formik.setFieldValue('cidade', curriculoReducer.show_curriculo.curriculo.cidade)
       formik.setFieldValue('uf', curriculoReducer.show_curriculo.curriculo.estado)
     }
-  }, [])
+  }, [curriculoReducer.show_curriculo.curriculo])
 
   return (
     <>
