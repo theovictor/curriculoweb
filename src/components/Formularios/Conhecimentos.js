@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Container, Row, Col, Button, Form, Input, Label } from 'reactstrap';
+import { Card, Container, Row, Col, Button, Form, Input, Label, CardHeader } from 'reactstrap';
 import { useFormik } from 'formik';
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider from "react-bootstrap-table2-toolkit";
@@ -64,11 +64,19 @@ export default function Conhecimentos() {
 
   return (
     <>
+   
       <Container fluid>
+      <CardHeader className="bg-white border-0">
+    <Row className="align-items-center">
+      <Col xs="8">
+        <h3 className="mb-0">Cursos</h3>
+      </Col>
+    </Row>
+  </CardHeader>
         <Row> {/* Render da Tabela Conhecimentos*/}
           <Card className="tabelinha">
             <ToolkitProvider
-              data={curriculoReducer.show_curriculo.conhecimento && curriculoReducer.show_curriculo.conhecimento}
+              data={curriculoReducer.show_curriculo?.conhecimento? curriculoReducer.show_curriculo.conhecimento: []}
               keyField="_id"
               columns={[
                 {
@@ -124,25 +132,25 @@ export default function Conhecimentos() {
         <hr className="line-primary"></hr>
         <Label className="form-control-label" htmlFor="cursoAdicional">CURSOS COMPLEMENTARES</Label>
         <div >
-        {curriculoReducer.show_curriculo?.conhecimento ? curriculoReducer.show_curriculo.conhecimento.map((item, idx) => (
-          <ul key={idx}>
+          {curriculoReducer.show_curriculo?.conhecimento ? curriculoReducer.show_curriculo.conhecimento.map((item, idx) => (
+            <ul key={idx}>
               <li>{item.cursoAdicional}</li>
               {/* <li>{item.docAdicional}</li> */}
-         </ul>
-    
-        )) : null}
-          </div>
+            </ul>
 
-          <Label className="form-control-label" htmlFor="cursoAdicional">DOCUMENTOS ADICIONAIS</Label>
+          )) : null}
+        </div>
+
+        <Label className="form-control-label" htmlFor="cursoAdicional">DOCUMENTOS ADICIONAIS</Label>
         <div >
-        {curriculoReducer.show_curriculo?.conhecimento ? curriculoReducer.show_curriculo.conhecimento.map((item, idx) => (
-          <ul key={idx}>
+          {curriculoReducer.show_curriculo?.conhecimento ? curriculoReducer.show_curriculo.conhecimento.map((item, idx) => (
+            <ul key={idx}>
               {/* <li>{item.cursoAdicional}</li> */}
               <li>{item.docAdicional}</li>
-         </ul>
-    
-        )) : null}
-          </div>
+            </ul>
+
+          )) : null}
+        </div>
       </Container>
     </>
   );

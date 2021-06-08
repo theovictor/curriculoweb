@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Card, Container, Row, Col, Button } from 'reactstrap';
+import { Card, Container, Row, Col, Button, CardHeader } from 'reactstrap';
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider from "react-bootstrap-table2-toolkit";
 
@@ -41,11 +41,18 @@ export default function Experiencias(){
 
   return (
     <>
+     <CardHeader className="bg-white border-0">
+    <Row className="align-items-center">
+      <Col xs="8">
+        <h3 className="mb-0">Experiências</h3>
+      </Col>
+    </Row>
+  </CardHeader>
       <Container fluid>
         <Row> {/* Render da Tabela Conhecimentos*/}
           <Card className="tabelinha">
             <ToolkitProvider
-              data={dados_formacao.show_curriculo.experiencias && dados_formacao.show_curriculo.experiencias}
+              data={dados_formacao.show_curriculo?.experiencias? dados_formacao.show_curriculo.experiencias: []}
               keyField="_id"
               columns={[
                 {

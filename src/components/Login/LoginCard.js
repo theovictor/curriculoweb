@@ -30,7 +30,7 @@ export default function LoginCard() {
 
   const history = useHistory();
   const routeChange = () => {
-    history.push('/dashboard');
+    history.push('/dados_iniciais');
   }
 
   const notify = (type, msg) => {

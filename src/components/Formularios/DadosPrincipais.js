@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useFormik } from 'formik';
 import {
-  Input, Form, Row, Col, FormGroup, Button, FormFeedback, Label, Card, CardText, CardBody, CardLink,
+  Input, Form, Row, Col, FormGroup, Button, FormFeedback, Label, Card, CardText, CardBody, CardLink, CardHeader,
   CardTitle, CardSubtitle
 } from "reactstrap";
 import * as yup from 'yup';
@@ -92,6 +92,11 @@ export default function DadosPrincipais() {
     return setFieldValue('idade', age.toString());
   }
 
+  const att_tabela = () => {
+    const userID = sessionStorage.getItem('user_id')
+    dispatch(curriculoActions.busca_curriculo(userID))
+  }
+
   const envia_curriculo = () => {
     console.log(formik.values)
     axios.post(`${api_curriculo}/create`, {
@@ -111,17 +116,35 @@ export default function DadosPrincipais() {
       estado: formik.values.uf,
     }, { headers })
       .then(res => {
-        // att_tabela()
-        console.log('enviado com sucesso')
         setEditMode(false)
+        console.log('enviado com sucesso')
       }).catch(err => {
         console.log(err)
       })
   };
 
+  const btnDeletar = (id_curriculo) => {
+    axios.delete(`${api_curriculo}/delete/${id_curriculo}`, { headers })
+      .then(res => {
+        // att_tabela()
+        setEditMode(true)
+        console.log('curriculo apagado com sucesso')
+      }).catch(err => {
+        console.log(err + 'falha ao apagar curriculo')
+      })
+  }
+
+  // if (editMode == true) {
+  //   setEditMode(false)
+  // } else { 
+    
+  // }
+
+
   // preenche os dados q estão no reducer para os inputs do formulário
   useEffect(() => {
-    if (curriculoReducer.show_curriculo.curriculo) {
+    if (curriculoReducer.show_curriculo && curriculoReducer.show_curriculo.curriculo) {
+      setEditMode(false)
       formik.setFieldValue('nome', curriculoReducer.show_curriculo.curriculo.nome ? curriculoReducer.show_curriculo.curriculo.nome : '')
       formik.setFieldValue('email', curriculoReducer.show_curriculo.curriculo.email ? curriculoReducer.show_curriculo.curriculo.email : '')
       formik.setFieldValue('telefone', curriculoReducer.show_curriculo.curriculo.telefone ? curriculoReducer.show_curriculo.curriculo.telefone : '')
@@ -136,10 +159,19 @@ export default function DadosPrincipais() {
       formik.setFieldValue('bairro', curriculoReducer.show_curriculo.curriculo.bairro ? curriculoReducer.show_curriculo.curriculo.bairro : '')
       formik.setFieldValue('cidade', curriculoReducer.show_curriculo.curriculo.cidade ? curriculoReducer.show_curriculo.curriculo.cidade : '')
       formik.setFieldValue('uf', curriculoReducer.show_curriculo.curriculo.estado ? curriculoReducer.show_curriculo.curriculo.estado : '')
+    } else {
+      setEditMode(true)
     }
-  }, [curriculoReducer.show_curriculo.curriculo])
+  }, [curriculoReducer.show_curriculo])
 
   return editMode ? (<>
+  <CardHeader className="bg-white border-0">
+    <Row className="align-items-center">
+      <Col xs="8">
+        <h3 className="mb-0">Meu Curriculo</h3>
+      </Col>
+    </Row>
+  </CardHeader>
     <Form>
       <CardText className="heading-small text-muted mb-4">Dados Principais</CardText>
       <div> {/* Dados Principais */}
@@ -334,10 +366,19 @@ export default function DadosPrincipais() {
         </span>
         <span className="btn-inner--text ml-2">Salvar</span>
       </Button>
+      <Button
+        className="btn-icon float-right mb-2"
+        color="success"
+        onClick={() => { setEditMode(false)}}>
+        <span className="btn-inner--icon">
+          <i className="ni ni-check-bold ml--2" />
+        </span>
+        <span className="btn-inner--text ml-2">Teste</span>
+      </Button>
     </Form>
   </>)
     :
-    curriculoReducer.show_curriculo.curriculo && (
+    curriculoReducer.show_curriculo?.curriculo? (
       <>
         <Card>
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
@@ -353,27 +394,45 @@ export default function DadosPrincipais() {
 
             <hr />
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'start', alignItems: 'start', width: '100%', marginLeft: 30 }}>
-              <b>OBJETIVO:</b><p> Descrição do objetivo. </p>
+              <b>OBJETIVO:</b><p> Descrição do objetivo. </p><br />
               <b>RESUMO DE QUALIFICAÇÕES:</b>
-                <p> Descrição do objetivo. </p>
+              <p> Descrição do objetivo. </p><br />
               <b>FORMAÇÕES ACADÊMICAS:</b>
-              <ul>
-                <li> Descrição do objetivo.</li>
-                <li> Descrição do objetivo.</li>
-                <li> Descrição do objetivo.</li>
-              </ul>
+              <div style={{ display: 'flex' }}>
+                {curriculoReducer.show_curriculo?.formacoes ? curriculoReducer.show_curriculo.formacoes.map((item, idx) => (
+                  <ul key={idx}>
+                    <li>
+                      <strong>Curso: </strong> {item.curso} <br />
+                      <strong>Início: </strong> {item.dataInicio}<br />
+                      <strong>Término: </strong>{item.dataTermino}<br />
+                      <strong>Período: </strong>{item.periodo}º<br />
+                      <strong>Turno: </strong>{item.turno}<br />
+                      <strong>Status: </strong>{item.status}
+                    </li>
+                  </ul>
+                )) : null}
+              </div><br />
               <b>CURSOS:</b>
-              <ul>
-                <li> Descrição do objetivo.</li>
-                <li> Descrição do objetivo.</li>
-                <li> Descrição do objetivo.</li>
-              </ul>
-              <b>EXPERIÊNCIAS PROFISSIONAIS:</b>
-              <ul>
-                <li> Descrição do objetivo.</li>
-                <li> Descrição do objetivo.</li>
-                <li> Descrição do objetivo.</li>
-              </ul>
+              <div style={{ display: 'flex' }}>
+                {curriculoReducer.show_curriculo?.conhecimento ? curriculoReducer.show_curriculo?.conhecimento.map((item, idx) => (
+                  <ul key={idx}>
+                    <li>
+                      <strong>Curso: </strong> {item.cursoAdicional} <br />
+                      <strong>Nível: </strong> {item.nivel}<br />
+                    </li>
+                  </ul>
+                )) : null}
+              </div><br />
+              <b>Documentos Adicionais:</b>
+              <div style={{ display: 'flex' }}>
+                {curriculoReducer.show_curriculo?.conhecimento ? curriculoReducer.show_curriculo?.conhecimento.map((item, idx) => (
+                  <ul key={idx}>
+                    <li>
+                      <strong>Documento Adicional: </strong> {item.docAdicional} <br />
+                    </li>
+                  </ul>
+                )) : null}
+              </div>
             </div>
 
             <Button
@@ -385,6 +444,33 @@ export default function DadosPrincipais() {
               </span>
               <span className="btn-inner--text ml-2">Editar</span>
             </Button>
+            <Button className="mb-3" color="danger" type="button" onClick={() =>btnDeletar(curriculoReducer.show_curriculo.curriculo._id)}>
+              <span className="btn-inner--text ml-2">Apagar Currículo</span>
+            </Button>
+            
+          </div>
+        </Card>
+      </>
+    ) :
+
+    (
+      <>
+        <Card>
+          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+            <h3>Nenhum currículo cadastrado!</h3>
+
+            <hr />
+           
+            <Button
+              className="btn-icon float-right mb-2"
+              color="success"
+              onClick={() => setEditMode(true)}>
+              <span className="btn-inner--icon">
+                <i className="ni ni-check-bold ml--2" />
+              </span>
+              <span className="btn-inner--text ml-2">Cadastrar Currículo</span>
+            </Button>
+            
           </div>
         </Card>
       </>
