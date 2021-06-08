@@ -3,7 +3,7 @@ import { UncontrolledCollapse, DropdownMenu, DropdownItem, DropdownToggle, Uncon
 import { Link } from "react-router-dom";
 // import Logo from "components/Logo/Logo.js";
 import { useSelector, useDispatch } from 'react-redux'
-import userActions from '../../store/actions/userActions'
+import userActions from '../../../store/actions/userActions'
 import curriculoActions from 'store/actions/curriculoActions';
 
 export default function DashNavbar() {

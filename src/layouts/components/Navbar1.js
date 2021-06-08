@@ -9,11 +9,6 @@ import curriculoActions from 'store/actions/curriculoActions';
 export default function Navbar1() {
   const reducer = useSelector( state => state.userReducer);
   
-
-  useEffect(() => {
-    console.log(reducer)
-  }, [reducer])
-
   return (
     <>
       <header className="header-global">
