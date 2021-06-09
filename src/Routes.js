@@ -5,15 +5,15 @@ import MainLayout from './layouts/Main'
 
 import Index from "pages/Index";
 // import Dashboard from "pages/Dashboard";
-// import Profile from "pages/Profile";
-// import ResetPage from "pages/ResetPage";
-// import Configuracao from "pages/Configuracao";
-// import Contato from "pages/Contato";
 
 import DadosPrincipais from './components/Formularios/DadosPrincipais';
 import Escolares from './components/Formularios/Escolares';
 import Conhecimentos from './components/Formularios/Conhecimentos';
 import Experiencias from './components/Formularios/Experiencias';
+import Profile from "pages/Profile";
+import Configuracao from "pages/Configuracao";
+import Contato from "pages/Contato";
+import ResetPage from 'pages/ResetPage';
 
 
 const Routes = () => {
@@ -26,9 +26,11 @@ const Routes = () => {
           <RouteWithLayout component={Escolares} exact layout={MainLayout} path="/formacoes"/>
           <RouteWithLayout component={Conhecimentos} exact layout={MainLayout} path="/cursos"/>
           <RouteWithLayout component={Experiencias} exact layout={MainLayout} path="/experiencias"/>
-
-
-            <Route exact path="/login" component={Index}/>
+          <Route exact path="/meu_perfil" component={Profile}/>
+          <Route exact path="/configuracao" component={Configuracao}/>
+          <Route exact path="/contato" component={Contato}/>
+          <Route exact path="/login" component={Index}/>
+          <Route exact path="/reset" component={ResetPage}/>
             
             {/* <Route path="*"><NoMatch /></Route> PÁGINA NÃO ENCONTRADA  */}
         </Switch>

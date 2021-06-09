@@ -1,5 +1,6 @@
 export const initialState = {
   logged: null,
+  user_name: null,
   dados_api: [],
   edit: null,
 }
@@ -9,6 +10,7 @@ const userReducer = (state = initialState, action) => {
    case 'LOGIN': return { ...state, logged: action.values }; // sempre que precisar alterar o state, tem que fazer a desestruturação para add a action dentro do state
    case 'INDEX': return { ...state, dados_api: action.values }; // sempre que precisar alterar o state, tem que fazer a desestruturação para add a action dentro do state
    case 'EDIT': return { ...state, edit: action.values };
+   case 'USER_NAME': return { ...state, user_name: action.values };
    default: return state
    }
 }

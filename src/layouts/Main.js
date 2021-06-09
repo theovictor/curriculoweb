@@ -15,8 +15,9 @@ export default function Main({ children }) {
   const notifica = useRef();
 
   const reducer = useSelector( state => state.userReducer);
-  const curriculoReducer = useSelector( state => state.curriculoReducer);
+  // const curriculoReducer = useSelector( state => state.curriculoReducer);
   const userID = sessionStorage.getItem('user_id')
+  const nome = sessionStorage.getItem('nome')
   const dispatch = useDispatch();
   
   const routeChange = () => {
@@ -42,10 +43,13 @@ export default function Main({ children }) {
   };
 
   useEffect(() => {
+    notify('success', 'Login efetuado com Sucesso!')
     if(!reducer.logged){
       dispatch(userActions.login(userID))
       dispatch(curriculoActions.busca_curriculo(userID))
+      dispatch(userActions.user_name(nome))
     }
+    // console.log(reducer)
   }, [])
 
   // CLASSE CSS DE FOTO DO PERFIL
@@ -59,7 +63,6 @@ export default function Main({ children }) {
     };
   }, []);
 
-
   if (!isLoged()) { routeChange() };
 
   return (
@@ -68,7 +71,7 @@ export default function Main({ children }) {
       <div className="rna-wrapper"><NotificationAlert ref={notifica} /></div>
       <div className="wrapper">
         <section className="section section-shaped section-lg">
-          <div className="shape shape-style-1 bg-gradient-teal">
+          <div className="shape shape-style-1 bg-gradient-gray">
             <span />
             <span />
             <span />
@@ -81,10 +84,8 @@ export default function Main({ children }) {
           <Container className="mt-7" fluid>
             <Row>
               <Sidebar />
-
               <Col className="order-xl-2" xl="9"> {/* Card da esquerda*/}
                 <Card className="telaRND bg-secondary shadow">
-                  
                   <CardBody>
                     {children}
                   </CardBody>

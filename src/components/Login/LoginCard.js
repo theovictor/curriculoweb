@@ -3,7 +3,7 @@ import { Button, Card, CardHeader, CardBody, FormGroup, Form, Input, InputGroup,
 import { useFormik } from 'formik';
 import { useHistory } from "react-router-dom";
 import { api_login } from '../../services/api.js';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import * as yup from 'yup';
 import axios from 'axios';
 import userActions from '../../store/actions/userActions'
@@ -58,7 +58,9 @@ export default function LoginCard() {
     if (email != '' && password != '') {
       axios.post(`${api_login}`, loginUser)
         .then(res => {
+          // console.log(res)
           sessionStorage.setItem('token', res.data.token);
+          sessionStorage.setItem('nome', res.data.user.nome);
           sessionStorage.setItem('user_id', res.data.user._id);
           dispatch(userActions.login(res.data));
           dispatch(curriculoActions.busca_curriculo(res.data.user._id))

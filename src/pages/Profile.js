@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-import DashNavbar from "components/Navbars/DashNavbar.js";
+import Navbar1 from "../layouts/components/Navbar1";
 import ProfileBody from "components/Profile/ProfileBody.js";
 import isLoged from 'helpers/isLoged';
 
@@ -22,7 +22,7 @@ export default function Profile() {
   },[]);
   return (
     <>
-      <DashNavbar />
+      <Navbar1 />
       <main className="profile-page">
         <section className="section-profile-cover section-shaped my-0">
           <div className="shape shape-style-1 shape-default alpha-4">

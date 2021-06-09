@@ -1,7 +1,7 @@
 import React, {useEffect}from 'react';
 import { useHistory } from "react-router-dom";
 
-import DashNavbar from 'components/Navbars/DashNavbar';
+import Navbar1 from '../layouts/components/Navbar1';
 import AccountSettings from 'components/Configuracao/AccountSettings';
 import isLoged from "helpers/isLoged";
 
@@ -24,7 +24,7 @@ export default function Configuracao(){
 
   return(
     <>
-      <DashNavbar/>
+      <Navbar1/>
       <div className="wrapper">
         <section className="section section-shaped section-lg">
           <div className="shape shape-style-1 bg-gradient-gray">

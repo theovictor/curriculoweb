@@ -4,16 +4,25 @@ import { Link } from "react-router-dom";
 // import Logo from "components/Logo/Logo.js";
 import { useSelector, useDispatch } from 'react-redux'
 import userActions from '../../store/actions/userActions'
-import curriculoActions from 'store/actions/curriculoActions';
+// import curriculoActions from 'store/actions/curriculoActions';
 
 export default function Navbar1() {
   const reducer = useSelector( state => state.userReducer);
+  const nome = sessionStorage.getItem('nome')
+  const dispatch = useDispatch();
   
+  useEffect(() => {
+    if(!reducer.user_name){
+    dispatch(userActions.user_name(nome))
+    }
+  }, [])
+  
+
   return (
     <>
       <header className="header-global">
         <Navbar className="navbar-main navbar-transparent navbar-light headroom" expand="lg" id="navbar-main">
-          <Container className="nav-container bg-gradient-purple">
+          <Container className="nav-container bg-gradient-info">
             <NavbarBrand className="mr-lg-5 ml-4" to="#" tag={Link}>
               <div className="logo-navbar"/>
             </NavbarBrand>
@@ -32,7 +41,7 @@ export default function Navbar1() {
                       </span>
                       <Media className="ml-2 mr-1 d-lg-block">
                         <span className="mb-0 text-sm font-weight-bold">
-                          {reducer.logged?.user?.nome? reducer.logged.user.nome : ''}
+                          {reducer.user_name? reducer.user_name : null}
                         </span>
                       </Media>
                     </Media>
@@ -47,25 +56,25 @@ export default function Navbar1() {
               </div>
               <Nav className="navbar-nav-hover align-items-lg-center" navbar>
                 <UncontrolledDropdown nav>
-                  <DropdownToggle nav to="/dashboard" tag={Link}>
+                  <DropdownToggle nav to="/dados_iniciais" tag={Link}>
                     <i className="fa fa-home d-lg-none mr-2" />
                     <span className="nav-link-inner--text">Início</span>
                   </DropdownToggle>
                 </UncontrolledDropdown>
                 <UncontrolledDropdown nav>
-                  <DropdownToggle nav to="/profile" tag={Link}>
+                  <DropdownToggle nav to="/meu_perfil" tag={Link}>
                     <i className="ni ni-single-02 d-lg-none mr-2" />
                     <span className="nav-link-inner--text">Meu Perfil</span>
                   </DropdownToggle>
                 </UncontrolledDropdown>
                 <UncontrolledDropdown nav>
-                  <DropdownToggle nav to="/settings" tag={Link}>
+                  <DropdownToggle nav to="/configuracao" tag={Link}>
                     <i className="ni ni-settings-gear-65 d-lg-none mr-2" />
                     <span className="nav-link-inner--text">Configurações</span>
                   </DropdownToggle>
                 </UncontrolledDropdown>
                 <UncontrolledDropdown nav>
-                  <DropdownToggle nav to="/contact" tag={Link}>
+                  <DropdownToggle nav to="/contato" tag={Link}>
                     <i className="ni ni-support-16 d-lg-none mr-2" />
                     <span className="nav-link-inner--text">Contato</span>
                   </DropdownToggle>
@@ -91,7 +100,7 @@ export default function Navbar1() {
                           </span>
                           <Media className="ml-1 mr-1 d-lg-block">
                             <span className="mb-0 text-sm font-weight-bold" id="nome">
-                              {reducer.logged?.user?.nome? reducer.logged.user.nome : ''}
+                              {reducer.user_name? reducer.user_name : null}
                             </span>
                           </Media>
                         </Media>

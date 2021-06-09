@@ -7,11 +7,8 @@ import { Link } from "react-router-dom";
 export default function Sidebar({ children }) {
 
   const dados_curriculo = useSelector(state => state.curriculoReducer)
-
-  
   
 // useEffect(() => {console.log(dados_curriculo)}, [dados_curriculo])
-
 
   return (
     <Col className="order-xl-1 mb-2 mb-xl-0" xl="3"> {/* Card do Menu */}

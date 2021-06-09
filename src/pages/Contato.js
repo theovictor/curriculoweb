@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import { useHistory } from "react-router-dom";
 
 import isLoged from "helpers/isLoged";
-import DashNavbar from 'components/Navbars/DashNavbar'
+import Navbar1 from '../layouts/components/Navbar1'
 import ContatoCard from 'components/Contato/ContatoCard'
 
 export default function Contato(){
@@ -22,16 +22,10 @@ export default function Contato(){
   
   return(
     <>
-      <DashNavbar />
+      <Navbar1 />
       <div className="wrapper">
         <section className="section section-shaped section-lg">
-          <div className="shape shape-style-1"
-            style={{
-              backgroundImage: 'url("' + require("assets/img/theme/curved.jpg") + '")',
-              backgroundSize: "cover",
-              backgroundPosition: "center top",
-            }}
-          >
+          <div className="shape shape-style-1 bg-gradient-gray">
             <span />
             <span />
             <span />

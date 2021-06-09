@@ -17,7 +17,7 @@ export default function ResetPage() {
     <>
       <div className="wrapper">
         <section className="section section-shaped section-lg">
-          <div className="shape shape-style-1 bg-gradient-teal">
+          <div className="shape shape-style-1 bg-gradient-gray">
             <span />
             <span />
             <span />

@@ -12,9 +12,12 @@ import { api_login } from '../../services/api'
   const login = (values) => {
       return { type: 'LOGIN', values };
   };
+  const user_name = (values) => {
+      return { type: 'USER_NAME', values };
+  };
 
   const edit = values => {
     return { type: 'EDIT', values };
   };
 
-  export default { login, edit };
+  export default { login, edit, user_name };
