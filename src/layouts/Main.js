@@ -24,26 +24,30 @@ export default function Main({ children }) {
     history.push('/');
   }
   const notify = (type, msg) => {
-    const options = {
-      place: 'tc',
-      message: (
-        <div className="alert-text">
-          <span className="alert-title" data-notify="title">
-            {''}
-           Aviso !
-          </span>
-          <span className="alert-msg" data-notify="message">{msg}</span>
-        </div>
-      ),
-      type: type,
-      icon: "ni ni-bell-55",
-      autoDismiss: 3
-    };
-    notifica.current.notificationAlert(options)
+    let showmsg = 0
+    if(showmsg < 1){
+      const options = {
+        place: 'tc',
+        message: (
+          <div className="alert-text">
+            <span className="alert-title" data-notify="title">
+              {''}
+             Aviso !
+            </span>
+            <span className="alert-msg" data-notify="message">{msg}</span>
+          </div>
+        ),
+        type: type,
+        icon: "ni ni-bell-55",
+        autoDismiss: 3
+      };
+      notifica.current.notificationAlert(options)
+      showmsg++
+    }
   };
 
   useEffect(() => {
-    notify('success', 'Login efetuado com Sucesso!')
+    // notify('success', 'Login efetuado com Sucesso!')
     if(!reducer.logged){
       dispatch(userActions.login(userID))
       dispatch(curriculoActions.busca_curriculo(userID))
@@ -57,7 +61,7 @@ export default function Main({ children }) {
     document.body.classList.add("dashboard");
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
-    // notify('success', 'Login efetuado com Sucesso!')
+    notify('success', 'Login efetuado com Sucesso!')
     return function cleanup() {
       document.body.classList.remove("dashboard");
     };

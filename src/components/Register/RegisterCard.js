@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { api_cadastro } from 'services/api';
 import axios from 'axios'
 import userActions from '../../store/actions/userActions'
-// import curriculoActions from '../../store/actions/curriculoActions'
+import curriculoActions from '../../store/actions/curriculoActions'
 
 import NotificationAlert from "react-notification-alert";
 
@@ -18,7 +18,7 @@ export default function LoginCard() {
   const dispatch = useDispatch()
 
   const routeChange = () => {
-    history.push('/dashboard');
+    history.push('/dados_iniciais');
   }
   const formik = useFormik({
     initialValues: {
@@ -70,9 +70,10 @@ export default function LoginCard() {
           if (res.status == 200) {
             if (res.data.token != null) {
               sessionStorage.setItem('token', res.data.token);
+              sessionStorage.setItem('nome', res.data.user.nome);
               sessionStorage.setItem('user_id', res.data.user._id);
               dispatch(userActions.login(res.data));
-              // dispatch(curriculoActions.busca_curriculo(res.data.user._id))
+              dispatch(curriculoActions.busca_curriculo(res.data.user._id))
               routeChange();
             }
           }

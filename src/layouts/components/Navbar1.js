@@ -82,7 +82,9 @@ export default function Navbar1() {
                 <UncontrolledDropdown className="d-lg-none" nav>
                   <DropdownToggle nav to="/" tag={Link} onClick={() => { 
                     sessionStorage.removeItem('token');
+                    sessionStorage.removeItem('nome');
                     sessionStorage.removeItem('user_id');
+                    sessionStorage.removeItem('thumbnail_url');
                   }}>
                     <i className="ni ni-user-run d-lg-none mr-2" />
                     <span className="nav-link-inner--text">Sair</span>
@@ -109,7 +111,9 @@ export default function Navbar1() {
                     <DropdownMenu className="dropdown-menu">
                       <DropdownItem to="/" tag={Link} onClick={() => {
                         sessionStorage.removeItem('token');
+                        sessionStorage.removeItem('nome');
                         sessionStorage.removeItem('user_id');
+                        sessionStorage.removeItem('thumbnail_url');
                       }}>
                         <i className="ni ni-user-run mr-2" />
                         <span className="nav-link-inner--text font-weight-bold">Sair</span>

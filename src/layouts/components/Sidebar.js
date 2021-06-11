@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 export default function Sidebar({ children }) {
 
   const dados_curriculo = useSelector(state => state.curriculoReducer)
+  const imagem = sessionStorage.getItem('thumbnail_url')
+  console.log(imagem)
   
 // useEffect(() => {console.log(dados_curriculo)}, [dados_curriculo])
 
@@ -16,7 +18,9 @@ export default function Sidebar({ children }) {
         <Row className="justify-content-center">
           <Col className="order-lg-2" lg="3">
             <div className="card-profile-image">
-              <div className="rounded-circle" />
+              <div className="rounded-circle">
+                {/* <img src={imagem}/> */}
+              </div>
             </div>
           </Col>
         </Row>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, createRef} from 'react';
 import PropTypes from "prop-types";
 import {Button} from 'reactstrap';
 
@@ -6,11 +6,16 @@ import defaultImage from "assets/img/image_placeholder.jpg";
 import defaultAvatar from "assets/img/placeholder.jpg";
 
 export default function Upload(props){
-  const [file, setFile] = React.useState(null);
-  const [imagePreviewUrl, setImagePreviewUrl] = React.useState(
+
+  // const defaultImage = sessionStorage.getItem('thumbnail')
+  // const dispatch = useDispatch();
+
+  
+  const [file, setFile] = useState(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(
     props.avatar ? defaultAvatar : defaultImage
   );
-  const fileInput = React.createRef();
+  const fileInput = createRef();
   const handleImageChange = (e) => {
     e.preventDefault();
     let reader = new FileReader();
