@@ -28,7 +28,7 @@ export default function Navbar1() {
             </NavbarBrand>
             <button className="navbar-toggler" id="navbar_global">
               <span className="avatar avatar-sm rounded-circle">
-                <img className="logo-user-navbar"/>
+                <img className="logo-user-navbar" alt=""/>
               </span>
             </button>
             <UncontrolledCollapse toggler="#navbar_global" navbar>
@@ -37,7 +37,7 @@ export default function Navbar1() {
                   <div className="collapse-brand">
                     <Media className="align-items-center">
                       <span className="avatar avatar-sm rounded-circle">
-                        <img className="logo-user-navbar" />
+                        <img className="logo-user-navbar" alt="" />
                       </span>
                       <Media className="ml-2 mr-1 d-lg-block">
                         <span className="mb-0 text-sm font-weight-bold">
