@@ -117,9 +117,9 @@ export default function DadosPrincipais() {
     }, { headers })
       .then(res => {
         setEditMode(false)
-        console.log('enviado com sucesso')
+        // console.log('enviado com sucesso')
       }).catch(err => {
-        console.log(err)
+        // console.log(err)
       })
   };
 
@@ -128,9 +128,9 @@ export default function DadosPrincipais() {
       .then(res => {
         // att_tabela()
         setEditMode(true)
-        console.log('curriculo apagado com sucesso')
+        // console.log('curriculo apagado com sucesso')
       }).catch(err => {
-        console.log(err + 'falha ao apagar curriculo')
+        // console.log(err + 'falha ao apagar curriculo')
       })
   }
 

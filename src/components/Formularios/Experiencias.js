@@ -33,9 +33,9 @@ export default function Experiencias(){
     axios.delete(`${api_experiencia}/delete/${rowId}`, {headers})
     .then(res => {
     att_tabela() 
-      console.log('formação apagada com sucesso')
+      // console.log('formação apagada com sucesso')
     }).catch(err => {
-      console.log(err + 'falha ao apagar formação')
+      // console.log(err + 'falha ao apagar formação')
     })
   }
 

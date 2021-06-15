@@ -43,9 +43,9 @@ export default function Conhecimentos() {
     axios.delete(`${api_conhecimento}/delete/${rowId}`, { headers })
       .then(res => {
         att_tabela()
-        console.log('formação apagada com sucesso')
+        // console.log('formação apagada com sucesso')
       }).catch(err => {
-        console.log(err + 'falha ao apagar formação')
+        // console.log(err + 'falha ao apagar formação')
       })
   }
 
@@ -56,9 +56,9 @@ export default function Conhecimentos() {
     }, { headers })
       .then(res => {
         // att_tabela()
-        console.log('enviado com sucesso')
+        // console.log('enviado com sucesso')
       }).catch(err => {
-        console.log(err)
+        // console.log(err)
       })
   };
 

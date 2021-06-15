@@ -8,7 +8,7 @@ export default function Sidebar({ children }) {
 
   const dados_curriculo = useSelector(state => state.curriculoReducer)
   const imagem = sessionStorage.getItem('thumbnail_url')
-  console.log(imagem)
+  // console.log(imagem)
   
 // useEffect(() => {console.log(dados_curriculo)}, [dados_curriculo])
 

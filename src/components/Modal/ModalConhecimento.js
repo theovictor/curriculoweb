@@ -53,9 +53,9 @@ export default function ModalConhecimento() {
     }, { headers })
       .then(res => {
         att_tabela()
-        console.log('enviado com sucesso')
+        // console.log('enviado com sucesso')
       }).catch(err => {
-        console.log(err)
+        // console.log(err)
       })
   };
 
