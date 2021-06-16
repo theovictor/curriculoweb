@@ -12,7 +12,7 @@ import NotificationAlert from "react-notification-alert";
 import Logo from 'components/Logo/Logo.js';
 
 export default function LoginCard() {
-  // const reducer = useSelector( state => state.userReducer);
+  const reducer = useSelector( state => state.userReducer);
   const notifica = useRef()
 
   const dispatch = useDispatch()
@@ -62,7 +62,7 @@ export default function LoginCard() {
           sessionStorage.setItem('token', res.data.token);
           sessionStorage.setItem('nome', res.data.user.nome);
           sessionStorage.setItem('user_id', res.data.user._id);
-          sessionStorage.setItem('thumbnail_url', res.data.user.thumbnail_url);
+          sessionStorage.setItem('thumbnail', res.data.user.thumbnail);
           dispatch(userActions.login(res.data));
           dispatch(curriculoActions.busca_curriculo(res.data.user._id))
           routeChange();
@@ -73,9 +73,9 @@ export default function LoginCard() {
     }
   }
 
-  // React.useEffect(() => {
-  //   console.log(reducer)
-  // }, [reducer])
+  React.useEffect(() => {
+    console.log(reducer)
+  }, [reducer])
 
 
   return (

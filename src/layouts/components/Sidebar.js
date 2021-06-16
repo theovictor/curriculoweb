@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardHeader, CardBody, Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap';
 import { useSelector } from 'react-redux'
+import { api_file } from '../../services/api.js';
 import { Link } from "react-router-dom";
 
 
 export default function Sidebar({ children }) {
 
   const dados_curriculo = useSelector(state => state.curriculoReducer)
-  const imagem = sessionStorage.getItem('thumbnail_url')
-  // console.log(imagem)
+  const imagem = sessionStorage.getItem('thumbnail')
   
 // useEffect(() => {console.log(dados_curriculo)}, [dados_curriculo])
 
@@ -18,9 +18,11 @@ export default function Sidebar({ children }) {
         <Row className="justify-content-center">
           <Col className="order-lg-2" lg="3">
             <div className="card-profile-image">
-              <div className="rounded-circle">
-                {/* <img src={imagem}/> */}
-              </div>
+              {imagem === 'undefined' ?
+                <div className="rounded-circle"/>
+                :
+              <img className="rounded-circle" src={`${api_file}/${imagem}`} alt="..."/>
+              }
             </div>
           </Col>
         </Row>

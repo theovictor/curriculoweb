@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 // import Logo from "components/Logo/Logo.js";
 import { useSelector, useDispatch } from 'react-redux'
 import userActions from '../../store/actions/userActions'
+import { api_file } from '../../services/api.js';
 // import curriculoActions from 'store/actions/curriculoActions';
 
 export default function Navbar1() {
   const reducer = useSelector( state => state.userReducer);
   const nome = sessionStorage.getItem('nome')
+  const imagem = sessionStorage.getItem('thumbnail')
   const dispatch = useDispatch();
   
   useEffect(() => {
@@ -28,7 +30,11 @@ export default function Navbar1() {
             </NavbarBrand>
             <button className="navbar-toggler" id="navbar_global">
               <span className="avatar avatar-sm rounded-circle">
-                <img className="logo-user-navbar" alt=""/>
+                {imagem === 'undefined' ?
+                  <div className="rounded-circle"/>
+                  :
+                  <img className="rounded-circle" src={`${api_file}/${imagem}`} alt="..."/>
+                }
               </span>
             </button>
             <UncontrolledCollapse toggler="#navbar_global" navbar>
@@ -37,7 +43,11 @@ export default function Navbar1() {
                   <div className="collapse-brand">
                     <Media className="align-items-center">
                       <span className="avatar avatar-sm rounded-circle">
-                        <img className="logo-user-navbar" alt="" />
+                        {imagem === 'undefined' ?
+                          <div className="rounded-circle"/>
+                          :
+                          <img className="rounded-circle" src={`${api_file}/${imagem}`} alt="..."/>
+                        }
                       </span>
                       <Media className="ml-2 mr-1 d-lg-block">
                         <span className="mb-0 text-sm font-weight-bold">
@@ -84,7 +94,7 @@ export default function Navbar1() {
                     sessionStorage.removeItem('token');
                     sessionStorage.removeItem('nome');
                     sessionStorage.removeItem('user_id');
-                    sessionStorage.removeItem('thumbnail_url');
+                    sessionStorage.removeItem('thumbnail');
                   }}>
                     <i className="ni ni-user-run d-lg-none mr-2" />
                     <span className="nav-link-inner--text">Sair</span>
@@ -98,7 +108,11 @@ export default function Navbar1() {
                       <Card className="card-nav collapse-brand bg-gradient-gray-dark">
                         <Media className="align-items-center">
                           <span className="avatar avatar-sm rounded-circle">
-                            <img className="logo-user-navbar"/>
+                          {imagem === 'undefined' ?
+                            <div className="rounded-circle"/>
+                            :
+                            <img className="rounded-circle" src={`${api_file}/${imagem}`} alt="..."/>
+                          }
                           </span>
                           <Media className="ml-1 mr-1 d-lg-block">
                             <span className="mb-0 text-sm font-weight-bold" id="nome">
@@ -113,7 +127,7 @@ export default function Navbar1() {
                         sessionStorage.removeItem('token');
                         sessionStorage.removeItem('nome');
                         sessionStorage.removeItem('user_id');
-                        sessionStorage.removeItem('thumbnail_url');
+                        sessionStorage.removeItem('thumbnail');
                       }}>
                         <i className="ni ni-user-run mr-2" />
                         <span className="nav-link-inner--text font-weight-bold">Sair</span>
