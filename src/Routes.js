@@ -40,9 +40,3 @@ const Routes = () => {
 }
 
 export default Routes;
-
-
-{/* <Route path="/dashboard" component={Dashboard}/>
-            <Route path="/reset" component={ResetPage}/>
-            <Route path="/settings" component={Configuracao}/>
-            <Route path="/contact" component={Contato}/> */} 
