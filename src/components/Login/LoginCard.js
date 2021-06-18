@@ -63,6 +63,7 @@ export default function LoginCard() {
           sessionStorage.setItem('nome', res.data.user.nome);
           sessionStorage.setItem('user_id', res.data.user._id);
           sessionStorage.setItem('thumbnail', res.data.user.thumbnail);
+          sessionStorage.setItem('notifica', 1);
           dispatch(userActions.login(res.data));
           dispatch(curriculoActions.busca_curriculo(res.data.user._id))
           routeChange();

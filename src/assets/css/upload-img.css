@@ -44,3 +44,9 @@
   border-radius: 30px!important;
   padding: 11px 23px;
 }
+.settings .btn-upload-foto{
+  display: flex;
+}
+.settings .btn-foto{
+  margin-top: -70px!important;
+}

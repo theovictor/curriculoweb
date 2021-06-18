@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import isLoged from "helpers/isLoged";
@@ -13,30 +13,11 @@ export default function Dashboard(){
   const routeChange = () =>{ 
     history.push('/');
   }
-  const notify = (type, msg) => {
-    const options = {
-      place: 'tc',
-      message: (
-        <div className="alert-text">
-          <span className="alert-title" data-notify="title">
-           {''}
-           Aviso ! 
-          </span>
-          <span className="alert-msg" data-notify="message">{msg}</span>
-        </div>
-      ),
-      type: type,
-      icon: "ni ni-bell-55",
-      autoDismiss: 3
-    };
-    notifica.current.notificationAlert(options)
-  };
 
   useEffect(() => {
     document.body.classList.add("dashboard");
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
-    notify('success', 'Login efetuado com Sucesso!')
     return function cleanup() {
       document.body.classList.remove("dashboard");
     };

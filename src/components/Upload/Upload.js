@@ -1,19 +1,19 @@
 import React, {useState, createRef} from 'react';
 import PropTypes from "prop-types";
 import {Button} from 'reactstrap';
+import { api_file } from '../../services/api.js';
 
 import defaultImage from "assets/img/image_placeholder.jpg";
 import defaultAvatar from "assets/img/placeholder.jpg";
 
-export default function Upload(props){
+export default function Upload(){
 
-  // const defaultImage = sessionStorage.getItem('thumbnail')
-  // const dispatch = useDispatch();
-
+  const imagem = sessionStorage.getItem('thumbnail')
+  const avatar = `${api_file}/${imagem}`
   
   const [file, setFile] = useState(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState(
-    props.avatar ? defaultAvatar : defaultImage
+    (imagem !== 'undefined') ? avatar : defaultImage
   );
   const fileInput = createRef();
   const handleImageChange = (e) => {
@@ -39,7 +39,7 @@ export default function Upload(props){
   };
   const handleRemove = () => {
     setFile(null);
-    setImagePreviewUrl(props.avatar ? defaultAvatar : defaultImage);
+    setImagePreviewUrl(avatar ? defaultAvatar : defaultImage);
     fileInput.current.value = null;
   };
   return (
@@ -48,24 +48,28 @@ export default function Upload(props){
       <div
         className={
           "fileinput-new thumbnail img-raised" +
-          (props.avatar ? " img-circle" : "")
+          (avatar ? " img-circle" : "")
         }
       >
         <img className="fileImg" src={imagePreviewUrl} alt="..." />
       </div>
-      <div>
+      <div className="btn-foto">
         {file === null ? (
-          <Button className="btn-round" color="default" onClick={handleClick}>
-            {props.avatar ? "Add Foto" : "Select image"}
+          <Button className="btn-round" color="default" size="sm" onClick={handleClick}>
+            {avatar ? "Add Foto" : "Select image"}
           </Button>
         ) : (
-          <span>
-            <Button className="btn-round" color="default" onClick={handleClick}>
+          <span className="btn-upload-foto">
+            <Button color="default" size="sm" onClick={handleClick}>
               Alterar
             </Button>
-            {props.avatar ? <br /> : null}
-            <Button color="danger" className="btn-round" onClick={handleRemove}>
-              <i className="fa fa-times" /> Remover
+            {avatar ? <br /> : null}
+            <Button color="success" size="sm" onClick={handleRemove}>
+              Salvar
+            </Button>
+            {avatar ? <br /> : null}
+            <Button color="danger" size="sm" onClick={handleRemove}>
+              Remover
             </Button>
           </span>
         )}
@@ -74,6 +78,6 @@ export default function Upload(props){
   );
 }
 
-Upload.propTypes = {
-  avatar: PropTypes.bool,
-};
+// Upload.propTypes = {
+//   avatar: PropTypes.bool,
+// };

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Card, CardHeader, CardBody, Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap';
 import { useHistory } from "react-router-dom";
 import isLoged from "helpers/isLoged";
@@ -18,14 +18,13 @@ export default function Main({ children }) {
   // const curriculoReducer = useSelector( state => state.curriculoReducer);
   const userID = sessionStorage.getItem('user_id')
   const nome = sessionStorage.getItem('nome')
+  const alerta = sessionStorage.getItem('notifica')
   const dispatch = useDispatch();
   
   const routeChange = () => {
     history.push('/');
   }
   const notify = (type, msg) => {
-    let showmsg = 0
-    if(showmsg < 1){
       const options = {
         place: 'tc',
         message: (
@@ -42,12 +41,9 @@ export default function Main({ children }) {
         autoDismiss: 3
       };
       notifica.current.notificationAlert(options)
-      showmsg++
-    }
   };
 
   useEffect(() => {
-    // notify('success', 'Login efetuado com Sucesso!')
     if(!reducer.logged){
       dispatch(userActions.login(userID))
       dispatch(curriculoActions.busca_curriculo(userID))
@@ -61,7 +57,10 @@ export default function Main({ children }) {
     document.body.classList.add("dashboard");
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
-    notify('success', 'Login efetuado com Sucesso!')
+    if(alerta == 1){
+      notify('success', 'Login efetuado com Sucesso!')
+      sessionStorage.removeItem('notifica');
+    }
     return function cleanup() {
       document.body.classList.remove("dashboard");
     };
