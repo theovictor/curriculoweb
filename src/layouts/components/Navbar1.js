@@ -71,12 +71,12 @@ export default function Navbar1() {
                     <span className="nav-link-inner--text">Início</span>
                   </DropdownToggle>
                 </UncontrolledDropdown>
-                <UncontrolledDropdown nav>
+                {/* <UncontrolledDropdown nav>
                   <DropdownToggle nav to="/meu_perfil" tag={Link}>
                     <i className="ni ni-single-02 d-lg-none mr-2" />
                     <span className="nav-link-inner--text">Meu Perfil</span>
                   </DropdownToggle>
-                </UncontrolledDropdown>
+                </UncontrolledDropdown> */}
                 <UncontrolledDropdown nav>
                   <DropdownToggle nav to="/configuracao" tag={Link}>
                     <i className="ni ni-settings-gear-65 d-lg-none mr-2" />

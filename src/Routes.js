@@ -26,7 +26,7 @@ const Routes = () => {
           <RouteWithLayout component={Escolares} exact layout={MainLayout} path="/formacoes"/>
           <RouteWithLayout component={Conhecimentos} exact layout={MainLayout} path="/cursos"/>
           <RouteWithLayout component={Experiencias} exact layout={MainLayout} path="/experiencias"/>
-          <Route exact path="/meu_perfil" component={Profile}/>
+          {/* <Route exact path="/meu_perfil" component={Profile}/> */}
           <Route exact path="/configuracao" component={Configuracao}/>
           <Route exact path="/contato" component={Contato}/>
           <Route exact path="/login" component={Index}/>
