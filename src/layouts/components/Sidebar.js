@@ -8,9 +8,10 @@ import { Link } from "react-router-dom";
 export default function Sidebar({ children }) {
 
   const dados_curriculo = useSelector(state => state.curriculoReducer)
-  const imagem = sessionStorage.getItem('thumbnail')
+  const rd_user = useSelector(state => state.userReducer)
   
-// useEffect(() => {console.log(dados_curriculo)}, [dados_curriculo])
+  
+// useEffect(() => {console.log(rd_user)}, [rd_user])
 
   return (
     <Col className="order-xl-1 mb-2 mb-xl-0" xl="3"> {/* Card do Menu */}
@@ -18,10 +19,10 @@ export default function Sidebar({ children }) {
         <Row className="justify-content-center">
           <Col className="order-lg-2" lg="3">
             <div className="card-profile-image">
-              {imagem === 'undefined' ?
-                <div className="rounded-circle"/>
+              {rd_user.logged?.thumbnail?
+              <img className="rounded-circle" src={`${api_file}/${rd_user.logged.thumbnail}`} alt="..."/>
                 :
-              <img className="rounded-circle" src={`${api_file}/${imagem}`} alt="..."/>
+                <div className="rounded-circle"/>
               }
             </div>
           </Col>

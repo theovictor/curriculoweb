@@ -17,8 +17,8 @@ export default function AccountSettings() {
   const [enablePassword, setEnablePassword] = useState(true);
   const [enableConfirmPass, setEnableConfirmPass] = useState('d-none');
 
-  const reducer = useSelector( state => state.userReducer);
-  const nome = sessionStorage.getItem('nome')
+  const rd_user = useSelector( state => state.userReducer);
+  
   const dispatch = useDispatch();
 
   const history = useHistory();
@@ -45,15 +45,10 @@ export default function AccountSettings() {
 
   if (!isLoged()) { routeChange() };
 
-  useEffect(() => {
-    if(!reducer.user_name){
-    dispatch(userActions.user_name(nome))
-    }
-  }, [])
 
   // useEffect(() => {
-  //   console.log(formik.values)
-  // }, [formik.values])
+  //   console.log(rd_user)
+  // }, [rd_user])
 
   return (
     <>
@@ -62,11 +57,31 @@ export default function AccountSettings() {
           <Col className="order-xl-1 mb-2 mb-xl-0" xl="4">
             <Card className="card-profile shadow">
               <section className="text-center">
-                {/* Component de Upload de Foto*/}
                 <Upload avatar />
-                <h3 className="title mt-4">{reducer.user_name? reducer.user_name : null}</h3>
+                <h3 className="title mt-4">{rd_user.logged?.nome? rd_user.logged.nome : null}</h3>
               </section>
             </Card>
+
+            {/* <Card className="card-profile shadow">
+        <Row className="justify-content-center">
+          <Col className="order-lg-2" lg="3">
+            <div className="card-profile-image">
+              
+                <div className="rounded-circle"/>
+              
+            </div>
+          </Col>
+        </Row>
+        <CardBody className="pt-0">
+          <div className="text-center">
+            <h3 className="mt--6">Olá Visitante</h3>
+            <hr className="my-4" />
+        
+          </div>
+        </CardBody>
+      </Card> */}
+
+
           </Col>
           <Col className="order-xl-2" xl="8">
             <Card className="bg-secondary shadow">

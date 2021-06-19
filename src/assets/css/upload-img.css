@@ -30,9 +30,51 @@
   box-shadow: 0 10px 25px 0 rgb(0 0 0 / 30%);
 }
 .settings img.fileImg {
-  max-width: 100%;
-  border-radius: 1px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 180px!important;
+  width: 180px!important;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  position: relative;
+  left: 50%;
+  transition: all .15s ease;
+  box-shadow: 0 0 2rem 0 rgb(167, 178, 189)!important;
 }
+
+@media(max-width:768px) {
+
+  .settings img.fileImg {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 180px!important;
+    width: 180px!important;
+    border-radius: 50%;
+    transform: translate(-95%, -50%);
+    position: relative;
+    left: 50%;
+    transition: all .15s ease;
+    box-shadow: 0 0 2rem 0 rgb(167, 178, 189)!important;
+  } 
+  .settings .card-profile-image>.rounded-circle{
+    background-image: url(../img/placeholder.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 180px!important;
+    width: 180px!important;
+    border-radius: .375rem;
+    transform: translate(-95%, -50%);
+    position: relative;
+    left: 50%;
+    transition: all .15s ease;
+    box-shadow: 0 0 2rem 0 rgb(167, 178, 189)!important;
+  }
+}
+
+
 .settings .fileinput .thumbnail>img {
   max-height: 100%;
 }
@@ -49,4 +91,27 @@
 }
 .settings .btn-foto{
   margin-top: -70px!important;
+}
+.settings .card-profile-image>.rounded-circle{
+  background-image: url(../img/placeholder.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 180px!important;
+  width: 180px!important;
+  border-radius: .375rem;
+  transform: translate(-50%, -50%);
+  position: relative;
+  left: 50%;
+  transition: all .15s ease;
+  box-shadow: 0 0 2rem 0 rgb(167, 178, 189)!important;
+}
+
+.settings .btnAddImage{
+  /* background-color: #3498db; */
+  /* border-radius: 5px; */
+  /* color: #fff; */
+  cursor: pointer!important;
+  margin: -12px -22px!important;
+  padding: 15px!important;
 }

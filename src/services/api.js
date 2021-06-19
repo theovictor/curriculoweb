@@ -11,3 +11,4 @@ export const api_conhecimento = `${BASE_URL}/curriculo/conhecimento`
 export const api_experiencia = `${BASE_URL}/curriculo/experiencia`
 export const api_file = `${BASE_URL}/file`
 export const api_file2 = `${BASE_URL}/update`
+export const api_user = `${BASE_URL}/user`
