@@ -1,7 +1,6 @@
 import React from "react";
-function Logo() {
+export default function Logo() {
   return (
-    <img className="logo" alt="..." src={require("assets/img/logo.png")} />
+    <div className="logo"/>
   );
 }
-export default Logo;
