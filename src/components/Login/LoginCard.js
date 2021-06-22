@@ -9,14 +9,11 @@ import axios from 'axios';
 import userActions from '../../store/actions/userActions'
 import curriculoActions from '../../store/actions/curriculoActions'
 import NotificationAlert from "react-notification-alert";
-import Logo from 'components/Logo/Logo.js';
 
 export default function LoginCard() {
   const reducer = useSelector( state => state.userReducer);
   const notifica = useRef()
-
   const dispatch = useDispatch()
-
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -27,12 +24,8 @@ export default function LoginCard() {
       password: yup.string().required('Insira sua Senha!'),
     })
   })
-
   const history = useHistory();
-  const routeChange = () => {
-    history.push('/dados_iniciais');
-  }
-
+  const routeChange = () => { history.push('/dados_iniciais') }
   const notify = (type, msg) => {
     const options = {
       place: 'tc',
@@ -51,7 +44,6 @@ export default function LoginCard() {
     };
     notifica.current.notificationAlert(options)
   };
-
   const btLogin = () => {
     const { email, password } = formik.values;
     const loginUser = { 'email': email, 'senha': password };
@@ -63,36 +55,28 @@ export default function LoginCard() {
           sessionStorage.setItem('nome', res.data.user.nome);
           sessionStorage.setItem('user_id', res.data.user._id);
           dispatch(userActions.carrega_foto(res.data.user.thumbnail))
-          // sessionStorage.setItem('thumbnail', res.data.user.thumbnail);
           sessionStorage.setItem('notifica', 1);
           dispatch(userActions.login(res.data));
           dispatch(curriculoActions.busca_curriculo(res.data.user._id))
           routeChange();
         }).catch( err => {
           notify('danger', 'Email ou Senha Inválidos!')
-          // console.log(err)
         })
     }
   }
-
-  React.useEffect(() => {
-    console.log(reducer)
-  }, [reducer])
-
-
   return (
     <>
       <div className="rna-wrapper"><NotificationAlert ref={notifica} /></div>
       <Container>
         <Col className="mx-auto" lg="5" md="8">
           <Card className="bg-secondary shadow border-0">
-            <CardHeader className="bg-white pb-5">
+            <CardHeader className="bg-white p-3">
               <div className="text-muted text-center mb-3">
-                <small>Login</small>
+                <h4>Login</h4>
               </div>
-              <Logo />
+              <div className="logo"/>
             </CardHeader>
-            <CardBody className="px-lg-5 py-lg-5">
+            <CardBody className="px-lg-4 py-lg-4">
               <div className="text-center text-muted mb-4">
                 <small>Entre com suas credenciais</small>
               </div>
@@ -123,14 +107,8 @@ export default function LoginCard() {
                     <FormFeedback>{formik.touched.password && formik.errors.password ? formik.errors.password : null}</FormFeedback>
                   </InputGroup>
                 </FormGroup>
-                {/* <div className="custom-control custom-control-alternative custom-checkbox">
-                  <input className="custom-control-input" id="customCheckLogin2" type="checkbox" />
-                  <label className="custom-control-label" htmlFor="customCheckLogin2">
-                    <span className="text-default opacity-5">Lembrar-me</span>
-                  </label>
-                </div> */}
                 <div className="text-center">
-                  <Button className="my-4" color="primary" onClick={btLogin}>Entrar</Button>
+                  <Button className="my-3" color="primary" onClick={btLogin}>Entrar</Button>
                 </div>
               </Form>
             </CardBody>

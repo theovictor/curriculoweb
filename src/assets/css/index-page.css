@@ -114,9 +114,29 @@
 .index .logo{
   background-image: url(../img/logo.png);
   background-repeat: no-repeat;
-  min-height: 22vh;
   background-size: contain;
   background-position: center;
+  background-repeat: no-repeat;
+  min-height: 150px!important;
+  width: 100%!important;
+  position: relative;
+}
+/* estilização do barra de rolagem vertical */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(13deg, #d4f1ff 7%, #c7ffd0 35%);
+  border-radius: 15px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(13deg, #c7ceff 14%, #f9d4ff 64%);
+}
+::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: inset 7px 10px 12px #f0f0f0;
 }
 @media (min-width: 992px){
   .index .page-header .container {
