@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Card, CardHeader, CardBody, Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap';
+import React, { useEffect, useRef } from "react";
+import { Card, CardBody, Container, Row, Col } from 'reactstrap';
 import { useHistory } from "react-router-dom";
 import isLoged from "helpers/isLoged";
 import NotificationAlert from "react-notification-alert";
@@ -15,7 +15,6 @@ export default function Main({ children }) {
   const notifica = useRef();
 
   const reducer = useSelector( state => state.userReducer);
-  // const curriculoReducer = useSelector( state => state.curriculoReducer);
   const userID = sessionStorage.getItem('user_id')
   const nome = sessionStorage.getItem('nome')
   const alerta = sessionStorage.getItem('notifica')

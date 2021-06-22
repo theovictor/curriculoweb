@@ -13,9 +13,6 @@ import 'assets/css/profile-page.css'
 import 'assets/css/reset-page.css'
 import 'assets/css/upload-img.css'
 
-
-
-
 import { Provider } from 'react-redux'
 import store from './store'
 import Routes from './Routes'

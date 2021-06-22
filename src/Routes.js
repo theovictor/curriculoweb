@@ -4,8 +4,6 @@ import RouteWithLayout from './components/RouteWithLayout';
 import MainLayout from './layouts/Main'
 
 import Index from "pages/Index";
-// import Dashboard from "pages/Dashboard";
-
 import DadosPrincipais from './components/Formularios/DadosPrincipais';
 import Escolares from './components/Formularios/Escolares';
 import Conhecimentos from './components/Formularios/Conhecimentos';
@@ -31,8 +29,6 @@ const Routes = () => {
           <Route exact path="/contato" component={Contato}/>
           <Route exact path="/login" component={Index}/>
           <Route exact path="/reset" component={ResetPage}/>
-            
-            {/* <Route path="*"><NoMatch /></Route> PÁGINA NÃO ENCONTRADA  */}
         </Switch>
     </BrowserRouter>
   

@@ -1,20 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Card, CardHeader, CardBody, Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap';
+import React from 'react';
+import { Card, CardBody, Row, Col, ListGroup, ListGroupItem } from 'reactstrap';
 import { useSelector } from 'react-redux'
 import { api_file } from '../../services/api.js';
 import { Link } from "react-router-dom";
 
-
 export default function Sidebar({ children }) {
-
   const dados_curriculo = useSelector(state => state.curriculoReducer)
   const rd_user = useSelector(state => state.userReducer)
-  
-  
-// useEffect(() => {console.log(rd_user)}, [rd_user])
-
   return (
-    <Col className="order-xl-1 mb-2 mb-xl-0" xl="3"> {/* Card do Menu */}
+    <Col className="order-xl-1 mb-2 mb-xl-0" xl="3">
       <Card className="card-profile shadow">
         <Row className="justify-content-center">
           <Col className="order-lg-2" lg="3">
