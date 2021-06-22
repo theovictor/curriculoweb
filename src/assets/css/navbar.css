@@ -1,5 +1,6 @@
 .card-nav {
   border-radius: 20rem !important;
+  min-width: 6rem!important;
 }
 span#nome {
   color: white;
@@ -13,7 +14,7 @@ span#nome {
   border-radius: 5rem !important;
   box-shadow: 0 15px 35px rgb(50 50 93 / 25%), 0 5px 15px rgb(0 0 0 / 10%);
 }
-img.logo-user-navbar{
+/* img.logo-user-navbar{
   background-image: url(../img/theme/team-4-800x800.jpg);
   background-size: cover;
   background-position: center;
@@ -21,4 +22,15 @@ img.logo-user-navbar{
   position: relative;
   min-height: 35px!important;
   width: 35px!important;
+} */
+.foto-nav{
+  border: 2px solid #c2282b;
+}
+.logo-navbar{
+  background-image: url(../img/logo-nav.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 50px!important;
+  width: 50px!important;
 }

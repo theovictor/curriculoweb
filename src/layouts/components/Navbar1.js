@@ -1,31 +1,24 @@
 import React, {useEffect} from "react";
 import { UncontrolledCollapse, DropdownMenu, DropdownItem, DropdownToggle, UncontrolledDropdown, Media, NavbarBrand, Navbar, Nav, Container, Row, Col, Card } from "reactstrap";
 import { Link } from "react-router-dom";
-// import Logo from "components/Logo/Logo.js";
 import { useSelector, useDispatch } from 'react-redux'
-import userActions from '../../store/actions/userActions'
 import { api_file } from '../../services/api.js';
-// import curriculoActions from 'store/actions/curriculoActions';
+import userActions from '../../store/actions/userActions'
 
 export default function Navbar1() {
   const rd_user = useSelector( state => state.userReducer);
-  // const nome = sessionStorage.getItem('nome')
-  // const imagem = sessionStorage.getItem('thumbnail')
   const dispatch = useDispatch();
-  
   useEffect(() => {
     if(!rd_user.logged){
       dispatch(userActions.busca_user())
     }
   }, [])
-  
-
   return (
     <>
       <header className="header-global">
         <Navbar className="navbar-main navbar-transparent navbar-light headroom" expand="lg" id="navbar-main">
           <Container className="nav-container bg-gradient-info">
-            <NavbarBrand className="mr-lg-5 ml-4" to="#" tag={Link}>
+            <NavbarBrand className="mr-lg-5 ml-4">
               <div className="logo-navbar"/>
             </NavbarBrand>
             <button className="navbar-toggler" id="navbar_global">
@@ -100,11 +93,11 @@ export default function Navbar1() {
                 <div className="d-none d-lg-block ml-lg-4">
                   <UncontrolledDropdown nav>
                     <DropdownToggle nav>
-                      <Card className="card-nav collapse-brand bg-gradient-gray-dark">
+                      <Card className="card-nav collapse-brand bg-gradient-gray">
                         <Media className="align-items-center">
                           <span className="avatar avatar-sm rounded-circle">
                           {rd_user.logged?.thumbnail?
-                            <img className="rounded-circle" src={`${api_file}/${rd_user.logged.thumbnail}`} alt="..."/>
+                            <img className="foto-nav rounded-circle" src={`${api_file}/${rd_user.logged.thumbnail}`} alt="..."/>
                             :
                             <div className="rounded-circle"/>
                           }
