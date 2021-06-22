@@ -1,25 +1,20 @@
 import React, { useRef } from 'react';
 import { Button, Card, CardHeader, CardBody, FormGroup, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Container, Col, FormFeedback } from 'reactstrap';
 import { useFormik } from 'formik';
-import * as yup from 'yup';
-
 import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { api_cadastro } from 'services/api';
+import * as yup from 'yup';
 import axios from 'axios'
 import userActions from '../../store/actions/userActions'
 import curriculoActions from '../../store/actions/curriculoActions'
-
 import NotificationAlert from "react-notification-alert";
 
 export default function LoginCard() {
   const notifica = useRef()
   const history = useHistory()
   const dispatch = useDispatch()
-
-  const routeChange = () => {
-    history.push('/dados_iniciais');
-  }
+  const routeChange = () => { history.push('/dados_iniciais') }
   const formik = useFormik({
     initialValues: {
       userName: '',
@@ -60,7 +55,6 @@ export default function LoginCard() {
     };
     notifica.current.notificationAlert(options)
   };
-
   const register = () => {
     const { userName, email, password, changePassword, acceptTerms } = formik.values;
     const user = { 'nome': userName, 'email': email, 'senha': password };
@@ -81,27 +75,25 @@ export default function LoginCard() {
           }
         }).catch(error => {
           notify('danger', 'Não foi possivel fazer o cadastro')
-          // console.log(error)
         })
       } else {
         notify('danger', 'As senhas nao coincidem');
       }
     }
   }
-  
   return (
     <>
       <div className="rna-wrapper"><NotificationAlert ref={notifica} /></div>
       <Container>
         <Col className="mx-auto" lg="5" md="8">
           <Card className="bg-secondary shadow border-0">
-            <CardHeader className="bg-white pb-5">
+            <CardHeader className="bg-white p-3">
               <div className="text-muted text-center mb-3">
-                <small>Cadastro</small>
+                <h4>Cadastro</h4>
               </div>
               <div className="logo"/>
             </CardHeader>
-            <CardBody className="px-lg-5 py-lg-5">
+            <CardBody className="px-lg-4 py-lg-4">
               <div className="text-center text-muted mb-4">
                 <small>Entre com suas credenciais</small>
               </div>
@@ -160,7 +152,7 @@ export default function LoginCard() {
                 </FormGroup>
                 <FormGroup>
                   <div className="custom-control custom-checkbox mb-3">
-                    <Input className="form-control-alternative" className="custom-control-input" id="acceptTerms" type="checkbox"
+                    <Input className="form-control-alternative custom-control-input" id="acceptTerms" type="checkbox"
                       invalid={formik.touched.acceptTerms && formik.errors.acceptTerms ? true : false}
                       {...formik.getFieldProps('acceptTerms')} />
                     <label className="custom-control-label" htmlFor="acceptTerms">
@@ -170,7 +162,7 @@ export default function LoginCard() {
                   </div>
                 </FormGroup>
                 <div className="text-center">
-                  <Button className="my-4" color="primary" onClick={register}>Cadastrar</Button>
+                  <Button className="my-3" color="primary" onClick={register}>Cadastrar</Button>
                 </div>
               </Form>
             </CardBody>
