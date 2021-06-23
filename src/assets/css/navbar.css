@@ -16,6 +16,8 @@ span#nome {
 }
 .foto-nav{
   border: 2px solid #c2282b;
+  min-height: 100%!important;
+  width: 100%!important;
 }
 .img-default-nav{
   background-image: url(../img/placeholder.jpg);
