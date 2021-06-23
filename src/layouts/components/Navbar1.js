@@ -8,13 +8,24 @@ import curriculoActions from '../../store/actions/curriculoActions'
 
 
 export default function Navbar1() {
-  const rd_user = useSelector( state => state.userReducer);
-  const dispatch = useDispatch();
+  const rd_user = useSelector( state => state.userReducer)
+  const rd_curriculo = useSelector( state => state.curriculoReducer)
+  const dispatch = useDispatch()
+
+  function load_curriculo(){
+    if(rd_user.logged?._id){
+      dispatch(curriculoActions.busca_curriculo(rd_user.logged._id))
+    }
+  }
+
   useEffect(() => {
     if(!rd_user.logged){
       dispatch(userActions.busca_user())
     }
-  }, [])
+    load_curriculo()
+    console.log(rd_user.logged)
+    console.log(rd_curriculo)
+  }, [rd_user])
   
   return (
     <>
@@ -73,12 +84,6 @@ export default function Navbar1() {
                     <span className="nav-link-inner--text">Início</span>
                   </DropdownToggle>
                 </UncontrolledDropdown>
-                {/* <UncontrolledDropdown nav>
-                  <DropdownToggle nav to="/meu_perfil" tag={Link}>
-                    <i className="ni ni-single-02" />
-                    <span className="nav-link-inner--text">Meu Perfil</span>
-                  </DropdownToggle>
-                </UncontrolledDropdown> */}
                 <UncontrolledDropdown nav>
                   <DropdownToggle nav to="/configuracao" tag={Link}>
                     <i className="ni ni-settings-gear-65"/>

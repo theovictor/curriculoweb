@@ -52,7 +52,7 @@ export default function LoginCard() {
     if (email != '' && password != '') {
       axios.post(`${api_login}`, loginUser)
         .then(res => {
-          console.log(res)
+          // console.log(res)
           sessionStorage.setItem('token', res.data.token);
           sessionStorage.setItem('notifica', 1);
           dispatch(userActions.carrega_foto(res.data.user.thumbnail))
