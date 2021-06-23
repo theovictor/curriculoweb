@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
-import { Button, Card, CardHeader, CardBody, FormGroup, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Container, Col, FormFeedback } from 'reactstrap';
+import { Button, Card, CardHeader, CardBody, FormGroup, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Container, Col, FormFeedback, Row } from 'reactstrap';
 import { useFormik } from 'formik';
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { useDispatch } from 'react-redux'
 import { api_cadastro } from 'services/api';
 import * as yup from 'yup';
@@ -165,6 +165,12 @@ export default function LoginCard() {
                   <Button className="my-3" color="primary" onClick={register}>Cadastrar</Button>
                 </div>
               </Form>
+              <Row className="justify-content-center mt-3">
+                <Link className="align-items-center" to="/reset" style={{display: 'flex'}}>
+                  <i className="ni ni-lg ni-bold-right"/>
+                  <span>Redefinir senha</span>
+                </Link>
+              </Row>
             </CardBody>
           </Card>
         </Col>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Card, CardHeader, CardBody, CardImg, CardTitle, Form, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText, FormFeedback } from "reactstrap";
+import { Button, Card, CardHeader, CardBody, CardTitle, Form, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText, FormFeedback, Row } from "reactstrap";
 import { Link } from "react-router-dom";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -17,16 +17,14 @@ export default function ResetCard() {
     <>
       <Card className="bg-secondary shadow border-0">
         <CardHeader>
-          <CardImg alt="..."
-            src={require("assets/img/logo.png")}
-          ></CardImg>
+          <div className="logo"/>
           <CardTitle className="text-center" tag="h4">
             Resetar Senha
-                    </CardTitle>
+          </CardTitle>
         </CardHeader>
-        <CardBody className="px-lg-5 py-lg-5">
+        <CardBody className="px-lg-4 py-lg-4">
           <div className="text-center text-muted mb-4">
-            <smal>Digite o seu e-mail para redefinir a senha</smal>
+            <small>Digite o seu e-mail para redefinir a senha</small>
           </div>
           <Form role="form" onSubmit={formik.handleSubmit}>
             <FormGroup className="mb-3">
@@ -43,16 +41,16 @@ export default function ResetCard() {
               </InputGroup>
             </FormGroup>
             <div className="text-center">
-              <Button className="my-4" color="primary" type="button">
+              <Button className="my-4" color="primary">
                 Enviar
               </Button>
             </div>
-            <div className="text-center">
-              <i className="fa fa-hand-point-left mr-1" />
-              <Link to="/index-page" tag={Link}>
-                Voltar
+            <Row className="justify-content-center mt-3">
+              <Link className="align-items-center" to="/" style={{display: 'flex'}}>
+                <i className="ni ni-lg ni-bold-left"/>
+                <span>Voltar</span>
               </Link>
-            </div>
+            </Row>
           </Form>
         </CardBody>
       </Card>

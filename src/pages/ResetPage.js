@@ -15,25 +15,18 @@ export default function ResetPage() {
   
   return (
     <>
-      <div className="wrapper">
-        <section className="section section-shaped section-lg">
-          <div className="shape shape-style-1 bg-gradient-gray">
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-          </div>
-          <Container>
-            <Col className="mx-auto" lg="5" mb="1">
-              <ResetCard />
-            </Col>
-          </Container>
-        </section>
+      <div className="section-shaped my-0 skew-separator skew-mini">
+        <div className="page-header page-header-small header-filter">
+          <div className="page-header-image"/>
+        </div>
       </div>
+      <section className="upper">
+        <Container>
+          <Col className="mx-auto" lg="5" mb="1">
+            <ResetCard />
+          </Col>
+        </Container>
+      </section>
     </>
   );
 }
