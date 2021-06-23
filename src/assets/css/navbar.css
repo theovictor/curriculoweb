@@ -16,13 +16,15 @@ span#nome {
 }
 .foto-nav{
   border: 2px solid #c2282b;
+  height: 100%!important;
+  width: 100%!important;
 }
 .img-default-nav{
   background-image: url(../img/placeholder.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 100%!important;
+  height: 100%!important;
   width: 100%!important;
   position: relative;
   border: 2px solid #c2282b;

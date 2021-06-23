@@ -3,7 +3,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 180px!important;
+  height: 180px!important;
   width: 180px!important;
   border-radius: .375rem;
   transform: translate(-50%, -50%);

@@ -141,7 +141,6 @@ export default function DadosPrincipais() {
     
   // }
 
-
   // preenche os dados q estão no reducer para os inputs do formulário
   useEffect(() => {
     if (curriculoReducer.show_curriculo && curriculoReducer.show_curriculo.curriculo) {

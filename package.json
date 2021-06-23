@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.4",
+    "@react-pdf/renderer": "^2.0.15",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -14,6 +15,7 @@
     "headroom.js": "0.11.0",
     "node-sass": "4",
     "nouislider": "14.1.1",
+    "pdfmake": "^0.1.71",
     "react": "^17.0.2",
     "react-bootstrap-sweetalert": "^5.2.0",
     "react-bootstrap-table-next": "^4.0.3",
