@@ -5,20 +5,11 @@ import isLoged from "helpers/isLoged";
 import NotificationAlert from "react-notification-alert";
 import Navbar from "./components/Navbar1";
 import Sidebar from "./components/Sidebar";
-import { useSelector, useDispatch } from 'react-redux'
-import userActions from '../store/actions/userActions'
-import curriculoActions from '../store/actions/curriculoActions';
-
 
 export default function Main({ children }) {
   const history = useHistory();
   const notifica = useRef();
-
-  const reducer = useSelector( state => state.userReducer);
-  const userID = sessionStorage.getItem('user_id')
-  const nome = sessionStorage.getItem('nome')
   const alerta = sessionStorage.getItem('notifica')
-  const dispatch = useDispatch();
   
   const routeChange = () => {
     history.push('/');
@@ -41,15 +32,6 @@ export default function Main({ children }) {
       };
       notifica.current.notificationAlert(options)
   };
-
-  useEffect(() => {
-    if(!reducer.logged){
-      dispatch(userActions.login(userID))
-      dispatch(curriculoActions.busca_curriculo(userID))
-      dispatch(userActions.user_name(nome))
-    }
-    // console.log(reducer)
-  }, [])
 
   // CLASSE CSS DE FOTO DO PERFIL
   useEffect(() => {
@@ -86,7 +68,7 @@ export default function Main({ children }) {
           <Container className="mt-7" fluid>
             <Row>
               <Sidebar />
-              <Col className="order-xl-2" xl="9"> {/* Card da esquerda*/}
+              <Col className="order-xl-2" xl="9">
                 <Card className="telaRND bg-secondary shadow">
                   <CardBody>
                     {children}

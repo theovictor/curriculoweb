@@ -3,7 +3,7 @@ import { Button, Card, CardHeader, CardBody, FormGroup, Form, Input, InputGroup,
 import { useFormik } from 'formik';
 import { useHistory } from "react-router-dom";
 import { api_login } from '../../services/api.js';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import * as yup from 'yup';
 import axios from 'axios';
 import userActions from '../../store/actions/userActions'
@@ -11,9 +11,9 @@ import curriculoActions from '../../store/actions/curriculoActions'
 import NotificationAlert from "react-notification-alert";
 
 export default function LoginCard() {
-  const reducer = useSelector( state => state.userReducer);
   const notifica = useRef()
   const dispatch = useDispatch()
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -26,6 +26,7 @@ export default function LoginCard() {
   })
   const history = useHistory();
   const routeChange = () => { history.push('/dados_iniciais') }
+
   const notify = (type, msg) => {
     const options = {
       place: 'tc',
@@ -44,6 +45,7 @@ export default function LoginCard() {
     };
     notifica.current.notificationAlert(options)
   };
+
   const btLogin = () => {
     const { email, password } = formik.values;
     const loginUser = { 'email': email, 'senha': password };
@@ -52,10 +54,8 @@ export default function LoginCard() {
         .then(res => {
           console.log(res)
           sessionStorage.setItem('token', res.data.token);
-          sessionStorage.setItem('nome', res.data.user.nome);
-          sessionStorage.setItem('user_id', res.data.user._id);
-          dispatch(userActions.carrega_foto(res.data.user.thumbnail))
           sessionStorage.setItem('notifica', 1);
+          dispatch(userActions.carrega_foto(res.data.user.thumbnail))
           dispatch(userActions.login(res.data));
           dispatch(curriculoActions.busca_curriculo(res.data.user._id))
           routeChange();
@@ -64,6 +64,7 @@ export default function LoginCard() {
         })
     }
   }
+  
   return (
     <>
       <div className="rna-wrapper"><NotificationAlert ref={notifica} /></div>

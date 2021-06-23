@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Card, Container, Row, Col, Button, CardHeader } from 'reactstrap';
 import { useSelector, useDispatch } from 'react-redux'
-import axios from 'axios';
 import { api_formacao } from '../../services/api.js';
 import curriculoActions from '../../store/actions/curriculoActions'
-
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider from "react-bootstrap-table2-toolkit";
 import ModalEscola from 'components/Modal/ModalEscola.js';
-// import curriculoReducer from "store/reducers/curriculoReducer.js";
+import axios from 'axios';
 
 export default function Escolares() {
   const dados_formacao = useSelector(state => state.curriculoReducer)
+  const rd_user = useSelector(state => state.userReducer)
   const dispatch = useDispatch()
-  // const [ dataRow , setDataRow] = useState()
 
   const headers = {
     'Accept': 'application/json',
@@ -26,45 +24,30 @@ export default function Escolares() {
   }
 
   const att_tabela = () => {
-    const userID = sessionStorage.getItem('user_id')
-    dispatch(curriculoActions.busca_curriculo(userID))
+    dispatch(curriculoActions.busca_curriculo(rd_user.logged._id))
   }
 
   const btnDeletar = (rowId) => {
     axios.delete(`${api_formacao}/delete/${rowId}`, { headers })
       .then(res => {
         att_tabela()
-        // console.log('formação apagada com sucesso')
-      }).catch(err => {
-        // console.log(err + 'falha ao apagar formação')
-      })
+      }).catch(err => {})
   }
-
-  // const btnEditar = () => {
-  //   dispatch(curriculoActions.modal_escola(true))
-  //   dispatch(curriculoActions.edit_mode(true))
-  // }
-
-  // captura o evento do click na linha
-  // useEffect(() => {
-  //   dispatch(curriculoActions.show_formacao(dataRow))
-  //   console.log(dataRow)
-  // }, [dataRow])
 
   return (
     <>
-     <CardHeader className="bg-white border-0">
-    <Row className="align-items-center">
-      <Col xs="8">
-        <h3 className="mb-0">Formações</h3>
-      </Col>
-    </Row>
-  </CardHeader>
+      <CardHeader className="bg-white border-0">
+        <Row className="align-items-center">
+          <Col xs="8">
+            <h3 className="mb-0">Formações</h3>
+          </Col>
+        </Row>
+      </CardHeader>
       <Container fluid>
         <Row>
           <Card className="tabelinha">
             <ToolkitProvider
-              data={dados_formacao.show_curriculo?.formacoes? dados_formacao.show_curriculo.formacoes: []}
+              data={dados_formacao.show_curriculo?.formacoes ? dados_formacao.show_curriculo.formacoes : []}
               keyField="_id"
               columns={[
                 {
@@ -120,22 +103,17 @@ export default function Escolares() {
               ]}
             >
               {(props) => (<>
-                {/* //Renderização da Tabela */}
                 <div className="table-responsive pt-3">
-                  <Button className="mb-3" color="primary" type="button" onClick={btnNovo}>
+                  <Button className="mb-3 ml-3" color="primary" type="button" onClick={btnNovo}>
                     <span className="btn-inner--icon">
                       <i className="fa fa-plus-circle ml--2"></i>
                     </span>
-                    <span className="btn-inner--text ml-2">Novo Formação</span>
+                    <span className="btn-inner--text ml-2">Nova Formação</span>
                   </Button>
-                  {/* {console.log(props.baseProps.data)} */}
                   <BootstrapTable
                     {...props.baseProps}
                     bootstrap4={true}
                     bordered={false}
-                  // rowEvents={{onClick: (e, row, idx) => {
-                  //   setDataRow(row._id)
-                  // }}}
                   />
                 </div>
                 <ModalEscola />

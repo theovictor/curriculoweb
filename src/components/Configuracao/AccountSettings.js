@@ -1,25 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Card, CardHeader, Form, FormFeedback, Input, InputGroup, InputGroupAddon, Row, Col, Container, Label, CardBody } from 'reactstrap';
+import { Button, Card, CardHeader, Form, FormFeedback, InputGroup, InputGroupAddon, Row, Col, Container, CardBody } from 'reactstrap';
 import TextField from '@material-ui/core/TextField';
 import { useHistory } from "react-router-dom";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux'
-import userActions from '../../store/actions/userActions'
-
-import '../../assets/css/settings-page.css'
+// import userActions from '../../store/actions/userActions'
 import isLoged from "helpers/isLoged";
 import Upload from 'components/Upload/Upload'
+import '../../assets/css/settings-page.css'
 
 export default function AccountSettings() {
   const [enableNome, setEnableNome] = useState(true);
-  const [enableEmail, setEnableEmail] = useState(true);
   const [enablePassword, setEnablePassword] = useState(true);
   const [enableConfirmPass, setEnableConfirmPass] = useState('d-none');
 
   const rd_user = useSelector( state => state.userReducer);
   
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const history = useHistory();
   const routeChange = () => {
@@ -28,7 +26,6 @@ export default function AccountSettings() {
   const formik = useFormik({
     initialValues: {
       user: '',
-      // email: '',
       password: '',
       confirmPassword: '',
     },
@@ -45,11 +42,6 @@ export default function AccountSettings() {
 
   if (!isLoged()) { routeChange() };
 
-
-  // useEffect(() => {
-  //   console.log(rd_user)
-  // }, [rd_user])
-
   return (
     <>
       <Container className="mt-7">
@@ -58,30 +50,9 @@ export default function AccountSettings() {
             <Card className="card-profile shadow">
               <section className="text-center">
                 <Upload avatar />
-                <h3 className="title mt-4">{rd_user.logged?.nome? rd_user.logged.nome : null}</h3>
+                <h3 className="nome mt--4">{rd_user.logged?.nome? rd_user.logged.nome : rd_user.logged?.user?.nome? rd_user.logged.user.nome : null}</h3>
               </section>
             </Card>
-
-            {/* <Card className="card-profile shadow">
-        <Row className="justify-content-center">
-          <Col className="order-lg-2" lg="3">
-            <div className="card-profile-image">
-              
-                <div className="rounded-circle"/>
-              
-            </div>
-          </Col>
-        </Row>
-        <CardBody className="pt-0">
-          <div className="text-center">
-            <h3 className="mt--6">Olá Visitante</h3>
-            <hr className="my-4" />
-        
-          </div>
-        </CardBody>
-      </Card> */}
-
-
           </Col>
           <Col className="order-xl-2" xl="8">
             <Card className="bg-secondary shadow">

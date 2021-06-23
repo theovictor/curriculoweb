@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useFormik } from 'formik';
-import {
-  Input, Form, Row, Col, FormGroup, Button, FormFeedback, Label, Card, CardText, CardBody, CardLink, CardHeader,
-  CardTitle, CardSubtitle
-} from "reactstrap";
-import * as yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux'
-import curriculoActions from '../../store/actions/curriculoActions'
-import axios from "axios";
+import { Input, Form, Row, Col, FormGroup, Button, FormFeedback, Label, Card, CardText, CardHeader } from "reactstrap";
+import { useSelector,
+  // useDispatch
+ } from 'react-redux'
 import { api_curriculo } from '../../services/api'
+import * as yup from 'yup';
+import axios from "axios";
+// import curriculoActions from '../../store/actions/curriculoActions'
+// import userActions from '../../store/actions/userActions'
 
 export default function DadosPrincipais() {
   const curriculoReducer = useSelector(state => state.curriculoReducer)
+  // const rd_user = useSelector( state => state.userReducer);
   const [editMode, setEditMode] = useState(false)
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
@@ -92,10 +93,10 @@ export default function DadosPrincipais() {
     return setFieldValue('idade', age.toString());
   }
 
-  const att_tabela = () => {
-    const userID = sessionStorage.getItem('user_id')
-    dispatch(curriculoActions.busca_curriculo(userID))
-  }
+  // const att_tabela = () => {
+  //   const userID = sessionStorage.getItem('user_id')
+  //   dispatch(curriculoActions.busca_curriculo(userID))
+  // }
 
   const envia_curriculo = () => {
     console.log(formik.values)

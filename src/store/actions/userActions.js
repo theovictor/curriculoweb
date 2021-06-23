@@ -25,7 +25,8 @@ const busca_user = (token) => {
     return { type: 'EDIT', values };
   };
 
-  export default { login, 
+  export default { 
+    login, 
     edit, 
     user_name, 
     carrega_foto,
