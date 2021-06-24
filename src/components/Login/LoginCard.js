@@ -9,11 +9,13 @@ import axios from 'axios';
 import userActions from '../../store/actions/userActions'
 import curriculoActions from '../../store/actions/curriculoActions'
 import NotificationAlert from "react-notification-alert";
+import { useNotify } from "hooks/useNotify";
 
 
 export default function LoginCard() {
   const notifica = useRef()
   const dispatch = useDispatch()
+  const notify = useNotify()
 
 
   // const notify = (type, msg) => {
@@ -64,16 +66,16 @@ export default function LoginCard() {
           dispatch(userActions.add_user(res.data.user));
           dispatch(curriculoActions.busca_curriculo(res.data.user._id))
           routeChange();
-          // notify('success', 'Sucesso!')
+          dispatch(userActions.add_controle());
         }).catch( err => {
-          // notify('danger', 'Email ou Senha Inválidos!')
+          notify.notify('danger', 'Email ou Senha Inválidos!')
         })
     }
   }
   
   return (
     <>
-     <div className="rna-wrapper"><NotificationAlert ref={notifica} /></div>
+     <div className="rna-wrapper"><NotificationAlert ref={notify.notifica} /></div>
       <Container>
         <Col className="mx-auto" lg="5" md="8">
           <Card className="bg-secondary shadow border-0">

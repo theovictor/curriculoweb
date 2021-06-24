@@ -3,6 +3,7 @@ export const initialState = {
   user: null,
   edit: null,
   foto: null,
+  controle: 0,
 }
 //  userReducer.js
 const userReducer = (state = initialState, action) => {
@@ -11,6 +12,7 @@ const userReducer = (state = initialState, action) => {
     case 'ADD_USER': return { ...state, user: action.values };
     case 'EDIT': return { ...state, edit: action.values };
     case 'CARREGA_FOTO': return { ...state, foto: action.values };
+    case 'ADD_CONTROLE': return { ...state, controle: state.controle+1 };
     default: return state
   }
 }

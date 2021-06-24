@@ -8,6 +8,7 @@ import Sidebar from "./components/Sidebar";
 import { useSelector, useDispatch } from 'react-redux'
 import userActions from "store/actions/userActions";
 import curriculoActions from "store/actions/curriculoActions";
+import {useNotify} from '../hooks/useNotify'
 
 document.body.classList.add("dashboard");
 window.scrollTo(0, 0);
@@ -18,37 +19,12 @@ export default function Main({ children }) {
   const dispatch = useDispatch()
   const rd_user = useSelector( state => state.userReducer)
   const history = useHistory();
-  const notifica = useRef();
-  
-  const alerta = sessionStorage.getItem('notifica')
+  const notify = useNotify()
   const [isLoading, setIsLoading] = useState(true)
 
   const routeChange = () => {
     history.push('/');
   }
-
-  
-  const notify = (type, msg) => {
-    const options = {
-      place: 'tc',
-      message: (
-        <div className="alert-text">
-          <span className="alert-title" data-notify="title">
-            {''}
-           Aviso !
-          </span>
-          <span className="alert-msg" data-notify="message">{msg}</span>
-        </div>
-      ),
-      type: type,
-      icon: "ni ni-bell-55",
-      autoDismiss: 3
-    };
-    notifica.current.notificationAlert(options)
-};
-
-  // CLASSE CSS DE FOTO DO PERFIL
-
 
   useEffect(() => {
     if (isLoged()) {
@@ -56,8 +32,9 @@ export default function Main({ children }) {
         const token = sessionStorage.getItem('token')
         dispatch(userActions.busca_user())
         dispatch(userActions.add_token(token))
-        setIsLoading(false)
+        setIsLoading(false) 
       }
+      
     } else {
       routeChange()
     }
@@ -67,12 +44,15 @@ export default function Main({ children }) {
     if (rd_user.user)
     dispatch(curriculoActions.busca_curriculo(rd_user.user._id))
     setIsLoading(false)
+      if(rd_user.controle === 1) {
+        notify.notify('success', 'Login efetuado com sucesso!')
+      }
   }, [rd_user])
 
 
   return (
     <>
-    <div className="rna-wrapper"><NotificationAlert ref={notifica} /></div>
+    <div className="rna-wrapper"><NotificationAlert ref={notify.notifica} /></div>
     {isLoading ? <h1>Carregando...</h1>
       :
       <>

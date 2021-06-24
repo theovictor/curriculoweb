@@ -29,10 +29,15 @@ const busca_user = (token) => {
     return { type: 'EDIT', values };
   };
 
+  const add_controle = () => {
+    return { type: 'ADD_CONTROLE' };
+  };
+
   export default { 
     add_token, 
     edit, 
     add_user, 
     carrega_foto,
     busca_user,
+    add_controle,
    };
