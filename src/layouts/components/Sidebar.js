@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Card, CardBody, Row, Col, ListGroup, ListGroupItem } from 'reactstrap';
 import { api_file } from '../../services/api.js';
 import { Link } from "react-router-dom";
@@ -14,6 +14,10 @@ export default function Sidebar({ children }) {
     console.log('teste')
     curriculoPdf(rd_curriculo.show_curriculo)
   }
+
+  useEffect(() => {
+    console.log(rd_user)
+  }, [rd_user])
 
   return (
     <>

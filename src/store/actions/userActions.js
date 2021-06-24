@@ -6,15 +6,19 @@ const busca_user = (token) => {
   return dispatch => {
     axios.get(api_user, {headers: {Authorization: `Bearer ${sessionStorage.getItem('token')}`}})
       .then(res => {
-        dispatch(login(res.data))
+        dispatch(add_user(res.data))
+        dispatch(carrega_foto(res.data.thumbnail))
       })
   };
 };
-  const login = (values) => {
-      return { type: 'LOGIN', values };
+  
+  
+  const add_token = (values) => {
+      return { type: 'ADD_TOKEN', values };
   };
-  const user_name = (values) => {
-      return { type: 'USER_NAME', values };
+  
+  const add_user = (values) => {
+      return { type: 'ADD_USER', values };
   };
   
   const carrega_foto = (values) => {
@@ -26,9 +30,9 @@ const busca_user = (token) => {
   };
 
   export default { 
-    login, 
+    add_token, 
     edit, 
-    user_name, 
+    add_user, 
     carrega_foto,
     busca_user,
    };

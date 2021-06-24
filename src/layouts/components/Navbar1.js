@@ -1,32 +1,12 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { UncontrolledCollapse, DropdownMenu, DropdownItem, DropdownToggle, UncontrolledDropdown, Media, NavbarBrand, Navbar, Nav, Container, Row, Col, Card } from "reactstrap";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { api_file } from '../../services/api.js';
-import userActions from '../../store/actions/userActions'
-import curriculoActions from '../../store/actions/curriculoActions'
-
 
 export default function Navbar1() {
   const rd_user = useSelector( state => state.userReducer)
-  const rd_curriculo = useSelector( state => state.curriculoReducer)
-  const dispatch = useDispatch()
 
-  function load_curriculo(){
-    if(rd_user.logged?._id){
-      dispatch(curriculoActions.busca_curriculo(rd_user.logged._id))
-    }
-  }
-
-  useEffect(() => {
-    if(!rd_user.logged){
-      dispatch(userActions.busca_user())
-    }
-    load_curriculo()
-    console.log(rd_user.logged)
-    console.log(rd_curriculo)
-  }, [rd_user])
-  
   return (
     <>
       <header className="header-global">

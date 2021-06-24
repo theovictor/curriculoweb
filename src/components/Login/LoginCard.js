@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Button, Card, CardHeader, CardBody, FormGroup, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Container, Col, FormFeedback, Row } from 'reactstrap';
 import { useFormik } from 'formik';
 import { useHistory, Link } from "react-router-dom";
@@ -10,9 +10,33 @@ import userActions from '../../store/actions/userActions'
 import curriculoActions from '../../store/actions/curriculoActions'
 import NotificationAlert from "react-notification-alert";
 
+
 export default function LoginCard() {
   const notifica = useRef()
   const dispatch = useDispatch()
+
+
+  // const notify = (type, msg) => {
+  //   const options = {
+  //     place: 'tc',
+  //     message: (
+  //       <div className="alert-text">
+  //         <span className="alert-title" data-notify="title">
+  //           {''}
+  //          Aviso
+  //         </span>
+  //         <span data-notify="message">{msg}</span>
+  //       </div>
+  //     ),
+  //     type: type,
+  //     icon: "ni ni-bell-55",
+  //     autoDismiss: 3
+  //   };
+  //   notifica.current.notificationAlert(options)
+  // };
+
+  
+  
 
   const formik = useFormik({
     initialValues: {
@@ -27,47 +51,29 @@ export default function LoginCard() {
   const history = useHistory();
   const routeChange = () => { history.push('/dados_iniciais') }
 
-  const notify = (type, msg) => {
-    const options = {
-      place: 'tc',
-      message: (
-        <div className="alert-text">
-          <span className="alert-title" data-notify="title">
-            {''}
-           Aviso
-          </span>
-          <span data-notify="message">{msg}</span>
-        </div>
-      ),
-      type: type,
-      icon: "ni ni-bell-55",
-      autoDismiss: 3
-    };
-    notifica.current.notificationAlert(options)
-  };
-
   const btLogin = () => {
     const { email, password } = formik.values;
     const loginUser = { 'email': email, 'senha': password };
     if (email != '' && password != '') {
       axios.post(`${api_login}`, loginUser)
         .then(res => {
-          // console.log(res)
           sessionStorage.setItem('token', res.data.token);
           sessionStorage.setItem('notifica', 1);
           dispatch(userActions.carrega_foto(res.data.user.thumbnail))
-          dispatch(userActions.login(res.data));
+          dispatch(userActions.add_token(res.data.token));
+          dispatch(userActions.add_user(res.data.user));
           dispatch(curriculoActions.busca_curriculo(res.data.user._id))
           routeChange();
+          // notify('success', 'Sucesso!')
         }).catch( err => {
-          notify('danger', 'Email ou Senha Inválidos!')
+          // notify('danger', 'Email ou Senha Inválidos!')
         })
     }
   }
   
   return (
     <>
-      <div className="rna-wrapper"><NotificationAlert ref={notifica} /></div>
+     <div className="rna-wrapper"><NotificationAlert ref={notifica} /></div>
       <Container>
         <Col className="mx-auto" lg="5" md="8">
           <Card className="bg-secondary shadow border-0">

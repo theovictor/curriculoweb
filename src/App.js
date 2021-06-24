@@ -1,27 +1,43 @@
-import React from 'react';
-import "assets/vendor/nucleo/css/nucleo.css";
-import "assets/vendor/font-awesome/css/font-awesome.min.css";
-import "assets/css/argon-design-system-react.css";
-import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
-import 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.css';
-import 'react-notification-alert/dist/animate.css';
-
-import 'assets/css/index-page.css'
-import 'assets/css/dash-page.css'
-import 'assets/css/navbar.css'
-import 'assets/css/profile-page.css'
-import 'assets/css/reset-page.css'
-import 'assets/css/upload-img.css'
-
-import { Provider } from 'react-redux'
-import store from './store'
+import React, {useRef, useEffect} from "react";
 import Routes from './Routes'
+// import { useSelector, useDispatch } from 'react-redux'
+// import userActions from './store/actions/userActions'
+import NotificationAlert from "react-notification-alert";
 
 function App() {
+
+
+  const notifica = useRef()
+
+  const notify = (type, msg) => {
+    const options = {
+      place: 'tc',
+      message: (
+        <div className="alert-text">
+          <span className="alert-title" data-notify="title">
+            {''}
+           Aviso
+          </span>
+          <span data-notify="message">{msg}</span>
+        </div>
+      ),
+      type: type,
+      icon: "ni ni-bell-55",
+      autoDismiss: 3
+    };
+    notifica.current.notificationAlert(options)
+  };
+
+  
+  useEffect(() => {
+    notify('TESTE')
+  }, [])
+
   return (
-    <Provider store={store}>
+    <>
+      <div className="rna-wrapper"><NotificationAlert ref={notifica} /></div>
       <Routes />
-    </Provider>
+    </>
   );
 }
 
