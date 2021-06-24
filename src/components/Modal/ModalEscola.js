@@ -9,6 +9,7 @@ import curriculoActions from '../../store/actions/curriculoActions'
 
 export default function ModalEscola() {
   const curriculoReducer = useSelector(state => state.curriculoReducer) 
+  const rd_user = useSelector(state => state.userReducer) 
   const dispatch = useDispatch()
 
   const headers = {
@@ -51,8 +52,7 @@ export default function ModalEscola() {
   }
 
   const att_tabela = () => {
-    const userID = sessionStorage.getItem('user_id')
-    dispatch(curriculoActions.busca_curriculo(userID))
+    dispatch(curriculoActions.busca_curriculo(rd_user.user._id))
   }
 
   const envia_formacao = () => {

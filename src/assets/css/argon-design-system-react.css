@@ -5083,6 +5083,9 @@ button.bg-darker:focus {
 .border-left {
   border-left: 0.0625rem solid #e9ecef !important; }
 
+.border-left-pink {
+  border-left: 0.0625rem solid #e5adb6 !important; }
+
 .border-0 {
   border: 0 !important; }
 

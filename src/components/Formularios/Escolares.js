@@ -24,8 +24,9 @@ export default function Escolares() {
   }
 
   const att_tabela = () => {
-    dispatch(curriculoActions.busca_curriculo(rd_user.logged._id))
+    dispatch(curriculoActions.busca_curriculo(rd_user.user._id))
   }
+
 
   const btnDeletar = (rowId) => {
     axios.delete(`${api_formacao}/delete/${rowId}`, { headers })

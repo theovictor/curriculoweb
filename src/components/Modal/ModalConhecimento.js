@@ -9,6 +9,7 @@ import curriculoActions from '../../store/actions/curriculoActions'
 
 export default function ModalConhecimento() {
   const curriculoReducer = useSelector(state => state.curriculoReducer)
+  const rd_user = useSelector(state => state.userReducer)
   const dispatch = useDispatch()
 
   const headers = {
@@ -33,15 +34,14 @@ export default function ModalConhecimento() {
   });
   
   const limpar = () => {
-    formik.values.conhecimento = '';
+    formik.values.nome = '';
     formik.values.nivel = '';
     formik.values.cursoAdicional = '';
     formik.values.docAdicional = '';
   }
 
   const att_tabela = () => {
-    const userID = sessionStorage.getItem('user_id')
-    dispatch(curriculoActions.busca_curriculo(userID))
+    dispatch(curriculoActions.busca_curriculo(rd_user.user._id))
   }
 
   const envia_conhecimento = () => {
@@ -53,6 +53,7 @@ export default function ModalConhecimento() {
     }, { headers })
       .then(res => {
         att_tabela()
+        limpar()
         // console.log('enviado com sucesso')
       }).catch(err => {
         // console.log(err)

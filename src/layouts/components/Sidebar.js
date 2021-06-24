@@ -9,9 +9,10 @@ export default function Sidebar({ children }) {
 
   const rd_user = useSelector(state => state.userReducer)
   const rd_curriculo = useSelector(state => state.curriculoReducer)
+  console.log(rd_curriculo)
 
   const gera_pdf = () => {
-    console.log('teste')
+    // console.log('teste')
     curriculoPdf(rd_curriculo.show_curriculo)
   }
 

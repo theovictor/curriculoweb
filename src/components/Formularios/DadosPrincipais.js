@@ -15,6 +15,7 @@ export default function DadosPrincipais() {
   // const rd_user = useSelector( state => state.userReducer);
   const [editMode, setEditMode] = useState(true)
   // const dispatch = useDispatch()
+
   const headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
@@ -54,7 +55,7 @@ export default function DadosPrincipais() {
       cidade: yup.string().required('Cidade obrigatório'),
       uf: yup.string().required('Estado (UF) obrigatório'),
     }),
-  });
+  })
   //função que consulta o cep
   const bucas_cep = (ev, setFieldValue) => {
     const { value } = ev.target;
@@ -93,17 +94,12 @@ export default function DadosPrincipais() {
     return setFieldValue('idade', age.toString());
   }
 
-  // const att_tabela = () => {
-  //   const userID = sessionStorage.getItem('user_id')
-  //   dispatch(curriculoActions.busca_curriculo(userID))
-  // }
-
   const envia_curriculo = () => {
     console.log(formik.values)
     axios.post(`${api_curriculo}/create`, {
       nome: formik.values.nome,
       email: formik.values.email,
-      idade: formik.values.idade,
+      // idade: formik.values.idade,
       telefone: formik.values.telefone,
       dataNascimento: formik.values.dataNascimento,
       sexo: formik.values.sexo,
@@ -111,7 +107,7 @@ export default function DadosPrincipais() {
       nacionalidade: formik.values.nacionalidade,
       cep: formik.values.cep,
       logradouro: formik.values.logradouro,
-      numeroCasa: formik.values.numeroCasa,
+      casa: formik.values.numeroCasa,
       bairro: formik.values.bairro,
       cidade: formik.values.cidade,
       estado: formik.values.uf,
@@ -122,13 +118,13 @@ export default function DadosPrincipais() {
       }).catch(err => {
         // console.log(err)
       })
-  };
+  }
 
   const btnDeletar = (id_curriculo) => {
     axios.delete(`${api_curriculo}/delete/${id_curriculo}`, { headers })
       .then(res => {
-        // att_tabela()
         setEditMode(true)
+        // att_tabela()
         // console.log('curriculo apagado com sucesso')
       }).catch(err => {
         // console.log(err + 'falha ao apagar curriculo')
@@ -382,73 +378,85 @@ export default function DadosPrincipais() {
     </>
   )
     :
-  curriculoReducer.show_curriculo?.curriculo? (
+    curriculoReducer.show_curriculo?.curriculo? (
     <>
       <Card>
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-          <h3>{curriculoReducer.show_curriculo.curriculo.nome}</h3>
-          <span>{curriculoReducer.show_curriculo.curriculo.logradouro}, {curriculoReducer.show_curriculo.curriculo.bairro}</span>
-          <span>{curriculoReducer.show_curriculo.curriculo.cidade} - {curriculoReducer.show_curriculo.curriculo.estado}, {curriculoReducer.show_curriculo.curriculo.cep}</span>
-          <span>{curriculoReducer.show_curriculo.curriculo.telefone}, {curriculoReducer.show_curriculo.curriculo.email}</span>
-          <span>{curriculoReducer.show_curriculo.curriculo.nacionalidade} | {curriculoReducer.show_curriculo.curriculo.civil}</span>
-          <hr />
-          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'start', alignItems: 'start', width: '100%', marginLeft: 30 }}>
-            <b>OBJETIVO:</b><p> Descrição do objetivo. </p><br />
-            <b>RESUMO DE QUALIFICAÇÕES:</b>
-            <p> Descrição do objetivo. </p><br />
-            <b>FORMAÇÕES ACADÊMICAS:</b>
-            <div style={{ display: 'flex' }}>
-              {curriculoReducer.show_curriculo?.formacoes ? curriculoReducer.show_curriculo.formacoes.map((item, idx) => (
-                <ul key={idx}>
-                  <li>
-                    <strong>Curso: </strong> {item.curso} <br />
-                    <strong>Início: </strong> {item.dataInicio}<br />
-                    <strong>Término: </strong>{item.dataTermino}<br />
-                    <strong>Período: </strong>{item.periodo}º<br />
-                    <strong>Turno: </strong>{item.turno}<br />
-                    <strong>Status: </strong>{item.status}
-                  </li>
-                </ul>
-              )) : null}
-            </div><br />
-            <b>CURSOS:</b>
-            <div style={{ display: 'flex' }}>
-              {curriculoReducer.show_curriculo?.conhecimento ? curriculoReducer.show_curriculo?.conhecimento.map((item, idx) => (
-                <ul key={idx}>
-                  <li>
-                    <strong>Curso: </strong> {item.cursoAdicional} <br />
-                    <strong>Nível: </strong> {item.nivel}<br />
-                  </li>
-                </ul>
-              )) : null}
-            </div><br />
-            <b>Documentos Adicionais:</b>
-            <div style={{ display: 'flex' }}>
-              {curriculoReducer.show_curriculo?.conhecimento ? curriculoReducer.show_curriculo?.conhecimento.map((item, idx) => (
-                <ul key={idx}>
-                  <li>
-                    <strong>Documento Adicional: </strong> {item.docAdicional} <br />
-                  </li>
-                </ul>
-              )) : null}
-            </div>
-          </div>
-          <Button
-            className="btn-icon float-right mb-2"
-            color="success"
-            onClick={() => setEditMode(true)}>
-            <span className="btn-inner--icon">
-              <i className="ni ni-check-bold ml--2" />
-            </span>
-            <span className="btn-inner--text ml-2">Editar</span>
-          </Button>
-          <Button className="mb-3" color="danger" type="button" onClick={() => btnDeletar(curriculoReducer.show_curriculo.curriculo._id)}>
-            <span className="btn-inner--text ml-2">Apagar Currículo</span>
-          </Button>
-        </div>
+        <CardBody>
+          <Row className="m-0">{curriculoReducer.show_curriculo.curriculo.nome}</Row>
+          <Row className="m-0">
+            <Col md="4">
+              <Row>{curriculoReducer.show_curriculo.curriculo.email}</Row>
+              <Row>{curriculoReducer.show_curriculo.curriculo.telefone}</Row>
+              <Row>{curriculoReducer.show_curriculo.curriculo.civil}</Row>
+            </Col>
+            <Col className="border-left-pink" md="1"/>
+            <Col md="4">
+              <Row>{curriculoReducer.show_curriculo.curriculo.cidade} - {curriculoReducer.show_curriculo.curriculo.estado}</Row>
+              <Row>{curriculoReducer.show_curriculo.curriculo.logradouro} - {curriculoReducer.show_curriculo.curriculo.casa} - {curriculoReducer.show_curriculo.curriculo.bairro}</Row>
+              <Row>{curriculoReducer.show_curriculo.curriculo.nacionalidade}</Row>
+            </Col>
+          </Row>
+          <Label>Objetivo</Label>
+          <hr className="my-1" color="pink"/>
+          <Row></Row>
+          <Label>Formações Acadêmicas</Label>
+          <hr className="my-1" color="pink"/>
+          <Row className="m-0">
+            {curriculoReducer.show_curriculo?.formacoes ? curriculoReducer.show_curriculo.formacoes.map((item, idx) => (
+              <ul key={idx}>
+                <li>
+                  <strong>Curso: </strong> {item.curso} <br />
+                  <strong>Início: </strong> {item.dataInicio}<br />
+                  <strong>Término: </strong>{item.dataTermino}<br />
+                  <strong>Período: </strong>{item.periodo}º<br />
+                  <strong>Turno: </strong>{item.turno}<br />
+                  <strong>Status: </strong>{item.status}
+                </li>
+              </ul>
+            )) : null}
+          </Row>
+          <Label>Cursos Complementares</Label>
+          <hr className="my-1" color="pink"/>
+          <Row className="m-0">
+            {curriculoReducer.show_curriculo?.conhecimento ? curriculoReducer.show_curriculo?.conhecimento.map((item, idx) => (
+              <ul key={idx}>
+                <li>
+                  <strong>Curso: </strong> {item.cursoAdicional} <br />
+                  <strong>Nível: </strong> {item.nivel}<br />
+                </li>
+              </ul>
+            )) : null}
+          </Row>
+          <Label>Experiências Profissionais</Label>
+          <hr className="my-1" color="pink"/>
+          <Row className="m-0">
+            {curriculoReducer.show_curriculo?.experiencias ? curriculoReducer.show_curriculo?.experiencias.map((item, idx) => (
+              <ul key={idx}>
+                <li>
+                  <strong>Nome: </strong>{item.nome}<br/>
+                  <strong>Local: </strong>{item.local}<br/>
+                  <strong>Atividade: </strong>{item.atividades}<br/>
+                  <strong>Início: </strong>{item.dataInicio}<br/>
+                  <strong>Término: </strong>{item.dataTermino}<br/>
+                </li>
+              </ul>
+            )) : null}
+          </Row>
+          <Label>Conhecimentos Adicionais</Label>
+          <hr className="my-1" color="pink"/>
+          <Row className="m-0">
+            {curriculoReducer.show_curriculo?.conhecimento ? curriculoReducer.show_curriculo?.conhecimento.map((item, idx) => (
+              <ul key={idx}>
+                <li>
+                  <strong>Documento Adicional: </strong> {item.docAdicional} <br />
+                </li>
+              </ul>
+            )) : null}
+          </Row>
+        </CardBody>
       </Card>
     </>
-  ) 
+  )
     :
   (
     <>
