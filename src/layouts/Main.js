@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardBody, Container, Row, Col } from 'reactstrap';
+import { Card, CardBody, Container, Row, Col, Spinner } from 'reactstrap';
 import { useHistory } from "react-router-dom";
-import isLoged from "helpers/isLoged";
-import NotificationAlert from "react-notification-alert";
+import { useSelector, useDispatch } from 'react-redux'
+import {useNotify} from '../hooks/useNotify'
 import Navbar from "./components/Navbar1";
 import Sidebar from "./components/Sidebar";
-import { useSelector, useDispatch } from 'react-redux'
-import userActions from "store/actions/userActions";
+import NotificationAlert from "react-notification-alert";
+// import userActions from "store/actions/userActions";
 import curriculoActions from "store/actions/curriculoActions";
-import {useNotify} from '../hooks/useNotify'
-
-
+import isLoged from "helpers/isLoged";
 
 export default function Main({ children }) {
 
@@ -29,13 +27,12 @@ export default function Main({ children }) {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     if (isLoged()) {
-      if(!rd_user.logged){
-        const token = sessionStorage.getItem('token')
-        dispatch(userActions.busca_user())
-        dispatch(userActions.add_token(token))
-        setIsLoading(false) 
-      }
-      
+      // if(!rd_user.logged){
+        //   const token = sessionStorage.getItem('token')
+        //   dispatch(userActions.busca_user())
+        //   dispatch(userActions.add_token(token))
+        // }
+        setIsLoading(false)
     } else {
       routeChange()
     }
@@ -53,15 +50,13 @@ export default function Main({ children }) {
       }
   }, [rd_user])
 
-
   return (
     <>
     <div className="rna-wrapper"><NotificationAlert ref={notify.notifica} /></div>
-    {isLoading ? <h1>Carregando...</h1>
+    {isLoading ? <Spinner color="primary"/>
       :
       <>
         <Navbar />
-        
         <div className="wrapper">
           <section className="section section-shaped section-lg">
             <div className="shape shape-style-1 bg-gradient-gray">

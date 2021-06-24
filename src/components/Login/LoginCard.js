@@ -36,7 +36,6 @@ export default function LoginCard() {
       axios.post(`${api_login}`, loginUser)
         .then(res => {
           sessionStorage.setItem('token', res.data.token);
-          sessionStorage.setItem('notifica', 1);
           dispatch(userActions.carrega_foto(res.data.user.thumbnail))
           dispatch(userActions.add_token(res.data.token));
           dispatch(userActions.add_user(res.data.user));

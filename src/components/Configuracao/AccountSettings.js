@@ -52,7 +52,7 @@ export default function AccountSettings() {
             <Card className="card-profile shadow">
               <section className="text-center">
                 <Upload avatar />
-                <h3 className="nome mt--4">{rd_user.logged?.nome? rd_user.logged.nome : rd_user.logged?.user?.nome? rd_user.logged.user.nome : null}</h3>
+                <h3 className="nome mt--4">{rd_user.user?.nome? rd_user.user.nome : null}</h3>
               </section>
             </Card>
           </Col>

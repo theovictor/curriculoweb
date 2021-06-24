@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { UncontrolledCollapse, DropdownMenu, DropdownItem, DropdownToggle, UncontrolledDropdown, Media, NavbarBrand, Navbar, Nav, Container, Row, Col, Card } from "reactstrap";
 import { Link } from "react-router-dom";
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { api_file } from '../../services/api.js';
+import userActions from "store/actions/userActions";
+import curriculoActions from "store/actions/curriculoActions";
 
 export default function Navbar1() {
+
   const rd_user = useSelector( state => state.userReducer)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if(!rd_user.logged){
+      const token = sessionStorage.getItem('token')
+      dispatch(userActions.busca_user())
+      dispatch(userActions.add_token(token))
+    }
+  }, [])
+  
+  useEffect(() => {
+    if (rd_user.user)
+    dispatch(curriculoActions.busca_curriculo(rd_user.user._id))
+    console.log(rd_user.user)
+  }, [rd_user])
 
   return (
     <>
@@ -44,7 +62,7 @@ export default function Navbar1() {
                       </span>
                       <Media className="ml-2 mr-1 d-lg-block">
                         <span className="mb-0 text-sm font-weight-bold">
-                          {rd_user.logged?.nome? rd_user.logged.nome : rd_user.logged?.user?.nome? rd_user.logged.user.nome : null}
+                          {rd_user.user?.nome? rd_user.user.nome : null}
                         </span>
                       </Media>
                     </Media>
@@ -101,7 +119,7 @@ export default function Navbar1() {
                           </span>
                           <Media className="ml-1 mr-1 d-lg-block">
                             <span className="mb-0 text-sm font-weight-bold" id="nome">
-                              {rd_user.logged?.nome? rd_user.logged.nome : rd_user.logged?.user?.nome? rd_user.logged.user.nome : null}
+                              {rd_user.user?.nome? rd_user.user.nome : null}
                             </span>
                           </Media>
                         </Media>

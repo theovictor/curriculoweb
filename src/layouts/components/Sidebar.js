@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { Card, CardBody, Row, Col, ListGroup, ListGroupItem } from 'reactstrap';
 import { api_file } from '../../services/api.js';
 import { Link } from "react-router-dom";
@@ -14,10 +14,6 @@ export default function Sidebar({ children }) {
     console.log('teste')
     curriculoPdf(rd_curriculo.show_curriculo)
   }
-
-  // useEffect(() => {
-  //   console.log(rd_user)
-  // }, [rd_user])
 
   return (
     <>
@@ -39,7 +35,7 @@ export default function Sidebar({ children }) {
           </Row>
           <CardBody className="pt-0">
             <div className="text-center">
-              <h3 className="nome mt--6">{rd_user.logged?.nome ? rd_user.logged.nome : rd_user.logged?.user?.nome ? rd_user.logged.user.nome : null}</h3>
+              <h3 className="nome mt--6">{rd_user.user?.nome ? rd_user.user.nome : null}</h3>
               <hr className="my-4" />
               <Col className="text-left">
                 <ListGroup>
