@@ -1,8 +1,6 @@
-import React, { useState, useRef } from 'react'
+import React, { useRef } from 'react'
 
 export const useNotify = () => {
-
-
   const notifica = useRef()
 
   const notify = (type, msg) => {
@@ -23,7 +21,6 @@ export const useNotify = () => {
     };
     notifica.current.notificationAlert(options)
   };
-
 
   return {
     notify,

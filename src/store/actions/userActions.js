@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { api_user } from '../../services/api'
-// requisição de login
 
 const busca_user = (token) => {
   return dispatch => {
@@ -11,7 +10,6 @@ const busca_user = (token) => {
       })
   };
 };
-  
   
   const add_token = (values) => {
       return { type: 'ADD_TOKEN', values };

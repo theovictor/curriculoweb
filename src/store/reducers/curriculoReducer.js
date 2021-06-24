@@ -8,10 +8,8 @@ export const initialState = {
   modal_conhecimento: false,
   modal_experiencia: false,
 }
- //  curriculoReducer.js
 const curriculoReducer = (state = initialState, action) => {
   switch (action.type) {
-    //  case 'INDEX': return { ...state, dados_api: action.values }; // sempre que precisar alterar o state, tem que fazer a desestruturação para add a action dentro do state
     case 'SHOW_CURRICULO': return { ...state, show_curriculo: action.values };
     case 'SHOW_FORMACAO': return { ...state, show_formacao: action.values };
     case 'SHOW_CONHECIMENTO': return { ...state, show_conhecimento: action.values };

@@ -1,6 +1,6 @@
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 // inicio curriculo 

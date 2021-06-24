@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
-import { Button, Modal, Input, Form, Row, Col, FormGroup, FormFeedback, Label, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
+import React from 'react';
+import { Button, Modal, Input, Form, Row, Col, FormGroup, Label, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
 import { useFormik } from 'formik';
-import * as yup from 'yup';
+// import * as yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios';
 import { api_conhecimento } from '../../services/api.js';

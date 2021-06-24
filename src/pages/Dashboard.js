@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef} from "react";
 import { useHistory } from "react-router-dom";
-
 import isLoged from "helpers/isLoged";
 import NotificationAlert from "react-notification-alert";
 import DashNavbar from "components/Navbars/DashNavbar.js";
@@ -22,7 +21,6 @@ export default function Dashboard(){
       document.body.classList.remove("dashboard");
     };
   }, []);
-
 
   if(!isLoged()){routeChange()};
   

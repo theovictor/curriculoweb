@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardBody, Container, Row, Col } from 'reactstrap';
 import { useHistory } from "react-router-dom";
 import isLoged from "helpers/isLoged";
@@ -10,9 +10,7 @@ import userActions from "store/actions/userActions";
 import curriculoActions from "store/actions/curriculoActions";
 import {useNotify} from '../hooks/useNotify'
 
-document.body.classList.add("dashboard");
-window.scrollTo(0, 0);
-document.body.scrollTop = 0;
+
 
 export default function Main({ children }) {
 
@@ -27,6 +25,9 @@ export default function Main({ children }) {
   }
 
   useEffect(() => {
+    document.body.classList.add("dashboard");
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
     if (isLoged()) {
       if(!rd_user.logged){
         const token = sessionStorage.getItem('token')
@@ -37,6 +38,9 @@ export default function Main({ children }) {
       
     } else {
       routeChange()
+    }
+    return function cleanup() {
+      document.body.classList.remove("dashboard");
     }
   }, [])
 

@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, Card, CardHeader, Form, FormFeedback, InputGroup, InputGroupAddon, Row, Col, Container, CardBody } from 'reactstrap';
 import TextField from '@material-ui/core/TextField';
 import { useHistory } from "react-router-dom";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, 
+  // useDispatch 
+} from 'react-redux'
 // import userActions from '../../store/actions/userActions'
 import isLoged from "helpers/isLoged";
 import Upload from 'components/Upload/Upload'
@@ -139,5 +141,5 @@ export default function AccountSettings() {
         </Row>
       </Container>
     </>
-  );
+  )
 }

@@ -8,7 +8,7 @@ import DadosPrincipais from './components/Formularios/DadosPrincipais';
 import Escolares from './components/Formularios/Escolares';
 import Conhecimentos from './components/Formularios/Conhecimentos';
 import Experiencias from './components/Formularios/Experiencias';
-import Profile from "pages/Profile";
+// import Profile from "pages/Profile";
 import Configuracao from "pages/Configuracao";
 import Contato from "pages/Contato";
 import ResetPage from 'pages/ResetPage';
@@ -16,7 +16,6 @@ import ResetPage from 'pages/ResetPage';
 
 const Routes = () => {
   return (
-    
     <BrowserRouter>
         <Switch>
           <Redirect exact from="/" to="/login"/>
@@ -31,7 +30,6 @@ const Routes = () => {
           <Route exact path="/reset" component={ResetPage}/>
         </Switch>
     </BrowserRouter>
-  
   );
 }
 

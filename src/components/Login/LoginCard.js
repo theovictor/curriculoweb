@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import { Button, Card, CardHeader, CardBody, FormGroup, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Container, Col, FormFeedback, Row } from 'reactstrap';
 import { useFormik } from 'formik';
 import { useHistory, Link } from "react-router-dom";
@@ -13,32 +13,8 @@ import { useNotify } from "hooks/useNotify";
 
 
 export default function LoginCard() {
-  const notifica = useRef()
   const dispatch = useDispatch()
   const notify = useNotify()
-
-
-  // const notify = (type, msg) => {
-  //   const options = {
-  //     place: 'tc',
-  //     message: (
-  //       <div className="alert-text">
-  //         <span className="alert-title" data-notify="title">
-  //           {''}
-  //          Aviso
-  //         </span>
-  //         <span data-notify="message">{msg}</span>
-  //       </div>
-  //     ),
-  //     type: type,
-  //     icon: "ni ni-bell-55",
-  //     autoDismiss: 3
-  //   };
-  //   notifica.current.notificationAlert(options)
-  // };
-
-  
-  
 
   const formik = useFormik({
     initialValues: {

@@ -15,9 +15,9 @@ export default function Sidebar({ children }) {
     curriculoPdf(rd_curriculo.show_curriculo)
   }
 
-  useEffect(() => {
-    console.log(rd_user)
-  }, [rd_user])
+  // useEffect(() => {
+  //   console.log(rd_user)
+  // }, [rd_user])
 
   return (
     <>
