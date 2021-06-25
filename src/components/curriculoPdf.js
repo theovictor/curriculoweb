@@ -7,6 +7,9 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 // inicio curriculo 
 const curriculoPdf = props => {
+
+  let periodo = 'Período';
+
   console.log(props)
   const { curriculo, conhecimento, experiencias, formacoes } = props
 
@@ -23,7 +26,7 @@ const curriculoPdf = props => {
             bold: 20,
             fontSize: 23,
             color: 'black',
-            text: `${curriculo.nome}`,
+            text: `${curriculo.nome}`, style: 'quote'
           },
 
           {
@@ -39,23 +42,41 @@ const curriculoPdf = props => {
         columnGap: 150,
       },
       '\n',
-      {text: 'Objetivo'},
+      {text: 'Objetivo', style: 'header'},
       { canvas: [{ type: 'line', x1: 0, y1: 5, x2: 595 - 2 * 40, y2: 5, lineWidth: 1 }] },
       '\n',
-      {text: 'Formação Acadêmica'},
+      {text: 'Formação Acadêmica', style: 'header'},
       { canvas: [{ type: 'line', x1: 0, y1: 5, x2: 595 - 2 * 40, y2: 5, lineWidth: 1 }] },
       '\n',
-      formacoes.map((item, idx) => [{ text: `Instituição: ${item.instituicao} - Período: ${item.periodo}º - Turno: ${item.turno} - Status: ${item.status} `,}]), '\n',
-      {text: 'Conhecimento Complementares'},
+
+      formacoes.map((item, idx) => [{ text: `Instituição: ${item.instituicao} - ${item.curso} ${item.periodo ? `- ${periodo}: ${item.periodo}º` : ""} - Turno: ${item.turno} - Status: ${item.status} `,}]), '\n',
+      
+      {text: 'Conhecimento Complementares', style: 'header'},
       { canvas: [{ type: 'line', x1: 0, y1: 5, x2: 595 - 2 * 40, y2: 5, lineWidth: 1 }] }, '\n',
       conhecimento.map((item, idx) => [{ text: `${item.nome} - ${item.nivel}`, }]),
       '\n',
-      {text: 'Experiências Profissionais'},
+      {text: 'Experiências Profissionais', style: 'header'},
       { canvas: [{ type: 'line', x1: 0, y1: 5, x2: 595 - 2 * 40, y2: 5, lineWidth: 1 }] }, '\n',
-      experiencias.map((item, idx) => [{ text: `Cargo: ${item.nome} \nLocal: ${item.local} \n Atividade: ${item.atividades} `,}]), '\n',
+       {text: 'Experiências Profissionais', style: 'header'}, experiencias.map((item, idx) => [{ text: `Cargo: ${item.nome} \nLocal: ${item.local} \n Atividade: ${item.atividades} `,}]), '\n',
 
       '\n',
-    ]
+    ],
+    styles: {
+      header: {
+        fontSize: 15,
+        bold: true
+      },
+      subheader: {
+        fontSize: 15,
+        bold: true
+      },
+      quote: {
+        italics: true
+      },
+      small: {
+        fontSize: 8
+      }
+    } 
   }
 
   // const imgTeste = '../assets/img/logo.png'
