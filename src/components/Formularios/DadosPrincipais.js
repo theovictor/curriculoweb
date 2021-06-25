@@ -380,7 +380,7 @@ export default function DadosPrincipais() {
     :
     curriculoReducer.show_curriculo?.curriculo? (
     <>
-      <Card>
+      {/* <Card> */}
         <CardBody>
           <Row className="m-0">{curriculoReducer.show_curriculo.curriculo.nome}</Row>
           <Row className="m-0">
@@ -402,30 +402,49 @@ export default function DadosPrincipais() {
           <Label>Formações Acadêmicas</Label>
           <hr className="my-1" color="pink"/>
           <Row className="m-0">
-            {curriculoReducer.show_curriculo?.formacoes ? curriculoReducer.show_curriculo.formacoes.map((item, idx) => (
-              <ul key={idx}>
-                <li>
-                  <strong>Curso: </strong> {item.curso} <br />
-                  <strong>Início: </strong> {item.dataInicio}<br />
-                  <strong>Término: </strong>{item.dataTermino}<br />
-                  <strong>Período: </strong>{item.periodo}º<br />
-                  <strong>Turno: </strong>{item.turno}<br />
-                  <strong>Status: </strong>{item.status}
-                </li>
-              </ul>
-            )) : null}
+            {curriculoReducer.show_curriculo?.formacoes ? curriculoReducer.show_curriculo.formacoes.map((item, idx) => {
+              if(item.dataInicio === ""){
+                return(
+                  <Col md="4">
+                    <Card key={idx} className="border p-2 mb-1 shadow">
+                      <Label>Instituição: {item.instituicao}</Label>
+                      <Label>Ensino: {item.curso}</Label>
+                      <Label>Status: {item.status}</Label>
+                    </Card>
+                  </Col>             
+                )
+              }else{
+                return(
+                  <Col md="4">
+                    <Card key={idx} className="border p-2 mb-1 shadow">
+                      <Label>Instituição: {item.instituicao}</Label>
+                      <Label>Curso: {item.curso}</Label>
+                      <Label>Início: {item.dataInicio}</Label>
+                      <Label>Término: {item.dataTermino}</Label>
+                      <Label>Período: {item.periodo}</Label>
+                      <Label>Turno: {item.turno}</Label>
+                      <Label>Status: {item.status}</Label>
+                    </Card>
+                  </Col>
+                )
+              }
+            }) : null}
           </Row>
           <Label>Cursos Complementares</Label>
           <hr className="my-1" color="pink"/>
           <Row className="m-0">
-            {curriculoReducer.show_curriculo?.conhecimento ? curriculoReducer.show_curriculo?.conhecimento.map((item, idx) => (
-              <ul key={idx}>
-                <li>
-                  <strong>Curso: </strong> {item.cursoAdicional} <br />
-                  <strong>Nível: </strong> {item.nivel}<br />
-                </li>
-              </ul>
-            )) : null}
+            {curriculoReducer.show_curriculo?.conhecimento ? curriculoReducer.show_curriculo?.conhecimento.map((item, idx) => {
+              if(item.cursoAdicional != ""){
+                return(
+                  <ul key={idx}>
+                    <li>
+                      <strong>Curso: </strong> {item.cursoAdicional} <br />
+                      <strong>Nível: </strong> {item.nivel}<br />
+                    </li>
+                  </ul>
+                )
+              }
+            }) : null}
           </Row>
           <Label>Experiências Profissionais</Label>
           <hr className="my-1" color="pink"/>
@@ -445,16 +464,20 @@ export default function DadosPrincipais() {
           <Label>Conhecimentos Adicionais</Label>
           <hr className="my-1" color="pink"/>
           <Row className="m-0">
-            {curriculoReducer.show_curriculo?.conhecimento ? curriculoReducer.show_curriculo?.conhecimento.map((item, idx) => (
-              <ul key={idx}>
-                <li>
-                  <strong>Documento Adicional: </strong> {item.docAdicional} <br />
-                </li>
-              </ul>
-            )) : null}
+            {curriculoReducer.show_curriculo?.conhecimento ? curriculoReducer.show_curriculo?.conhecimento.map((item, idx) => {
+              if(item.docAdicional != ""){
+                return(
+                  <ul key={idx}>
+                    <li>
+                    <strong>Documento Adicional: </strong> {item.docAdicional} <br />
+                    </li>
+                  </ul>
+                )
+              }
+            }) : null}
           </Row>
         </CardBody>
-      </Card>
+      {/* </Card> */}
     </>
   )
     :

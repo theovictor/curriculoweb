@@ -18,7 +18,6 @@ export default function ModalExperiencia() {
     'Authorization': `Bearer ${sessionStorage.getItem('token')}`
   }
 
-  // variaveis do formulario.
   const formik = useFormik({
     initialValues: {
       nome: '',
@@ -27,12 +26,11 @@ export default function ModalExperiencia() {
       dataInicio: '',
       dataTermino: '',
     },
-    //validação dos campos do formulario.
     validationSchema: yup.object({
       nome: yup.string().required('O campo Nome é obrigatório.'),
-      atividade: yup.string().required('O campo Atividade é obrigatório.'),
-      dataInicio: yup.string().required('O campo Data de Início é obrigatório.'),
-      dataTermino: yup.string().required('O campo Data de Término é obrigatório.'),
+      // atividade: yup.string().required('O campo Atividade é obrigatório.'),
+      // dataInicio: yup.string().required('O campo Data de Início é obrigatório.'),
+      // dataTermino: yup.string().required('O campo Data de Término é obrigatório.'),
     }),
   });
 
@@ -113,33 +111,47 @@ export default function ModalExperiencia() {
                     </InputGroup>
                 </FormGroup>
                 <FormGroup className="mb-3">
-                  <Label className="form-control-label required" htmlFor="atividade">Atividade</Label>
+                  <Label className="form-control-label" htmlFor="atividade">Atividade</Label>
                   <Input className="form-control-alternative" id="atividades" placeholder="Digite aqui as atividades" type="textarea" rows="3"
-                    invalid={formik.touched.atividades && formik.errors.atividades ? true : false}
+                    // invalid={formik.touched.atividades && formik.errors.atividades ? true : false}
                     {...formik.getFieldProps('atividades')}/>
-                  <FormFeedback>{formik.touched.atividades && formik.errors.atividades ? formik.errors.atividades : null}</FormFeedback>
+                  {/* <FormFeedback>{formik.touched.atividades && formik.errors.atividades ? formik.errors.atividades : null}</FormFeedback> */}
                 </FormGroup>
               </Col>
             </Row>
             <Row>
               <Col>
                 <FormGroup>
-                  <Label className=" form-control-label required" htmlFor="dataInicio">Data de Início</Label>
-                  <Input className="form-control-alternative" id="dataInicio" type="date"
-                    invalid={formik.touched.dataInicio && formik.errors.dataInicio ? true : false}
-                    {...formik.getFieldProps('dataInicio')}
-                  />
-                  <FormFeedback>{formik.touched.dataInicio && formik.errors.dataInicio ? formik.errors.dataInicio : null}</FormFeedback>
+                  <Label className=" form-control-label" htmlFor="dataInicio">Ano de Início</Label>
+                  <InputGroup className="input-group-alternative">
+                    <Input className="form-control-alternative" id="dataInicio" type="text" placeholder="Ano de início"
+                      // invalid={formik.touched.dataInicio && formik.errors.dataInicio ? true : false}
+                      {...formik.getFieldProps('dataInicio')}
+                    />
+                    <InputGroupAddon addonType="append">
+                      <InputGroupText>
+                        <i className="ni ni-calendar-grid-58"/>
+                      </InputGroupText>
+                    </InputGroupAddon>
+                  </InputGroup>
+                  {/* <FormFeedback>{formik.touched.dataInicio && formik.errors.dataInicio ? formik.errors.dataInicio : null}</FormFeedback> */}
                 </FormGroup>
               </Col>
               <Col>
                 <FormGroup>
-                  <Label className=" form-control-label required" htmlFor="dataTermino">Date de Término</Label>
-                  <Input className="form-control-alternative" id="dataTermino" type="date"
-                    invalid={formik.touched.dataTermino && formik.errors.dataTermino ? true : false}
-                    {...formik.getFieldProps('dataTermino')}
-                  />
-                  <FormFeedback>{formik.touched.dataTermino && formik.errors.dataTermino ? formik.errors.dataTermino : null}</FormFeedback>
+                  <Label className=" form-control-label" htmlFor="dataTermino">Ano de Término</Label>
+                  <InputGroup className="input-group-alternative">
+                    <Input className="form-control-alternative" id="dataTermino" type="text" placeholder="Ano de término"
+                      // invalid={formik.touched.dataTermino && formik.errors.dataTermino ? true : false}
+                      {...formik.getFieldProps('dataTermino')}
+                    />
+                    <InputGroupAddon addonType="append">
+                      <InputGroupText>
+                        <i className="ni ni-calendar-grid-58"/>
+                      </InputGroupText>
+                    </InputGroupAddon>
+                  </InputGroup>
+                  {/* <FormFeedback>{formik.touched.dataTermino && formik.errors.dataTermino ? formik.errors.dataTermino : null}</FormFeedback> */}
                 </FormGroup>
               </Col>
             </Row>
