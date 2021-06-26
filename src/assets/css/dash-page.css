@@ -33,6 +33,23 @@
   content: " *";
   color: red;
 }
+.status-required::before{
+  content: "Status: ";
+  color: red;
+}
+.titulos-curriculo{
+  font-family: cursive!important;
+  font-size: 20px!important;
+  font-weight: bold!important;
+  font-style: italic!important;
+}
+.titulo-doc-E-curso{
+  font-family: cursive!important;
+  font-size: 17px!important;
+  font-weight: bold;
+  font-style: italic;
+  color: #5e72e4;
+}
 .dashboard .rna-wrapper .alert {
   display: flex!important;
   max-width: 600px;
@@ -63,4 +80,9 @@
 .dashboard .nome{
   font-style: italic;
   font-family: cursive;
+}
+@media(max-width: 768px){
+  .Cursos-Docs{
+    display: block;
+  }
 }
