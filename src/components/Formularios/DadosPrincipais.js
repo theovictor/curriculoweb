@@ -11,7 +11,7 @@ import axios from "axios";
 // import userActions from '../../store/actions/userActions'
 
 export default function DadosPrincipais() {
-  const [editMode, setEditMode] = useState(true)
+  const [editMode, setEditMode] = useState(false)
   const curriculoReducer = useSelector(state => state.curriculoReducer)
   // const rd_user = useSelector( state => state.userReducer);
   // const dispatch = useDispatch()
@@ -111,6 +111,7 @@ export default function DadosPrincipais() {
       bairro: formik.values.bairro,
       cidade: formik.values.cidade,
       estado: formik.values.uf,
+      objetivo: formik.values.objetivo,
     }, { headers })
       .then(res => {
         setEditMode(false)
@@ -124,7 +125,6 @@ export default function DadosPrincipais() {
     axios.delete(`${api_curriculo}/delete/${id_curriculo}`, { headers })
       .then(res => {
         setEditMode(true)
-        // att_tabela()
         // console.log('curriculo apagado com sucesso')
       }).catch(err => {
         // console.log(err + 'falha ao apagar curriculo')
@@ -155,6 +155,7 @@ export default function DadosPrincipais() {
       formik.setFieldValue('bairro', curriculoReducer.show_curriculo.curriculo.bairro ? curriculoReducer.show_curriculo.curriculo.bairro : '')
       formik.setFieldValue('cidade', curriculoReducer.show_curriculo.curriculo.cidade ? curriculoReducer.show_curriculo.curriculo.cidade : '')
       formik.setFieldValue('uf', curriculoReducer.show_curriculo.curriculo.estado ? curriculoReducer.show_curriculo.curriculo.estado : '')
+      formik.setFieldValue('objetivo', curriculoReducer.show_curriculo.curriculo.objetivo ? curriculoReducer.show_curriculo.curriculo.objetivo : '')
     } else {
       setEditMode(true)
     }
@@ -407,7 +408,13 @@ export default function DadosPrincipais() {
         <hr className="my-1" color="pink"/>
         <Label className="titulos-curriculo">Objetivo</Label>
         <hr className="my-1" color="pink"/>
-        <Row className="m-0 mb-3">O objetivo vai AQUI</Row>
+        <Row className="m-0 mb-3">
+          <Col>
+            <Card className="border p-2 mb-1 shadow" style={{minHeight: '6rem'}}>
+              {curriculoReducer.show_curriculo.curriculo.objetivo}
+            </Card>
+          </Col>
+        </Row>
         <hr className="my-1" color="pink"/>
         <Label className="titulos-curriculo">Formações Acadêmicas</Label>
         <hr className="my-1" color="pink"/>
@@ -529,11 +536,11 @@ export default function DadosPrincipais() {
         <Row className="justify-content-center mt-4">
           <Button className="btn-icon mb-2 mr-4 bg-gradient-success text-white" onClick={() => setEditMode(true)}>
             <span className="btn-inner--icon">
-              <i className="ni ni-check-bold ml--2" />
+              <i className="fa fa-pencil ml--2"/>
             </span>
             <span className="btn-inner--text ml-2">Editar</span>
           </Button>
-          <Button className="btn-icon mb-2 ml-3 bg-gradient-danger text-white" onClick={() => btnDeletar(curriculoReducer.show_curriculo.curriculo._id)}>
+          <Button className="btn-icon mb-2 ml-3 bg-gradient-danger text-white" onClick={() => {btnDeletar(curriculoReducer.show_curriculo.curriculo._id);}}>
             <span className="btn-inner--icon">
               <i className="ni ni-basket ml--2" />
             </span>

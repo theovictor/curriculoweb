@@ -22,7 +22,7 @@ export default function Navbar1() {
   useEffect(() => {
     if (rd_user.user)
     dispatch(curriculoActions.busca_curriculo(rd_user.user._id))
-    console.log(rd_user.user)
+    // console.log(rd_user.user)
   }, [rd_user])
 
   return (

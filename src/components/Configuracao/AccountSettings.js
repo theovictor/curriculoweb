@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { Button, Card, CardHeader, Form, FormFeedback, InputGroup, InputGroupAddon, Row, Col, Container, CardBody } from 'reactstrap';
 import TextField from '@material-ui/core/TextField';
 import { useHistory } from "react-router-dom";
@@ -13,21 +13,17 @@ import Upload from 'components/Upload/Upload'
 import '../../assets/css/settings-page.css'
 
 export default function AccountSettings() {
-  const [enableNome, setEnableNome] = useState(true);
-  const [enablePassword, setEnablePassword] = useState(true);
-  const [enableConfirmPass, setEnableConfirmPass] = useState('d-none');
+  const history = useHistory();
+  const routeChange = () => { history.push('/') }
+  if (!isLoged()) { routeChange() }
 
   const rd_user = useSelector( state => state.userReducer);
-  
   // const dispatch = useDispatch();
 
-  const history = useHistory();
-  const routeChange = () => {
-    history.push('/');
-  }
   const formik = useFormik({
     initialValues: {
-      user: '',
+      nome: '',
+      email: '',
       password: '',
       confirmPassword: '',
     },
@@ -37,12 +33,18 @@ export default function AccountSettings() {
         then: yup.string().oneOf(
           [yup.ref("password")],
           "Ambas as senhas devem ser iguais!"
-        )
-      }),
+          )
+        }),
+      })
     })
-  })
+    
 
-  if (!isLoged()) { routeChange() };
+  useEffect(() => {
+    if (rd_user.user) {
+      formik.setFieldValue('nome', rd_user.user.nome ?  rd_user.user.nome : '')
+      formik.setFieldValue('email', rd_user.user.email ?  rd_user.user.email : '')
+    }
+  }, [rd_user])
 
   return (
     <>
@@ -73,16 +75,31 @@ export default function AccountSettings() {
                         <InputGroupAddon className="align-self-center" addonType="append">
                           <i className="ni ni-single-02 mr-3"/>
                         </InputGroupAddon>
-                        <TextField id="user" label="Nome" size="small" variant="outlined" disabled={enableNome}
-                          {...formik.getFieldProps('user')} />
-                        <InputGroupAddon addonType="append">
-                          <Button className="btn-icon ml-2 rounded-circle" color="success" size="sm"
-                            onClick={() => setEnableNome(!enableNome)}>
+                        <TextField id="nome" label="Nome" size="small" variant="outlined" disabled {...formik.getFieldProps('nome')} style={{width: '20rem'}}/>
+                        {/* <InputGroupAddon addonType="append">
+                          <Button className="btn-icon ml-2 rounded-circle" color="success" size="sm" disabled>
                             <span className="btn-inner--icon">
                               <i className="fa fa-3x fa-pencil"/>
                             </span>
                           </Button>
+                        </InputGroupAddon> */}
+                      </InputGroup>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col className="align-self-baseline mb-1">
+                      <InputGroup className="account mb-3 justify-content-center">
+                        <InputGroupAddon className="align-self-center" addonType="append">
+                          <i className="ni ni-email-83 mr-3"/>
                         </InputGroupAddon>
+                        <TextField id="email" label="E-mail" size="small" variant="outlined" disabled {...formik.getFieldProps('email')} style={{width: '20rem'}}/>
+                        {/* <InputGroupAddon addonType="append">
+                          <Button className="btn-icon ml-2 rounded-circle" color="success" size="sm" disabled>
+                            <span className="btn-inner--icon">
+                              <i className="fa fa-3x fa-pencil"/>
+                            </span>
+                          </Button>
+                        </InputGroupAddon> */}
                       </InputGroup>
                     </Col>
                   </Row>
@@ -92,42 +109,39 @@ export default function AccountSettings() {
                         <InputGroupAddon className="align-self-center" addonType="append">
                           <i className="ni ni-lock-circle-open mr-3"/>
                         </InputGroupAddon>
-                        <TextField id="password" label="Senha" size="small" variant="outlined" disabled={enablePassword} type="password"
-                          {...formik.getFieldProps('password')} />
-                        <InputGroupAddon addonType="append">
-                          <Button className="btn-icon ml-2 rounded-circle" color="success" size="sm"
-                            onClick={() => (setEnablePassword(!enablePassword), setEnableConfirmPass(''))}>
+                        <TextField id="password" label="Nova Senha" size="small" variant="outlined" type="password" disabled {...formik.getFieldProps('password')} style={{width: '20rem'}}/>
+                        {/* <InputGroupAddon addonType="append">
+                          <Button className="btn-icon ml-2 rounded-circle" color="success" size="sm" disabled>
                             <span className="btn-inner--icon">
                               <i className="fa fa-3x fa-pencil"/>
                             </span>
                           </Button>
-                        </InputGroupAddon>
+                        </InputGroupAddon> */}
                       </InputGroup>
                     </Col>
                   </Row>
-                  <Row className={`justify-content-center ${enableConfirmPass}`}>
+                  <Row className="justify-content-center">
                     <Col className="align-self-baseline mb-1">
                       <InputGroup className="account mb-3 justify-content-center">
                         <InputGroupAddon className="align-self-center" addonType="append">
                           <i className="ni ni-lock-circle-open mr-3"/>
                         </InputGroupAddon>
-                        <TextField id="confirmPassword" label="Comfirmar Senha" size="small" variant="outlined" type="password"
+                        <TextField id="confirmPassword" label="Comfirmar Senha" size="small" variant="outlined" type="password" disabled
                           error={formik.touched.confirmPassword && formik.errors.confirmPassword ? true : false}
-                          {...formik.getFieldProps('confirmPassword')} />
-                        <InputGroupAddon addonType="append">
-                          <Button className="btn-icon ml-2 rounded-circle" color="danger" size="sm"
-                            onClick={() => setEnableConfirmPass('d-none')}>
+                          {...formik.getFieldProps('confirmPassword')} style={{width: '20rem'}}/>
+                        {/* <InputGroupAddon addonType="append">
+                          <Button className="btn-icon ml-2 rounded-circle" color="danger" size="sm" disabled>
                             <span className="btn-inner--icon">
                               <i className="fa fa-3x fa-times-circle"/>
                             </span>
                           </Button>
-                        </InputGroupAddon>
+                        </InputGroupAddon> */}
                         <FormFeedback>{formik.touched.confirmPassword && formik.errors.confirmPassword ? formik.errors.confirmPassword : null}</FormFeedback>
                       </InputGroup>
                     </Col>
                   </Row>
                   <Row className="justify-content-center">
-                    <Button className="btn-icon float-right mt-2" color="success" onClick={() => { }}>
+                    <Button className="btn-icon float-right mt-2 bg-gradient-success text-white" onClick={() => { }} disabled>
                       <span className="btn-inner--icon">
                         <i className="ni ni-check-bold ml--2" />
                       </span>
