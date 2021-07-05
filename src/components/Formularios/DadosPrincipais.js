@@ -181,7 +181,7 @@ export default function DadosPrincipais() {
     }
   }, [curriculoReducer.show_curriculo])
 
-  return editMode ? (
+  return editMode? (
     <>
       <CardHeader className="bg-secondary border-0">
         <Row className="align-items-center">
