@@ -9,12 +9,13 @@ import axios from 'axios'
 import userActions from '../../store/actions/userActions'
 import curriculoActions from '../../store/actions/curriculoActions'
 import NotificationAlert from "react-notification-alert";
+import { useNotify } from "hooks/useNotify";
 
 export default function LoginCard() {
-  const notifica = useRef()
   const history = useHistory()
   const dispatch = useDispatch()
   const routeChange = () => { history.push('/dados_iniciais') }
+  const notify = useNotify()
   const formik = useFormik({
     initialValues: {
       userName: '',
@@ -37,24 +38,6 @@ export default function LoginCard() {
       acceptTerms: yup.bool().oneOf([true], 'Você deve concordar com os Termos antes de cadastrar.'),
     })
   });
-  const notify = (type, msg) => {
-    const options = {
-      place: 'tc',
-      message: (
-        <div className="alert-text">
-          <span className="alert-title" data-notify="title">
-            {''}
-           Aviso
-          </span>
-          <span data-notify="message">{msg}</span>
-        </div>
-      ),
-      type: type,
-      icon: "ni ni-bell-55",
-      autoDismiss: 3
-    };
-    notifica.current.notificationAlert(options)
-  };
   const register = () => {
     const { userName, email, password, changePassword, acceptTerms } = formik.values;
     const user = { 'nome': userName, 'email': email, 'senha': password };
@@ -64,13 +47,12 @@ export default function LoginCard() {
           if (res.status == 200) {
             if (res.data.token != null) {
               sessionStorage.setItem('token', res.data.token);
-              sessionStorage.setItem('nome', res.data.user.nome);
-              sessionStorage.setItem('user_id', res.data.user._id);
-              sessionStorage.setItem('thumbnail', res.data.user.thumbnail);
-              sessionStorage.setItem('notifica', 1);
-              dispatch(userActions.login(res.data));
+              dispatch(userActions.carrega_foto(res.data.user.thumbnail))
+              dispatch(userActions.add_token(res.data.token));
+              dispatch(userActions.add_user(res.data.user));
               dispatch(curriculoActions.busca_curriculo(res.data.user._id))
               routeChange();
+              dispatch(userActions.add_controle());
             }
           }
         }).catch(error => {
@@ -83,7 +65,7 @@ export default function LoginCard() {
   }
   return (
     <>
-      <div className="rna-wrapper"><NotificationAlert ref={notifica} /></div>
+      <div className="rna-wrapper"><NotificationAlert ref={notify.notifica} /></div>
       <Container>
         <Col className="mx-auto" lg="5" md="8">
           <Card className="bg-secondary shadow border-0">

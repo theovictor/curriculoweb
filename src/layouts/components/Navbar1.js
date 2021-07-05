@@ -7,7 +7,6 @@ import userActions from "store/actions/userActions";
 import curriculoActions from "store/actions/curriculoActions";
 
 export default function Navbar1() {
-
   const rd_user = useSelector( state => state.userReducer)
   const dispatch = useDispatch()
 
