@@ -87,7 +87,7 @@ export default function LoginCard() {
                         <i className="ni ni-circle-08" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input className="form-control-alternative" placeholder="Nome" id="userName" type="text"
+                    <Input autoFocus className="form-control-alternative" placeholder="Nome" id="userName" type="text"
                       invalid={formik.touched.userName && formik.errors.userName ? true : false}
                       {...formik.getFieldProps('userName')} />
                     <FormFeedback>{formik.touched.userName && formik.errors.userName ? formik.errors.userName : null}</FormFeedback>
