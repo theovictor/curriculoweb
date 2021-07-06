@@ -1,28 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useFormik } from 'formik';
 import { Input, Form, Row, Col, FormGroup, Button, FormFeedback, Label, Card, CardHeader, CardBody, ListGroup, ListGroupItem, CardTitle } from "reactstrap";
-import { useSelector,
-  // useDispatch
- } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { api_curriculo } from '../../services/api'
-import * as yup from 'yup';
 import axios from "axios";
 import MaskedInput from 'react-text-mask'
-// import curriculoActions from '../../store/actions/curriculoActions'
-// import userActions from '../../store/actions/userActions'
+import curriculoActions from '../../store/actions/curriculoActions'
 
 export default function DadosPrincipais() {
   const [editMode, setEditMode] = useState(false)
   const curriculoReducer = useSelector(state => state.curriculoReducer)
-  // const rd_user = useSelector( state => state.userReducer);
-  // const dispatch = useDispatch()
+  const rd_user = useSelector( state => state.userReducer);
+  const dispatch = useDispatch()
 
   const headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${sessionStorage.getItem('token')}`
   }
-
   const formik = useFormik({
     initialValues: {
       nome: '',
@@ -40,25 +35,8 @@ export default function DadosPrincipais() {
       cidade: '',
       uf: '',
       objetivo: '',
-    },
-    validationSchema: yup.object({
-      name: yup.string().required('Nome obrigatório'),
-      email: yup.string().required('Email obrigatório'),
-      idade: yup.string().required('Idade obrigatória'),
-      telefone: yup.string().required('Telefone de telefone obrigatório'),
-      dataNascimento: yup.string().required('Data de Nascimento obrigatório'),
-      sexo: yup.string().required('Sexo obrigatório'),
-      estadoCivil: yup.string().required('Estado Civil obrigatório'),
-      nacionalidade: yup.string().required('Nacionalidade obrigatório'),
-      cep: yup.string().required('CEP obrigatório'),
-      logradouro: yup.string().required('Logradouro obrigatório'),
-      numeroCasa: yup.string().required('Nº da Casa obrigatório'),
-      bairro: yup.string().required('Barrio obrigatório'),
-      cidade: yup.string().required('Cidade obrigatório'),
-      uf: yup.string().required('Estado (UF) obrigatório'),
-    }),
+    }
   })
-  //função que consulta o cep
   const bucas_cep = (ev, setFieldValue) => {
     const { value } = ev.target;
     const cep = value?.replace(/[^0-9]/g, '');
@@ -74,7 +52,6 @@ export default function DadosPrincipais() {
         setFieldValue('uf', data.uf);
       });
   }
-  // função que calcula a idade, capturando a data fornecida no campo de dataNascimento.
   const calc_idade = (setFieldValue) => {
     const dataInfo = formik.values.dataNascimento;
     const anoAtual = new Date().getFullYear();
@@ -95,7 +72,23 @@ export default function DadosPrincipais() {
     }
     return setFieldValue('idade', age.toString());
   }
-
+  const limpar = () => {
+    formik.values.nome = '';
+    formik.values.email = '';
+    formik.values.idade = '';
+    formik.values.telefone = '';
+    formik.values.dataNascimento = '';
+    formik.values.sexo = '';
+    formik.values.estadoCivil = '';
+    formik.values.nacionalidade = '';
+    formik.values.cep = '';
+    formik.values.logradouro = '';
+    formik.values.numeroCasa = '';
+    formik.values.bairro = '';
+    formik.values.cidade = '';
+    formik.values.uf = '';
+    formik.values.objetivo = '';
+  }
   const envia_curriculo = () => {
     axios.post(`${api_curriculo}/create`, {
       nome: formik.values.nome,
@@ -114,9 +107,9 @@ export default function DadosPrincipais() {
       estado: formik.values.uf,
       objetivo: formik.values.objetivo,
     }, { headers })
-      .then(res => {
-        setEditMode(false)
-        console.log('enviado com sucesso')
+    .then(res => {
+      setEditMode(false)
+      dispatch(curriculoActions.busca_curriculo(rd_user.user._id))
       }).catch(err => {
         console.log(err)
       })
@@ -141,30 +134,28 @@ export default function DadosPrincipais() {
     }, { headers })
       .then(res => {
         setEditMode(false)
-        console.log('atualizado com sucesso')
+        dispatch(curriculoActions.busca_curriculo(rd_user.user._id))
       }).catch(err => {
-        console.log(err)
+        // console.log(err)
       })
   }
-
   const btnDeletar = (id_curriculo) => {
     axios.delete(`${api_curriculo}/delete/${id_curriculo}`, { headers })
       .then(res => {
-        setEditMode(true)
-        // console.log('curriculo apagado com sucesso')
+        limpar()
+        setEditMode(false)
+        dispatch(curriculoActions.busca_curriculo(rd_user.user._id))
       }).catch(err => {
         // console.log(err + 'falha ao apagar curriculo')
       })
   }
-
   // preenche os dados q estão no reducer para os inputs do formulário
   useEffect(() => {
     if (curriculoReducer.show_curriculo && curriculoReducer.show_curriculo.curriculo) {
-      setEditMode(false)
       formik.setFieldValue('nome', curriculoReducer.show_curriculo.curriculo.nome ? curriculoReducer.show_curriculo.curriculo.nome : '')
       formik.setFieldValue('email', curriculoReducer.show_curriculo.curriculo.email ? curriculoReducer.show_curriculo.curriculo.email : '')
       formik.setFieldValue('telefone', curriculoReducer.show_curriculo.curriculo.telefone ? curriculoReducer.show_curriculo.curriculo.telefone : '')
-      formik.setFieldValue('idade', curriculoReducer.show_curriculo.dataInicio ? curriculoReducer.show_curriculo.curriculo.dataInicio : '')
+      formik.setFieldValue('idade', curriculoReducer.show_curriculo.curriculo.idade ? curriculoReducer.show_curriculo.curriculo.idade : '')
       formik.setFieldValue('dataNascimento', curriculoReducer.show_curriculo.curriculo.dataNascimento ? curriculoReducer.show_curriculo.curriculo.dataNascimento : '')
       formik.setFieldValue('sexo', curriculoReducer.show_curriculo.curriculo.sexo ? curriculoReducer.show_curriculo.curriculo.sexo : '')
       formik.setFieldValue('estadoCivil', curriculoReducer.show_curriculo.curriculo.civil ? curriculoReducer.show_curriculo.curriculo.civil : '')
@@ -176,19 +167,17 @@ export default function DadosPrincipais() {
       formik.setFieldValue('cidade', curriculoReducer.show_curriculo.curriculo.cidade ? curriculoReducer.show_curriculo.curriculo.cidade : '')
       formik.setFieldValue('uf', curriculoReducer.show_curriculo.curriculo.estado ? curriculoReducer.show_curriculo.curriculo.estado : '')
       formik.setFieldValue('objetivo', curriculoReducer.show_curriculo.curriculo.objetivo ? curriculoReducer.show_curriculo.curriculo.objetivo : '')
-    } else {
-      setEditMode(true)
     }
   }, [curriculoReducer.show_curriculo])
-
-  return editMode? (
+ 
+  return editMode ?(
     <>
       <CardHeader className="bg-secondary border-0">
-        <Row className="align-items-center">
-          <Col xs="8">
-            <h3 className="mb-0">Meu Curriculo</h3>
-          </Col>
-        </Row>
+      <Row className="align-items-center">
+        <Col xs="8">
+          <h3 className="mb-0">Meu Curriculo</h3>
+        </Col>
+      </Row>
       </CardHeader>
       <CardBody>
         <Form>
@@ -197,7 +186,7 @@ export default function DadosPrincipais() {
               <Row className="m-0 mt-2">
               <Col lg="5">
                 <FormGroup>
-                  <Label className="form-control-label required" htmlFor="name">Nome</Label>
+                  <Label className="form-control-label" htmlFor="name">Nome</Label>
                   <Input className="form-control border-light shadow" id="nome" placeholder="Nome" type="text"
                     invalid={formik.touched.nome && formik.errors.nome ? true : false}
                     {...formik.getFieldProps('nome')} />
@@ -206,7 +195,7 @@ export default function DadosPrincipais() {
               </Col>
               <Col lg="4">
                 <FormGroup>
-                  <Label className="form-control-label required" htmlFor="email">Email</Label>
+                  <Label className="form-control-label" htmlFor="email">Email</Label>
                   <Input className="form-control border-light shadow" id="email" placeholder="examplo@email.com" type="email"
                     invalid={formik.touched.email && formik.errors.email ? true : false}
                     {...formik.getFieldProps('email')} />
@@ -215,7 +204,7 @@ export default function DadosPrincipais() {
               </Col>
               <Col lg="3">
                 <FormGroup>
-                  <Label className="form-control-label required" htmlFor="sexo">Sexo</Label>
+                  <Label className="form-control-label" htmlFor="sexo">Sexo</Label>
                   <Input className="form-control border-light shadow" id="sexo" type="select" data-trigger=""
                     invalid={formik.touched.sexo && formik.errors.sexo ? true : false}
                     {...formik.getFieldProps('sexo')}>
@@ -230,7 +219,7 @@ export default function DadosPrincipais() {
               <Row className="m-0">
               <Col lg="4">
                 <FormGroup>
-                  <Label className=" form-control-label required" htmlFor="telefone">Telefone</Label>
+                  <Label className=" form-control-label" htmlFor="telefone">Telefone</Label>
                   <MaskedInput
                     mask={['(', /[1-9]/, /\d/, ')', ' ', /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', '-', ' ', /\d/, /\d/, /\d/, /\d/]}
                     className="form-control border-light shadow" id="telefone" type="text" placeholder="(DDD) 0 0000-0000"
@@ -240,7 +229,7 @@ export default function DadosPrincipais() {
               </Col>
               <Col lg="4">
                 <FormGroup>
-                  <Label className=" form-control-label required" htmlFor="dataNascimento">Date de Nascimento</Label>
+                  <Label className=" form-control-label" htmlFor="dataNascimento">Date de Nascimento</Label>
                   <Input className="form-control shadow border-light" id="dataNascimento" type="date"
                     invalid={formik.touched.dataNascimento && formik.errors.dataNascimento ? true : false}
                     {...formik.getFieldProps('dataNascimento')}
@@ -251,7 +240,7 @@ export default function DadosPrincipais() {
               </Col>
               <Col lg="2">
                 <FormGroup>
-                  <Label className=" form-control-label required" htmlFor="idade">Idade</Label>
+                  <Label className=" form-control-label" htmlFor="idade">Idade</Label>
                   <Input className="form-control border-light shadow" id="idade" type="text" disabled
                     {...formik.getFieldProps('idade')}
                     invalid={formik.touched.idade && formik.errors.idade ? true : false} />
@@ -262,7 +251,7 @@ export default function DadosPrincipais() {
               <Row className="m-0">
               <Col lg="4">
                 <FormGroup>
-                  <Label className=" form-control-label required" htmlFor="estadoCivil">Estado Civil</Label>
+                  <Label className=" form-control-label" htmlFor="estadoCivil">Estado Civil</Label>
                   <Input className="form-control border-light shadow" id="estadoCivil" type="select"
                     invalid={formik.touched.estadoCivil && formik.errors.estadoCivil ? true : false}
                     {...formik.getFieldProps('estadoCivil')}>
@@ -277,7 +266,7 @@ export default function DadosPrincipais() {
               </Col>
               <Col lg="4">
                 <FormGroup>
-                  <Label className=" form-control-label required" htmlFor="nacionalidade">Nacionalidade</Label>
+                  <Label className=" form-control-label" htmlFor="nacionalidade">Nacionalidade</Label>
                   <Input className="form-control border-light shadow" id="nacionalidade" type="text" placeholder="País"
                     invalid={formik.touched.nacionalidade && formik.errors.nacionalidade ? true : false}
                     {...formik.getFieldProps('nacionalidade')} />
@@ -292,8 +281,8 @@ export default function DadosPrincipais() {
               <Row className="m-0 mt-2">
               <Col lg="3">
                 <FormGroup>
-                  <Label className="form-control-label required" htmlFor="cep">CEP</Label>
-                  <Input className="form-control border-light" id="cep" placeholder="CEP" type="text"
+                  <Label className="form-control-label" htmlFor="cep">CEP</Label>
+                  <Input className="form-control border-light shadow" id="cep" placeholder="CEP" type="text"
                     {...formik.getFieldProps('cep')}
                     invalid={formik.touched.cep && formik.errors.cep ? true : false}
                     onBlur={(ev) => bucas_cep(ev, formik.setFieldValue)} />
@@ -302,8 +291,8 @@ export default function DadosPrincipais() {
               </Col>
               <Col lg="3">
                 <FormGroup>
-                  <Label className="form-control-label required" htmlFor="logradouro">Logradouro</Label>
-                  <Input className="form-control border-light" id="logradouro" placeholder="Logradouro" type="text" disabled
+                  <Label className="form-control-label" htmlFor="logradouro">Logradouro</Label>
+                  <Input className="form-control border-light shadow" id="logradouro" placeholder="Logradouro" type="text" disabled
                     {...formik.getFieldProps('logradouro')}
                     invalid={formik.touched.logradouro && formik.errors.logradouro ? true : false} />
                   <FormFeedback>{formik.touched.logradouro && formik.errors.logradouro ? formik.errors.logradouro : null}</FormFeedback>
@@ -311,8 +300,8 @@ export default function DadosPrincipais() {
               </Col>
               <Col lg="2">
                 <FormGroup>
-                  <Label className="form-control-label required" htmlFor="numeroCasa">Nº Casa</Label>
-                  <Input className="form-control border-light" id="numeroCasa" placeholder="nº casa" type="text"
+                  <Label className="form-control-label" htmlFor="numeroCasa">Nº Casa</Label>
+                  <Input className="form-control border-light shadow" id="numeroCasa" placeholder="nº casa" type="text"
                     invalid={formik.touched.numeroCasa && formik.errors.numeroCasa ? true : false}
                     {...formik.getFieldProps('numeroCasa')} />
                   <FormFeedback>{formik.touched.numeroCasa && formik.errors.numeroCasa ? formik.errors.numeroCasa : null}</FormFeedback>
@@ -320,8 +309,8 @@ export default function DadosPrincipais() {
               </Col>
               <Col lg="3">
                 <FormGroup>
-                  <Label className=" form-control-label required" htmlFor="bairro">Bairro</Label>
-                  <Input className="form-control border-light" id="bairro" placeholder="Bairro" type="text" disabled
+                  <Label className=" form-control-label" htmlFor="bairro">Bairro</Label>
+                  <Input className="form-control border-light shadow" id="bairro" placeholder="Bairro" type="text" disabled
                     {...formik.getFieldProps('bairro')}
                     invalid={formik.touched.bairro && formik.errors.bairro ? true : false} />
                   <FormFeedback>{formik.touched.bairro && formik.errors.bairro ? formik.errors.bairro : null}</FormFeedback>
@@ -331,8 +320,8 @@ export default function DadosPrincipais() {
               <Row className="m-0">
               <Col lg="3">
                 <FormGroup>
-                  <Label className=" form-control-label required" htmlFor="cidade">Cidade</Label>
-                  <Input className="form-control border-light" id="cidade" placeholder="Cidade" type="text" disabled
+                  <Label className=" form-control-label" htmlFor="cidade">Cidade</Label>
+                  <Input className="form-control border-light shadow" id="cidade" placeholder="Cidade" type="text" disabled
                     {...formik.getFieldProps('cidade')}
                     invalid={formik.touched.cidade && formik.errors.cidade ? true : false} />
                   <FormFeedback>{formik.touched.cidade && formik.errors.cidade ? formik.errors.cidade : null}</FormFeedback>
@@ -340,8 +329,8 @@ export default function DadosPrincipais() {
               </Col>
               <Col lg="3">
                 <FormGroup>
-                  <Label className=" form-control-label required" htmlFor="uf">UF</Label>
-                  <Input className="form-control border-light" id="uf" placeholder="UF" type="select" disabled
+                  <Label className=" form-control-label" htmlFor="uf">UF</Label>
+                  <Input className="form-control border-light shadow" id="uf" placeholder="UF" type="select" disabled
                     invalid={formik.touched.uf && formik.errors.uf ? true : false}
                     {...formik.getFieldProps('uf')}>
                     <option value={null}>UF</option>
@@ -380,19 +369,36 @@ export default function DadosPrincipais() {
           <Card className="p-2  bg-transparent border-0">
             <CardTitle className="heading-small text-muted">Objetivo</CardTitle>
             <Row className="m-0">
-              <Input className="form-control border-light" id="objetivo" placeholder="Digite aqui o seu objetivo geral." rows="4" type="textarea"
+              <Input className="form-control border-light shadow" id="objetivo" placeholder="Digite aqui o seu objetivo geral." rows="6" type="textarea"
                 {...formik.getFieldProps('objetivo')}/>
             </Row>
           </Card>
           <hr className="line-primary"/>
-          <Row className="justify-content-center m-0">
-            <Button className="btn-icon mb-2 bg-gradient-indigo text-white" onClick={() => { setEditMode(false)}}>
-              <span className="btn-inner--icon">
-                <i className="ni ni-check-bold ml--2" />
-              </span>
-              <span className="btn-inner--text ml-2">Salvar</span>
-            </Button>
-          </Row>
+          {curriculoReducer.edit_mode?
+            <Row className="justify-content-center m-0">
+              <Button className="btn-icon mb-2 bg-gradient-indigo text-white border-0" onClick={att_curriculo}>
+                <span className="btn-inner--icon">
+                  <i className="ni ni-check-bold ml--2" />
+                </span>
+                <span className="btn-inner--text ml-2">Salvar Edição</span>
+              </Button>
+              <Button className="btn-icon mb-2 bg-gradient-warning text-white border-0" onClick={() => {dispatch(curriculoActions.edit_mode(false)); setEditMode(false)}}>
+                <span className="btn-inner--icon">
+                  <i className="ni ni-fat-remove ml--2" />
+                </span>
+                <span className="btn-inner--text ml-2">Cancelar Edição</span>
+              </Button>
+            </Row>
+            :
+            <Row className="justify-content-center m-0">
+              <Button className="btn-icon mb-2 bg-gradient-indigo text-white" onClick={envia_curriculo}>
+                <span className="btn-inner--icon">
+                  <i className="ni ni-check-bold ml--2" />
+                </span>
+                <span className="btn-inner--text ml-2">Salvar Curriculo</span>
+              </Button>
+            </Row>
+          }
         </Form>
       </CardBody>
     </>
@@ -406,7 +412,7 @@ export default function DadosPrincipais() {
           <Col>
             <Row className="justify-content-end">{curriculoReducer.show_curriculo.curriculo.email}</Row>
             <Row className="justify-content-end">{curriculoReducer.show_curriculo.curriculo.telefone}</Row>
-            <Row className="justify-content-end">{curriculoReducer.show_curriculo.curriculo.civil}</Row>
+            <Row className="justify-content-end">{curriculoReducer.show_curriculo.curriculo.civil} - {`${curriculoReducer.show_curriculo.curriculo.idade} Anos`}</Row>
           </Col>
           <Col className="border-left-pink mr-4 ml-4" md="0"/>
           <Col>
@@ -420,9 +426,8 @@ export default function DadosPrincipais() {
         <hr className="my-1" color="pink"/>
         <Row className="m-0 mb-3">
           <Col>
-            <Card className="border p-2 mb-1 shadow" style={{minHeight: '6rem'}}>
-              {curriculoReducer.show_curriculo.curriculo.objetivo}
-            </Card>
+            <Input className="form-control border-0 bg-neutral shadow" rows="6" type="textarea" disabled
+            defaultValue={curriculoReducer.show_curriculo.curriculo.objetivo}/>
           </Col>
         </Row>
         <hr className="my-1" color="pink"/>
@@ -544,13 +549,13 @@ export default function DadosPrincipais() {
           }) : null}
         </Row>
         <Row className="justify-content-center mt-4">
-          <Button className="btn-icon mb-2 mr-4 bg-gradient-success text-white" onClick={() => setEditMode(true)}>
+          <Button className="btn-icon mb-2 mr-4 bg-gradient-success text-white border-0" onClick={() => {dispatch(curriculoActions.edit_mode(true)); setEditMode(true)}}>
             <span className="btn-inner--icon">
               <i className="fa fa-pencil ml--2"/>
             </span>
             <span className="btn-inner--text ml-2">Editar</span>
           </Button>
-          <Button className="btn-icon mb-2 ml-3 bg-gradient-danger text-white" onClick={() => {btnDeletar(curriculoReducer.show_curriculo.curriculo._id);}}>
+          <Button className="btn-icon mb-2 ml-3 bg-gradient-danger text-white border-0" onClick={() => {btnDeletar(curriculoReducer.show_curriculo.curriculo._id)}}>
             <span className="btn-inner--icon">
               <i className="ni ni-basket ml--2" />
             </span>
@@ -564,7 +569,7 @@ export default function DadosPrincipais() {
   (
     <>
       <Row className="justify-content-center mt-8 m-0">
-        <h3 className="text-center">Você não tem nenhum Curriculo Cadastrado.</h3>
+      <h3 className="text-center">Você não tem nenhum Curriculo Cadastrado.</h3>
       </Row>
       <Row className="justify-content-center mt-3 m-0">
         <h4>Cadastre um agora mesmo!</h4>
