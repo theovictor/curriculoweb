@@ -34,7 +34,7 @@ export default function ResetCard() {
                     <i className="ni ni-email-83" />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input placeholder="Email" type="email" id="email"
+                <Input autoFocus placeholder="Email" type="email" id="email"
                   invalid={formik.touched.email && formik.errors.email ? true : false}
                   {...formik.getFieldProps('email')} />
                 <FormFeedback>{formik.touched.email && formik.errors.email ? formik.errors.email : null}</FormFeedback>
