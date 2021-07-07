@@ -141,7 +141,7 @@ export default function AccountSettings() {
                     </Col>
                   </Row>
                   <Row className="justify-content-center">
-                    <Button className="btn-icon float-right mt-2 bg-gradient-success text-white" onClick={() => { }} disabled>
+                    <Button className="btn-icon mb-2 bg-gradient-success text-white border-0" disabled>
                       <span className="btn-inner--icon">
                         <i className="ni ni-check-bold ml--2" />
                       </span>
