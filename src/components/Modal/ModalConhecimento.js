@@ -84,7 +84,7 @@ export default function ModalConhecimento() {
               <Col>
                 <FormGroup className="mb-3">
                   <Label className="form-control-label" htmlFor="conhecimento">Conhecimentos Gerais</Label>
-                    <InputGroup className="input-group-alternative">
+                    <InputGroup className="input-group-alternative shadow">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
                             <i className="ni ni-world"/>
@@ -100,7 +100,7 @@ export default function ModalConhecimento() {
               <Col lg="4">
                 <FormGroup className="mb-3">
                   <Label className="form-control-label" htmlFor="nivel">Nível</Label>
-                    <InputGroup className="input-group-alternative">
+                    <InputGroup className="input-group-alternative shadow">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <i className="ni ni-chart-bar-32"/>
@@ -123,7 +123,7 @@ export default function ModalConhecimento() {
             <Row>
               <Col>
                 <Label className="form-control-label" htmlFor="cursoAdicional">CURSOS COMPLEMENTARES.</Label>
-                <Input className="form-control-alternative" id="cursoAdicional" placeholder="Insira aqui os cursos que você possui." rows="3" type="textarea"
+                <Input className="form-control-alternative shadow" id="cursoAdicional" placeholder="Insira aqui os cursos que você possui." rows="3" type="textarea"
                   {...formik.getFieldProps('cursoAdicional')}/>
               </Col>
             </Row>
@@ -131,22 +131,24 @@ export default function ModalConhecimento() {
             <Row className="mb-3">
               <Col>
                 <Label className="form-control-label" htmlFor="docAdicional">DOCUMENTOS ADICIONAIS.</Label>
-                <Input className="form-control-alternative" id="docAdicional" placeholder="Insira aqui os documentos que você possui." rows="3" type="textarea"
+                <Input className="form-control-alternative shadow" id="docAdicional" placeholder="Insira aqui os documentos que você possui." rows="3" type="textarea"
                   {...formik.getFieldProps('docAdicional')}/>
               </Col>
             </Row>
-            <Button className="btn-icon float-right mt-2" color="success" onClick={() => {envia_conhecimento(); btn_fechar()}}>
-              <span className="btn-inner--icon">
-                <i className="ni ni-check-bold ml--2"/>
-              </span>
-              <span className="btn-inner--text ml-2">Salvar</span>
-            </Button>
-            <Button className="btn-icon float-right mr-3 mt-2" color="danger" onClick={btn_fechar}>
-              <span className="btn-inner--icon">
-                <i className="fa fa-times ml--2"/>
-              </span>
-              <span className="btn-inner--text ml-2">Cancelar</span>
-            </Button>
+            <Row className="justify-content-center">
+              <Button className="btn-icon mt-2 bg-gradient-success text-indigo border-0" onClick={() => {envia_conhecimento(); btn_fechar()}}>
+                <span className="btn-inner--icon">
+                  <i className="ni ni-check-bold ml--2"/>
+                </span>
+                <span className="btn-inner--text ml-2">Salvar</span>
+              </Button>
+              <Button className="btn-icon ml-3 mt-2 bg-gradient-danger text-white border-0" onClick={btn_fechar}>
+                <span className="btn-inner--icon">
+                  <i className="fa fa-times ml--2"/>
+                </span>
+                <span className="btn-inner--text ml-2">Cancelar</span>
+              </Button>
+            </Row>
           </Form>
         </div>
       </Modal>

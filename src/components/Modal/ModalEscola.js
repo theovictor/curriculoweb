@@ -94,8 +94,8 @@ export default function ModalEscola() {
               <div className="modal-body bg-secondary">
                 <h5 className="text-center">Escolha a Instituição</h5>
                 <Row className="m-0 justify-content-center mt-3">
-                  <Button className="mr-4 bg-gradient-teal text-white" onClick={()=> {setEscola(true); setUniversidade(false)}}>Escola</Button>
-                  <Button className="bg-gradient-success text-indigo" onClick={()=> {setUniversidade(true); setEscola(false)}}>Universidade</Button>
+                  <Button className="mr-4 bg-gradient-teal text-white border-0" onClick={()=> {setEscola(true); setUniversidade(false)}}>Escola</Button>
+                  <Button className="bg-gradient-success text-indigo border-0" onClick={()=> {setUniversidade(true); setEscola(false)}}>Universidade</Button>
                 </Row>
                 {escola ? 
                   <>
@@ -103,7 +103,7 @@ export default function ModalEscola() {
                       <Row className="m-0">
                         <FormGroup>
                           <Label className="form-control-label required" htmlFor="instituicao">Escola</Label>
-                          <Input className="form-control-alternative" id="instituicao" placeholder="Nome da Escola" type="text"
+                          <Input className="form-control-alternative shadow" id="instituicao" placeholder="Nome da Escola" type="text"
                             invalid={formik.touched.instituicao && formik.errors.instituicao ? true : false}
                             {...formik.getFieldProps('instituicao')}/>
                           <FormFeedback>{formik.touched.instituicao && formik.errors.instituicao ? formik.errors.instituicao : null}</FormFeedback>
@@ -113,7 +113,7 @@ export default function ModalEscola() {
                         <Col>
                           <FormGroup>
                             <Label className="form-control-label required" htmlFor="curso">Ensino</Label>
-                            <Input className="form-control-alternative" id="curso" type="select"
+                            <Input className="form-control-alternative shadow" id="curso" type="select"
                               invalid={formik.touched.status && formik.errors.status ? true : false}
                               {...formik.getFieldProps('curso')}>
                               <option value={null}>Selecion seu ensino</option>
@@ -126,7 +126,7 @@ export default function ModalEscola() {
                         <Col>
                           <FormGroup>
                             <Label className="form-control-label required" htmlFor="status">Status</Label>
-                            <Input className="form-control-alternative" id="status" type="select"
+                            <Input className="form-control-alternative shadow" id="status" type="select"
                               invalid={formik.touched.status && formik.errors.status ? true : false}
                               {...formik.getFieldProps('status')}>
                               <option value={null}>Status</option>
@@ -138,18 +138,20 @@ export default function ModalEscola() {
                           </FormGroup>
                         </Col>
                       </Row>
-                      <Button className="btn-icon float-right mt-2" color="success" onClick={() => {envia_formacao(); btn_fechar(); setUniversidade(false); setEscola(false)}}>
-                        <span className="btn-inner--icon">
-                          <i className="ni ni-check-bold ml--2"/>
-                        </span>
-                        <span className="btn-inner--text ml-2">Salvar</span>
-                      </Button>
-                      <Button className="btn-icon float-right mr-3 mt-2" color="danger" onClick={() => {btn_fechar(); setUniversidade(false); setEscola(false)}}>
-                        <span className="btn-inner--icon">
-                          <i className="fa fa-times ml--2"/>
-                        </span>
-                        <span className="btn-inner--text ml-2">Cancelar</span>
-                      </Button>
+                      <Row className="justify-content-center">
+                        <Button className="btn-icon mt-2 bg-gradient-success border-0 text-indigo" onClick={() => {envia_formacao(); btn_fechar(); setUniversidade(false); setEscola(false)}}>
+                          <span className="btn-inner--icon">
+                            <i className="ni ni-check-bold ml--2"/>
+                          </span>
+                          <span className="btn-inner--text ml-2">Salvar</span>
+                        </Button>
+                        <Button className="btn-icon ml-3 mt-2 bg-gradient-danger border-0 text-white" onClick={() => {btn_fechar(); setUniversidade(false); setEscola(false)}}>
+                          <span className="btn-inner--icon">
+                            <i className="fa fa-times ml--2"/>
+                          </span>
+                          <span className="btn-inner--text ml-2">Cancelar</span>
+                        </Button>
+                      </Row>
                     </Form>
                   </>
                 : universidade ?
@@ -159,14 +161,14 @@ export default function ModalEscola() {
                         <Col>
                           <FormGroup>
                             <Label className="form-control-label required" htmlFor="instituicao">Universidade</Label>
-                            <Input className="form-control-alternative" id="instituicao" placeholder="Nome da Universidade" type="text"
+                            <Input className="form-control-alternative shadow" id="instituicao" placeholder="Nome da Universidade" type="text"
                               invalid={formik.touched.instituicao && formik.errors.instituicao ? true : false}
                               {...formik.getFieldProps('instituicao')}/>
                             <FormFeedback>{formik.touched.instituicao && formik.errors.instituicao ? formik.errors.instituicao : null}</FormFeedback>
                           </FormGroup>
                           <FormGroup>
                             <Label className="form-control-label required" htmlFor="curso">Curso</Label>
-                            <Input className="form-control-alternative" id="curso" placeholder="Curso" type="text"
+                            <Input className="form-control-alternative shadow" id="curso" placeholder="Curso" type="text"
                               invalid={formik.touched.curso && formik.errors.curso ? true : false}
                               {...formik.getFieldProps('curso')}/>
                             <FormFeedback>{formik.touched.curso && formik.errors.curso ? formik.errors.curso : null}</FormFeedback>
@@ -177,7 +179,7 @@ export default function ModalEscola() {
                         <Col>
                         <FormGroup>
                           <Label className="form-control-label" htmlFor="dataInicio">Ano Início</Label>
-                          <InputGroup className="input-group-alternative">
+                          <InputGroup className="input-group-alternative shadow">
                             <Input className="form-control-alternative" id="dataInicio" type="text" placeholder="Ano de início"
                             // invalid={formik.touched.dataInicio && formik.errors.dataInicio ? true : false}
                             {...formik.getFieldProps('dataInicio')}/>
@@ -193,7 +195,7 @@ export default function ModalEscola() {
                         <Col>
                         <FormGroup>
                           <Label className="form-control-label" htmlFor="dataTermino">Ano Término</Label>
-                          <InputGroup className="input-group-alternative">
+                          <InputGroup className="input-group-alternative shadow">
                             <Input className="form-control-alternative" id="dataTermino" type="text" placeholder="Ano de conclusão"
                               // invalid={formik.touched.dataTermino && formik.errors.dataTermino ? true : false}
                               {...formik.getFieldProps('dataTermino')}/>
@@ -211,7 +213,7 @@ export default function ModalEscola() {
                         <Col>
                           <FormGroup>
                             <Label className="form-control-label" htmlFor="periodo">Período</Label>
-                            <Input className="form-control-alternative" id="periodo" type="select"
+                            <Input className="form-control-alternative shadow" id="periodo" type="select"
                               // invalid={formik.touched.periodo && formik.errors.periodo ? true : false}
                               {...formik.getFieldProps('periodo')}>
                               <option value={null}>Selecione o Período</option>
@@ -232,7 +234,7 @@ export default function ModalEscola() {
                         <Col>
                           <FormGroup>
                             <Label className="form-control-label" htmlFor="turno">Turno</Label>
-                            <Input className="form-control-alternative" id="turno" type="select"
+                            <Input className="form-control-alternative shadow" id="turno" type="select"
                               // invalid={formik.touched.turno && formik.errors.turno ? true : false}
                               {...formik.getFieldProps('turno')}>
                               <option value={null}>Turno</option>
@@ -246,7 +248,7 @@ export default function ModalEscola() {
                         <Col>
                           <FormGroup>
                             <Label className="form-control-label" htmlFor="status">Status</Label>
-                            <Input className="form-control-alternative" id="status" type="select"
+                            <Input className="form-control-alternative shadow" id="status" type="select"
                               // invalid={formik.touched.status && formik.errors.status ? true : false}
                               {...formik.getFieldProps('status')}>
                               <option value={null}>Status</option>
@@ -259,18 +261,20 @@ export default function ModalEscola() {
                           </FormGroup>
                         </Col>
                       </Row>
-                      <Button className="btn-icon float-right mt-2" color="success" onClick={() => {envia_formacao(); btn_fechar(); setUniversidade(false); setEscola(false)}}>
-                        <span className="btn-inner--icon">
-                          <i className="ni ni-check-bold ml--2"/>
-                        </span>
-                        <span className="btn-inner--text ml-2">Salvar</span>
-                      </Button>
-                      <Button className="btn-icon float-right mr-3 mt-2" color="danger" onClick={()=> {btn_fechar(); setUniversidade(false); setEscola(false)}}>
-                        <span className="btn-inner--icon">
-                          <i className="fa fa-times ml--2"/>
-                        </span>
-                        <span className="btn-inner--text ml-2">Cancelar</span>
-                      </Button>
+                      <Row className="justify-content-center">
+                        <Button className="btn-icon mt-2 bg-gradient-success border-0 text-indigo" onClick={() => {envia_formacao(); btn_fechar(); setUniversidade(false); setEscola(false)}}>
+                          <span className="btn-inner--icon">
+                            <i className="ni ni-check-bold ml--2"/>
+                          </span>
+                          <span className="btn-inner--text ml-2">Salvar</span>
+                        </Button>
+                        <Button className="btn-icon ml-3 mt-2 bg-gradient-danger border-0 text-white" onClick={()=> {btn_fechar(); setUniversidade(false); setEscola(false)}}>
+                          <span className="btn-inner--icon">
+                            <i className="fa fa-times ml--2"/>
+                          </span>
+                          <span className="btn-inner--text ml-2">Cancelar</span>
+                        </Button>
+                      </Row>
                     </Form>
                   </>
                 : null}

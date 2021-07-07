@@ -49,7 +49,7 @@ export default function Upload() {
       </Button>
       <input id='file' style={{ display: 'none' }} type="file" onChange={e => setImagem(e.target.files[0])} />
       <br />
-      <Button className="mt-4 btn-img bg-gradient-success text-white" onClick={enviar_imagem}>Salvar</Button>
+      <Button className="mt-4 btn-img bg-gradient-success text-white border-0" onClick={enviar_imagem}>Salvar</Button>
     </>
   )
 }

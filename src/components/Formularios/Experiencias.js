@@ -81,7 +81,7 @@ export default function Experiencias(){
                   formatter: (cellContent, row) => {
                     return (
                       <div className="btnAcoes">
-                        <Button className="btn-icon" color="danger" onClick={() => btnDeletar(row._id)}>
+                        <Button className="btn-icon bg-gradient-danger border-0" color="danger" onClick={() => btnDeletar(row._id)}>
                           <span className="btn-inner--icon">
                             <i className="fa fa-trash-o" />
                           </span>
@@ -94,7 +94,7 @@ export default function Experiencias(){
             >
               {(props) => (<>
                 <div className="table-responsive pt-3">
-                  <Button className="mb-3 ml-3" color="primary" type="button" onClick={btnNovo}>
+                  <Button className="mb-3 ml-3 bg-gradient-primary border-0 text-white" onClick={btnNovo}>
                     <span className="btn-inner--icon">
                       <i className="fa fa-plus-circle ml--2" />
                     </span>

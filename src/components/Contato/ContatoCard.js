@@ -8,7 +8,7 @@ export default function Contato(){
       <Container>
         <Card>
           <Form className="p-3">
-            <CardHeader>
+            <CardHeader className="border-0">
               <CardTitle tag="h4">Envie-nos uma mensagem</CardTitle>
               <small>Entre em contato conosco para saber mais sobre nosso produto e serviço.</small>
             </CardHeader>
@@ -17,7 +17,7 @@ export default function Contato(){
                 <Col md="6">
                   <FormGroup className="">
                     <Label>Primeiro Nome</Label>
-                    <InputGroup>
+                    <InputGroup className="shadow">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <i className="ni ni-circle-08"></i>
@@ -30,7 +30,7 @@ export default function Contato(){
                 <Col md="6">
                   <FormGroup className="">
                     <Label>Segundo Nome</Label>
-                    <InputGroup>
+                    <InputGroup className="shadow">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <i className="ni ni-collection"></i>
@@ -43,7 +43,7 @@ export default function Contato(){
               </Row>
               <FormGroup>
                 <Label>Endereço de Email</Label>
-                <InputGroup>
+                <InputGroup className="shadow">
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
                       <i className="ni ni-email-83"></i>
@@ -54,7 +54,7 @@ export default function Contato(){
               </FormGroup>
               <FormGroup>
                 <Label>Sua Mensagem</Label>
-                <Input id="mensagem" rows="6" type="textarea" />
+                <Input className="shadow" id="mensagem" rows="5" type="textarea" />
               </FormGroup>
               <Row>
                 <Col md="6">
@@ -66,7 +66,7 @@ export default function Contato(){
                   </div>
                 </Col>
                 <Col md="6">
-                  <Button className="pull-right" color="info" type="submit">
+                  <Button className="pull-right bg-gradient-info border-0 text-white" onClick={()=>{alert('Função Desabilitada no Momento.\nTente novamente mais tarde !')}}>
                     Enviar Mensagem
                   </Button>
                 </Col>

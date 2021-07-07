@@ -67,7 +67,7 @@ export default function Conhecimentos() {
                   formatter: (cellContent, row) => {
                     return (
                       <div className="btnAcoes">
-                        <Button className="btn-icon" color="danger" onClick={() => btnDeletar(row._id)}>
+                        <Button className="btn-icon bg-gradient-danger border-0" color="danger" onClick={() => btnDeletar(row._id)}>
                           <span className="btn-inner--icon">
                             <i className="fa fa-trash-o" />
                           </span>
@@ -80,7 +80,7 @@ export default function Conhecimentos() {
             >
               {(props) => (<>
                 <div className="table-responsive pt-3">
-                  <Button className="mb-3 ml-3" color="primary" onClick={btnNovo}>
+                  <Button className="mb-3 ml-3 bg-gradient-primary border-0 text-white" onClick={btnNovo}>
                     <span className="btn-inner--icon">
                       <i className="fa fa-plus-circle ml--2" />
                     </span>
@@ -100,33 +100,37 @@ export default function Conhecimentos() {
         </Row>
         <hr className="line-primary"></hr>
         <Row>
-          <Col className="bg-yellow">
-            <Label className="form-control-label" htmlFor="cursoAdicional">CURSOS COMPLEMENTARES</Label>
-            <div >
-              {rd_curriculo.show_curriculo?.conhecimento? rd_curriculo.show_curriculo.conhecimento.map((item, idx) => {
-                if(item.cursoAdicional != ""){
-                  return(
-                    <ul key={idx}>
-                      <li>{item.cursoAdicional}</li>
-                    </ul>
-                  )
-                }
-              }) : null}
-            </div>
+          <Col>
+            <Card className="border p-2 mb-1 shadow" style={{minHeight: '20vh'}}>
+              <Label className="form-control-label text-center p-1" htmlFor="cursoAdicional">CURSOS COMPLEMENTARES</Label>
+              <div>
+                {rd_curriculo.show_curriculo?.conhecimento? rd_curriculo.show_curriculo.conhecimento.map((item, idx) => {
+                  if(item.cursoAdicional != ""){
+                    return(
+                      <ul key={idx}>
+                        <li>{item.cursoAdicional}</li>
+                      </ul>
+                    )
+                  }
+                }) : null}
+              </div>
+            </Card>
           </Col>
-          <Col className="bg-info">
-            <Label className="form-control-label" htmlFor="cursoAdicional">DOCUMENTOS ADICIONAIS</Label>
-            <div >
-              {rd_curriculo.show_curriculo?.conhecimento ? rd_curriculo.show_curriculo.conhecimento.map((item, idx) => {
-                if(item.docAdicional != ""){
-                  return(
-                    <ul key={idx}>
-                      <li>{item.docAdicional}</li>
-                    </ul>
-                  )
-                }
-              }) : null}
-            </div>
+          <Col>
+            <Card className="border p-2 mb-1 shadow" style={{minHeight: '20vh'}}>
+              <Label className="form-control-label text-center p-1" htmlFor="cursoAdicional">DOCUMENTOS ADICIONAIS</Label>
+              <div >
+                {rd_curriculo.show_curriculo?.conhecimento ? rd_curriculo.show_curriculo.conhecimento.map((item, idx) => {
+                  if(item.docAdicional != ""){
+                    return(
+                      <ul key={idx}>
+                        <li>{item.docAdicional}</li>
+                      </ul>
+                    )
+                  }
+                }) : null}
+              </div>
+            </Card>
           </Col>
         </Row>
       </Container>

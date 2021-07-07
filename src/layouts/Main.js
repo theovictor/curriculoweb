@@ -22,6 +22,10 @@ export default function Main({ children }) {
     history.push('/');
   }
 
+  setTimeout(() => {
+    setIsLoading(false)
+  }, 300);
+
   useEffect(() => {
     document.body.classList.add("dashboard");
     window.scrollTo(0, 0);
@@ -53,7 +57,10 @@ export default function Main({ children }) {
   return (
     <>
     <div className="rna-wrapper"><NotificationAlert ref={notify.notifica} /></div>
-    {isLoading ? <Spinner color="primary"/>
+    {isLoading ? 
+      <div className="d-flex justify-content-center align-items-center" style={{minHeight: '100vh'}}>
+        <Spinner color="primary"/>
+      </div>
       :
       <>
         <Navbar />

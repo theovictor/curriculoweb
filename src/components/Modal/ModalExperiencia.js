@@ -86,7 +86,7 @@ export default function ModalExperiencia() {
               <Col>
                 <FormGroup className="mb-3">
                   <Label className="form-control-label required" htmlFor="nome">Nome</Label>
-                    <InputGroup className="input-group-alternative">
+                    <InputGroup className="input-group-alternative shadow">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
                             <i className="ni ni-badge"/>
@@ -100,7 +100,7 @@ export default function ModalExperiencia() {
                 </FormGroup>
                 <FormGroup className="mb-3">
                   <Label className="form-control-label" htmlFor="local">Local</Label>
-                    <InputGroup className="input-group-alternative">
+                    <InputGroup className="input-group-alternative shadow">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
                             <i className="ni ni-pin-3"/>
@@ -112,7 +112,7 @@ export default function ModalExperiencia() {
                 </FormGroup>
                 <FormGroup className="mb-3">
                   <Label className="form-control-label" htmlFor="atividade">Atividade</Label>
-                  <Input className="form-control-alternative" id="atividades" placeholder="Digite aqui as atividades" type="textarea" rows="3"
+                  <Input className="form-control-alternative shadow" id="atividades" placeholder="Digite aqui as atividades" type="textarea" rows="3"
                     // invalid={formik.touched.atividades && formik.errors.atividades ? true : false}
                     {...formik.getFieldProps('atividades')}/>
                   {/* <FormFeedback>{formik.touched.atividades && formik.errors.atividades ? formik.errors.atividades : null}</FormFeedback> */}
@@ -123,7 +123,7 @@ export default function ModalExperiencia() {
               <Col>
                 <FormGroup>
                   <Label className=" form-control-label" htmlFor="dataInicio">Ano de Início</Label>
-                  <InputGroup className="input-group-alternative">
+                  <InputGroup className="input-group-alternative shadow">
                     <Input className="form-control-alternative" id="dataInicio" type="text" placeholder="Ano de início"
                       // invalid={formik.touched.dataInicio && formik.errors.dataInicio ? true : false}
                       {...formik.getFieldProps('dataInicio')}
@@ -140,7 +140,7 @@ export default function ModalExperiencia() {
               <Col>
                 <FormGroup>
                   <Label className=" form-control-label" htmlFor="dataTermino">Ano de Término</Label>
-                  <InputGroup className="input-group-alternative">
+                  <InputGroup className="input-group-alternative shadow">
                     <Input className="form-control-alternative" id="dataTermino" type="text" placeholder="Ano de término"
                       // invalid={formik.touched.dataTermino && formik.errors.dataTermino ? true : false}
                       {...formik.getFieldProps('dataTermino')}
@@ -155,18 +155,20 @@ export default function ModalExperiencia() {
                 </FormGroup>
               </Col>
             </Row>
-            <Button className="btn-icon float-right mt-2" color="success" type="submit" onClick={() => {envia_experiencia(); btn_fechar()}}>
-              <span className="btn-inner--icon">
-                <i className="ni ni-check-bold ml--2"/>
-              </span>
-              <span className="btn-inner--text ml-2">Salvar</span>
-            </Button>
-            <Button className="btn-icon float-right mr-3 mt-2" color="danger" onClick={btn_fechar}>
-              <span className="btn-inner--icon">
-                <i className="fa fa-times ml--2"/>
-              </span>
-              <span className="btn-inner--text ml-2">Cancelar</span>
-            </Button>
+            <Row className="justify-content-center">
+              <Button className="btn-icon mt-2 bg-gradient-success border-0 text-indigo" onClick={() => {envia_experiencia(); btn_fechar()}}>
+                <span className="btn-inner--icon">
+                  <i className="ni ni-check-bold ml--2"/>
+                </span>
+                <span className="btn-inner--text ml-2">Salvar</span>
+              </Button>
+              <Button className="btn-icon ml-3 mt-2 bg-gradient-danger border-0 text-white" onClick={btn_fechar}>
+                <span className="btn-inner--icon">
+                  <i className="fa fa-times ml--2"/>
+                </span>
+                <span className="btn-inner--text ml-2">Cancelar</span>
+              </Button>
+            </Row>
           </Form>
         </div>
       </Modal>
