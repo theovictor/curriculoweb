@@ -14,7 +14,7 @@ export default function Sidebar({ children }) {
 
   const gera_pdf = () => {
     // console.log('teste')
-    curriculoPdf([rd_curriculo.show_curriculo, rd_user.user])
+    curriculoPdf([rd_curriculo.show_curriculo, rd_user.user, rd_curriculo.idade])
   }
 
   return (

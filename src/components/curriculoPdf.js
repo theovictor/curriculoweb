@@ -8,8 +8,10 @@ const curriculoPdf = props => {
 
   // console.log(props[0])
   // console.log(props[1])
+  // console.log(props[2])
   const { curriculo, conhecimento, experiencias, formacoes } = props[0]
   const { thumbnail } = props[1]
+  const idade  = props[2]
 
   const docDefinition = {
     pageSize: 'A4',
@@ -68,7 +70,7 @@ const curriculoPdf = props => {
               {//dados-contato
                 border:[false,false,false,false],
                 alignment: 'justify',
-                text: `\n» ${curriculo.cidade} - ${curriculo.estado}\n» ${curriculo.nacionalidade} - ${curriculo.civil}\n» ${curriculo.email}\n» ${curriculo.telefone}\n\n`,
+                text: `\n» ${curriculo.cidade} - ${curriculo.estado}\n» ${curriculo.nacionalidade} - ${curriculo.civil} - ${idade} Anos\n» ${curriculo.email}\n» ${curriculo.telefone}\n\n`,
               },
               {//dados-objetivo
                 border:[false,false,false,false],

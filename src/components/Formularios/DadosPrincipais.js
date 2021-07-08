@@ -70,7 +70,10 @@ export default function DadosPrincipais() {
         }
       }
     }
-    return setFieldValue('idade', age.toString());
+    return (
+      dispatch(curriculoActions.idade(age.toString())),
+      setFieldValue('idade', age.toString())
+    );
   }
   const limpar = () => {
     formik.values.nome = '';
@@ -93,7 +96,6 @@ export default function DadosPrincipais() {
     axios.post(`${api_curriculo}/create`, {
       nome: formik.values.nome,
       email: formik.values.email,
-      idade: formik.values.idade,
       telefone: formik.values.telefone,
       dataNascimento: formik.values.dataNascimento,
       sexo: formik.values.sexo,
@@ -110,6 +112,7 @@ export default function DadosPrincipais() {
     .then(res => {
       setEditMode(false)
       dispatch(curriculoActions.busca_curriculo(rd_user.user._id))
+      dispatch(curriculoActions.idade(formik.values.idade))
       }).catch(err => {
         console.log(err)
       })
@@ -118,7 +121,6 @@ export default function DadosPrincipais() {
     axios.put(`${api_curriculo}/update`, {
       nome: formik.values.nome,
       email: formik.values.email,
-      idade: formik.values.idade,
       telefone: formik.values.telefone,
       dataNascimento: formik.values.dataNascimento,
       sexo: formik.values.sexo,
@@ -135,6 +137,8 @@ export default function DadosPrincipais() {
       .then(res => {
         setEditMode(false)
         dispatch(curriculoActions.busca_curriculo(rd_user.user._id))
+        dispatch(curriculoActions.idade(formik.values.idade))
+        console.log('att com sucesso' + curriculoReducer.idade)
       }).catch(err => {
         // console.log(err)
       })
@@ -155,7 +159,7 @@ export default function DadosPrincipais() {
       formik.setFieldValue('nome', curriculoReducer.show_curriculo.curriculo.nome ? curriculoReducer.show_curriculo.curriculo.nome : '')
       formik.setFieldValue('email', curriculoReducer.show_curriculo.curriculo.email ? curriculoReducer.show_curriculo.curriculo.email : '')
       formik.setFieldValue('telefone', curriculoReducer.show_curriculo.curriculo.telefone ? curriculoReducer.show_curriculo.curriculo.telefone : '')
-      formik.setFieldValue('idade', curriculoReducer.show_curriculo.curriculo.idade ? curriculoReducer.show_curriculo.curriculo.idade : '')
+      formik.setFieldValue('idade', curriculoReducer?.idade? curriculoReducer.idade : '')
       formik.setFieldValue('dataNascimento', curriculoReducer.show_curriculo.curriculo.dataNascimento ? curriculoReducer.show_curriculo.curriculo.dataNascimento : '')
       formik.setFieldValue('sexo', curriculoReducer.show_curriculo.curriculo.sexo ? curriculoReducer.show_curriculo.curriculo.sexo : '')
       formik.setFieldValue('estadoCivil', curriculoReducer.show_curriculo.curriculo.civil ? curriculoReducer.show_curriculo.curriculo.civil : '')
@@ -169,7 +173,7 @@ export default function DadosPrincipais() {
       formik.setFieldValue('objetivo', curriculoReducer.show_curriculo.curriculo.objetivo ? curriculoReducer.show_curriculo.curriculo.objetivo : '')
     }
   }, [curriculoReducer.show_curriculo])
- 
+
   return editMode ?(
     <>
       <CardHeader className="bg-secondary border-0">
@@ -412,7 +416,7 @@ export default function DadosPrincipais() {
           <Col>
             <Row className="justify-content-end">{curriculoReducer.show_curriculo.curriculo.email}</Row>
             <Row className="justify-content-end">{curriculoReducer.show_curriculo.curriculo.telefone}</Row>
-            <Row className="justify-content-end">{curriculoReducer.show_curriculo.curriculo.civil} - {`${curriculoReducer.show_curriculo.curriculo.idade} Anos`}</Row>
+            <Row className="justify-content-end">{curriculoReducer.show_curriculo.curriculo.civil} - {`${curriculoReducer.idade? curriculoReducer.idade : ''} Anos`}</Row>
           </Col>
           <Col className="border-left-pink mr-4 ml-4" md="0"/>
           <Col>

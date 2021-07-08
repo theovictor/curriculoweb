@@ -3,14 +3,13 @@ import { Button, Card, CardHeader, CardBody, FormGroup, Form, Input, InputGroup,
 import { useFormik } from 'formik';
 import { useHistory, Link } from "react-router-dom";
 import { api_login } from '../../services/api.js';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import * as yup from 'yup';
 import axios from 'axios';
 import userActions from '../../store/actions/userActions'
 import curriculoActions from '../../store/actions/curriculoActions'
 import NotificationAlert from "react-notification-alert";
 import { useNotify } from "hooks/useNotify";
-
 
 export default function LoginCard() {
   const dispatch = useDispatch()
@@ -45,6 +44,7 @@ export default function LoginCard() {
         }).catch( err => {
           notify.notify('danger', 'Email ou Senha Inválidos!')
         })
+        
     }
   }
   

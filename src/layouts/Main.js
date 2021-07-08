@@ -6,21 +6,17 @@ import {useNotify} from '../hooks/useNotify'
 import Navbar from "./components/Navbar1";
 import Sidebar from "./components/Sidebar";
 import NotificationAlert from "react-notification-alert";
-// import userActions from "store/actions/userActions";
 import curriculoActions from "store/actions/curriculoActions";
 import isLoged from "helpers/isLoged";
 
 export default function Main({ children }) {
-
-  const dispatch = useDispatch()
-  const rd_user = useSelector( state => state.userReducer)
   const history = useHistory();
+  const routeChange = () => {history.push('/')}
+  const rd_user = useSelector( state => state.userReducer)
+  const rd_curriculo = useSelector( state => state.curriculoReducer)
+  const dispatch = useDispatch()
   const notify = useNotify()
   const [isLoading, setIsLoading] = useState(true)
-
-  const routeChange = () => {
-    history.push('/');
-  }
 
   setTimeout(() => {
     setIsLoading(false)
@@ -31,12 +27,7 @@ export default function Main({ children }) {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     if (isLoged()) {
-      // if(!rd_user.logged){
-        //   const token = sessionStorage.getItem('token')
-        //   dispatch(userActions.busca_user())
-        //   dispatch(userActions.add_token(token))
-        // }
-        setIsLoading(false)
+      setIsLoading(false)
     } else {
       routeChange()
     }
@@ -49,11 +40,36 @@ export default function Main({ children }) {
     if (rd_user.user)
     dispatch(curriculoActions.busca_curriculo(rd_user.user._id))
     setIsLoading(false)
-      if(rd_user.controle === 1) {
-        notify.notify('success', 'Login efetuado com sucesso!')
-      }
+    if(rd_curriculo.show_curriculo?.curriculo){
+    setTimeout(() => {
+        const dataInfo = rd_curriculo.show_curriculo.curriculo.dataNascimento;
+        const anoAtual = new Date().getFullYear();
+        const dataInfoParts = dataInfo.split('-');
+        const anoNasc = dataInfoParts[0];
+        const mesNasc = dataInfoParts[1];
+        const diaNasc = dataInfoParts[2];
+        let age = anoAtual - anoNasc;
+        const mesAtual = new Date().getMonth() + 1;
+        if (mesAtual < mesNasc) {
+          age--;
+        } else {
+          if (mesAtual === mesNasc) {
+            if (new Date().getDate() < diaNasc) {
+              age--;
+            }
+          }
+        }
+        return (
+          dispatch(curriculoActions.idade(age.toString()))
+        )
+      }, 100)
+    }
+    if(rd_user.controle === 1) {
+      notify.notify('success', 'Login efetuado com sucesso!')
+    }
   }, [rd_user])
 
+  
   return (
     <>
     <div className="rna-wrapper"><NotificationAlert ref={notify.notifica} /></div>
