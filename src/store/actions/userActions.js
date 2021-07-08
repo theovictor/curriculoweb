@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { api_user } from '../../services/api'
 
-const busca_user = (token) => {
+const busca_user = () => {
   return dispatch => {
     axios.get(api_user, {headers: {Authorization: `Bearer ${sessionStorage.getItem('token')}`}})
       .then(res => {

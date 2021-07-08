@@ -3,7 +3,7 @@ import { Button, Card, CardHeader, CardBody, FormGroup, Form, Input, InputGroup,
 import { useFormik } from 'formik';
 import { useHistory, Link } from "react-router-dom";
 import { api_login } from '../../services/api.js';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import * as yup from 'yup';
 import axios from 'axios';
 import userActions from '../../store/actions/userActions'
@@ -41,6 +41,7 @@ export default function LoginCard() {
           dispatch(curriculoActions.busca_curriculo(res.data.user._id))
           routeChange();
           dispatch(userActions.add_controle());
+          dispatch(userActions.busca_user());
         }).catch( err => {
           notify.notify('danger', 'Email ou Senha Inválidos!')
         })

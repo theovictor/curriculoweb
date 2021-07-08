@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar1";
 import Sidebar from "./components/Sidebar";
 import NotificationAlert from "react-notification-alert";
 import curriculoActions from "store/actions/curriculoActions";
+import userActions from 'store/actions/userActions'
 import isLoged from "helpers/isLoged";
 
 export default function Main({ children }) {
@@ -19,14 +20,41 @@ export default function Main({ children }) {
   const [isLoading, setIsLoading] = useState(true)
 
   setTimeout(() => {
+    if(rd_curriculo.idade === null && rd_curriculo.show_curriculo?.curriculo){
+      const dataInfo = rd_curriculo.show_curriculo.curriculo.dataNascimento;
+      const anoAtual = new Date().getFullYear();
+      const dataInfoParts = dataInfo.split('-');
+      const anoNasc = dataInfoParts[0];
+      const mesNasc = dataInfoParts[1];
+      const diaNasc = dataInfoParts[2];
+      let age = anoAtual - anoNasc;
+      const mesAtual = new Date().getMonth() + 1;
+      if (mesAtual < mesNasc) {
+        age--;
+      } else {
+        if (mesAtual === mesNasc) {
+          if (new Date().getDate() < diaNasc) {
+            age--;
+          }
+        }
+      }
+      return (
+        dispatch(curriculoActions.idade(age.toString()))
+      )
+    }
     setIsLoading(false)
-  }, 300);
+  }, 10);
 
   useEffect(() => {
     document.body.classList.add("dashboard");
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     if (isLoged()) {
+      if(!rd_user.logged){
+        const token = sessionStorage.getItem('token')
+        dispatch(userActions.busca_user())
+        dispatch(userActions.add_token(token))
+      }
       setIsLoading(false)
     } else {
       routeChange()
@@ -40,35 +68,11 @@ export default function Main({ children }) {
     if (rd_user.user)
     dispatch(curriculoActions.busca_curriculo(rd_user.user._id))
     setIsLoading(false)
-    if(rd_curriculo.show_curriculo?.curriculo){
-    setTimeout(() => {
-        const dataInfo = rd_curriculo.show_curriculo.curriculo.dataNascimento;
-        const anoAtual = new Date().getFullYear();
-        const dataInfoParts = dataInfo.split('-');
-        const anoNasc = dataInfoParts[0];
-        const mesNasc = dataInfoParts[1];
-        const diaNasc = dataInfoParts[2];
-        let age = anoAtual - anoNasc;
-        const mesAtual = new Date().getMonth() + 1;
-        if (mesAtual < mesNasc) {
-          age--;
-        } else {
-          if (mesAtual === mesNasc) {
-            if (new Date().getDate() < diaNasc) {
-              age--;
-            }
-          }
-        }
-        return (
-          dispatch(curriculoActions.idade(age.toString()))
-        )
-      }, 100)
-    }
     if(rd_user.controle === 1) {
       notify.notify('success', 'Login efetuado com sucesso!')
+      dispatch(userActions.add_controle(0))
     }
   }, [rd_user])
-
   
   return (
     <>

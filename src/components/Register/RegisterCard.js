@@ -53,6 +53,7 @@ export default function LoginCard() {
               dispatch(curriculoActions.busca_curriculo(res.data.user._id))
               routeChange();
               dispatch(userActions.add_controle());
+              dispatch(userActions.busca_user());
             }
           }
         }).catch(error => {

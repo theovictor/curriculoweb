@@ -71,8 +71,8 @@ export default function DadosPrincipais() {
       }
     }
     return (
-      dispatch(curriculoActions.idade(age.toString())),
-      setFieldValue('idade', age.toString())
+      setFieldValue('idade', age.toString()),
+      dispatch(curriculoActions.idade(age.toString()))
     );
   }
   const limpar = () => {
@@ -112,7 +112,6 @@ export default function DadosPrincipais() {
     .then(res => {
       setEditMode(false)
       dispatch(curriculoActions.busca_curriculo(rd_user.user._id))
-      dispatch(curriculoActions.idade(formik.values.idade))
       }).catch(err => {
         console.log(err)
       })
@@ -137,10 +136,8 @@ export default function DadosPrincipais() {
       .then(res => {
         setEditMode(false)
         dispatch(curriculoActions.busca_curriculo(rd_user.user._id))
-        dispatch(curriculoActions.idade(formik.values.idade))
-        console.log('att com sucesso' + curriculoReducer.idade)
       }).catch(err => {
-        // console.log(err)
+        console.log(err)
       })
   }
   const btnDeletar = (id_curriculo) => {

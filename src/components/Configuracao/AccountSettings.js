@@ -4,10 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import { useHistory } from "react-router-dom";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { useSelector, 
-  // useDispatch 
-} from 'react-redux'
-// import userActions from '../../store/actions/userActions'
+import { useSelector } from 'react-redux'
 import isLoged from "helpers/isLoged";
 import Upload from 'components/Upload/Upload'
 import '../../assets/css/settings-page.css'
@@ -16,9 +13,7 @@ export default function AccountSettings() {
   const history = useHistory();
   const routeChange = () => { history.push('/') }
   if (!isLoged()) { routeChange() }
-
-  const rd_user = useSelector( state => state.userReducer);
-  // const dispatch = useDispatch();
+  const rd_user = useSelector(state => state.userReducer);
 
   const formik = useFormik({
     initialValues: {
@@ -33,16 +28,16 @@ export default function AccountSettings() {
         then: yup.string().oneOf(
           [yup.ref("password")],
           "Ambas as senhas devem ser iguais!"
-          )
-        }),
-      })
+        )
+      }),
     })
-    
+  })
+
 
   useEffect(() => {
     if (rd_user.user) {
-      formik.setFieldValue('nome', rd_user.user.nome ?  rd_user.user.nome : '')
-      formik.setFieldValue('email', rd_user.user.email ?  rd_user.user.email : '')
+      formik.setFieldValue('nome', rd_user.user.nome ? rd_user.user.nome : '')
+      formik.setFieldValue('email', rd_user.user.email ? rd_user.user.email : '')
     }
   }, [rd_user])
 
@@ -54,7 +49,7 @@ export default function AccountSettings() {
             <Card className="card-profile shadow">
               <section className="text-center">
                 <Upload avatar />
-                <h3 className="nome mt--4">{rd_user.user?.nome? rd_user.user.nome : null}</h3>
+                <h3 className="nome mt--4">{rd_user.user?.nome ? rd_user.user.nome : null}</h3>
               </section>
             </Card>
           </Col>
@@ -73,9 +68,9 @@ export default function AccountSettings() {
                     <Col className="align-self-baseline mb-1">
                       <InputGroup className="account mb-3 justify-content-center">
                         <InputGroupAddon className="align-self-center" addonType="append">
-                          <i className="ni ni-single-02 mr-3"/>
+                          <i className="ni ni-single-02 mr-3" />
                         </InputGroupAddon>
-                        <TextField id="nome" label="Nome" size="small" variant="outlined" disabled {...formik.getFieldProps('nome')} style={{width: '20rem'}}/>
+                        <TextField id="nome" label="Nome" size="small" variant="outlined" disabled {...formik.getFieldProps('nome')} style={{ width: '20rem' }} />
                         {/* <InputGroupAddon addonType="append">
                           <Button className="btn-icon ml-2 rounded-circle" color="success" size="sm" disabled>
                             <span className="btn-inner--icon">
@@ -90,9 +85,9 @@ export default function AccountSettings() {
                     <Col className="align-self-baseline mb-1">
                       <InputGroup className="account mb-3 justify-content-center">
                         <InputGroupAddon className="align-self-center" addonType="append">
-                          <i className="ni ni-email-83 mr-3"/>
+                          <i className="ni ni-email-83 mr-3" />
                         </InputGroupAddon>
-                        <TextField id="email" label="E-mail" size="small" variant="outlined" disabled {...formik.getFieldProps('email')} style={{width: '20rem'}}/>
+                        <TextField id="email" label="E-mail" size="small" variant="outlined" disabled {...formik.getFieldProps('email')} style={{ width: '20rem' }} />
                         {/* <InputGroupAddon addonType="append">
                           <Button className="btn-icon ml-2 rounded-circle" color="success" size="sm" disabled>
                             <span className="btn-inner--icon">
@@ -107,9 +102,9 @@ export default function AccountSettings() {
                     <Col className="align-self-baseline mb-1">
                       <InputGroup className="account mb-3 justify-content-center">
                         <InputGroupAddon className="align-self-center" addonType="append">
-                          <i className="ni ni-lock-circle-open mr-3"/>
+                          <i className="ni ni-lock-circle-open mr-3" />
                         </InputGroupAddon>
-                        <TextField id="password" label="Nova Senha" size="small" variant="outlined" type="password" disabled {...formik.getFieldProps('password')} style={{width: '20rem'}}/>
+                        <TextField id="password" label="Nova Senha" size="small" variant="outlined" type="password" disabled {...formik.getFieldProps('password')} style={{ width: '20rem' }} />
                         {/* <InputGroupAddon addonType="append">
                           <Button className="btn-icon ml-2 rounded-circle" color="success" size="sm" disabled>
                             <span className="btn-inner--icon">
@@ -124,11 +119,11 @@ export default function AccountSettings() {
                     <Col className="align-self-baseline mb-1">
                       <InputGroup className="account mb-3 justify-content-center">
                         <InputGroupAddon className="align-self-center" addonType="append">
-                          <i className="ni ni-lock-circle-open mr-3"/>
+                          <i className="ni ni-lock-circle-open mr-3" />
                         </InputGroupAddon>
                         <TextField id="confirmPassword" label="Comfirmar Senha" size="small" variant="outlined" type="password" disabled
                           error={formik.touched.confirmPassword && formik.errors.confirmPassword ? true : false}
-                          {...formik.getFieldProps('confirmPassword')} style={{width: '20rem'}}/>
+                          {...formik.getFieldProps('confirmPassword')} style={{ width: '20rem' }} />
                         {/* <InputGroupAddon addonType="append">
                           <Button className="btn-icon ml-2 rounded-circle" color="danger" size="sm" disabled>
                             <span className="btn-inner--icon">
